@@ -1,4 +1,6 @@
 {% from "./menu-link.njk" import menu_link %}
+{% from "./menu-icon.njk" import menu_icon %}
+
 
 {% set external_links = [
     {title: "YouTube", url: "", altText: "/@Rollygon"},
@@ -14,7 +16,10 @@
 ] %}
 
 {% macro menu(lastUpdate) %}
-<input class="menu__button" type="checkbox" />
+<label class="menu__button" for="menu button">
+	<input class="menu__button__toggle" type="checkbox" />
+	{{ menu_icon() }}
+</label>
 <div class="menu">
 	<div class="content-wrapper menu__wrapper">
 		<img

@@ -6,6 +6,8 @@
 	--gap-s: 1em;
 	--gap-m: 3em;
 	--gap-l: 6em;
+
+	--clr-test: #00ff00; 
 }
 
 *,
@@ -91,7 +93,7 @@ h6 {
 	min-width: 100vw;
 	min-height: 100vh;
 
-	background-color: gray;
+	background-color: #000000;
 
 	overflow-x: hidden;
 }
@@ -127,15 +129,54 @@ h6 {
 	justify-content: center;
 	align-items: center;
 
-	width: var(--gap-l);
-	height: var(--gap-l);
-	border-radius: 50px;
-	border: none;
+	content: "";
 
 	bottom: var(--gap-m);
 	right: var(--gap-m);
 
-	background-color: blue;
 	color: white;
 	z-index: 999;
+}
+
+.menu__button__toggle {
+	width: var(--gap-l);
+	height: var(--gap-l);
+
+	padding: 0;
+	border-radius: 50px;
+	border: none;
+
+	background-color: blue;
+
+	outline: none;
+	appearance: none;
+}
+
+.menu__button:has(.menu__button__toggle:checked) #menu-icon {
+	transition-delay: 0.15s;
+	rotate: -0.25turn;
+}
+
+.menu__button:has(.menu__button__toggle:checked) #menu-icon__path-a {
+	transition-delay: 0.1s;
+	stroke-dashoffset: -142;
+}
+
+.menu__button:has(.menu__button__toggle:checked) #menu-icon__path-b {
+	transition-delay: 0.4s;
+	stroke-dashoffset: -132;
+}
+
+#menu-icon {
+	position: absolute;
+	pointer-events: none;
+	transition: 0.4s ease-in-out;
+}
+
+.menu-icon__path {
+	transition: 0.8s ease-in-out;
+
+	stroke-width: 2px;
+	stroke: white;
+	stroke-dasharray: 24 1000;
 }
