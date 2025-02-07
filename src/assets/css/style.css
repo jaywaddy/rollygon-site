@@ -2,6 +2,11 @@
     https://joshwcomeau.com/css/custom-css-reset/ 
     version: 2024-11-25
 */
+:root {
+	--gap-s: 1em;
+	--gap-m: 3em;
+	--gap-l: 6em;
+}
 
 *,
 *::before,
@@ -15,6 +20,7 @@
 
 body {
 	line-height: 1.5;
+	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -59,4 +65,77 @@ h6 {
 #root,
 #__next {
 	isolation: isolate;
+}
+
+/* Component Classes */
+.content-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	width: 328px;
+	margin-inline: auto;
+	padding: var(--gap-m) 0;
+}
+
+.menu__wrapper {
+	row-gap: var(--gap-m);
+
+	min-height: 100dvh;
+}
+
+.menu {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+
+	min-width: 100vw;
+	min-height: 100vh;
+
+	background-color: gray;
+
+	overflow-x: hidden;
+}
+
+.rollygon-text {
+	display: flex;
+	align-self: center;
+}
+
+.menu__nav {
+	margin-top: auto;
+}
+
+.menu__link {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	font-weight: 700;
+}
+
+.link__handle {
+	margin-inline-start: 0.5em;
+}
+
+.link__arrow-icon {
+	margin-inline-start: auto;
+}
+
+.menu__button {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: var(--gap-l);
+	height: var(--gap-l);
+	border-radius: 50px;
+	border: none;
+
+	bottom: var(--gap-m);
+	right: var(--gap-m);
+
+	background-color: blue;
+	color: white;
+	z-index: 999;
 }
