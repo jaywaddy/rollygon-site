@@ -1,6 +1,5 @@
 {% from "./menu-link.njk" import menu_link %}
-{% from "./menu-icon.njk" import menu_icon %}
-
+{% from "../icons/menu-icon.njk" import menu_icon %}
 
 {% set external_links = [
     {title: "YouTube", url: "", altText: "/@Rollygon"},
@@ -8,6 +7,7 @@
     {title: "Bluesky", url: "", altText: "Rollygon.bsky.social"},
     {title: "Gumroad", url: "", altText: "Rollygon.gumroad.com"}
 ] %}
+
 {% set nav_links = [
     {title: "/ home", url: "/"},
     {title: "/ builds", url: "/builds"},
@@ -16,11 +16,11 @@
 ] %}
 
 {% macro menu(lastUpdate) %}
-<label class="menu__button" for="menu button">
+<button class="menu__button">
 	<input class="menu__button__toggle" type="checkbox" />
-	{{ menu_icon() }}
-</label>
-<div class="menu">
+	{{ menu_icon("var(--clr-neutral-50)") }}
+</button>
+<aside class="menu">
 	<div class="content-wrapper menu__wrapper">
 		<img
 			class="rollygon-text"
@@ -30,7 +30,7 @@
 		/>
 		<ul class="menu__links">
 		{%- for link in external_links -%}
-            <li>{{ menu_link(link.title, link.url, link.altText, true) }}</li>
+            <li class="menu__item">{{ menu_link(link.title, link.url, link.altText) }}</li>
         {%- endfor -%}
 		</ul>
 		<nav class="menu__nav">
@@ -45,5 +45,5 @@
 			&copy; Rollygon
 		</span>
 	</div>
-</div>
+</aside>
 {% endmacro %}

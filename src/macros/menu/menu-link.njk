@@ -1,0 +1,9 @@
+{% from "../icons/arrow-icon.njk" import arrow_icon %}
+
+{% macro menu_link(link_title, link_url, link_alt_text, is_external) %}
+<a class="menu__link" href="{{ link_url }}">{{ link_title }}</a>
+{% if link_alt_text %}
+<span>{{ link_alt_text }}</span>
+<a class="link__arrow-icon" href="{{ link_url }}">{{ arrow_icon("var(--clr-neutral-50)") }}</a>
+{% endif %}
+{% endmacro %}
