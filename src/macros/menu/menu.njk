@@ -34,13 +34,13 @@
         {%- endfor -%}
 		</ul>
 		<nav class="menu__nav">
-			<ul class="nav__links">
+			<ul class="menu__links">
 			{%- for link in nav_links -%}
-				<li>{{ menu_link(link.title, link.url) }}</li>
+				<li class="menu__item">{{ menu_link(link.title, link.url) }}</li>
 			{%- endfor -%}
 			</ul>
 		</nav>
-		<span class="menu__footer__copy">
+		<span>
 			Last update: {{ lastUpdate | postDate }}<br />
 			&copy; Rollygon
 		</span>
