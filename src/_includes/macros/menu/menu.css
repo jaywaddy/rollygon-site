@@ -1,29 +1,26 @@
 .menu__wrapper {
 	row-gap: var(--gap-m);
 	min-height: 100dvh;
+	padding-block: var(--gap-m);
 
-	overflow-y: scroll;
+	flex-direction: column-reverse;
 }
 
 .menu {
 	position: fixed;
 	display: flex;
+
+	overflow-x: visible;
+	overflow-y: scroll;
+
+	inset: 0;
 	min-width: 100vw;
 	height: 100%;
 
 	background-color: var(--clr-menu-background);
 
 	translate: 100%;
-	transition: translate 0.8s cubic-bezier(0.70, -0.4, 0.1, 1.4);
-}
-
-.menu::before {
-	position: absolute;
-	content: "";
-	width: 20dvw;
-	height: 100dvh;
-	background-color: var(--clr-menu-background);
-	right: -50px;
+	transition: translate 0.5s ease-in-out;
 }
 
 .rollygon-text {
