@@ -46,7 +46,7 @@
 	color: var(--clr-text--faded);
 }
 
-.menu__link {
+.link {
 	display: flex;
 	flex-direction: row;
 

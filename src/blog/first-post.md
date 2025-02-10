@@ -1,8 +1,10 @@
 ---
 layout: "/layouts/base.njk"
-title: "First Post"
+title: "First Post: But a Logner Title test test"
+date: 2025-02-09
+duration: 6 min
 ---
 
-# hello
+# Hello!
 
-this is the first blog post.
+This is the first blog post.

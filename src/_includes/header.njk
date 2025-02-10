@@ -4,11 +4,11 @@
     <a class="header__link" href="/">rollygon</a>
     <span class="header__link">/</span>
     {% if ("/blog/" in page.url) and ("/blog/" !== page.url) %}
-        <a class="header__link" href="/posts/">blog</a>
+        <a class="header__link" href="/blog">blog</a>
         <span class="header__link">/</span>
         <span class="header__focus">...</span>
     {% elif ("/builds/" in page.url) and ("/builds/" !== page.url) %}
-        <a class="header__link" href="/builds/">builds</a>
+        <a class="header__link" href="/builds">builds</a>
         <span class="header__link">/</span>
         <span class="header__focus">...</span>
     {% else %}

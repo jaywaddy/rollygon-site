@@ -20,6 +20,7 @@ lastUpdate: 2025-02-06
 	</head>
 	<body>
 		{% include "header.njk" %}
-		<main class="content-wrapper">{{ content | safe }}</main>
+		<main class="content-wrapper content-spacing">{{ content | safe }}</main>
+		{% include "footer.njk" %}
 	</body>
 </html>

@@ -2,3 +2,15 @@
 layout: "/layouts/base.njk"
 title: "Blog"
 ---
+
+<ul class="post__list">
+    {%- for post in collections.post | reverse-%}
+    <li class="post__item">
+        <div class="post__header">
+            <a class="post__title" href="{{ post.url }}">{{ post.data.title }}</a>
+            <span class="post__date">{{post.data.duration}}</span>
+        </div>
+        <span class="post__duration">{{post.data.date | postDate}}</span>
+    </li>
+    {%- endfor -%}
+</ul>

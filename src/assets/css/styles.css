@@ -2,6 +2,7 @@
 @import url("menu.css");
 
 :root {
+	--gap-xs: 0.5em;
 	--gap-s: 1em;
 	--gap-m: 3em;
 	--gap-l: 6em;
@@ -11,6 +12,11 @@
 	--fs-h3: 1em;
 	--fs-p: 1em;
 	--fs-small: 1em;
+
+	--fw-regular: 400;
+	--fw-bold: 900;
+
+	--border-radius: 0.5em;
 
 	--clr-primary: #0F6EFC;
 	--clr-neutral-50: #F1F6F9;
@@ -36,7 +42,8 @@
 
 		--clr-background: var(--clr-neutral-700);
 		--clr-menu-background: var(--clr-neutral-900);
-	}
+		--clr-car-background: var(--clr-neutral-900);
+}
 }
 
 body {
@@ -55,6 +62,12 @@ body {
 	margin-inline: auto;
 }
 
+.content-spacing {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-m);
+}
+
 .header {
 	display: flex;
 	flex-direction: row;
@@ -68,5 +81,49 @@ body {
 }
 
 .header__focus {
-	font-weight: 900;
+	font-weight: var(--fw-bold);
+}
+
+.build__list,
+.post__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-s);
+
+	list-style: none;
+
+	padding: 0;
+}
+
+.build__card {
+	display: flex;
+	justify-content: space-between;
+
+	padding: var(--gap-s);
+	border-radius: var(--border-radius);
+	background-color: var(--clr-menu-background);
+}
+
+.post__item {
+	display: flex;
+	flex-direction: column;
+}
+
+.post__header {
+	display: flex;
+	gap: var(--gap-xs);
+}
+
+.post__title {
+	max-width: 24ch;
+	overflow: hidden;
+
+	font-weight: var(--fw-bold);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.post__duration,
+.post__date {
+	color: var(--clr-text--faded);
 }
