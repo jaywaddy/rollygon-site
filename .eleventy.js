@@ -1,3 +1,4 @@
+const timeToRead = require('eleventy-plugin-time-to-read');
 const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
@@ -10,8 +11,17 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addWatchTarget("./src/_includes/macros/menu/menu.css");
 	eleventyConfig.addWatchTarget("./src/assets/js/");
 
+	eleventyConfig.addPlugin(timeToRead, {
+		speed: "248 characters per minute",
+		style: "short"
+	});
+
+	eleventyConfig.addShortcode("year", function () {
+		return `${new Date().getFullYear()}`
+	});
+
 	eleventyConfig.addFilter("postDate", function (dateObj) {
-		return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+		return DateTime.fromJSDate(dateObj, { zone: "UTC+0", locale: "en" }).toFormat("MMM d, yyyy");
 	});
 	eleventyConfig.addFilter("log", function (value) {
 		return console.log(value);

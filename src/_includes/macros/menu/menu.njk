@@ -2,10 +2,10 @@
 {% from "../icons/menu-icon.njk" import menu_icon %}
 
 {% set external_links = [
-    {title: "YouTube", url: "", altText: "/@Rollygon"},
-    {title: "Sketchfab", url: "", altText: "/Rollygon"},
-    {title: "Bluesky", url: "", altText: "Rollygon.bsky.social"},
-    {title: "Gumroad", url: "", altText: "Rollygon.gumroad.com"}
+    {title: "YouTube", url: "https://youtube.com/@rollygon/streams", altText: "/@Rollygon"},
+    {title: "Sketchfab", url: "https://sketchfab.com/rollygon/models", altText: "/Rollygon"},
+    {title: "Bluesky", url: "https://rollygon.bsky.social", altText: "Rollygon.bsky.social"},
+    {title: "Gumroad", url: "https://rollygon.gumroad.com", altText: "Rollygon.gumroad.com"}
 ] %}
 
 {% set nav_links = [
@@ -40,10 +40,7 @@
 			{%- endfor -%}
 			</ul>
 		</nav>
-		<span>
-			Last update: {{ lastUpdate | postDate }}<br />
-			&copy; Rollygon
-		</span>
+		<span>&copy; {% year %} Rollygon</span>
 	</div>
 </aside>
 {% endmacro %}

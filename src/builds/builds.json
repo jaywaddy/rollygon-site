@@ -1,4 +1,5 @@
 {
-    "layout": "./layouts/base.njk",
-    "tags": "build"
+    "layout": "./layouts/build.njk",
+    "tags": "build",
+    "permalink": "builds/{{title | slugify}}/"
 }

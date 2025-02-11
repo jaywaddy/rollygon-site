@@ -109,11 +109,6 @@ body {
 	flex-direction: column;
 }
 
-.post__header {
-	display: flex;
-	gap: var(--gap-xs);
-}
-
 .post__title {
 	max-width: 24ch;
 	overflow: hidden;
@@ -123,7 +118,6 @@ body {
 	text-overflow: ellipsis;
 }
 
-.post__duration,
-.post__date {
+.post__info {
 	color: var(--clr-text--faded);
 }

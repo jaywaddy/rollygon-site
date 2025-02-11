@@ -7,8 +7,19 @@ title: "Home"
 
 <div>
     <a class="link" href="/builds">/ builds</a>
+    <ul>
+    {%- for build in collections.build.reverse().slice(0, 3) -%}
+    <li><a href="{{build.url}}">{{build.data.title}}</a></li>
+    {%- endfor -%}
+    </ul>
 </div>
 <div>
     <a class="link" href="/blog">/ blog</a>
+    <ul>
+        {%- for post in collections.post.reverse().slice(0, 3) -%}
+        <li><a href="{{post.url}}">{{post.data.title}}</a></li>
+        {%- endfor -%}
+        </ul>
 </div>
+
 
