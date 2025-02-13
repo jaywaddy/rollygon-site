@@ -75,7 +75,7 @@
 	z-index: 999;
 }
 
-.menu__button__toggle {
+#menu__button__toggle {
 	width: var(--gap-m);
 	height: var(--gap-m);
 
@@ -87,24 +87,24 @@
 	cursor: pointer;
 }
 
-.menu__button:has(.menu__button__toggle:checked) + .menu {
+.menu__button:has(#menu__button__toggle:checked) + .menu {
 	translate: 0%;
 }
 
-.menu__button:has(.menu__button__toggle:checked) #menu-icon {
+.menu__button:has(#menu__button__toggle:checked) #menu-icon {
 	rotate: -0.25turn;
 }
 
-/* .menu__button:has(.menu__button__toggle:checked) .menu-icon__path {
+/* .menu__button:has(#menu__button__toggle:checked) .menu-icon__path {
 	animation-name: stroke-thickness-open;
 	animation-duration: 1s;
 } */
 
-.menu__button:has(.menu__button__toggle:checked) #menu-icon__path-a {
+.menu__button:has(#menu__button__toggle:checked) #menu-icon__path-a {
 	stroke-dashoffset: -203;
 }
 
-.menu__button:has(.menu__button__toggle:checked) #menu-icon__path-b {
+.menu__button:has(#menu__button__toggle:checked) #menu-icon__path-b {
 	stroke-dashoffset: -254.5;
 }
 

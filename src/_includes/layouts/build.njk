@@ -3,7 +3,7 @@ layout: "/layouts/base.njk"
 ---
 <header>
     <h1>{{ title }}</h1>
-    <span>{{ date | postDate }}</span>
+    <span>{{ page.date | postDate }}</span>
 </header>
 
 {{ content | safe }}
