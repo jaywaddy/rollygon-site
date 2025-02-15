@@ -1,6 +1,9 @@
-{% macro blogPostCard(update) %}
+{% macro blogPostCard(blogPost) %}
 <li class="post__item">
-    <a class="post__title" href="{{update.url}}">{{update.data.title}}</a>
-    <span class="post__info">{{ update.rawInput | timeToRead }} &bullet; {{ update.date | postDate }}</span>
+    <a class="post__title" href="{{blogPost.url}}">{{blogPost.data.title}}</a>
+    {% if blogPost.data.thumbnail %}
+    <img class="card-image" src="{{blogPost.data.thumbnail}}" alt="{{blogPost.data.title}}" width="128px">
+    {% endif %}
+    <span class="post__info">{{blogPost.rawInput | timeToRead}} &bullet; {{blogPost.date | postDate}}</span>
 </li>
 {% endmacro %}

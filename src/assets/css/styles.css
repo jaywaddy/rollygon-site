@@ -63,6 +63,7 @@ body {
 .header {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 
 	padding: var(--gap-m) 0 var(--gap-l) 0;
 	gap: var(--gap-s);

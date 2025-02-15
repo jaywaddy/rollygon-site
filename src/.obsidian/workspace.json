@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "0b8f5bc8a804efe2",
+    "type": "split",
+    "children": [
+      {
+        "id": "e79d11055e6d2486",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9b6bceb08ba0bf0d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "blog/2024-05-23-georgia-scorcher-update-3.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2024-05-23-georgia-scorcher-update-3"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7c79e26cb0f4b866",
+    "type": "split",
+    "children": [
+      {
+        "id": "485aedd82f0f42ff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b27e85e3f27bc477",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "064deefce48b19b5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "1d7a3c751b426c4b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8c80777e9086e61b",
+    "type": "split",
+    "children": [
+      {
+        "id": "afb1064724249b91",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f86e8615f4dacd05",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "blog/2024-05-23-georgia-scorcher-update-3.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2024-05-23-georgia-scorcher-update-3"
+            }
+          },
+          {
+            "id": "86a3a98b47de4f0f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "blog/2024-05-23-georgia-scorcher-update-3.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2024-05-23-georgia-scorcher-update-3"
+            }
+          },
+          {
+            "id": "b771944902e77517",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6b1b936203f3cc81",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "blog/2024-05-23-georgia-scorcher-update-3.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2024-05-23-georgia-scorcher-update-3"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "9b6bceb08ba0bf0d",
+  "lastOpenFiles": [
+    "blog/first-post.md",
+    "blog/2024-05-23-georgia-scorcher-update-3.md",
+    "_drafts/New Note.md",
+    "_drafts/Second new note.md",
+    "New File.md",
+    "_drafts/_templates/Build Template.md",
+    "_drafts/_templates/Blog Post.md",
+    "blog/2024-05-18-georgia-scorcher-update-1.md",
+    "blog/2024-05-18-georgia-scorcher-update-2.md",
+    "_drafts/_templates",
+    "builds/2024-06-01-georgia-scorcher.md",
+    "assets/img/georgia-scorcher.png",
+    "assets/img/Let's Make a Roller Coaster - 01.png",
+    "{{thumbnail}}.md",
+    "builds/2025-01-28-inferno.md",
+    "builds/2024-10-21-flashback.md",
+    "builds/2024-09-01-poltergeist.md",
+    "builds/2024-08-23-fahrenheit.md",
+    "builds/2024-06-03-batman-the-ride.md",
+    "builds/2024-04-11-talon-loop.md",
+    "builds/2024-03-20-hydra-zero-g.md",
+    "builds/2024-01-01-arrow-loop.md",
+    "builds/2023-12-26-intamin-launch-coaster.md",
+    "_drafts"
+  ]
+}

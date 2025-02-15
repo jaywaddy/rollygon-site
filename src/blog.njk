@@ -2,12 +2,9 @@
 layout: "/layouts/base.njk"
 title: "Blog"
 ---
-
+{% from "./_includes/components/blog-post-card.njk" import blogPostCard %}
 <ul class="post__list">
-    {%- for post in collections.post | reverse-%}
-    <li class="post__item">
-        <a class="post__title" href="{{ post.url }}">{{ post.data.title }}</a>
-        <span class="post__info">{{ post.rawInput | timeToRead }} &bullet; {{ post.date | postDate }}</span>
-    </li>
+    {%- for blogPost in collections["blog post"] | reverse -%}
+    {{blogPostCard(blogPost)}}
     {%- endfor -%}
 </ul>

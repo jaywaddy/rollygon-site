@@ -6,10 +6,11 @@ Blog posts should be saved as markdown files in the `/blog` folder. Name each bl
 
 `2025-01-01-build-name.md`
 
-Each blog post's front matter will require a `title` and `status`:
+Each blog post's front matter will require a `title`, and optionally accept a `thumbnail` for sharing streams thumbnails:
 
     ---
     title: Blog Post Name
+    thumbnail: "thumbnail.png"
     ---
 
 > Because each blog post has a date in its file name, there is no need for a `date` key in the front matter.
@@ -24,7 +25,7 @@ Builds should be saved as markdown files in the `/builds` folder. Name build fil
 
 ### Front Matter
 
-Each build's front matter will require a `title` and `status`:
+Each build's front matter will require a `title` and `type`:
 
     ---
     title: Build Name

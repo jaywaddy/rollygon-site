@@ -1,5 +1,5 @@
 {
-    "layout": "./layouts/post.njk",
-    "tags": "post",
+    "layout": "./layouts/blog-post.njk",
+    "tags": "blog post",
     "permalink": "blog/{{title | slugify}}/"
 }

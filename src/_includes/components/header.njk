@@ -1,17 +1,17 @@
 {% from "./menu.njk" import menu %}
+{% from "../icons/logo.njk" import logo %}
 <header class="header content-wrapper">
-    {{ menu(lastUpdate) }}
-    <a class="header__link" href="/">rollygon</a>
-    <span class="header__link">/</span>
+    {{menu(lastUpdate)}}
+    <a href="/">{{logo("var(--clr-primary)")}}</a>
     {% if ("/blog/" in page.url) and ("/blog/" !== page.url) %}
-        <a class="header__link" href="/blog">blog</a>
+        <a class="header__link" href="/blog">Blog</a>
         <span class="header__link">/</span>
-        <span class="header__focus">...</span>
+        <a href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
     {% elif ("/builds/" in page.url) and ("/builds/" !== page.url) %}
-        <a class="header__link" href="/builds">builds</a>
+        <a class="header__link" href="/builds">Builds</a>
         <span class="header__link">/</span>
-        <span class="header__focus">...</span>
+        <a href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
     {% else %}
-        <span class="header__focus">{{ title | slugify }}</span>
+        <a href="{{page.url}}">{{title}}</a>
     {% endif %}
 </header>

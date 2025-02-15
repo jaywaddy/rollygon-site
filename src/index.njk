@@ -17,7 +17,7 @@ title: "Home"
 <section class="content-section">
     <a class="link" href="/blog">/ blog</a>
     <ul class="post__list">
-        {%- for blogPost in collections.post.reverse().slice(0, 3) -%}
+        {%- for blogPost in collections["blog post"].reverse().slice(0, 3) -%}
         {{blogPostCard(blogPost)}}
         {%- endfor -%}
         </ul>
