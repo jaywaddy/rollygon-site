@@ -2,15 +2,10 @@
 layout: "/layouts/base.njk"
 title: "Builds"
 ---
-{# {% from "./_includes/macros/build-card.njk" import build %} #}
+{% from "./_includes/components/build-card.njk" import buildCard %}
 
 <ul class="build__list">
     {%- for build in collections.build | reverse -%}
-    <li>
-        <a class="build__card link" href="{{build.url}}">
-            {{build.data.title}}
-            <span>{{build.data.status}}</span>
-        </a>
-    </li>
+    {{buildCard(build)}}
     {%- endfor -%}
 </ul>

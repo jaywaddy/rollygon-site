@@ -1,7 +1,6 @@
 ---
 title: "First Post: But a Logner Title test test"
-date: 2025-02-09
-duration: 6 min
+tags: inferno-update
 ---
 
 ## Hello!

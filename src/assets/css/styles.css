@@ -19,26 +19,22 @@
 	--clr-neutral-700: #1E1D29;
 	--clr-neutral-900: #03010D;
 
-	--clr-text--primary: var(--clr-neutral-900);
+	--clr-text--primary: var(--clr-neutral-50);
 	--clr-text--faded: var(--clr-neutral-400);
 	
-	--clr-icon--primary: var(--clr-neutral-900);
+	--clr-icon--primary: var(--clr-neutral-50);
 	--clr-icon--faded: var(--clr-neutral-400);
 
-	--clr-background: var(--clr-neutral-50);
-	--clr-menu-background: var(--clr-neutral-100);
+	--clr-background: var(--clr-neutral-700);
+	--clr-menu-background: var(--clr-neutral-900);
+	--clr-card-background: var(--clr-neutral-900);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: light) {
 	:root {
-		--clr-text--primary: var(--clr-neutral-50);
-		--clr-icon--primary: var(--clr-neutral-50);
 
-		--clr-background: var(--clr-neutral-700);
-		--clr-menu-background: var(--clr-neutral-900);
-		--clr-car-background: var(--clr-neutral-900);
 	}
-}
+} */
 
 body {
 	overflow-x: hidden;

@@ -28,7 +28,11 @@ Each build's front matter will require a `title` and `status`:
 
     ---
     title: Build Name
-    status: finished
+    type: 
+        - coaster
+        - tool
+        - flat ride
+        - build
     ---
 
 > Because each build has a date in its file name, there is no need for a `date` key in the front matter.

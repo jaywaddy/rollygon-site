@@ -1,13 +1,22 @@
 ---
 layout: "/layouts/base.njk"
 ---
+{% set updateTag = (title | slugify) + "-update" %}
+{% from "../components/blog-post-card.njk" import blogPostCard %}
 <header>
     <h1>{{ title }}</h1>
     <span>{{ page.date | postDate }}</span>
 </header>
 
-{{ content | safe }}
+{{content | safe}}
 
-{# <div> <!-- Loop through all posts with the #update and #[project name] tags -->
+{% if collections[updateTag] %}
+<div>
     <h2>Updates</h2>
-</div> #}
+    <ul class="post__list">
+        {%- for update in collections[updateTag] -%}
+        {{blogPostCard(update)}}
+        {%- endfor -%}
+    </ul>
+</div>
+{% endif %}

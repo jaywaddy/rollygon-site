@@ -2,30 +2,23 @@
 layout: "/layouts/base.njk"
 title: "Home"
 ---
-
+{% from "./_includes/components/build-card.njk" import buildCard %}
+{% from "./_includes/components/blog-post-card.njk" import blogPostCard %}
 <span>I make roller coasters out of polygons!</span>
 
 <section class="content-section">
     <a class="link" href="/builds">/ builds</a>
     <ul class="build__list">
         {%- for build in collections.build.reverse().slice(0, 3) -%}
-        <li>
-            <a class="build__card link" href="{{build.url}}">
-                {{build.data.title}}
-                <span>{{build.data.status}}</span>
-            </a>
-        </li>
+        {{buildCard(build)}}
         {%- endfor -%}
     </ul>
 </section>
 <section class="content-section">
     <a class="link" href="/blog">/ blog</a>
     <ul class="post__list">
-        {%- for post in collections.post.reverse().slice(0, 3) -%}
-        <li class="post__item">
-            <a class="post__title" href="{{post.url}}">{{ post.data.title }}</a>
-            <span class="post__info">{{post.rawInput | timeToRead}} &bullet; {{post.date | postDate}}</span>
-        </li>
+        {%- for blogPost in collections.post.reverse().slice(0, 3) -%}
+        {{blogPostCard(blogPost)}}
         {%- endfor -%}
         </ul>
 </section>

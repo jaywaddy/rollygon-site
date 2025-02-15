@@ -1,0 +1,6 @@
+{% macro blogPostCard(update) %}
+<li class="post__item">
+    <a class="post__title" href="{{update.url}}">{{update.data.title}}</a>
+    <span class="post__info">{{ update.rawInput | timeToRead }} &bullet; {{ update.date | postDate }}</span>
+</li>
+{% endmacro %}

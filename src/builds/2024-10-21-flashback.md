@@ -1,5 +1,5 @@
 ---
 title: Flashback
-status: 🚧
+type: 🚧
 ---
 Top secret info 😎
