@@ -1,6 +1,5 @@
 ---
 title: 
 type: 
-thumbnail: 
 tags:
 ---

@@ -53,8 +53,7 @@ p {
 }
 
 a {
-	text-decoration: none;
-	color: var(--clr-text--primary);
+	color: var(--clr-text--muted);
 }
 
 h1,

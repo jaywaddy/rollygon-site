@@ -7,7 +7,7 @@ title: "Home"
 <span>I make roller coasters out of polygons!</span>
 
 <section class="content-section">
-    <a class="link" href="/builds">/ builds</a>
+    <a href="/builds">Builds</a>
     <ul class="build__list">
         {%- for build in collections.build.reverse().slice(0, 3) -%}
         {{buildCard(build)}}
@@ -15,12 +15,12 @@ title: "Home"
     </ul>
 </section>
 <section class="content-section">
-    <a class="link" href="/blog">/ blog</a>
+    <a href="/blog">Blog</a>
     <ul class="post__list">
         {%- for blogPost in collections["blog post"].reverse().slice(0, 3) -%}
         {{blogPostCard(blogPost)}}
         {%- endfor -%}
-        </ul>
+    </ul>
 </section>
 
 

@@ -1,8 +1,14 @@
+{% from "../icons/video-icon.njk" import videoIcon %}
 {% macro blogPostCard(blogPost) %}
-<li class="post__item">
-    <a class="post__title" href="{{blogPost.url}}">{{blogPost.data.title}}</a>
-    {% if blogPost.data.thumbnail %}
-    <img class="card-image" src="{{blogPost.data.thumbnail}}" alt="{{blogPost.data.title}}" width="128px">
+<li class="blog-post-card">
+    <a class="blog-post__title link--title" href="{{blogPost.url}}">
+        {{blogPost.data.title}}
+        {% if blogPost.data.thumbnail %}
+        {{videoIcon("var(--clr-text--primary)")}}
+        {% endif %}
+    </a>
+    {% if blogPost.data.description %}
+    <span class="blog-post__description">{{blogPost.data.description}}</span>
     {% endif %}
     <span class="post__info">{{blogPost.rawInput | timeToRead}} &bullet; {{blogPost.date | postDate}}</span>
 </li>

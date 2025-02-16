@@ -2,12 +2,8 @@
 layout: "/layouts/base.njk"
 ---
 <header >
-    <h1>{{ title }}</h1>
-    <span>{{ content | timeToRead }} read &bullet; Posted on: {{ date | postDate }}</span>
+    <h1>{{title}}</h1>
+    <span>{{content | timeToRead}} read &bullet; Posted on: {{page.date | postDate}}</span>
 </header>
 
-{{ content | safe }}
-
-{# <div> <!-- Loop through all posts with the #update and #[project name] tags -->
-    <h2>Updates</h2>
-</div> #}
+{{content | safe}}

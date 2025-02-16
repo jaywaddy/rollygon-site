@@ -6,11 +6,12 @@ Blog posts should be saved as markdown files in the `/blog` folder. Name each bl
 
 `2025-01-01-build-name.md`
 
-Each blog post's front matter will require a `title`, and optionally accept a `thumbnail` for sharing streams thumbnails:
+Each blog post's front matter will require a `title`, and optionally accept both `thumbnail` and `description`:
 
     ---
     title: Blog Post Name
     thumbnail: "thumbnail.png"
+    description: Description or YouTube video title for updates
     ---
 
 > Because each blog post has a date in its file name, there is no need for a `date` key in the front matter.

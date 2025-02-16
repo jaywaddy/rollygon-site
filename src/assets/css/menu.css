@@ -1,7 +1,7 @@
 .menu__wrapper {
-	row-gap: var(--gap-m);
+	row-gap: var(--gap-lg);
 	min-height: 100dvh;
-	padding-block: var(--gap-m);
+	padding-block: var(--gap-lg);
 
 	flex-direction: column-reverse;
 }
@@ -70,14 +70,14 @@
 	padding: 0;
 	background: none;
 
-	bottom: var(--gap-m);
-	right: var(--gap-m);
+	bottom: var(--gap-lg);
+	right: var(--gap-lg);
 	z-index: 999;
 }
 
 #menu__button__toggle {
-	width: var(--gap-m);
-	height: var(--gap-m);
+	width: var(--gap-lg);
+	height: var(--gap-lg);
 
 	border-radius: 50px;
 

@@ -1,6 +1,7 @@
 ---
 title: Georgia Scorcher - Update 1
 thumbnail: ../../assets/img/georgia-scorcher.png
+description: 
 tags:
   - georgia-scorcher-update
 ---

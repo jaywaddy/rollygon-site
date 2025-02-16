@@ -6,12 +6,12 @@
     {% if ("/blog/" in page.url) and ("/blog/" !== page.url) %}
         <a class="header__link" href="/blog">Blog</a>
         <span class="header__link">/</span>
-        <a href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
+        <a class="link--primary" href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
     {% elif ("/builds/" in page.url) and ("/builds/" !== page.url) %}
         <a class="header__link" href="/builds">Builds</a>
         <span class="header__link">/</span>
-        <a href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
+        <a class="link--primary" href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
     {% else %}
-        <a href="{{page.url}}">{{title}}</a>
+        <a class="link--primary" href="{{page.url}}">{{title}}</a>
     {% endif %}
 </header>
