@@ -8,6 +8,8 @@
 	--gap-lg: 3em;
 	--gap-xl: 6em;
 
+	--radius: 0.5em;
+
 	--fw-regular: 400;
 	--fw-bold: 900;
 
@@ -47,6 +49,8 @@ body {
 iframe {
 	width: 100%;
 	aspect-ratio: 16/9;
+
+	border-radius: var(--radius);
 }
 
 .link--primary {
@@ -159,6 +163,16 @@ iframe {
 
 .post__info {
 	color: var(--clr-text--muted);
+}
+
+.pagination {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.pagination__next {
+	margin-left: auto;
 }
 
 @media screen and (min-width: 720px) {

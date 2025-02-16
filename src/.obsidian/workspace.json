@@ -168,8 +168,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9b6bceb08ba0bf0d",
+  "active": "b27e85e3f27bc477",
   "lastOpenFiles": [
+    "_includes/components/page-pagination.njk",
+    "_includes/components/pagePagination.njk",
+    "_includes/components/pagination.njk",
     "blog/2024-05-30-georgia-scorcher-update-6.md",
     "blog/2024-05-31-georgia-scorcher-update-7.md",
     "blog/2024-05-29-georgia-scorcher-update-5.md",
