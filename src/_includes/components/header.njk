@@ -2,16 +2,22 @@
 {% from "../icons/logo.njk" import logo %}
 <header class="header content-wrapper">
     {{menu(lastUpdate)}}
-    <a href="/">{{logo("var(--clr-primary)")}}</a>
-    {% if ("/blog/" in page.url) and ("/blog/" !== page.url) %}
-        <a class="header__link" href="/blog">Blog</a>
-        <span class="header__link">/</span>
-        <a class="link--primary" href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
-    {% elif ("/builds/" in page.url) and ("/builds/" !== page.url) %}
+    <a class="header__logo" href="/">{{logo("var(--clr-primary-400)")}}</a>
+    {% if buildName %}
         <a class="header__link" href="/builds">Builds</a>
         <span class="header__link">/</span>
-        <a class="link--primary" href="{{page.url}}" class="header__focus">{{page.fileSlug}}</a>
+        <a class="header__link" href="/builds/{{buildName | slugify}}/">{{buildName}}</a>
+        <span class="header__link">/</span>
+        <a class="link--title" href="{{page.url}}">{{title}}</a>
+    {% elif buildType %}
+        <a class="header__link" href="/builds">Builds</a>
+        <span class="header__link">/</span>
+        <a class="link--title" href="{{page.url}}">{{title}}</a>
+    {% elif "/blog/" in page.url %}
+        <a class="header__link" href="/blog">Blog</a>
+        <span class="header__link">/</span>
+        <a class="link--title" href="{{page.url}}/">{{title}}</a>
     {% else %}
-        <a class="link--primary" href="{{page.url}}">{{title}}</a>
+        <a class="link--title" href="{{page.url}}">{{title}}</a>
     {% endif %}
 </header>

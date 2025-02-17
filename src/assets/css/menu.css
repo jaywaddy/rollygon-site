@@ -21,6 +21,8 @@
 
 	translate: 100%;
 	transition: translate 0.5s ease-in-out;
+
+	z-index: 899;
 }
 
 .rollygon-text {
@@ -35,7 +37,7 @@
 .menu__links {
 	display: flex;
 	flex-direction: column;
-	gap: var(--gap-s);
+	gap: var(--gap-sm);
 
 	list-style: none;
 	padding: 0;
@@ -61,6 +63,7 @@
 }
 
 .menu__button {
+	position: relative;
 	position: fixed;
 	display: flex;
 	justify-content: center;
@@ -73,6 +76,18 @@
 	bottom: var(--gap-lg);
 	right: var(--gap-lg);
 	z-index: 999;
+
+	&::before {
+		position: absolute;
+		content: "";
+
+		width: calc(var(--gap-lg) + 8px);
+		height: calc(var(--gap-lg) + 8px);
+		border-radius: 50%;
+
+		background-color: var(--clr-background);
+		z-index: -1;
+	}
 }
 
 #menu__button__toggle {
@@ -81,7 +96,7 @@
 
 	border-radius: 50px;
 
-	background-color: var(--clr-primary);
+	background-color: var(--clr-primary-400);
 
 	appearance: none;
 	cursor: pointer;

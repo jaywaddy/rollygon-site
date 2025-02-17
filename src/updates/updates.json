@@ -1,0 +1,6 @@
+{
+    "layout": "./layouts/blog-post.njk",
+    "tags": ["blog post", "update"],
+    "permalink": "builds/{{buildName | slugify}}/{{title | slugify}}/",
+    "thumbnail": "../../assets/img/{{buildName | slugify}}/{title | slugify}}/"
+}

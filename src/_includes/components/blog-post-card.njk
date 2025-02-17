@@ -2,6 +2,9 @@
 {% macro blogPostCard(blogPost) %}
 <li class="blog-post-card">
     <a class="blog-post__title link--title" href="{{blogPost.url}}">
+        {% if blogPost.data.buildName %}
+        {{blogPost.data.buildName}} - 
+        {% endif %}
         {{blogPost.data.title}}
         {% if blogPost.data.thumbnail %}
         {{videoIcon("var(--clr-text--primary)")}}
@@ -9,6 +12,9 @@
     </a>
     {% if blogPost.data.description %}
     <span class="blog-post__description">{{blogPost.data.description}}</span>
+    {% endif %}
+    {% if blogPost.data.thumbnail %}
+    <a class="blog-post__thumbnail" href="{{blogPost.url}}"><img src="{{blogPost.data.thumbnail}}" alt="{{blogPost.title}}"></a>
     {% endif %}
     <span class="post__info">{{blogPost.rawInput | timeToRead}} &bullet; {{blogPost.date | postDate}}</span>
 </li>
