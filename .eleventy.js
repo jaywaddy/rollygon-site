@@ -20,6 +20,9 @@ module.exports = function (eleventyConfig) {
 		return `${new Date().getFullYear()}`
 	});
 
+	eleventyConfig.addFilter("includes", function (value, array) {
+		return array.includes(value);
+	});
 	eleventyConfig.addFilter("postDate", function (dateObj) {
 		return DateTime.fromJSDate(dateObj, { zone: "UTC+0", locale: "en" }).toFormat("MMM d, yyyy");
 	});
