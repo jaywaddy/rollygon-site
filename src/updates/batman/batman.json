@@ -1,4 +1,5 @@
 {
     "buildURL": "/builds/batman/",
-    "tags": ["batman-update"]
+    "tags": ["batman-update"],
+    "buildName": "Batman"
 }

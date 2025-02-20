@@ -1,9 +1,8 @@
 ---
 title: Flashback
 buildType: 🎢
+href: https://sketchfab.com/models/c1cd33421d9844b885f7c6420889459a/embed
 ---
-<div class="embed-wrapper"> <iframe title="Vekoma Boomerang Coaster" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/c1cd33421d9844b885f7c6420889459a/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px;"> <a href="https://sketchfab.com/3d-models/vekoma-boomerang-coaster-c1cd33421d9844b885f7c6420889459a?utm_medium=embed&utm_campaign=share-popup&utm_content=c1cd33421d9844b885f7c6420889459a" target="_blank" rel="nofollow" style="font-weight: bold;"> Vekoma Boomerang Coaster </a> by <a href="https://sketchfab.com/Rollygon?utm_medium=embed&utm_campaign=share-popup&utm_content=c1cd33421d9844b885f7c6420889459a" target="_blank" rel="nofollow" style="font-weight: bold;"> Rollygon </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=c1cd33421d9844b885f7c6420889459a" target="_blank" rel="nofollow" style="font-weight: bold;">Sketchfab</a></p></div>
-
 This one has been sitting drafts for a while, but… Enjoy!
 
 A last minute call, but this month, I decidded to make the scariest, short coaster I could think of: a Vekoma Boomerang called **Flashback** This recreation moastly takes insporation Flying Cobras at Carowinds.

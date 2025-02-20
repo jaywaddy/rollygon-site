@@ -1,4 +1,5 @@
 {
     "buildURL": "/builds/fahrenheit/",
-    "tags": ["fahrenheit-update"]
+    "tags": ["fahrenheit-update"],
+    "buildName": "Fahrenheit"
 }
