@@ -1,6 +1,0 @@
-{
-    "layout": "./layouts/build.njk",
-    "tags": "build",
-    "permalink": "builds/{{title | slugify}}/",
-    "isBuild": "true"
-}
