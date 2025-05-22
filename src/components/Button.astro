@@ -1,0 +1,79 @@
+---
+import DownloadIcon from './icons/DownloadIcon.astro';
+
+interface Props {
+    label: string;
+    href: string;
+    color?: string;
+    icon?: 
+        | "download"
+        | "visit"
+        | "send";
+    isFilled?: boolean;
+}
+
+const {
+    label,
+    href,
+    icon,
+    color = "var(--color-blue-600)",
+    isFilled = false
+} = Astro.props;
+
+function toggleButtonColor (buttonFill: boolean): string {
+    if (!buttonFill) {
+        return color;
+    }
+    return "var(--color-neutral-50)";
+}
+---
+
+<a 
+title={label}
+data-fill={isFilled}
+class="button flex items-center gap-1"
+style=`--color-primary: ${color};`
+{href}>
+    <span>{label}</span>
+    {icon === "download" && (
+        <DownloadIcon color={toggleButtonColor(isFilled)}/>
+    )}
+</a>
+
+<style>
+.button {
+    --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-surface-primary) 20%);
+
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    border-radius: 0.5rem;
+    border-width: 0.125rem;
+    border-style: solid;
+    border-color: var(--color-primary);
+
+    color: var(--color-primary);
+}
+
+.button[data-fill=false] {
+    --color-bg-hover: color-mix(in srgb, var(--color-primary), transparent 95%);
+
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+
+    &:hover {
+        background-color: var(--color-bg-hover);
+    }
+}
+
+.button[data-fill=true] {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-neutral-50);
+
+    &:hover {
+        border-color: var(--color-primary-hover);
+        background-color: var(--color-primary-hover);
+    }
+}
+</style>

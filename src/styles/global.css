@@ -1,1 +1,25 @@
+@import "./reset.css";
 @import "tailwindcss";
+
+@layer colors {
+    :root {
+        --color-surface-primary: var(--color-neutral-50);
+        --color-surface-secondary: var(--color-neutral-100);
+
+        --color-border: var(--color-neutral-200);
+    }
+}
+
+@layer utilities {
+    .container {
+        margin: auto;
+    }
+    
+    .border-bottom {
+        border-bottom: solid 1px var(--color-border);
+    }
+
+    .border-top {
+        border-bottom: solid 1px var(--color-border);
+    }
+}

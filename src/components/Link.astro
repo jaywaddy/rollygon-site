@@ -1,0 +1,31 @@
+---
+import { slugify } from "@/scripts/slugify";
+
+
+interface Props {
+    label: string
+    href?: string
+    underline?: boolean
+}
+const { label, href, underline } = Astro.props;
+
+function labelToLowerCase () {
+    if (!href) {
+        return "/" + slugify(label);
+    }
+
+    if (label.toLowerCase() === "home") {
+        return "/";
+    }
+
+    return href;
+}
+---
+
+<a class={underline ? "link underline" : "link"} href={labelToLowerCase()} title={label}>{label}</a>
+
+<style>
+.link:hover {
+    color: var(--color-neutral-500);
+}
+</style>

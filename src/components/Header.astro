@@ -1,0 +1,25 @@
+---
+import Button from "./Button.astro";
+import Link from "./Link.astro";
+import Logo from "./icons/Logo.astro";
+import Rollygon from "./icons/Rollygon.astro";
+---
+
+<header class="border-bottom bg-[var(--color-surface-primary)] fixed w-full">
+    <nav class="container flex items-center justify-between py-4">
+        <span class="flex gap-1">
+            <Logo />
+            <Rollygon color="var(--color-neutral-900)"/>
+        </span>
+        <ul class="flex items-center gap-8">
+            <li><Link label="Home" href="/" /></li>
+            <li><Link label="Tools" /></li>
+            <li><Link label="Models" /></li>
+            <li><Link label="Blog" /></li>
+            <li><Link label="About" /></li>
+            <li>
+                <Button label="Get free tools" href="/tools" icon="download" />
+            </li>
+        </ul>
+    </nav>
+</header>
