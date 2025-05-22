@@ -1,39 +1,36 @@
 ---
 import Button from "./Button.astro";
 import Link from "./Link.astro";
-import Logo from "./icons/Logo.astro";
-import Rollygon from "./icons/Rollygon.astro";
+import SiteTitle from "./SiteTitle.astro";
 
 interface Page {
     title: string;
     href: string;
 }
 
-const home: Page = {
+const homePage: Page = {
     title: "Home",
     href: "/"
 }
-const tools: Page = {
+const toolsPage: Page = {
     title: "Tools",
     href: "/tools"
 }
-const models: Page = {
+const modelsPage: Page = {
     title: "Models",
     href: "/models"
 }
-const blog: Page = {
+const blogPage: Page = {
     title: "Blog",
     href: "/blog"
 }
-const about: Page = {
+const aboutPage: Page = {
     title: "About",
     href: "/about"
 }
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.toLowerCase();
+const currentPath = new URL(Astro.request.url).pathname;
 
-function enableActiveLink(label: string): "page" | "false" {
-    console.log("current: " + currentPath, "href: " + label);
+function toggleActiveLink(label: string): "page" | "false" {
     if (currentPath === label) {
         return "page"
     }
@@ -44,36 +41,33 @@ function enableActiveLink(label: string): "page" | "false" {
 
 <header class="border-bottom bg-[var(--color-surface-primary)] fixed w-full">
     <nav class="container flex items-center justify-between py-6">
-        <span class="flex gap-1">
-            <Logo />
-            <Rollygon color="var(--color-neutral-900)"/>
-        </span>
+        <SiteTitle />
         <ul class="flex items-center gap-8">
             <li>
                 <Link
-                label={home.title}
-                href={home.href}
-                isActive={enableActiveLink(home.href)}/>
+                label={homePage.title}
+                href={homePage.href}
+                isActive={toggleActiveLink(homePage.href)} />
             </li>
             <li>
                 <Link
-                label={tools.title}
-                isActive={enableActiveLink(tools.href)}/>
+                label={toolsPage.title}
+                isActive={toggleActiveLink(toolsPage.href)} />
             </li>
             <li>
                 <Link
-                label={models.title}
-                isActive={enableActiveLink(models.href)}/>
+                label={modelsPage.title}
+                isActive={toggleActiveLink(modelsPage.href)} />
             </li>
             <li>
                 <Link
-                label={blog.title}
-                isActive={enableActiveLink(blog.href)}/>
+                label={blogPage.title}
+                isActive={toggleActiveLink(blogPage.href)} />
             </li>
             <li>
                 <Link
-                label={about.title}
-                isActive={enableActiveLink(about.href)}/>
+                label={aboutPage.title}
+                isActive={toggleActiveLink(aboutPage.href)} />
             </li>
             <li>
                 <Button label="Get free tools" href="/tools" icon="download" />

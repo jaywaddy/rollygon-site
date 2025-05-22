@@ -3,10 +3,12 @@
 
 @layer colors {
     :root {
+        --color-text: var(--color-neutral-900);
+
         --color-surface-primary: var(--color-neutral-50);
         --color-surface-secondary: var(--color-neutral-100);
 
-        --color-border: var(--color-neutral-200);
+        --color-section-border: var(--color-neutral-200);
     }
 }
 
@@ -16,10 +18,10 @@
     }
     
     .border-bottom {
-        border-bottom: solid 1px var(--color-border);
+        border-bottom: solid 1px var(--color-section-border);
     }
 
     .border-top {
-        border-bottom: solid 1px var(--color-border);
+        border-bottom: solid 1px var(--color-section-border);
     }
 }
