@@ -31,7 +31,7 @@ function toggleButtonColor (buttonFill: boolean): string {
 <a 
 title={label}
 data-fill={isFilled}
-class="button flex items-center gap-1"
+class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]"
 style=`--color-primary: ${color};`
 {href}>
     <span>{label}</span>
@@ -41,21 +41,11 @@ style=`--color-primary: ${color};`
 </a>
 
 <style>
-.button {
+a {
     --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-surface-primary) 20%);
-
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
-
-    border-radius: 0.5rem;
-    border-width: 0.125rem;
-    border-style: solid;
-    border-color: var(--color-primary);
-
-    color: var(--color-primary);
 }
 
-.button[data-fill=false] {
+a[data-fill=false] {
     --color-bg-hover: color-mix(in srgb, var(--color-primary), transparent 95%);
 
     border-color: var(--color-primary);
@@ -66,7 +56,7 @@ style=`--color-primary: ${color};`
     }
 }
 
-.button[data-fill=true] {
+a[data-fill=true] {
     border-color: var(--color-primary);
     background-color: var(--color-primary);
     color: var(--color-neutral-50);

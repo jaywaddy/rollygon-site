@@ -1,31 +1,53 @@
 ---
 import { slugify } from "@/scripts/slugify";
 
-
 interface Props {
     label: string
+    isActive?: astroHTML.JSX.AriaAttributes['aria-current'];
     href?: string
     underline?: boolean
 }
-const { label, href, underline } = Astro.props;
-
-function labelToLowerCase () {
-    if (!href) {
-        return "/" + slugify(label);
-    }
-
-    if (label.toLowerCase() === "home") {
-        return "/";
-    }
-
-    return href;
-}
+const {
+    label,
+    href,
+    isActive = false,
+    underline = false
+} = Astro.props;
 ---
 
-<a class={underline ? "link underline" : "link"} href={labelToLowerCase()} title={label}>{label}</a>
+<a
+aria-current={isActive}
+data-underline={underline}
+href={href ? href : `/${slugify(label)}`}
+title={label}>
+    {label}
+</a>
 
 <style>
-.link:hover {
-    color: var(--color-neutral-500);
+a {
+    --color-indicator: var(--color-neutral-900);
+
+    display: flex;
+    position: relative;
+
+    &:hover {
+        color: var(--color-neutral-500);
+    }
+}
+
+a[data-underline="true"] {
+    text-decoration-line: underline;
+}
+
+a[aria-current="page"]::after {
+    position: absolute;
+    top: 1.75rem;
+    width: 100%;
+    height: 0.125rem;
+
+    background-color: var(--color-indicator);
+
+    pointer-events: none;
+    content: "";
 }
 </style>

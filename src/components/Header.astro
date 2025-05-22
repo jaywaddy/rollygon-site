@@ -3,20 +3,78 @@ import Button from "./Button.astro";
 import Link from "./Link.astro";
 import Logo from "./icons/Logo.astro";
 import Rollygon from "./icons/Rollygon.astro";
+
+interface Page {
+    title: string;
+    href: string;
+}
+
+const home: Page = {
+    title: "Home",
+    href: "/"
+}
+const tools: Page = {
+    title: "Tools",
+    href: "/tools"
+}
+const models: Page = {
+    title: "Models",
+    href: "/models"
+}
+const blog: Page = {
+    title: "Blog",
+    href: "/blog"
+}
+const about: Page = {
+    title: "About",
+    href: "/about"
+}
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.toLowerCase();
+
+function enableActiveLink(label: string): "page" | "false" {
+    console.log("current: " + currentPath, "href: " + label);
+    if (currentPath === label) {
+        return "page"
+    }
+
+    return "false";
+}
 ---
 
 <header class="border-bottom bg-[var(--color-surface-primary)] fixed w-full">
-    <nav class="container flex items-center justify-between py-4">
+    <nav class="container flex items-center justify-between py-6">
         <span class="flex gap-1">
             <Logo />
             <Rollygon color="var(--color-neutral-900)"/>
         </span>
         <ul class="flex items-center gap-8">
-            <li><Link label="Home" href="/" /></li>
-            <li><Link label="Tools" /></li>
-            <li><Link label="Models" /></li>
-            <li><Link label="Blog" /></li>
-            <li><Link label="About" /></li>
+            <li>
+                <Link
+                label={home.title}
+                href={home.href}
+                isActive={enableActiveLink(home.href)}/>
+            </li>
+            <li>
+                <Link
+                label={tools.title}
+                isActive={enableActiveLink(tools.href)}/>
+            </li>
+            <li>
+                <Link
+                label={models.title}
+                isActive={enableActiveLink(models.href)}/>
+            </li>
+            <li>
+                <Link
+                label={blog.title}
+                isActive={enableActiveLink(blog.href)}/>
+            </li>
+            <li>
+                <Link
+                label={about.title}
+                isActive={enableActiveLink(about.href)}/>
+            </li>
             <li>
                 <Button label="Get free tools" href="/tools" icon="download" />
             </li>
