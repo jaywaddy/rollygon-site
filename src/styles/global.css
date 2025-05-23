@@ -22,6 +22,6 @@
     }
 
     .border-top {
-        border-bottom: solid 1px var(--color-section-border);
+        border-top: solid 1px var(--color-section-border);
     }
 }

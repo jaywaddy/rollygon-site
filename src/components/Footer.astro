@@ -1,0 +1,43 @@
+---
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+import SiteTitle from "./SiteTitle.astro";
+---
+
+<footer class="absolute bottom-0 border-top w-full bg-[var(--color-surface-primary)]">
+    <nav class="container grid grid-cols-4 gap-4 py-8">
+        <ul>
+            <li><SiteTitle /></li>
+            <li><span class="flex items-center gap-2"><Icon name="compass" />Sacramento, CA</span></li>
+            <li>
+                <Link
+                label="message@rollygon.com"
+                href="mailto:"
+                icon="email"
+                underline />
+            </li>
+        </ul>
+        <ul>
+            <li><strong>Heading</strong></li>
+            <li><Link label="Home" href="/" underline /></li>
+            <li><Link label="All Tools" href="/tools" underline /></li>
+            <li><Link label="All Models" href="/models" underline /></li>
+            <li><Link label="Blog" href="/blog" underline /></li>
+            <li><Link label="About Rollygon" href="/about" underline /></li>
+        </ul>
+        <ul>
+            <li><strong>Heading</strong></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+        </ul>
+        <ul>
+            <li><strong>Heading</strong></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+            <li><Link label="Example Link" href="/" underline /></li>
+        </ul>
+    </nav>
+</footer>

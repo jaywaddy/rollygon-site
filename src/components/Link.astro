@@ -1,15 +1,19 @@
 ---
 import { slugify } from "@/scripts/slugify";
+import Icon from "./Icon.astro";
+import type { IconName } from "./Icon.astro";
 
 interface Props {
-    label: string
+    label: string;
+    icon?: IconName;
     isActive?: astroHTML.JSX.AriaAttributes['aria-current'];
-    href?: string
-    underline?: boolean
+    href?: string;
+    underline?: boolean;
 }
 const {
     label,
     href,
+    icon = "none",
     isActive = false,
     underline = false
 } = Astro.props;
@@ -20,7 +24,8 @@ aria-current={isActive}
 data-underline={underline}
 href={href ? href : `/${slugify(label)}`}
 title={label}
-class="flex relative text-[var(--color-text)]" >
+class="flex items-center gap-2 relative text-[var(--color-text)]" >
+    {icon !== "none" && <Icon name={icon}/>}
     {label}
 </a>
 
