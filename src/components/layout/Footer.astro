@@ -1,10 +1,12 @@
 ---
-import Icon from "./Icon.astro";
-import Link from "./Link.astro";
-import SiteTitle from "./SiteTitle.astro";
+import Link from "@/ui/Link.astro";
+import Icon from "@/ui/Icon.astro";
+import SiteTitle from "@/components/SiteTitle.astro";
+import ContactForm from "@/layout/ContactForm.astro";
 ---
 
-<footer class="mt-auto border-top w-full bg-[var(--color-surface-primary)]">
+<footer class="mt-auto w-full bg-surface">
+    <ContactForm />
     <nav class="wrapper grid grid-cols-4 gap-4  m-auto py-12">
         <ul>
             <li><SiteTitle /></li>
@@ -39,23 +41,23 @@ import SiteTitle from "./SiteTitle.astro";
             <li><Link label="Example Link" href="/" underline /></li>
         </ul>
     </nav>
-    <div class="flex justify-center items-center py-4 bg-[var(--color-neutral-800)] text-neutral-50">
-        <span>Copyright &copy;</span><span id="footer-date" class="mr-1"></span><span>Rollygon, All rights reserved.</span>
+    <div class="flex justify-center items-center py-4 bg-gray-800 text-neutral-50">
+        <small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>
     </div>
 </footer>
 
 <script>
-const footerDate = document.querySelector("#footer-date");
+    const footerDate = document.querySelector("#footer-date");
 
-if (footerDate !== null) {
-    footerDate.innerHTML = new Date().getFullYear().toString();
-}
+    if (footerDate !== null) {
+        footerDate.innerHTML = new Date().getFullYear().toString();
+    }
 </script>
 
 <style>
-ul  {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+    ul  {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 </style>

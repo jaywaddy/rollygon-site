@@ -1,0 +1,48 @@
+---
+import Icon from "@/ui//Icon.astro";
+
+interface Props {
+    size: "sm" | "auto" | "lg";
+    shape: "rect" | "round";
+    aspect: "square" | "video";
+    placeholder?: boolean;
+}
+
+const {
+    size = "sm",
+    shape = "rect",
+    aspect = "16:9",
+    placeholder = false
+} = Astro.props;
+
+const sm = 148;
+const lg = 424;
+
+function getShape(): "0" | "full" {
+    if (shape === "rect") {
+        return "0"
+    }
+
+    return "full"
+}
+
+function calcSize(): string {
+    if (size === "sm") {
+        return sm + "px";
+    }
+
+    if (size === "lg") {
+        return lg + "px";
+    }
+
+    return "100%";
+}
+---
+
+<div
+class=`flex justify-center items-center aspect-${aspect} rounded-${getShape()} w-[var(--w)] border bg-surface`
+style=`--w: ${calcSize()};`>
+    <div class=`box-content flex justify-center items-center aspect-${aspect} rounded-${getShape()} border-8 border-[var(--color-surface-primary)] w-full bg-gray-200`>
+        {placeholder && <Icon name="image"/> }
+    </div>
+</div>

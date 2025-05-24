@@ -11,7 +11,7 @@ interface Props {
 const { label, id, type, placeholder, value, required = false } = Astro.props;
 ---
 
-<label for={id} class="grid gap-2">
-    <span class="heading-sm">{label}</span>
-    <input {id} {type} {placeholder} {value} {required} class="border rounded-md py-1 px-2">
+<label for={id} class="grid gap-1">
+    <small class="text-dim">{label}</small>
+    <input {id} {type} {placeholder} {value} {required} class="bg-surface border px-3 py-2">
 </label>

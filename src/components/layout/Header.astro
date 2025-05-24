@@ -1,7 +1,7 @@
 ---
-import Button from "./Button.astro";
-import Link from "./Link.astro";
-import SiteTitle from "./SiteTitle.astro";
+import Button from "@/ui/Button.astro";
+import Link from "@/ui/Link.astro";
+import SiteTitle from "@/components/SiteTitle.astro";
 
 interface Page {
     title: string;
@@ -39,7 +39,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header class="border-bottom bg-[var(--color-surface-primary)] sticky w-full">
+<header class="border-bottom bg-surface sticky top-0 w-full">
     <nav class="wrapper flex items-center justify-between py-6">
         <SiteTitle />
         <ul class="flex items-center gap-8">

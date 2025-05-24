@@ -30,34 +30,34 @@ class="flex items-center gap-2 relative text-[var(--color-text)]" >
 </a>
 
 <style>
-a {
-    --color-indicator: var(--color-neutral-900);
-    --color-hover: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
+    a {
+        --color-indicator: var(--color-neutral-900);
+        --color-hover: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
 
-    &:hover {
-        color: var(--color-hover);
-    }
-}
-
-a[data-underline="true"] {
-    text-decoration-line: underline;
-}
-
-a[aria-current="page"]{ 
-    &:hover {
-        color: inherit;
+        &:hover {
+            color: var(--color-hover);
+        }
     }
 
-    &::after {
-        position: absolute;
-        top: 1.75rem;
-        width: 100%;
-        height: 0.125rem;
-
-        background-color: var(--color-indicator);
-
-        pointer-events: none;
-        content: "";
+    a[data-underline="true"] {
+        text-decoration-line: underline;
     }
-}
+
+    a[aria-current="page"]{ 
+        &:hover {
+            color: inherit;
+        }
+
+        &::after {
+            position: absolute;
+            top: 1.75rem;
+            width: 100%;
+            height: 0.125rem;
+
+            background-color: var(--color-indicator);
+
+            pointer-events: none;
+            content: "";
+        }
+    }
 </style>

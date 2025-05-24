@@ -1,0 +1,83 @@
+---
+import type { IconName } from '@/ui/Icon.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+    submit?: boolean;
+    label: string;
+    href?: string;
+    className?: string;
+    color?: string;
+    icon?: IconName;
+    isFilled?: boolean;
+}
+
+const {
+    submit = false,
+    label,
+    href,
+    className,
+    icon,
+    color = "var(--color-blue-600)",
+    isFilled = false
+} = Astro.props;
+
+function toggleButtonColor (buttonFill: boolean): string {
+    if (!buttonFill) {
+        return color;
+    }
+    return "var(--color-neutral-50)";
+}
+---
+
+{submit ? (
+    <button 
+    title={label}
+    data-fill={isFilled}
+    class=`${className} flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]`
+    style=`--color-primary: ${color};` >
+        <span>{label}</span>
+        {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
+    </button>
+) : (
+    <a 
+    title={label}
+    data-fill={isFilled}
+    class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]"
+    style=`--color-primary: ${color};`
+    {href}>
+        <span>{label}</span>
+        {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
+    </a>
+)}
+
+<style>
+    a, button {
+        --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-surface-primary) 20%);
+
+        width: fit-content;
+        cursor: pointer;
+    }
+
+    a[data-fill=false], button[data-fill=false] {
+        --color-bg-hover: color-mix(in srgb, var(--color-primary), transparent 95%);
+
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+
+        &:hover {
+            background-color: var(--color-bg-hover);
+        }
+    }
+
+    a[data-fill=true], button[data-fill=true] {
+        border-color: var(--color-primary);
+        background-color: var(--color-primary);
+        color: var(--color-neutral-50);
+
+        &:hover {
+            border-color: var(--color-primary-hover);
+            background-color: var(--color-primary-hover);
+        }
+    }
+</style>

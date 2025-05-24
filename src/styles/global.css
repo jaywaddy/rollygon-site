@@ -3,17 +3,57 @@
 
 @theme {
     --color-text: var(--color-neutral-900);
+    --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 60%);
 
     --color-surface-primary: var(--color-neutral-50);
     --color-surface-secondary: var(--color-neutral-100);
 
     --color-section-border: var(--color-neutral-200);
-
-    --breakpoint-sm: 40rem;
 }
 
 @utility wrapper {
     margin-inline: auto;
+}
+
+@utility text {
+    color: var(--color-text);
+}
+
+@utility text-dim {
+    color: var(--color-text-dim);
+}
+
+@utility border {
+    border-color: var(--color-text-dim);
+    border-radius: 0.5rem;
+}
+
+@utility bg-surface {
+    background-color: var(--color-surface-primary);
+}
+
+@utility bg-surface-secondary {
+    background-color: var(--color-surface-secondary);
+}
+
+@utility heading-sm {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-text-dim);
+}
+
+@utility heading-md {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@utility border-bottom {
+    border-bottom: solid 1px var(--color-section-border);
+}
+
+@utility border-top {
+    border-top: solid 1px var(--color-section-border);
 }
 
 @media (max-width: 40rem) {
@@ -45,20 +85,5 @@
     .wrapper {
         width: 80rem;
     }
-}
-
-.heading-sm {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
-}
-
-.border-bottom {
-    border-bottom: solid 1px var(--color-section-border);
-}
-
-.border-top {
-    border-top: solid 1px var(--color-section-border);
 }
 
