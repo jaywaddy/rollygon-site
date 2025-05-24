@@ -32,9 +32,10 @@ class="flex items-center gap-2 relative text-[var(--color-text)]" >
 <style>
 a {
     --color-indicator: var(--color-neutral-900);
+    --color-hover: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
 
     &:hover {
-        color: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
+        color: var(--color-hover);
     }
 }
 

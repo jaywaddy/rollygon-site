@@ -1,0 +1,13 @@
+---
+import Input from "./Input.astro";
+import Textarea from "./Textarea.astro";
+---
+
+<section class="wrapper flex py-16">
+    <form action="" method="POST" class="grid gap-4 w-full">
+        <Input label="Name" type="text" id="contact-name" required />
+        <Input label="Email" type="email" id="contact-email" required />
+        <Textarea label="Message" id="contact-meessage"/>
+    </form>
+    <div class="w-full"></div>
+</section>

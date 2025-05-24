@@ -1,27 +1,64 @@
 @import "./reset.css";
 @import "tailwindcss";
 
-@layer colors {
-    :root {
-        --color-text: var(--color-neutral-900);
+@theme {
+    --color-text: var(--color-neutral-900);
 
-        --color-surface-primary: var(--color-neutral-50);
-        --color-surface-secondary: var(--color-neutral-100);
+    --color-surface-primary: var(--color-neutral-50);
+    --color-surface-secondary: var(--color-neutral-100);
 
-        --color-section-border: var(--color-neutral-200);
+    --color-section-border: var(--color-neutral-200);
+
+    --breakpoint-sm: 40rem;
+}
+
+@utility wrapper {
+    margin-inline: auto;
+}
+
+@media (max-width: 40rem) {
+    .wrapper {
+        width: 100%;
+        padding: 2rem;
     }
 }
 
-@layer utilities {
-    .container {
-        margin: auto;
-    }
-    
-    .border-bottom {
-        border-bottom: solid 1px var(--color-section-border);
-    }
-
-    .border-top {
-        border-top: solid 1px var(--color-section-border);
+@media (min-width: 40rem) {
+    .wrapper {
+        width: 38rem;
     }
 }
+
+@media (min-width: 60rem) {
+    .wrapper {
+        width: 50rem;
+    }
+}
+
+@media (min-width: 80rem) {
+    .wrapper {
+        width: 70rem;
+    }
+}
+
+@media (min-width: 100rem) {
+    .wrapper {
+        width: 80rem;
+    }
+}
+
+.heading-sm {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
+}
+
+.border-bottom {
+    border-bottom: solid 1px var(--color-section-border);
+}
+
+.border-top {
+    border-top: solid 1px var(--color-section-border);
+}
+
