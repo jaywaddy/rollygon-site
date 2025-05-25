@@ -23,6 +23,10 @@ import SendIcon from '@/icons/SendIcon.astro';
 import TollIcon from '@/icons/TollIcon.astro';
 import UserIcon from '@/icons/UserIcon.astro';
 import VertexIcon from '@/icons/VertexIcon.astro';
+import GumroadIcon from '@/icons/GumroadIcon.astro';
+import YouTubeIcon from '@/icons/YouTubeIcon.astro';
+import Sketchfab from '@/icons/SketchfabIcon.astro';
+import BlueskyIcon from '@/icons/BlueskyIcon.astro';
 
 export type IconName = (
     | "arrow-left"
@@ -50,15 +54,20 @@ export type IconName = (
     | "tri"
     | "quad"
     | "ngon"
+    | "bluesky"
+    | "gumroad"
+    | "sketchfab"
+    | "youtube"
     | "none"
 );
 
 interface Props {
     name: IconName;
+    size?: string;
     color?: string;
 }
 
-const { name, color = "var(--color-text)" } = Astro.props;
+const { name, size = "16px", color = "var(--color-text)" } = Astro.props;
 ---
 {name === "arrow-left" && <ArrowLeftIcon color={color} />}
 {name === "arrow-right" && <ArrowRightIcon color={color} />}
@@ -84,4 +93,8 @@ const { name, color = "var(--color-text)" } = Astro.props;
 {name === "vertex" && <VertexIcon color={color} />}
 {name === "quad" && <QuadIcon color={color} />}
 {name === "ngon" && <NgonIcon color={color} />}
+{name === "bluesky" && <BlueskyIcon {size} color={color} />}
+{name === "gumroad" && <GumroadIcon {size} color={color} />}
+{name === "sketchfab" && <Sketchfab {size} color={color} />}
+{name === "youtube" && <YouTubeIcon {size} color={color} />}
 

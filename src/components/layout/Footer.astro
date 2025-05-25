@@ -3,6 +3,7 @@ import Link from "@/ui/Link.astro";
 import Icon from "@/ui/Icon.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
 import ContactForm from "@/layout/ContactForm.astro";
+import ContactLinks from "../ContactLinks.astro";
 ---
 
 <footer class="mt-auto w-full bg-surface">
@@ -10,14 +11,7 @@ import ContactForm from "@/layout/ContactForm.astro";
     <nav class="wrapper grid grid-cols-4 gap-4  m-auto py-12">
         <ul>
             <li><SiteTitle /></li>
-            <li><span class="flex items-center gap-2"><Icon name="compass" />Sacramento, CA</span></li>
-            <li>
-                <Link
-                label="example@email.com"
-                href="mailto:"
-                icon="email"
-                underline />
-            </li>
+            <li><ContactLinks /></li>
         </ul>
         <ul>
             <li><strong class="heading-sm">Heading</strong></li>

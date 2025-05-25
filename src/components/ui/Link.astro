@@ -20,11 +20,12 @@ const {
 ---
 
 <a
+data-icon-stroke={icon !== "none"}
 aria-current={isActive}
 data-underline={underline}
 href={href ? href : `/${slugify(label)}`}
 title={label}
-class="flex items-center gap-2 relative text-[var(--color-text)]" >
+class="flex items-center gap-2 relative text-[var(--color-text)] w-fit" >
     {icon !== "none" && <Icon name={icon}/>}
     {label}
 </a>

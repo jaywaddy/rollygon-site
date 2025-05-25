@@ -3,7 +3,7 @@
 
 @theme {
     --color-text: var(--color-neutral-700);
-    --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 60%);
+    --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
 
     --color-surface-primary: var(--color-neutral-50);
     --color-surface-secondary: var(--color-neutral-100);
@@ -87,3 +87,10 @@
     }
 }
 
+a[data-icon-fill]:hover > svg > path {
+    fill: var(--color-text-dim);
+}
+
+a[data-icon-stroke]:hover > svg > path {
+    stroke: var(--color-text-dim);
+}
