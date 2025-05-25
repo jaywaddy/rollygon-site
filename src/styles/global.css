@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-    --color-text: var(--color-neutral-900);
+    --color-text: var(--color-neutral-700);
     --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 60%);
 
     --color-surface-primary: var(--color-neutral-50);

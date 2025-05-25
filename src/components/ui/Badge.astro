@@ -1,0 +1,22 @@
+---
+interface Props {
+    label: string;
+    color: 
+        | "red"
+        | "orange"
+        | "yellow"
+        | "green"
+        | "blue"
+        | "purple"
+        | "fuschia"
+        | "disabled";
+}
+
+const { label, color } = Astro.props;
+---
+
+<small
+class=`bg-[var(--bg)] rounded-sm py-[2px] px-2 w-fit`
+style=`--bg: var(--color-${color}-200)`>
+    {label}
+</small>

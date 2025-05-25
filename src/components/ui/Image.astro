@@ -2,7 +2,7 @@
 import Icon from "@/ui//Icon.astro";
 
 interface Props {
-    size: "sm" | "auto" | "lg";
+    size: string;
     shape: "rect" | "round";
     aspect: "square" | "video";
     placeholder?: boolean;
@@ -16,6 +16,7 @@ const {
 } = Astro.props;
 
 const sm = 148;
+const md = 196;
 const lg = 424;
 
 function getShape(): "0" | "full" {
@@ -31,11 +32,19 @@ function calcSize(): string {
         return sm + "px";
     }
 
+    if (size === "md") {
+        return md + "px";
+    }
+
     if (size === "lg") {
         return lg + "px";
     }
 
-    return "100%";
+    if (size === "auto") {
+        return "100%";
+    }
+
+    return size;
 }
 ---
 
