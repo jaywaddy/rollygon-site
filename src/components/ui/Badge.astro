@@ -17,12 +17,13 @@ interface Props {
 const { label, color } = Astro.props;
 
 function calcColor(color: BadgeColor): string {
-    return `var(--color-${color}-200)`;
+    return `--badge-bg: var(--color-${color}-200)`;
 }
 ---
 
 <small
-class=`bg-[var(--bagde-bg)] rounded-sm py-[2px] px-2 w-fit`
-style=`--bagde-bg: ${calcColor(color)}`>
+class="bg-[var(--badge-bg)] rounded-sm py-[2px] px-2 w-fit"
+style={calcColor(color)}
+>
     {label}
 </small>

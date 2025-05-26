@@ -3,7 +3,7 @@ interface Props {
     color?: string;
 }
 
-const { color } = Astro.props;
+const { color = "var(--color-text)" } = Astro.props;
 ---
 
 <svg width="89" height="29" viewBox="0 0 89 29" fill="none" xmlns="http://www.w3.org/2000/svg">

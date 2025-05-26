@@ -11,6 +11,7 @@
     --color-section-border: var(--color-neutral-200);
 
     --stroke-width: 1.5;
+
 }
 
 @utility wrapper {
@@ -38,15 +39,25 @@
     background-color: var(--color-surface-secondary);
 }
 
-@utility heading-sm {
+@utility heading-xs {
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: bold;
     color: var(--color-text-dim);
 }
 
+@utility heading-sm {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
 @utility heading-md {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+@utility heading-lg {
+    font-size: 4rem;
     font-weight: bold;
 }
 

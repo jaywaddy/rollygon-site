@@ -3,10 +3,13 @@ import Icon from '@/ui/Icon.astro';
 import Button from './Button.astro';
 
 interface Props {
-    type: "tool" | "bundle" | "add-on"
+    title: string;
+    description: string;
+    href: string;
+    type: "tool" | "bundle" | "add-on";
 }
 
-const { type } = Astro.props;
+const { title, description, href, type } = Astro.props;
 
 function calcType(type: string): "tool" | "bundle" {
     if (type === "add-on") {
@@ -21,11 +24,11 @@ function calcType(type: string): "tool" | "bundle" {
 }
 ---
 
-<div class="flex flex-col border min-w-xs">
+<div class="flex flex-col border min-w-xs text-center">
     <div class="flex justify-center items-center py-16 border-b border-b-[var(--color-text-dim)]"><Icon name={calcType(type)} size="64" /></div>
     <div class="flex flex-col items-center gap-8 p-8">
-        <h3 class="heading-sm">Card</h3>
-        <p>Description</p>
-        <Button label=`Get ${type}` href=""/>
+        <h3 class="heading-sm">{title}</h3>
+        <p>{description}</p>
+        <Button label=`Get ${type}` {href} />
     </div>
 </div>
