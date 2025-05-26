@@ -1,22 +1,28 @@
 ---
+type BadgeColor =
+    | "red"
+    | "orange"
+    | "yellow"
+    | "green"
+    | "blue"
+    | "purple"
+    | "fuschia"
+    | "disabled";
+
 interface Props {
     label: string;
-    color: 
-        | "red"
-        | "orange"
-        | "yellow"
-        | "green"
-        | "blue"
-        | "purple"
-        | "fuschia"
-        | "disabled";
+    color: BadgeColor;
 }
 
 const { label, color } = Astro.props;
+
+function calcColor(color: BadgeColor): string {
+    return `var(--color-${color}-200)`;
+}
 ---
 
 <small
-class=`bg-[var(--bg)] rounded-sm py-[2px] px-2 w-fit`
-style=`--bg: var(--color-${color}-200)`>
+class=`bg-[var(--bagde-bg)] rounded-sm py-[2px] px-2 w-fit`
+style=`--bagde-bg: ${calcColor(color)}`>
     {label}
 </small>

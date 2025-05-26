@@ -4,14 +4,14 @@ import Icon from "@/ui//Icon.astro";
 interface Props {
     size: string;
     shape: "rect" | "round";
-    aspect: "square" | "video";
+    aspect: "1/1" | "16/9";
     placeholder?: boolean;
 }
 
 const {
     size = "sm",
     shape = "rect",
-    aspect = "16:9",
+    aspect = "16/9",
     placeholder = false
 } = Astro.props;
 
@@ -19,12 +19,12 @@ const sm = 148;
 const md = 196;
 const lg = 424;
 
-function getShape(): "0" | "full" {
+function getShape(): "0" | "50%" {
     if (shape === "rect") {
         return "0"
     }
 
-    return "full"
+    return "50%"
 }
 
 function calcSize(): string {
@@ -49,9 +49,9 @@ function calcSize(): string {
 ---
 
 <div
-class=`flex justify-center items-center aspect-${aspect} rounded-${getShape()} w-[var(--w)] border bg-surface`
-style=`--w: ${calcSize()};`>
-    <div class=`box-content flex justify-center items-center aspect-${aspect} rounded-${getShape()} border-8 border-[var(--color-surface-primary)] w-full bg-gray-200`>
-        {placeholder && <Icon name="image"/> }
+class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] w-[var(--img-w)] border bg-surface"
+style=`--img-w: ${calcSize()}; --img-aspect: ${aspect}; --shape: ${getShape()};`>
+    <div class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-200">
+        {placeholder && <Icon name="image" size="64" /> }
     </div>
 </div>

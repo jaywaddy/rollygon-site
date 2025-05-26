@@ -1,5 +1,9 @@
 ---
-const color = "var(--color-neutral-900)";
+interface Props {
+    color?: string;
+}
+
+const { color } = Astro.props;
 ---
 
 <svg width="89" height="29" viewBox="0 0 89 29" fill="none" xmlns="http://www.w3.org/2000/svg">

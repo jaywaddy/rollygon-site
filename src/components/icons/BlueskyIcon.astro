@@ -1,10 +1,10 @@
 ---
 interface Props {
+    color?: string;
     size?: string;
-    color?: string
 }
 
-const { color, size } = Astro.props;
+const { color, size = "16" } = Astro.props;
 ---
 
 <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24">

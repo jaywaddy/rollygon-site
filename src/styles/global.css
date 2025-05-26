@@ -9,6 +9,8 @@
     --color-surface-secondary: var(--color-neutral-100);
 
     --color-section-border: var(--color-neutral-200);
+
+    --stroke-width: 1.5;
 }
 
 @utility wrapper {

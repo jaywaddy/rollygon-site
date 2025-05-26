@@ -1,7 +1,15 @@
 ---
+import Card from '@/components/ui/Card.astro';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 ---
 
 <SiteLayout pageTitle="Home">
-
+    <section class="wrapper flex flex-col gap-4 py-16">
+        <h2 class="heading-md">Heading</h2>
+        <div class="flex gap-8 w-full">
+            <Card type="bundle"/>
+            <Card type="bundle"/>
+            <Card type="bundle"/>
+        </div>
+    </section>
 </SiteLayout>

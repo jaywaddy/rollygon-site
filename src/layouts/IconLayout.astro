@@ -1,0 +1,10 @@
+---
+export interface Props {
+    color?: string;
+    size?: string;
+    svg: string;
+}
+
+const { color, size = "16", svg } = Astro.props;
+---
+{svg}

@@ -65,36 +65,47 @@ interface Props {
     name: IconName;
     size?: string;
     color?: string;
+    stroke?: string;
 }
 
-const { name, size = "16px", color = "var(--color-text)" } = Astro.props;
+const { name, size = "16px", color = "var(--color-text)", stroke } = Astro.props;
+
+function clacStroke(stroke: string | undefined): string {
+    const defaultWidth = 1.5;
+    const defaultSize = 16;
+
+    return (defaultWidth / (Number(size) / defaultSize)).toString();
+}
 ---
-{name === "arrow-left" && <ArrowLeftIcon color={color} />}
-{name === "arrow-right" && <ArrowRightIcon color={color} />}
-{name === "arrow-up-right" && <ArrowUpRightIcon color={color} />}
-{name === "download" && <DownloadIcon color={color} />}
-{name === "external-link" && <ExternalLinkIcon color={color} />}
-{name === "email" && <EmailIcon color={color} />}
-{name === "send" && <SendIcon color={color} />}
-{name === "compass" && <CompassIcon color={color} />}
-{name === "network" && <NetworkIcon color={color} />}
-{name === "bundle" && <PackageIcon color={color} />}
-{name === "tool" && <TollIcon color={color} />}
-{name === "menu-hamburger" && <MenuHamburgerIcon color={color} />}
-{name === "menu-close" && <MenuCloseIcon color={color} />}
-{name === "menu-meatball-v" && <MenuVerticalIcon color={color} />}
-{name === "menu-meatball-h" && <MenuHorizontalIcon color={color} />}
-{name === "rss" && <RssIcon color={color} />}
-{name === "clock" && <ClockIcon color={color} />}
-{name === "calendar" && <CalendarIcon color={color} />}
-{name === "search" && <SearchIcon color={color} />}
-{name === "image" && <ImageIcon color={color} />}
-{name === "user" && <UserIcon color={color} />}
-{name === "vertex" && <VertexIcon color={color} />}
-{name === "quad" && <QuadIcon color={color} />}
-{name === "ngon" && <NgonIcon color={color} />}
-{name === "bluesky" && <BlueskyIcon {size} color={color} />}
-{name === "gumroad" && <GumroadIcon {size} color={color} />}
-{name === "sketchfab" && <Sketchfab {size} color={color} />}
-{name === "youtube" && <YouTubeIcon {size} color={color} />}
+
+{name === "arrow-left" && <ArrowLeftIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "arrow-right" && <ArrowRightIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "arrow-up-right" && <ArrowUpRightIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "download" && <DownloadIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "external-link" && <ExternalLinkIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "email" && <EmailIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "send" && <SendIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "compass" && <CompassIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "network" && <NetworkIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "bundle" && <PackageIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "tool" && <TollIcon {color} {size} stroke={clacStroke(stroke)} stroke={clacStroke(stroke)} />}
+{name === "menu-hamburger" && <MenuHamburgerIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "menu-close" && <MenuCloseIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "menu-meatball-v" && <MenuVerticalIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "menu-meatball-h" && <MenuHorizontalIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "rss" && <RssIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "clock" && <ClockIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "calendar" && <CalendarIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "search" && <SearchIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "image" && <ImageIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "user" && <UserIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "vertex" && <VertexIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "quad" && <QuadIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "ngon" && <NgonIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "bluesky" && <BlueskyIcon {color} {size} />}
+{name === "gumroad" && <GumroadIcon {color} {size} />}
+{name === "sketchfab" && <Sketchfab {color} {size} />}
+{name === "youtube" && <YouTubeIcon {color} {size} />}
+
+
 
