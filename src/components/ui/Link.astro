@@ -5,7 +5,9 @@ import type { IconName } from "./Icon.astro";
 
 interface Props {
     label: string;
-    icon?: IconName;
+    iconLeft?: IconName;
+    iconRight?: IconName;
+    size?: string;
     isActive?: astroHTML.JSX.AriaAttributes['aria-current'];
     href?: string;
     underline?: boolean;
@@ -13,21 +15,24 @@ interface Props {
 const {
     label,
     href,
-    icon = "none",
+    iconLeft = "none",
+    iconRight = "none",
+    size = "16",
     isActive = false,
     underline = false
 } = Astro.props;
 ---
 
 <a
-data-icon-stroke={icon !== "none"}
+data-icon-stroke={iconLeft !== "none" || iconRight !== "none"}
 aria-current={isActive}
 data-underline={underline}
 href={href ? href : `/${slugify(label)}`}
 title={label}
 class="flex items-center gap-2 relative text-[var(--color-text)] w-fit" >
-    {icon !== "none" && <Icon name={icon}/>}
+    {iconLeft !== "none" && <Icon name={iconLeft} {size} stroke="1.5" />}
     {label}
+    {iconRight !== "none" && <Icon name={iconRight} {size} stroke="1.5" />}
 </a>
 
 <style>

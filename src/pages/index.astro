@@ -1,5 +1,6 @@
 ---
-import Card from '@/components/ui/Card.astro';
+import ArticleCard from '@/components/ui/ArticleCard.astro';
+import ToolCard from '@/components/ui/ToolCard.astro';
 import SiteLayout from '@/layouts/SiteLayout.astro';
 ---
 
@@ -7,20 +8,39 @@ import SiteLayout from '@/layouts/SiteLayout.astro';
     <section id="tools" class="wrapper flex flex-col gap-4 py-16">
         <h2 class="heading-md">Heading</h2>
         <div class="flex gap-8 w-full">
-            <Card
+            <ToolCard
             title="Card Title"
             description="A description of the bundle, the included add-ons, and more."
             href="/"
             type="bundle" />
-            <Card
+            <ToolCard
             title="Card Title"
             description="A description of the bundle, the included add-ons, and more."
             type="bundle"
             href="/" />
-            <Card
+            <ToolCard
             title="Card Title"
             description="A description of the bundle, the included add-ons, and more."
             type="bundle"
+            href="/" />
+        </div>
+    </section>
+    <section id="articles" class="wrapper flex flex-col gap-8 py-16">
+        <h2 class="heading-md">Heading</h2>
+        <div class="flex flex-col gap-8 w-full">
+            <ArticleCard
+            title="Article Title"
+            description="Description of the article would go into this section right here. This could be between one to two sentences."
+            href="/"
+            tags={["tag 1", "tag 2"]} />
+            <ArticleCard
+            title="Article Title"
+            description="Description of the article would go into this section right here. This could be between one to two sentences."
+            href="/"
+            tags={["a new tag", "tag 1"]} />
+            <ArticleCard
+            title="Article Title"
+            description="Description of the article would go into this section right here. This could be between one to two sentences."
             href="/" />
         </div>
     </section>

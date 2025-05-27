@@ -6,7 +6,6 @@ interface Props {
     submit?: boolean;
     label: string;
     href?: string;
-    className?: string;
     color?: string;
     icon?: IconName;
     isFilled?: boolean;
@@ -16,7 +15,6 @@ const {
     submit = false,
     label,
     href,
-    className,
     icon,
     color = "var(--color-blue-600)",
     isFilled = false
@@ -34,8 +32,7 @@ function toggleButtonColor (buttonFill: boolean): string {
     <button 
     title={label}
     data-fill={isFilled}
-    class=`${className} flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]`
-    style=`--color-primary: ${color};` >
+    class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]">
         <span>{label}</span>
         {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
     </button>
@@ -44,14 +41,13 @@ function toggleButtonColor (buttonFill: boolean): string {
     title={label}
     data-fill={isFilled}
     class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]"
-    style=`--color-primary: ${color};`
     {href}>
         <span>{label}</span>
         {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
     </a>
 )}
 
-<style>
+<style define:vars={{"color-primary": color}}>
     a, button {
         --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-surface-primary) 20%);
 

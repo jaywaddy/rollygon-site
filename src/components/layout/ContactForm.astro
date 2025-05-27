@@ -14,7 +14,9 @@ import AboutSection from "@/layout/AboutSection.astro";
                 <Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
                 <Input label="Email*" type="email" id="contact-email" required />
                 <Textarea label="Message*" id="contact-meessage"/>
-                <Button label="Start a conversation" icon="send" className="mt-6" submit isFilled/>
+                <div class="mt-6">
+                    <Button label="Start a conversation" icon="send" submit isFilled/>
+                </div>
             </form>
         </section>
         <AboutSection />
