@@ -1,14 +1,13 @@
 ---
 import Image from '@/ui/Image.astro';
 import Link from '@/ui/Link.astro';
-import { slugify } from '@/scripts/slugify';
-import Tag from './Tag.astro';
+import TagList from './TagList.astro';
 
 interface Props {
     title: string;
     description: string;
     href: string;
-    tags?: string[];
+    tags?: Array<string>;
     featured?: boolean;
 }
 
@@ -16,22 +15,14 @@ const { title, description, href, tags, featured = false } = Astro.props;
 ---
 
 {!featured && (
-    <div class="flex gap-8">
+    <div class="flex gap-8 w-2/3">
         <Image size="sm" shape="round" aspect="1/1" placeholder />
         <div class="flex flex-col gap-4">
             <h3 class="heading-sm flex items-center gap-2">
                 <Link label={title} {href} iconRight="arrow-up-right" size="24" />
             </h3>
-            {tags && (
-                <ul class="flex gap-2">
-                    {tags?.map(tag => (
-                        <li>
-                            <a href={`/${slugify(tag)}`}><Tag label={tag} color="orange" /></a>
-                        </li>)
-                    )}
-                </ul>
-            )}
-            <p class="max-w-xl">{description}</p>
+            <TagList {tags} />
+            <p>{description}</p>
         </div>
     </div>
 )}

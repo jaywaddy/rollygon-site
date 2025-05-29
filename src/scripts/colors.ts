@@ -1,4 +1,4 @@
-interface ColorTheme {
+export interface ColorTheme {
     "--bg": string;
     "--bg-hover": string;
     "--fg": string;
@@ -12,7 +12,7 @@ export type Color = (
     | "green"
     | "blue"
     | "purple"
-    | "fuschia"
+    | "fuchsia"
     | "neutral"
     | undefined
 );
@@ -59,9 +59,16 @@ export const Purple: ColorTheme = {
     "--fg-hover": "var(--color-purple-600)"
 }
 
-export const Fuschia: ColorTheme = {
-    "--bg": "var(--color-fuschia-200)",
-    "--bg-hover": "var(--color-fuschia-100)",
-    "--fg": "var(--color-fuschia-700)",
-    "--fg-hover": "var(--color-fuschia-600)"
+export const Fuchsia: ColorTheme = {
+    "--bg": "var(--color-fuchsia-200)",
+    "--bg-hover": "var(--color-fuchsia-100)",
+    "--fg": "var(--color-fuchsia-700)",
+    "--fg-hover": "var(--color-fuchsia-600)"
+}
+
+export const Neutral: ColorTheme = {
+    "--bg": "var(--color-neutral-200)",
+    "--bg-hover": "var(--color-neutral-100)",
+    "--fg": "var(--color-neutral-700)",
+    "--fg-hover": "var(--color-neutral-600)"
 }

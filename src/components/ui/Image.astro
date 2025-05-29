@@ -15,42 +15,31 @@ const {
     placeholder = false
 } = Astro.props;
 
-const sm = 148;
-const md = 196;
-const lg = 424;
-
-function getShape(): "0" | "50%" {
-    if (shape === "rect") {
-        return "0"
-    }
+function getShape(input: typeof shape): "0" | "50%" {
+    if (input === "rect") return "0";
 
     return "50%"
 }
 
-function calcSize(): string {
-    if (size === "sm") {
-        return sm + "px";
-    }
+function calcSize(input: typeof size): string {
+    const sm = "148";
+    const lg = "424";
 
-    if (size === "md") {
-        return md + "px";
-    }
+    if (input === "sm") return sm + "px";
+    if (input === "lg") return lg + "px";
+    if (input === "auto") return "100%";
 
-    if (size === "lg") {
-        return lg + "px";
-    }
-
-    if (size === "auto") {
-        return "100%";
-    }
-
-    return size;
+    return input + "px";
 }
 ---
 
 <div
-class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] w-[var(--img-w)] border bg-surface"
-style=`--img-w: ${calcSize()}; --img-aspect: ${aspect}; --shape: ${getShape()};`>
+class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] border bg-surface"
+style={{
+    "--img-w": calcSize(size),
+    "--img-aspect": aspect,
+    "--shape": getShape(shape)
+}}>
     <div class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-200">
         {placeholder && <Icon name="image" size="64" /> }
     </div>

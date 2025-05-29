@@ -1,15 +1,16 @@
 ---
 import {
     type Color,
+    type ColorTheme,
     Red,
     Orange,
     Yellow,
     Green,
     Blue,
     Purple,
-    Fuschia
+    Fuchsia,
+    Neutral
 } from "@/scripts/colors";
-
 
 interface Props {
     label: string;
@@ -17,20 +18,27 @@ interface Props {
 }
 
 const { label, color } = Astro.props;
+
+function setBadgeColorTheme(input: Color): ColorTheme {
+    const colorList = [
+        { name: "red", theme: Red },
+        { name: "orange", theme: Orange },
+        { name: "yellow", theme: Yellow },
+        { name: "green", theme: Green },
+        { name: "blue", theme: Blue },
+        { name: "purple", theme: Purple },
+        { name: "fuchsia", theme: Fuchsia },
+        { name: "neutral", theme: Neutral }
+    ]
+    const color = colorList.find(color => color.name === input);
+
+    return color?.theme || Neutral;
+}
 ---
 
 <small
 data-badge
 class="bg-[var(--bg)] rounded-sm py-[2px] px-2 w-fit"
-style={(
-    color === undefined ? ""
-    : color === "red" ? Red
-    : color === "orange" ? Orange
-    : color === "yellow" ? Yellow
-    : color === "green" ? Green
-    : color === "blue" ? Blue
-    : color === "purple" ? Purple
-    : color === "fuschia" && Fuschia
-)}>
+style={setBadgeColorTheme(color)}>
     {label}
 </small>

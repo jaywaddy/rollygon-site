@@ -1,0 +1,22 @@
+---
+import { slugify } from '@/scripts/slugify';
+import Tag from './ui/Tag.astro';
+
+interface Props {
+    tags: Array<string> | undefined;
+}
+
+const { tags } = Astro.props;
+---
+
+{tags && (
+    <ul class="flex flex-wrap gap-1">
+        {tags?.map(tag => (
+            <li>
+                <a href={`/${slugify(tag)}`}>
+                    <Tag label={tag} count="10" />
+                </a>
+            </li>
+        ))}
+    </ul>
+)}
