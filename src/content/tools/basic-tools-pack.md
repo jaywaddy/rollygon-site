@@ -1,12 +1,12 @@
 ---
-title: Article 3
+title: Basic Tools Pack
 postDate: 2024-11-11
 image: 
 description: Description of the article would go into this section right here. This could be between one to two sentences.
-contentType: article
+contentType: tool
+price: Free
 tags:
-    - Tool
-    - Guide
+    - Blender
 ---
 
-This is the body of the article.
+This holds the information and specs about the tool along witht the download link.

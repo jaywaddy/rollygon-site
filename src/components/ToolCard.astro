@@ -1,40 +1,24 @@
 ---
-import Icon from '@/ui/Icon.astro';
-import Button from '@/ui/Button.astro';
-import type { IconName } from '@/ui/Icon.astro';
+import Icon from "@/ui/Icon.astro";
+import Button from "@/ui/Button.astro";
+import type { CollectionEntry } from "astro:content";
+import { slugify } from "@/scripts/utilities";
 
 interface Props {
-    title: string;
-    description: string;
-    href: string;
-    type: "tool" | "bundle" | "add-on";
+	tool: CollectionEntry<"tools">;
 }
 
-const { title, description, href, type } = Astro.props;
-
-function setIconName(input: typeof Astro.props.type): IconName {
-    interface ToolType {
-        name: typeof Astro.props.type;
-        icon: IconName;
-    }
-
-    const typeList: Array<ToolType> = [
-        { name: "tool", icon: "tool" },
-        { name: "bundle", icon: "bundle" },
-        { name: "add-on", icon: "tool" }
-    ]
-
-    const type = typeList.find(type => type.name === input);
-
-    return type?.icon;
-}
+const { tool } = Astro.props;
+const { title, description } = tool.data;
 ---
 
 <div class="flex flex-col border min-w-xs text-center">
-    <div class="flex justify-center items-center py-16 border-b border-b-[var(--color-text-dim)]"><Icon name={setIconName(type)} size="64" /></div>
-    <div class="flex flex-col items-center gap-8 p-8">
-        <h3 class="heading-sm">{title}</h3>
-        <p>{description}</p>
-        <Button label=`Get ${type}` {href} />
-    </div>
+	<div class="flex justify-center items-center py-16 border-b border-b-[var(--color-text-dim)]">
+		<Icon name="tool" size="64" />
+	</div>
+	<div class="flex flex-col items-center gap-8 p-8">
+		<h3 class="heading-sm">{title}</h3>
+		<p>{description}</p>
+		<Button label="Get tool" href={"/tools/" + slugify(title)} icon="download" />
+	</div>
 </div>

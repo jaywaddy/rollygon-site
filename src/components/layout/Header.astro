@@ -2,33 +2,15 @@
 import Button from "@/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
+import type { TopLevelPage } from "@/layouts/SiteLayout.astro";
+import { undefined } from "astro:schema";
 
-interface Page {
-	title: string;
-	href: string;
+interface Props {
+	topLevelPages: Array<TopLevelPage>;
 }
 
-const homePage: Page = {
-	title: "Home",
-	href: "/",
-};
-const toolsPage: Page = {
-	title: "Tools",
-	href: "/tools",
-};
-const modelsPage: Page = {
-	title: "Models",
-	href: "/models",
-};
-const articlesPage: Page = {
-	title: "Articles",
-	href: "/articles",
-};
-const aboutPage: Page = {
-	title: "About",
-	href: "/about",
-};
 const currentPath = new URL(Astro.request.url).pathname;
+const { topLevelPages } = Astro.props;
 
 function toggleActiveLink(label: string): "page" | "false" {
 	if (currentPath === label) {
@@ -36,6 +18,16 @@ function toggleActiveLink(label: string): "page" | "false" {
 	}
 
 	return "false";
+}
+
+function returnPage(input: TopLevelPage["title"]): TopLevelPage {
+	const page = topLevelPages.find((page) => page.title === input);
+
+	if (page) {
+		return page;
+	}
+
+	return topLevelPages[0];
 }
 ---
 
@@ -45,22 +37,34 @@ function toggleActiveLink(label: string): "page" | "false" {
 		<ul class="flex items-center gap-8">
 			<li>
 				<Link
-					label={homePage.title}
-					href={homePage.href}
-					isActive={toggleActiveLink(homePage.href)}
+					label={returnPage("Home").title}
+					href={returnPage("Home").href}
+					isActive={toggleActiveLink(returnPage("Home").href)}
 				/>
 			</li>
 			<li>
-				<Link label={toolsPage.title} isActive={toggleActiveLink(toolsPage.href)} />
+				<Link
+					label={returnPage("Tools").title}
+					isActive={toggleActiveLink(returnPage("Tools").href)}
+				/>
 			</li>
 			<li>
-				<Link label={modelsPage.title} isActive={toggleActiveLink(modelsPage.href)} />
+				<Link
+					label={returnPage("Models").title}
+					isActive={toggleActiveLink(returnPage("Models").href)}
+				/>
 			</li>
 			<li>
-				<Link label={articlesPage.title} isActive={toggleActiveLink(articlesPage.href)} />
+				<Link
+					label={returnPage("Articles").title}
+					isActive={toggleActiveLink(returnPage("Articles").href)}
+				/>
 			</li>
 			<li>
-				<Link label={aboutPage.title} isActive={toggleActiveLink(aboutPage.href)} />
+				<Link
+					label={returnPage("About").title}
+					isActive={toggleActiveLink(returnPage("About").href)}
+				/>
 			</li>
 			<li>
 				<Button label="Get free tools" href="/tools" icon="download" />

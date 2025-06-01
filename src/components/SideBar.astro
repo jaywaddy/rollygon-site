@@ -7,10 +7,10 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
     headings: Array<MarkdownHeading>;
-    article: CollectionEntry<"articles">;
+    content: CollectionEntry<"articles"> | CollectionEntry<"tools">;
 }
 
-const { headings, article } = Astro.props;
+const { headings, content } = Astro.props;
 ---
 
 <aside class="flex flex-col gap-8 py-16">
@@ -19,8 +19,10 @@ const { headings, article } = Astro.props;
         <hr />
         <div class="sticky top-[128px] flex flex-col gap-8">
             <TableOfContents {headings} />
-            <hr />
-            <ReadTimeIndicator {article} />
+            {content.data.contentType === "article" && (
+                <hr />
+                <ReadTimeIndicator {content} />
+            )}
         </div>
     )}
 </aside>

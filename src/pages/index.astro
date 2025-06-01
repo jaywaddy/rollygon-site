@@ -1,11 +1,9 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
-import Button from "@/components/ui/Button.astro";
 import Link from "@/components/ui/Link.astro";
-import { LATEST_ARTICLES } from "@/content/config";
+import { LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
 ---
 
 <SiteLayout pageTitle="Home">
@@ -15,24 +13,7 @@ import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
 			<Link label="View all tools" href="/tools" underline />
 		</div>
 		<div class="flex gap-8 w-full">
-			<ToolCard
-				title="Card Title"
-				description="A description of the bundle, the included add-ons, and more."
-				href="/"
-				type="bundle"
-			/>
-			<ToolCard
-				title="Card Title"
-				description="A description of the bundle, the included add-ons, and more."
-				type="bundle"
-				href="/"
-			/>
-			<ToolCard
-				title="Card Title"
-				description="A description of the bundle, the included add-ons, and more."
-				type="bundle"
-				href="/"
-			/>
+			{LATEST_TOOLS.map((tool) => <ToolCard {tool} />)}
 		</div>
 	</section>
 	<section id="articles" class="wrapper flex flex-col gap-8 py-16 w-2/3">

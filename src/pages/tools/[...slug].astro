@@ -1,0 +1,23 @@
+---
+import { ALL_TOOLS } from "@/content/config";
+import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+	return ALL_TOOLS.map((tool) => ({
+		params: {
+			slug: tool.slug,
+		},
+		props: { tool },
+	}));
+}
+
+const { tool } = Astro.props;
+const { Content } = await tool.render();
+---
+
+<SiteLayout pageTitle={tool.data.title}>
+	<ContentPageLayout content={tool}>
+		<Content />
+	</ContentPageLayout>
+</SiteLayout>

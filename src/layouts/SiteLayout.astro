@@ -9,8 +9,8 @@ interface Props {
 	pageTitle: string;
 }
 
-interface TopLevelPage {
-	title: string;
+export interface TopLevelPage {
+	title: "Home" | "Tools" | "Models" | "Articles" | "About";
 	href: string;
 }
 
@@ -41,7 +41,7 @@ const topLevelPageTitle = topLevelPages.find((page) => page.title === pageTitle)
 		<title>Rollygon | {pageTitle}</title>
 	</head>
 	<body class="flex flex-col min-h-full bg-surface">
-		<Header />
+		<Header {topLevelPages} />
 		{
 			pageTitle === topLevelPageTitle && topLevelPageTitle === "Home" && (
 				<div class="bg-surface-secondary border-bottom py-16">

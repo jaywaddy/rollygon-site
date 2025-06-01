@@ -3,6 +3,7 @@ import { z, defineCollection, type CollectionEntry, getCollection } from "astro:
 const articleCollection = defineCollection({
     type: "content",
     schema: z.object({
+        contentType: z.string(),
         title: z.string(),
         postDate: z.date(),
         description: z.string(),
@@ -10,8 +11,21 @@ const articleCollection = defineCollection({
     })
 });
 
+const toolCollection = defineCollection({
+    type: "content",
+    schema: z.object({
+        contentType: z.string(),
+        title: z.string(),
+        postDate: z.date(),
+        description: z.string(),
+        price: z.string(),
+        tags: z.array(z.string()),
+    })
+});
+
 export const collections = {
     articles: articleCollection,
+    tools: toolCollection,
 }
 
 export const ALL_ARTICLES: Array<CollectionEntry<"articles">> = (
@@ -23,9 +37,11 @@ export const ALL_ARTICLES: Array<CollectionEntry<"articles">> = (
 
 export const LATEST_ARTICLES: Array<CollectionEntry<"articles">> = [...ALL_ARTICLES].splice(0, 3);
 
-export function calcTagCount(input: string): number {
-	return ALL_ARTICLES
-        .map((article) => article.data.tags)
-        .flat(2)
-        .filter(match => input === match).length;
-}
+export const ALL_TOOLS: Array<CollectionEntry<"tools">> = (
+	await getCollection("tools")
+).sort(
+	(olderDate: CollectionEntry<"tools">, newerDate: CollectionEntry<"tools">) =>
+		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
+);
+
+export const LATEST_TOOLS: Array<CollectionEntry<"tools">> = [...ALL_TOOLS].splice(0, 3);

@@ -1,21 +1,20 @@
 ---
-import { calcTagCount } from "@/content/config";
+import { ALL_ARTICLES, ALL_TOOLS } from "@/content/config";
 import { slugify } from "@/scripts/utilities.ts";
 import Tag from "@/ui/Tag.astro";
 
 interface Props {
 	tags: Array<string> | undefined;
-	isArticle?: boolean;
+	contentArray: typeof ALL_ARTICLES | typeof ALL_TOOLS;
 }
 
-const { tags, isArticle = false } = Astro.props;
+const { tags, contentArray } = Astro.props;
 
-function countTags(isArticle: typeof Astro.props.isArticle, tag: string): number {
-	if (isArticle) {
-		return calcTagCount(tag);
-	}
-
-	return calcTagCount(tag); // Adjust this to calc number for tools!
+function calcTagCount(list: typeof ALL_ARTICLES | typeof ALL_TOOLS, input: string): number {
+	return list
+		.map((article) => article.data.tags)
+		.flat(2)
+		.filter((match) => input === match).length;
 }
 ---
 
@@ -24,9 +23,16 @@ function countTags(isArticle: typeof Astro.props.isArticle, tag: string): number
 		<ul class="flex flex-wrap gap-1">
 			{tags?.map((tag) => (
 				<li>
-					<a href={`/${slugify(tag)}`}>
-						<Tag label={tag} count={countTags(isArticle, tag)} />
-					</a>
+					{contentArray === ALL_ARTICLES && (
+						<a href={`/articles/tag/${slugify(tag)}`}>
+							<Tag label={tag} count={calcTagCount(contentArray, tag)} />
+						</a>
+					)}
+					{contentArray === ALL_TOOLS && (
+						<a href={`/tools/tag/${slugify(tag)}`}>
+							<Tag label={tag} count={calcTagCount(contentArray, tag)} />
+						</a>
+					)}
 				</li>
 			))}
 		</ul>

@@ -1,0 +1,50 @@
+---
+import SideBar from "@/components/SideBar.astro";
+import TagList from "@/components/TagList.astro";
+import Image from "@/components/ui/Image.astro";
+import Link from "@/components/ui/Link.astro";
+import { ALL_ARTICLES, ALL_TOOLS } from "@/content/config";
+import { calcReadTime, formatDate } from "@/scripts/utilities";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	content: CollectionEntry<"articles"> | CollectionEntry<"tools">;
+}
+
+const { content } = Astro.props;
+const { title, description, postDate, tags, contentType } = content.data;
+const { headings } = await content.render();
+---
+
+<section class="wrapper flex gap-16 py-16 w-lg">
+	<div class="flex flex-col gap-8 w-full">
+		{
+			contentType === "article" && (
+				<Link label="Back to articles" href="/articles" iconLeft="arrow-left" underline />
+			)
+		}
+		{
+			contentType === "tool" && (
+				<Link label="Back to tools" href="/tools" iconLeft="arrow-left" underline />
+			)
+		}
+		<div class="flex flex-col gap-4">
+			<h1 class="heading-lg">{title}</h1>
+			{contentType === "article" && <TagList contentArray={ALL_ARTICLES} {tags} />}
+			{contentType === "tool" && <TagList contentArray={ALL_TOOLS} {tags} />}
+			<p>{description}</p>
+			{
+				contentType === "article" && (
+					<small class="text-dim">
+						{calcReadTime(content.body)} min read &bullet; {formatDate(postDate)}
+					</small>
+				)
+			}
+		</div>
+		<Image placeholder />
+		<article class="content flex flex-col gap-8 scroll-mt-[92px]">
+			<slot />
+		</article>
+	</div>
+	<SideBar {headings} {content} />
+</section>

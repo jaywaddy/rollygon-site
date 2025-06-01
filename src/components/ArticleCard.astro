@@ -5,6 +5,7 @@ import TagList from "@/components/TagList.astro";
 import { calcReadTime, formatDate, slugify } from "@/scripts/utilities.ts";
 import type { CollectionEntry } from "astro:content";
 import Button from "@/ui/Button.astro";
+import { ALL_ARTICLES } from "@/content/config";
 
 interface Props {
 	article: CollectionEntry<"articles">;
@@ -23,7 +24,7 @@ const href = "articles/" + slugify(title);
 			<div class="flex flex-col gap-4 w-full">
 				<span class="heading-xs">Featured</span>
 				<h3 class="heading-sm flex items-center gap-2">{title}</h3>
-				<TagList {tags} isArticle />
+				<TagList contentArray={ALL_ARTICLES} {tags} />
 				<p>{description}</p>
 				<Button label="Read full article" {href} icon="arrow-up-right" isFilled />
 				<small class="text-dim">
@@ -43,7 +44,7 @@ const href = "articles/" + slugify(title);
 						href={"articles/" + slugify(title)}
 					/>
 				</h3>
-				<TagList {tags} isArticle />
+				<TagList contentArray={ALL_ARTICLES} {tags} />
 				<p>{description}</p>
 				<small class="text-dim">
 					{calcReadTime(article.body)} min read &bullet; {formatDate(postDate)}
