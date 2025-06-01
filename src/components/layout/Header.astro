@@ -4,84 +4,77 @@ import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
 
 interface Page {
-    title: string;
-    href: string;
+	title: string;
+	href: string;
 }
 
 const homePage: Page = {
-    title: "Home",
-    href: "/"
-}
+	title: "Home",
+	href: "/",
+};
 const toolsPage: Page = {
-    title: "Tools",
-    href: "/tools"
-}
+	title: "Tools",
+	href: "/tools",
+};
 const modelsPage: Page = {
-    title: "Models",
-    href: "/models"
-}
-const blogPage: Page = {
-    title: "Blog",
-    href: "/blog"
-}
+	title: "Models",
+	href: "/models",
+};
+const articlesPage: Page = {
+	title: "Articles",
+	href: "/articles",
+};
 const aboutPage: Page = {
-    title: "About",
-    href: "/about"
-}
+	title: "About",
+	href: "/about",
+};
 const currentPath = new URL(Astro.request.url).pathname;
 
 function toggleActiveLink(label: string): "page" | "false" {
-    if (currentPath === label) {
-        return "page"
-    }
+	if (currentPath === label) {
+		return "page";
+	}
 
-    return "false";
+	return "false";
 }
 ---
 
 <header class="border-bottom sticky top-0 w-full z-10">
-    <nav class="wrapper flex items-center justify-between py-6">
-        <SiteTitle />
-        <ul class="flex items-center gap-8">
-            <li>
-                <Link
-                label={homePage.title}
-                href={homePage.href}
-                isActive={toggleActiveLink(homePage.href)} />
-            </li>
-            <li>
-                <Link
-                label={toolsPage.title}
-                isActive={toggleActiveLink(toolsPage.href)} />
-            </li>
-            <li>
-                <Link
-                label={modelsPage.title}
-                isActive={toggleActiveLink(modelsPage.href)} />
-            </li>
-            <li>
-                <Link
-                label={blogPage.title}
-                isActive={toggleActiveLink(blogPage.href)} />
-            </li>
-            <li>
-                <Link
-                label={aboutPage.title}
-                isActive={toggleActiveLink(aboutPage.href)} />
-            </li>
-            <li>
-                <Button label="Get free tools" href="/tools" icon="download" />
-            </li>
-        </ul>
-    </nav>
+	<nav class="wrapper flex items-center justify-between py-6">
+		<SiteTitle />
+		<ul class="flex items-center gap-8">
+			<li>
+				<Link
+					label={homePage.title}
+					href={homePage.href}
+					isActive={toggleActiveLink(homePage.href)}
+				/>
+			</li>
+			<li>
+				<Link label={toolsPage.title} isActive={toggleActiveLink(toolsPage.href)} />
+			</li>
+			<li>
+				<Link label={modelsPage.title} isActive={toggleActiveLink(modelsPage.href)} />
+			</li>
+			<li>
+				<Link label={articlesPage.title} isActive={toggleActiveLink(articlesPage.href)} />
+			</li>
+			<li>
+				<Link label={aboutPage.title} isActive={toggleActiveLink(aboutPage.href)} />
+			</li>
+			<li>
+				<Button label="Get free tools" href="/tools" icon="download" />
+			</li>
+		</ul>
+	</nav>
 </header>
 
 <style>
-    header {
-        background: linear-gradient(
-            var(--color-surface-primary),
-            color-mix(in srgb, var(--color-surface-primary), rgba(0, 0, 0, 0))
-        );
-        backdrop-filter: blur(16px);
-    }
+	header {
+		background: linear-gradient(
+			var(--color-surface-primary),
+			color-mix(in srgb, var(--color-surface-primary), rgba(0, 0, 0, 0))
+		);
+		backdrop-filter: blur(24px);
+	}
 </style>

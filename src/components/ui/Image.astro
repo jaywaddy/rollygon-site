@@ -2,45 +2,60 @@
 import Icon from "@/ui//Icon.astro";
 
 interface Props {
-    size: string;
-    shape: "rect" | "round";
-    aspect: "1/1" | "16/9";
-    placeholder?: boolean;
+	size?: string;
+	shape?: "rect" | "round";
+	aspect?: "1/1" | "16/9";
+	placeholder?: boolean;
 }
 
-const {
-    size = "sm",
-    shape = "rect",
-    aspect = "16/9",
-    placeholder = false
-} = Astro.props;
+const { size = "auto", shape = "rect", aspect = "16/9", placeholder = false } = Astro.props;
 
-function getShape(input: typeof shape): "0" | "50%" {
-    if (input === "rect") return "0";
+function calcRadius(border: string, input: typeof shape): string {
+	if (border === "outer" && input === "rect") {
+		return "0.5em";
+	}
 
-    return "50%"
+	if (border === "inner" && input === "rect") {
+		return "0.75em";
+	}
+
+	return "50%";
 }
 
 function calcSize(input: typeof size): string {
-    const sm = "148";
-    const lg = "424";
+	interface Size {
+		name: string;
+		size: string;
+	}
 
-    if (input === "sm") return sm + "px";
-    if (input === "lg") return lg + "px";
-    if (input === "auto") return "100%";
+	const sizes: Array<Size> = [
+		{ name: "sm", size: "148px" },
+		{ name: "md", size: "424px" },
+		{ name: "lg", size: "586px" },
+		{ name: "auto", size: "100%" },
+	];
+	const matchingSize = sizes.find((match) => match.name === input);
 
-    return input + "px";
+	if (matchingSize) {
+		return matchingSize.size;
+	}
+
+	return input;
 }
 ---
 
 <div
-class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] border bg-surface"
-style={{
-    "--img-w": calcSize(size),
-    "--img-aspect": aspect,
-    "--shape": getShape(shape)
-}}>
-    <div class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--shape)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-200">
-        {placeholder && <Icon name="image" size="64" /> }
-    </div>
+	class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] border bg-surface"
+	style={{
+		"--img-w": calcSize(size),
+		"--img-aspect": aspect,
+		"--outter-radius": calcRadius("outer", shape),
+		"--inner-radius": calcRadius("inner", shape),
+	}}
+>
+	<div
+		class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--inner-radius)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-200"
+	>
+		{placeholder && <Icon name="image" size="64" />}
+	</div>
 </div>

@@ -1,48 +1,47 @@
 ---
-import ArticleCard from '@/components/ArticleCard.astro';
-import ToolCard from '@/components/ToolCard.astro';
-import SiteLayout from '@/layouts/SiteLayout.astro';
+import ArticleCard from "@/components/ArticleCard.astro";
+import ToolCard from "@/components/ToolCard.astro";
+import Button from "@/components/ui/Button.astro";
+import Link from "@/components/ui/Link.astro";
+import { LATEST_ARTICLES } from "@/content/config";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
 ---
 
 <SiteLayout pageTitle="Home">
-    <section id="tools" class="wrapper flex flex-col gap-4 py-16">
-        <h2 class="heading-md">Heading</h2>
-        <div class="flex gap-8 w-full">
-            <ToolCard
-            title="Card Title"
-            description="A description of the bundle, the included add-ons, and more."
-            href="/"
-            type="bundle" />
-            <ToolCard
-            title="Card Title"
-            description="A description of the bundle, the included add-ons, and more."
-            type="bundle"
-            href="/" />
-            <ToolCard
-            title="Card Title"
-            description="A description of the bundle, the included add-ons, and more."
-            type="bundle"
-            href="/" />
-        </div>
-    </section>
-    <section id="articles" class="wrapper flex flex-col gap-8 py-16 w-2/3">
-        <h2 class="heading-md">Heading</h2>
-        <div class="flex flex-col gap-8 w-full">
-            <ArticleCard
-            title="Article Title"
-            description="Description of the article would go into this section right here. This could be between one to two sentences."
-            href="/"
-            tags={["Tool", "Guide"]} />
-            <ArticleCard
-            title="Article Title"
-            description="Description of the article would go into this section right here. This could be between one to two sentences."
-            href="/"
-            tags={["Tool", "Update", "New Tag"]} />
-            <ArticleCard
-            title="Article Title"
-            description="Description of the article would go into this section right here. This could be between one to two sentences."
-            tags={["Coaster"]}
-            href="/" />
-        </div>
-    </section>
+	<section id="tools" class="wrapper flex flex-col gap-4 py-16">
+		<div class="flex items-baseline gap-4">
+			<h2 class="heading-md">Newst tools</h2>
+			<Link label="View all tools" href="/tools" underline />
+		</div>
+		<div class="flex gap-8 w-full">
+			<ToolCard
+				title="Card Title"
+				description="A description of the bundle, the included add-ons, and more."
+				href="/"
+				type="bundle"
+			/>
+			<ToolCard
+				title="Card Title"
+				description="A description of the bundle, the included add-ons, and more."
+				type="bundle"
+				href="/"
+			/>
+			<ToolCard
+				title="Card Title"
+				description="A description of the bundle, the included add-ons, and more."
+				type="bundle"
+				href="/"
+			/>
+		</div>
+	</section>
+	<section id="articles" class="wrapper flex flex-col gap-8 py-16 w-2/3">
+		<div class="flex items-baseline gap-4">
+			<h2 class="heading-md">Newest articles & updates</h2>
+			<Link label="View all articles" href="/articles" underline />
+		</div>
+		<div class="flex flex-col gap-8 w-full">
+			{LATEST_ARTICLES.map((article) => <ArticleCard {article} />)}
+		</div>
+	</section>
 </SiteLayout>

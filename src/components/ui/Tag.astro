@@ -1,53 +1,56 @@
 ---
 import {
-    type ColorTheme,
-    Red,
-    Orange,
-    Yellow,
-    Green,
-    Blue,
-    Purple,
-    Fuchsia,
-    Neutral
+	type ColorTheme,
+	Red,
+	Orange,
+	Yellow,
+	Green,
+	Blue,
+	Purple,
+	Fuchsia,
+	Neutral,
 } from "@/scripts/colors";
 
 interface Props {
-    label: string;
-    count: string;
+	label: string;
+	count: number;
 }
 
 const { label, count } = Astro.props;
 
 export function setTagColorTheme(input: string): ColorTheme {
-    interface ColoredTag {
-        name: string;
-        color: ColorTheme;
-    }
+	interface ColoredTag {
+		name: string;
+		color: ColorTheme;
+	}
 
-    const coloredTags: Array<ColoredTag> = [
-        { name: "Guide", color: Blue },
-        { name: "Tool", color: Yellow },
-        { name: "Update", color: Orange },
-        { name: "Coaster", color: Purple },
-    ];
-    const tag = coloredTags.find(tag => tag.name === input);
+	const coloredTags: Array<ColoredTag> = [
+		{ name: "Guide", color: Blue },
+		{ name: "Tool", color: Yellow },
+		{ name: "Update", color: Orange },
+		{ name: "Coaster", color: Purple },
+	];
+	const tag = coloredTags.find((tag) => tag.name === input);
 
-    return tag?.color || Neutral;
+	return tag?.color || Neutral;
 }
 ---
 
 <span
-data-tag
-class="flex items-center bg-[var(--bg)] rounded-sm border border-[var(--fg)] text-[var(--fg)] px-2 w-fit"
-style={setTagColorTheme(label)}>
-    <small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap "><span>#</span>{label}</small>
-    <small class="pl-2 py-[2px] border-l">{count}</small>
+	data-tag
+	class="flex items-center bg-[var(--bg)] rounded-sm border border-[var(--fg)] text-[var(--fg)] px-2 w-fit"
+	style={setTagColorTheme(label)}
+>
+	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap"
+		><span>#</span>{label}</small
+	>
+	<small class="pl-2 py-[2px] border-l">{count}</small>
 </span>
 
 <style>
-[data-tag]:hover {
-    background-color: var(--bg-hover);
-    color: var(--fg-hover);
-    border-color: var(--fg-hover);
-}
+	[data-tag]:hover {
+		background-color: var(--bg-hover);
+		color: var(--fg-hover);
+		border-color: var(--fg-hover);
+	}
 </style>

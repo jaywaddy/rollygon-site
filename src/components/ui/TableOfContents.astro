@@ -1,0 +1,24 @@
+---
+import { slugify } from "@/scripts/utilities";
+import Link from "./Link.astro";
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+	headings: Array<MarkdownHeading>;
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="flex flex-col gap-8">
+	<span class="heading-xs">Table of Contents</span>
+	<ol class="flex flex-col gap-4">
+		{
+			headings.map((title, index) => (
+				<li>
+					<Link label={index + 1 + ". " + title.text} href={"#" + slugify(title.text)} />
+				</li>
+			))
+		}
+	</ol>
+</nav>

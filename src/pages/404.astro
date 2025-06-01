@@ -1,0 +1,17 @@
+---
+import Button from "@/components/ui/Button.astro";
+import Link from "@/components/ui/Link.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout pageTitle="404">
+	<div class="bg-surface-primary py-16">
+		<div class="wrapper flex flex-col gap-8 w-2/3">
+			<h1>404 - Page Not Found.</h1>
+			<p class="heading-sub w-2/3">
+				Did you type the URL correctly? Or maybe try heading back to the home page.
+			</p>
+			<Button label="Head back home" href="/" icon="arrow-up-right" isFilled />
+		</div>
+	</div>
+</SiteLayout>

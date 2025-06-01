@@ -1,64 +1,65 @@
 ---
-import { slugify } from "@/scripts/slugify";
+import { slugify } from "@/scripts/utilities";
 import Icon from "./Icon.astro";
 import type { IconName } from "./Icon.astro";
 
 interface Props {
-    label: string;
-    iconLeft?: IconName;
-    iconRight?: IconName;
-    size?: string;
-    isActive?: astroHTML.JSX.AriaAttributes['aria-current'];
-    href?: string;
-    underline?: boolean;
+	label: string;
+	iconLeft?: IconName;
+	iconRight?: IconName;
+	size?: string;
+	isActive?: astroHTML.JSX.AriaAttributes["aria-current"];
+	href?: string;
+	underline?: boolean;
 }
 const {
-    label,
-    href,
-    iconLeft = "none",
-    iconRight = "none",
-    size = "16",
-    isActive = false,
-    underline = false
+	label,
+	href,
+	iconLeft = "none",
+	iconRight = "none",
+	size = "16",
+	isActive = false,
+	underline = false,
 } = Astro.props;
 ---
 
 <a
-data-icon-stroke={iconLeft !== "none" || iconRight !== "none"}
-aria-current={isActive}
-data-underline={underline}
-href={href ? href : `/${slugify(label)}`}
-title={label}
-class="flex items-center gap-2 relative text-[var(--color-text)] w-fit" >
-    {iconLeft !== "none" && <Icon name={iconLeft} {size} stroke="1.5" />}
-    {label}
-    {iconRight !== "none" && <Icon name={iconRight} {size} stroke="1.5" />}
+	data-icon-stroke={iconLeft !== "none" || iconRight !== "none"}
+	aria-current={isActive}
+	data-underline={underline}
+	href={href ? href : `/${slugify(label)}`}
+	title={label}
+	class="flex items-center gap-2 relative text-[var(--color-text)] w-fit"
+>
+	{iconLeft !== "none" && <Icon name={iconLeft} {size} stroke="1.5" />}
+	{label}
+	{iconRight !== "none" && <Icon name={iconRight} {size} stroke="1.5" />}
 </a>
 
 <style>
-    a:hover {
-        color: var(--color-text-dim);
-    }
+	a:hover {
+		color: var(--color-text-dim);
+	}
 
-    a[data-underline="true"] {
-        text-decoration-line: underline;
-    }
+	a[data-underline="true"] {
+		text-decoration-line: underline;
+	}
 
-    a[aria-current="page"]{ 
-        &:hover {
-            color: inherit;
-        }
+	a[aria-current="page"] {
+		&:hover {
+			color: inherit;
+		}
 
-        &::after {
-            position: absolute;
-            top: 1.75rem;
-            width: 100%;
-            height: 0.125rem;
+		&::after {
+			position: absolute;
+			top: 1.75rem;
+			width: 100%;
+			height: 0.125rem;
 
-            background-color: var(--color-text);
+			background-color: var(--color-text);
 
-            pointer-events: none;
-            content: "";
-        }
-    }
+			pointer-events: none;
+			content: "";
+		}
+	}
 </style>

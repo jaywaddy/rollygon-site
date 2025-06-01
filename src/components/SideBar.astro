@@ -1,0 +1,26 @@
+---
+import type { MarkdownHeading } from "astro";
+import AboutSection from "@/layout/AboutSection.astro";
+import TableOfContents from "@/ui/TableOfContents.astro";
+import ReadTimeIndicator from "@/ui/ReadTimeIndicator.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    headings: Array<MarkdownHeading>;
+    article: CollectionEntry<"articles">;
+}
+
+const { headings, article } = Astro.props;
+---
+
+<aside class="flex flex-col gap-8 py-16">
+    <AboutSection />
+    {headings.length > 1 && (
+        <hr />
+        <div class="sticky top-[128px] flex flex-col gap-8">
+            <TableOfContents {headings} />
+            <hr />
+            <ReadTimeIndicator {article} />
+        </div>
+    )}
+</aside>

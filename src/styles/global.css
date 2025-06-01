@@ -11,7 +11,61 @@
     --color-section-border: var(--color-neutral-200);
 
     --stroke-width: 1.5;
+}
 
+html {
+    scroll-padding-top: 92px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 4rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.content {
+    max-width: 72ch;
+
+    & > h2 {
+        margin-top: 2em;
+    }
+
+    & > p {
+        font-family: "Libre Baskerville";
+        font-size: 1.125em;
+    }
+}
+
+hr {
+    color: var(--color-neutral-200);
+}
+
+@utility list {
+    list-style-type: style;
+    & > li {
+        padding-left: 1rem;
+    }
+}
+
+@utility heading-xs {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--color-text-dim);
+}
+
+@utility heading-sub {
+    font-size: 1.5rem;
 }
 
 @utility wrapper {
@@ -37,28 +91,6 @@
 
 @utility bg-surface-secondary {
     background-color: var(--color-surface-secondary);
-}
-
-@utility heading-xs {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: var(--color-text-dim);
-}
-
-@utility heading-sm {
-    font-size: 1.6rem;
-    font-weight: bold;
-}
-
-@utility heading-md {
-    font-size: 2.4rem;
-    font-weight: bold;
-}
-
-@utility heading-lg {
-    font-size: 4rem;
-    font-weight: bold;
 }
 
 @utility border-bottom {
