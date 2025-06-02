@@ -1,44 +1,50 @@
 ---
 import {
-    type Color,
-    type ColorTheme,
-    Red,
-    Orange,
-    Yellow,
-    Green,
-    Blue,
-    Purple,
-    Fuchsia,
-    Neutral
+	type Color,
+	type ColorTheme,
+	Red,
+	Orange,
+	Yellow,
+	Green,
+	Blue,
+	Purple,
+	Fuchsia,
+	Neutral,
 } from "@/scripts/colors";
 
 interface Props {
-    label: string;
-    color?: Color;
+	label: string;
+	color?: Color;
 }
 
 const { label, color } = Astro.props;
 
-function setBadgeColorTheme(input: Color): ColorTheme {
-    const colorList = [
-        { name: "red", theme: Red },
-        { name: "orange", theme: Orange },
-        { name: "yellow", theme: Yellow },
-        { name: "green", theme: Green },
-        { name: "blue", theme: Blue },
-        { name: "purple", theme: Purple },
-        { name: "fuchsia", theme: Fuchsia },
-        { name: "neutral", theme: Neutral }
-    ]
-    const color = colorList.find(color => color.name === input);
+function setBadgeColorTheme(input: string): ColorTheme {
+	const badgeThemes = [
+		{ name: "red", theme: Red },
+		{ name: "orange", theme: Orange },
+		{ name: "yellow", theme: Yellow },
+		{ name: "green", theme: Green },
+		{ name: "Free", theme: Green },
+		{ name: "blue", theme: Blue },
+		{ name: "purple", theme: Purple },
+		{ name: "fuchsia", theme: Fuchsia },
+		{ name: "neutral", theme: Neutral },
+	];
+	const specifiedTheme = badgeThemes.find((theme) => theme.name === input)?.theme;
 
-    return color?.theme || Neutral;
+	if (specifiedTheme) {
+		return specifiedTheme;
+	}
+
+	return Neutral;
 }
 ---
 
 <small
-data-badge
-class="border border-[var(--fg)] bg-[var(--bg)] text-[var(--fg)] rounded-sm py-[2px] px-2 w-fit"
-style={setBadgeColorTheme(color)}>
-    {label}
+	data-badge
+	class="border border-[var(--fg)] bg-[var(--bg)] text-[var(--fg)] rounded-sm py-[2px] px-2 w-fit"
+	style={setBadgeColorTheme(color || label)}
+>
+	{label}
 </small>

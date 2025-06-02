@@ -12,31 +12,39 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const { title, description, postDate, tags, contentType } = content.data;
+const { title, description, postDate, tags } = content.data;
 const { headings } = await content.render();
 ---
 
 <section class="wrapper flex gap-16 py-16 w-lg">
 	<div class="flex flex-col gap-8 w-full">
 		{
-			contentType === "article" && (
+			content.collection === "articles" && (
 				<Link label="Back to articles" href="/articles" iconLeft="arrow-left" underline />
 			)
 		}
 		{
-			contentType === "tool" && (
+			content.collection === "tools" && (
 				<Link label="Back to tools" href="/tools" iconLeft="arrow-left" underline />
 			)
 		}
 		<div class="flex flex-col gap-4">
 			<h1 class="heading-lg">{title}</h1>
-			{contentType === "article" && <TagList contentArray={ALL_ARTICLES} {tags} />}
-			{contentType === "tool" && <TagList contentArray={ALL_TOOLS} {tags} />}
+			{content.collection === "articles" && <TagList contentArray={ALL_ARTICLES} {tags} />}
+			{content.collection === "tools" && <TagList contentArray={ALL_TOOLS} {tags} />}
 			<p>{description}</p>
 			{
-				contentType === "article" && (
+				content.collection === "articles" && (
 					<small class="text-dim">
-						{calcReadTime(content.body)} min read &bullet; {formatDate(postDate)}
+						{calcReadTime(content.body)} min read &bullet;
+						{formatDate(postDate)}
+					</small>
+				)
+			}
+			{
+				content.collection === "tools" && (
+					<small class="text-dim">
+						v{content.data.version} &bullet; {formatDate(postDate)}
 					</small>
 				)
 			}

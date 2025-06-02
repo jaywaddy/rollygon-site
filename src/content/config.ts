@@ -3,7 +3,6 @@ import { z, defineCollection, type CollectionEntry, getCollection } from "astro:
 const articleCollection = defineCollection({
     type: "content",
     schema: z.object({
-        contentType: z.string(),
         title: z.string(),
         postDate: z.date(),
         description: z.string(),
@@ -14,12 +13,12 @@ const articleCollection = defineCollection({
 const toolCollection = defineCollection({
     type: "content",
     schema: z.object({
-        contentType: z.string(),
         title: z.string(),
         postDate: z.date(),
         description: z.string(),
         price: z.string(),
         tags: z.array(z.string()),
+        version: z.number(),
     })
 });
 

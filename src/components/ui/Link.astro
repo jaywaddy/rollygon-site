@@ -29,10 +29,10 @@ const {
 	data-underline={underline}
 	href={href ? href : `/${slugify(label)}`}
 	title={label}
-	class="flex items-center gap-2 relative text-[var(--color-text)] w-fit"
+	class="flex flex-nowrap items-center gap-2 relative text-[var(--color-text)] max-w-fit"
 >
 	{iconLeft !== "none" && <Icon name={iconLeft} {size} stroke="1.5" />}
-	{label}
+	<span class="truncate w-full">{label}</span>
 	{iconRight !== "none" && <Icon name={iconRight} {size} stroke="1.5" />}
 </a>
 

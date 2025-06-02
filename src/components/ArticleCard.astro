@@ -25,7 +25,7 @@ const href = "articles/" + slugify(title);
 				<span class="heading-xs">Featured</span>
 				<h3 class="heading-sm flex items-center gap-2">{title}</h3>
 				<TagList contentArray={ALL_ARTICLES} {tags} />
-				<p>{description}</p>
+				<p class="line-clamp-2">{description}</p>
 				<Button label="Read full article" {href} icon="arrow-up-right" isFilled />
 				<small class="text-dim">
 					{calcReadTime(article.body)} min read &bullet; {formatDate(postDate)}
@@ -45,7 +45,7 @@ const href = "articles/" + slugify(title);
 					/>
 				</h3>
 				<TagList contentArray={ALL_ARTICLES} {tags} />
-				<p>{description}</p>
+				<p class="line-clamp-2">{description}</p>
 				<small class="text-dim">
 					{calcReadTime(article.body)} min read &bullet; {formatDate(postDate)}
 				</small>
