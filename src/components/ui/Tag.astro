@@ -8,7 +8,7 @@ import {
 	Blue,
 	Purple,
 	Fuchsia,
-	Neutral,
+	White,
 } from "@/scripts/colors";
 
 interface Props {
@@ -35,25 +35,17 @@ export function setTagColorTheme(input: string): ColorTheme {
 	];
 	const tag = coloredTags.find((tag) => tag.name === input);
 
-	return tag?.color || Neutral;
+	return tag?.color || White;
 }
 ---
 
 <span
 	data-tag
-	class="flex items-center bg-[var(--bg)] rounded-sm border border-[var(--fg)] text-[var(--fg)] px-2 w-fit"
+	class="flex items-center bg-[var(--bg)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
 	style={setTagColorTheme(label)}
 >
 	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap"
 		><span>#</span>{label}</small
 	>
-	<small class="pl-2 py-[2px] border-l">{count}</small>
+	<small class="pl-2 py-[2px] border-l-2">{count}</small>
 </span>
-
-<style>
-	[data-tag]:hover {
-		background-color: var(--bg-hover);
-		color: var(--fg-hover);
-		border-color: var(--fg-hover);
-	}
-</style>

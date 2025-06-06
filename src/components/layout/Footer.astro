@@ -6,51 +6,51 @@ import ContactLinks from "../ContactLinks.astro";
 ---
 
 <footer class="mt-auto w-full bg-surface">
-    <ContactForm />
-    <nav class="wrapper grid grid-cols-4 gap-4  m-auto py-12">
-        <ul>
-            <li><SiteTitle /></li>
-            <li><ContactLinks /></li>
-        </ul>
-        <ul>
-            <li><strong class="heading-xs">Heading</strong></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-        </ul>
-        <ul>
-            <li><strong class="heading-xs">Heading</strong></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-        </ul>
-        <ul>
-            <li><strong class="heading-xs">Heading</strong></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-            <li><Link label="Example Link" href="/" underline /></li>
-        </ul>
-    </nav>
-    <div class="flex justify-center items-center py-4 bg-blue-950 text-neutral-50">
-        <small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>
-    </div>
+	<ContactForm />
+	<nav class="wrapper grid grid-cols-4 gap-4 m-auto py-12">
+		<ul>
+			<li><SiteTitle /></li>
+			<li><ContactLinks /></li>
+		</ul>
+		<ul>
+			<li><strong class="heading-xs">Heading</strong></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+		</ul>
+		<ul>
+			<li><strong class="heading-xs">Heading</strong></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+		</ul>
+		<ul>
+			<li><strong class="heading-xs">Heading</strong></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+			<li><Link label="Example Link" href="/" underline /></li>
+		</ul>
+	</nav>
+	<div class="flex justify-center items-center py-4 bg-neutral-900 text-neutral-50">
+		<small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>
+	</div>
 </footer>
 
 <script>
-    const footerDate = document.querySelector("#footer-date");
+	const footerDate = document.querySelector("#footer-date");
 
-    if (footerDate !== null) {
-        footerDate.innerHTML = new Date().getFullYear().toString();
-    }
+	if (footerDate !== null) {
+		footerDate.innerHTML = new Date().getFullYear().toString();
+	}
 </script>
 
 <style>
-    ul  {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
 </style>

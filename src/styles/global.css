@@ -8,9 +8,9 @@
     --color-surface-primary: var(--color-neutral-50);
     --color-surface-secondary: var(--color-neutral-100);
 
-    --color-section-border: var(--color-neutral-200);
-
     --stroke-width: 1.5;
+    --radius-sm: 4px;
+    --radius-lg: 8px;
 }
 
 html {
@@ -36,18 +36,38 @@ h3 {
 .content {
     max-width: 72ch;
 
-    & > h2 {
-        margin-top: 2em;
+    & a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--color-text-dim);
+        }
     }
 
-    & > p {
+    & > h2 {
+        margin-top: 1em;
+    }
+
+    & p, & > a, & li, & strong, & em {
         font-family: "Libre Baskerville";
         font-size: 1.125em;
     }
-}
 
-hr {
-    color: var(--color-neutral-200);
+    & ol, & ul {
+        margin-top: -1em;
+    }
+
+    & li {
+        margin-left: 2em;
+        list-style: decimal;
+    }
+
+    & code {
+        padding: 0.25em;
+        border-radius: 0.25em;
+        font-size: 0.75em;
+        background-color: var(--color-neutral-200);
+    }
 }
 
 @utility list {
@@ -61,7 +81,6 @@ hr {
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--color-text-dim);
 }
 
 @utility heading-sub {
@@ -80,9 +99,44 @@ hr {
     color: var(--color-text-dim);
 }
 
-@utility border {
-    border-color: var(--color-text-dim);
-    border-radius: 0.5rem;
+@utility border-sm {
+    border: solid 2px;
+    border-radius: var(--radius-sm);
+}
+
+@utility border-lg {
+    border: solid 2px;
+    border-radius: var(--radius-lg);
+}
+
+@utility border-top {
+    border-top: solid 2px;
+}
+
+@utility border-bottom {
+    border-bottom: solid 2px;
+}
+
+@utility shadow-sm {
+    box-shadow: 2px 2px 0;
+}
+
+@utility shadow-lg {
+    box-shadow: 4px 4px 0;
+}
+
+@utility shadow-sm-hover {
+    &:hover {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0;
+    }
+}
+
+@utility shadow-lg-hover {
+    &:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0;
+    }
 }
 
 @utility bg-surface {
@@ -91,14 +145,6 @@ hr {
 
 @utility bg-surface-secondary {
     background-color: var(--color-surface-secondary);
-}
-
-@utility border-bottom {
-    border-bottom: solid 1px var(--color-section-border);
-}
-
-@utility border-top {
-    border-top: solid 1px var(--color-section-border);
 }
 
 @media (max-width: 40rem) {

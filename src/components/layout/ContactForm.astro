@@ -6,19 +6,22 @@ import AboutSection from "@/layout/AboutSection.astro";
 ---
 
 <section class="flex border-top border-bottom bg-surface-secondary">
-    <div class="wrapper flex gap-16 py-16">
-        <section class="flex flex-col gap-8">
-            <h2 class="heading-md">What should I build next?</h2>
-            <p>If you have an idea that could improve my workflow, I'd love to hear it. Let's work together and build better custom and high quality coaster models!</p>
-            <form action="" method="POST" class="grid gap-2 w-full">
-                <Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
-                <Input label="Email*" type="email" id="contact-email" required />
-                <Textarea label="Message*" id="contact-meessage"/>
-                <div class="mt-6">
-                    <Button label="Start a conversation" icon="send" submit isFilled/>
-                </div>
-            </form>
-        </section>
-        <AboutSection />
-    </div>
+	<div class="wrapper flex gap-16 py-16">
+		<section class="flex flex-col gap-8">
+			<h2 class="heading-md">What should I build next?</h2>
+			<p>
+				If you have an idea that could improve my workflow, I'd love to hear it. Let's work
+				together and build better custom and high quality coaster models!
+			</p>
+			<form action="" method="POST" class="grid gap-2 w-full">
+				<Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
+				<Input label="Email*" type="email" id="contact-email" required />
+				<Textarea label="Message*" id="contact-meessage" />
+				<div class="mt-6">
+					<Button label="Start a conversation" icon="send" submit />
+				</div>
+			</form>
+		</section>
+		<AboutSection />
+	</div>
 </section>

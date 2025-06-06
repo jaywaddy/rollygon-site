@@ -7,7 +7,7 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
     headings: Array<MarkdownHeading>;
-    content: CollectionEntry<"articles"> | CollectionEntry<"tools">;
+    content: CollectionEntry<"articles"> | CollectionEntry<"tools"> | CollectionEntry<"models">;
 }
 
 const { headings, content } = Astro.props;
@@ -19,7 +19,7 @@ const { headings, content } = Astro.props;
         <hr />
         <div class="sticky top-[128px] flex flex-col gap-8">
             <TableOfContents {headings} />
-            {content.data.contentType === "article" && (
+            {content.collection === "articles" && (
                 <hr />
                 <ReadTimeIndicator {content} />
             )}

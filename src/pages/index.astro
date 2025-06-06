@@ -1,12 +1,17 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
+import ModelCard from "@/components/ModelCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
-import Link from "@/components/ui/Link.astro";
-import { LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
+import Link from "@/ui/Link.astro";
+import { ALL_MODELS, LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 ---
 
 <SiteLayout pageTitle="Home">
+	<section class="wrapper flex flex-col gap-8 py-16">
+		<h2>Newest models</h2>
+		<ModelCard model={ALL_MODELS[0]} />
+	</section>
 	<section id="tools" class="wrapper flex flex-col gap-4 py-16">
 		<div class="flex items-baseline gap-4">
 			<h2 class="heading-md">Newst tools</h2>

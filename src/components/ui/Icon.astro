@@ -58,7 +58,7 @@ export type IconName = (
     | "gumroad"
     | "sketchfab"
     | "youtube"
-    | undefined
+    | "none"
 );
 
 interface Props {
@@ -110,3 +110,4 @@ function clacStroke(stroke: string | undefined): string {
 {name === "gumroad" && <GumroadIcon {color} {size} />}
 {name === "sketchfab" && <Sketchfab {color} {size} />}
 {name === "youtube" && <YouTubeIcon {color} {size} />}
+{name === "none" && null}

@@ -1,79 +1,51 @@
 ---
-import type { IconName } from '@/ui/Icon.astro';
-import Icon from './Icon.astro';
+import type { IconName } from "@/ui/Icon.astro";
+import Icon from "./Icon.astro";
 
 interface Props {
-    submit?: boolean;
-    label: string;
-    href?: string;
-    color?: string;
-    icon?: IconName;
-    isFilled?: boolean;
+	submit?: boolean;
+	label: string;
+	href?: string;
+	icon?: IconName;
+	primary?: boolean;
 }
 
-const {
-    submit = false,
-    label,
-    href,
-    icon,
-    color = "var(--color-blue-600)",
-    isFilled = false
-} = Astro.props;
+const { submit, label, href, icon = "arrow-right", primary } = Astro.props;
 
-function toggleButtonColor (buttonFill: boolean): string {
-    if (!buttonFill) {
-        return color;
-    }
-    return "var(--color-neutral-50)";
+function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
+	if (isPrimary) {
+		return "var(--color-cta-primary)";
+	}
+
+	return "var(--color-cta-secondary)";
 }
 ---
 
-{submit ? (
-    <button 
-    title={label}
-    data-fill={isFilled}
-    class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]">
-        <span>{label}</span>
-        {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
-    </button>
-) : (
-    <a 
-    title={label}
-    data-fill={isFilled}
-    class="flex items-center gap-1 px-4 py-2 rounded-lg border-2 border-[var(--color-primary)] text-[var(--color-primary)]"
-    {href}>
-        <span>{label}</span>
-        {icon && <Icon name={icon} color={toggleButtonColor(isFilled)} />}
-    </a>
-)}
+{
+	submit ? (
+		<button
+			title={label}
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg bg-[var(--color-primary)] w-fit cursor-pointer"
+		>
+			<span>{label}</span>
+			{icon && <Icon name={icon} />}
+		</button>
+	) : (
+		<a
+			title={label}
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color-primary)] w-fit"
+			{href}
+		>
+			<span>{label}</span>
+			{icon && <Icon name={icon} />}
+		</a>
+	)
+}
 
-<style define:vars={{"color-primary": color}}>
-    a, button {
-        --color-primary-hover: color-mix(in srgb, var(--color-primary), var(--color-surface-primary) 20%);
-
-        width: fit-content;
-        cursor: pointer;
-    }
-
-    a[data-fill=false], button[data-fill=false] {
-        --color-bg-hover: color-mix(in srgb, var(--color-primary), transparent 95%);
-
-        border-color: var(--color-primary);
-        color: var(--color-primary);
-
-        &:hover {
-            background-color: var(--color-bg-hover);
-        }
-    }
-
-    a[data-fill=true], button[data-fill=true] {
-        border-color: var(--color-primary);
-        background-color: var(--color-primary);
-        color: var(--color-neutral-50);
-
-        &:hover {
-            border-color: var(--color-primary-hover);
-            background-color: var(--color-primary-hover);
-        }
-    }
+<style define:vars={{ "color-primary": selectButtonColor(primary) }}>
+	a,
+	button {
+		--color-cta-primary: red;
+		--color-cta-secondary: var(--color-neutral-50);
+	}
 </style>

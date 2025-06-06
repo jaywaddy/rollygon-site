@@ -1,15 +1,20 @@
 ---
 interface Props {
-    label: string;
-    id?: string;
-    placeholder?: string;
-    value?: string;
+	label: string;
+	id?: string;
+	placeholder?: string;
+	value?: string;
 }
 
-const { label,  id, placeholder, value } = Astro.props;
+const { label, id, placeholder, value } = Astro.props;
 ---
 
 <label for={id} class="grid gap-2">
-    <small class="text-dim">{label}</small>
-    <textarea name={label} {id} {placeholder} {value} class="border bg-surface px-3 py-2"></textarea>
+	<small class="text-dim">{label}</small>
+	<textarea
+		name={label}
+		{id}
+		{placeholder}
+		{value}
+		class="border-lg shadow-lg bg-surface px-3 py-2"></textarea>
 </label>

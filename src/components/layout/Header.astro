@@ -31,7 +31,7 @@ function returnPage(input: TopLevelPage["title"]): TopLevelPage {
 }
 ---
 
-<header class="border-bottom sticky top-0 w-full z-10">
+<header class="bg-[var(--color-surface-primary)] border-bottom sticky top-0 w-full z-10">
 	<nav class="wrapper flex items-center justify-between py-6">
 		<SiteTitle />
 		<ul class="flex items-center gap-8">
@@ -72,13 +72,3 @@ function returnPage(input: TopLevelPage["title"]): TopLevelPage {
 		</ul>
 	</nav>
 </header>
-
-<style>
-	header {
-		background: linear-gradient(
-			var(--color-surface-primary),
-			color-mix(in srgb, var(--color-surface-primary), rgba(0, 0, 0, 0))
-		);
-		backdrop-filter: blur(24px);
-	}
-</style>

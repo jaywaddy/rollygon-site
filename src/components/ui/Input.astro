@@ -1,17 +1,24 @@
 ---
 interface Props {
-    label: string;
-    id: string;
-    type: astroHTML.JSX.HTMLInputTypeAttribute;
-    placeholder?: string;
-    value?: string;
-    required?: boolean;
+	label: string;
+	id: string;
+	type: astroHTML.JSX.HTMLInputTypeAttribute;
+	placeholder?: string;
+	value?: string;
+	required?: boolean;
 }
 
 const { label, id, type, placeholder, value, required = false } = Astro.props;
 ---
 
 <label for={id} class="grid gap-1">
-    <small class="text-dim">{label}</small>
-    <input {id} {type} {placeholder} {value} {required} class="bg-surface border px-3 py-2">
+	<small class="text-dim">{label}</small>
+	<input
+		{id}
+		{type}
+		{placeholder}
+		{value}
+		{required}
+		class="bg-surface border-lg shadow-lg px-3 py-2"
+	/>
 </label>

@@ -9,7 +9,7 @@ import {
 	Blue,
 	Purple,
 	Fuchsia,
-	Neutral,
+	White,
 } from "@/scripts/colors";
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 	color?: Color;
 }
 
-const { label, color } = Astro.props;
+const { label, color = "neutral" } = Astro.props;
 
 function setBadgeColorTheme(input: string): ColorTheme {
 	const badgeThemes = [
@@ -29,7 +29,7 @@ function setBadgeColorTheme(input: string): ColorTheme {
 		{ name: "blue", theme: Blue },
 		{ name: "purple", theme: Purple },
 		{ name: "fuchsia", theme: Fuchsia },
-		{ name: "neutral", theme: Neutral },
+		{ name: "white", theme: White },
 	];
 	const specifiedTheme = badgeThemes.find((theme) => theme.name === input)?.theme;
 
@@ -37,13 +37,13 @@ function setBadgeColorTheme(input: string): ColorTheme {
 		return specifiedTheme;
 	}
 
-	return Neutral;
+	return White;
 }
 ---
 
 <small
 	data-badge
-	class="border border-[var(--fg)] bg-[var(--bg)] text-[var(--fg)] rounded-sm py-[2px] px-2 w-fit"
+	class="border-sm bg-[var(--bg)] rounded-sm py-[2px] px-2 w-fit"
 	style={setBadgeColorTheme(color || label)}
 >
 	{label}

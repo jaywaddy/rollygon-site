@@ -12,13 +12,21 @@ const { headings } = Astro.props;
 
 <nav class="flex flex-col gap-8">
 	<span class="heading-xs">Table of Contents</span>
-	<ol class="flex flex-col gap-4">
+	<ol class="flex flex-col gap-4 list-decimal">
 		{
-			headings.map((title, index) => (
-				<li>
-					<Link label={index + 1 + ". " + title.text} href={"#" + slugify(title.text)} />
-				</li>
-			))
+			headings.map((heading) =>
+				heading.depth > 2 ? (
+					<ol class="list-disc">
+						<li class="ml-8">
+							<Link label={heading.text} href={"#" + heading.slug} />
+						</li>
+					</ol>
+				) : (
+					<li class="ml-4">
+						<Link label={heading.text} href={"#" + heading.slug} />
+					</li>
+				),
+			)
 		}
 	</ol>
 </nav>

@@ -22,7 +22,7 @@ function calcRadius(border: string, input: typeof shape): string {
 	return "50%";
 }
 
-function calcSize(input: typeof size): string {
+function calcSize(input: typeof size): string | undefined {
 	interface Size {
 		name: string;
 		size: string;
@@ -32,7 +32,7 @@ function calcSize(input: typeof size): string {
 		{ name: "sm", size: "148px" },
 		{ name: "md", size: "424px" },
 		{ name: "lg", size: "586px" },
-		{ name: "auto", size: "100%" },
+		{ name: "auto", size: "auto" },
 	];
 	const matchingSize = sizes.find((match) => match.name === input);
 
@@ -45,7 +45,7 @@ function calcSize(input: typeof size): string {
 ---
 
 <div
-	class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] border bg-surface"
+	class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-surface border-2 shadow-lg"
 	style={{
 		"--img-w": calcSize(size),
 		"--img-aspect": aspect,
@@ -54,8 +54,9 @@ function calcSize(input: typeof size): string {
 	}}
 >
 	<div
-		class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--inner-radius)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-200"
+		class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--inner-radius)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-900"
 	>
-		{placeholder && <Icon name="image" size="64" />}
+		<slot />
+		{placeholder && <Icon name="image" size="64" color="white" />}
 	</div>
 </div>

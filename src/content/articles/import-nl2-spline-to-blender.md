@@ -1,7 +1,7 @@
 ---
 title: Import NL2 Spline to Blender
 postDate: 2024-11-10
-image:
+image: ""
 description: Description of the article would go into this section right here. This could be between one to two sentences.
 contentType: article
 tags:
@@ -10,50 +10,51 @@ tags:
     - Blender
     - NoLimits 2
 ---
+Congrats! You've finished your NoLimits coaster layout! 🎉  Now it's time to turn it into a 3D model for printing, for importing to Planet Coaster, or just because you can. This guide will help you begin the next stage of your project: by exporting both the spline and supports into Blender, and then eventually you'll get a model to export to all that fun stuff mentioned earlier.
+## Downloads & Setup
 
-## Hook
-So, you finally finished your coaster design in NoLimits! *(cheers)* Great! Now what? Oh yeah, you could to turn it into a 3D model; maybe for 3D printing or VR development *(show VR b-roll)*, or... just to show it off. Well, THIS is where you'll begin that project: by exporting both the spline and supports into a 3d modeling software, and then eventually you'll get to all that fun stuff mentioned earlier.
+To pull this off, you'll need four things:
+1. [Blender](http://blender.org)
+2. [Track Spline Importer Add-on]()
+3. [Support Importer Add-on]()
+4. [NoLimits 2: Professional Edition]()
 
-## Tools
-Starting off, you'll need a few things: Blender 2.8 or higher--I'm using version 4.2, the two Blender add-ons linked in the description, and lastly NoLimits 2... Professional Edition.
+(I'm looking for ways to do this with the standard version of NoLimits 2, but for now you'll need to have the Professional version for this method to work.)
 
-I'm trying to find a way to do this with the standard version, but for now you need to have the Pro version for this to work.
+For Blender, I typically use the most recent version so that my tools like Track and Support generators are always up to date. This guide will be using version 4.2, but if anything becomes depreciated, please reach out to me and I'll make updates.
 
-For Blender, I always use the most recent version, so that my tools like Track and Support generators are always up to date. So If you'd like to use my tools or create your own, stick with the most current version.
+If you would like to set up your files ahead of time, I suggest having an `exports` folder inside of your NoLimits project and also using an `add-ons`  folder for Blender. For now, go ahead a take your zip files you just downloaded and drop them in that `add-ons` folder. I'll show you how to install them when we open Blender later.
 
-And most importantly, you'll also need the two add-ons in the description: the Track Spline Importer and the Support Importer. These two are the ones doing most of the work here.
+To install the Track and Support Blender add-ons, open your Blender preferences with `Ctrl/CMD ,` or go under the `Edit` menu then `Preferences`. In here, you'll find the `Add-ons` menu. For version 4.2 and up at, you'll have to hit the drop-down menu and choose `Install from disk`. And now, find that `add-ons` folder and select the .zip files to install them. Do this for both add-ons, and you're done with this part.
 
-If you want to set up your files ahead of time, I would suggest having an "Exports" folder inside of your NoLimits project and also using an "addons" folder for Blender. For now, go ahead a take your zip files you just downloaded and drop them in that "addons" folder. I'll show you how to install them when we open Blender later.
 
-But for now, onto the NoLimits editor... Professional Edition
-
-*(music change)*
+But for now, onto the NoLimits editor... Professional Edition.
 
 ## NoLimits 2 Editor
-Once you're in your NoLimits project, navigate to the "Coaster" tab. In there, you're going to find the current "coaster" you're working on. 
+Once you're in your NoLimits project, navigate to the `Coaster` tab. In there, you're going to find the current "coaster" you're working on. 
 
-Pay attention to this part! If you work like me, you'll have a whole list of options here. The more options you have, the more exports and imports you'll need to do, remember that. Oh! And now is a good time to have a good naming convention for your options here; labeling the splines and supports once just make it easier to deal with later.
+*Pay attention to this part!* If you organize your projects like me, you'll have a whole list of options here. The more options you have, the more exports and imports you'll need to do, remember that. Oh! And now is a good time to have a good naming convention for your options here; labeling the splines and supports once just makes it easier to maintain later.
 
-When your coaster, or supports, or whatever is selected, go to the "Professional" tab. In here, you'll have your export options. Let's start with "Export Track Spline."
+When your coaster/supports are selected, go to the `Professional` tab. In here, you'll have your export options. Let's start with `Export Track Spline`.
 
-With splines, you'll have a few options. The distance between points is the amount of detail in your spline. *(show b-roll of example in Blender)* So, the lower the number, the more detailed spline you get, but too much detail is going to slow down your computer... a lot. For this, 0.5m is perfectly fine and the option I use the most. The second option here is the spline type. You should 100% chose center of rails! This makes it so that when you make your coaster tracks, they'll always be aligned in the correct orientation. *(show b-roll of example in Blender)*
+### Exporting Track Spline
 
-Supports are way easier. Don't forget, you'll have to go back to the "Coaster" tab and choose the supports "coaster" if you have them separated like I do here. Head back to the "Professional" tab, click "Export Supports XML" and save and~ that's it.
+With splines, you'll have a few options. The distance between points is the amount of detail in your spline. So, the lower the number, the more detailed spline you get, but too much detail is going to slow down your computer... by a lot! For this, 0.5m is perfectly fine and the option I use the most. The second option here is the spline type. *You should always chose center of rails!* This makes it so that when you make your coaster tracks, they'll always be aligned in the correct orientation.
+
+### Exporting Supports
+
+Supports are way easier. Don't forget, you'll have to go back to the `Coaster` tab and choose the supports "coaster" if you have them separated like I do here. Head back to the `Professional` tab, click `Export Supports XML` and save. That's it!
 
 Ok, Blender time!
 
-*(music change)*
-
 ## Blender
-Before we can import our coaster, we have to install the Track and Support add-ons. Open your preferences with `Ctrl/CMD ,` or go under the "Edit" menu then "Preferences." In here, you'll find the "Add-ons" menu. For version 4.2 and up at, you'll have to hit this drop down menu and choose "Install from disk." And now, find that "addons" folder and select the .zip files to install them. Do this for both add-ons, and~ you're done.
 
-Now that everything's installed, you wont have to worry about that part ever again which is great! From this point on, whenever you open Blender, all you'll need to do is click "File" > "Import", then choose to import each spline or support file from the "Exports" folder from your NoLimits project... INDIVIDUALLY. 
+Once everything is installed from the initial setup, you wont have to worry about that part ever again which is great! From this point on, whenever you open Blender, all you'll need to do is click `File` > `Import`, then choose to import each spline or support file from the `Exports` folder from your NoLimits project *individually*. 
 
-Yes, each file must *individually* be imported into Blender. So, on my end I'll have import my spline and all 5 part of my support files separately. Having the files separated makes working in chunks much easier in both NoLimits AND Blender, *especially* with projects as complicated as this.
+Yes, each file must *individually* be imported into Blender. So, on my end I'll have to import my track spline and all 5 part of my support files separately. Having the files separated makes working in chunks much easier both in the NoLimits Editor and in Blender, especially with projects as complicated as this one.
 
-One thing you'll realize is that your spline and supports don't have the same Z rotation. I'm not sure why, but the best method is to just rotate the *spline* on the Z axis by 180 deg. It's more efficient than rotating all of the support objects. Trust me on this. Also don't forget to either apply your rotation in object mode, or rotate using edit mode!
-
-Sweet! So, were done right? Not exactly. There's a little left to do.
+After importing the track spline and support files into Blender, notice the track spline's z-rotation and support z-rotations don't align. The best way of resolving this is to rotate the track spline on the Z axis by 180 deg. It's more efficient than rotating all of the support objects.  Also *don't forget to apply your rotation in object mode* (or rotate using edit mode)!
+### Track  Spline Editing
 
 To quickly show you what's happening here, I'll add a mesh to follow the curve of your spline. You'll notice that on inversions, the curve kind of... goes wild out on 90 and 180 degree points. Don't worry, we'll fix this in a sec. But let me back up a sec and show you how I got there. It'll come in handy later when adding your track type.
 

@@ -1,8 +1,8 @@
 ---
-import Image from "@/ui/Image.astro";
+import ImageWrpper from "@/ui/ImageWrapper.astro";
 import Link from "@/ui/Link.astro";
 import TagList from "@/components/TagList.astro";
-import { calcReadTime, formatDate, slugify } from "@/scripts/utilities.ts";
+import { calcReadTime, formatDate } from "@/scripts/utilities.ts";
 import type { CollectionEntry } from "astro:content";
 import Button from "@/ui/Button.astro";
 import { ALL_ARTICLES } from "@/content/config";
@@ -13,20 +13,23 @@ interface Props {
 }
 
 const { article, featured } = Astro.props;
-const { title, description, tags, postDate } = article.data;
-const href = "articles/" + slugify(title);
+const { title, description, tags, postDate, image } = article.data;
 ---
 
 {
 	featured ? (
 		<div class="flex gap-16 w-full">
-			<Image size="50%" placeholder />
+			<ImageWrpper size="50%" placeholder />
 			<div class="flex flex-col gap-4 w-full">
 				<span class="heading-xs">Featured</span>
 				<h3 class="heading-sm flex items-center gap-2">{title}</h3>
 				<TagList contentArray={ALL_ARTICLES} {tags} />
 				<p class="line-clamp-2">{description}</p>
-				<Button label="Read full article" {href} icon="arrow-up-right" isFilled />
+				<Button
+					label="Read full article"
+					href={"articles/" + article.slug}
+					icon="arrow-up-right"
+				/>
 				<small class="text-dim">
 					{calcReadTime(article.body)} min read &bullet; {formatDate(postDate)}
 				</small>
@@ -34,14 +37,14 @@ const href = "articles/" + slugify(title);
 		</div>
 	) : (
 		<div class="flex gap-8 w-2/3">
-			<Image size="sm" shape="round" aspect="1/1" placeholder />
+			<ImageWrpper size="sm" shape="round" aspect="1/1" placeholder />
 			<div class="flex flex-col gap-2">
 				<h3 class="heading-sm flex items-center gap-2">
 					<Link
 						label={title}
 						iconRight="arrow-up-right"
 						size="24"
-						href={"articles/" + slugify(title)}
+						href={"articles/" + article.slug}
 					/>
 				</h3>
 				<TagList contentArray={ALL_ARTICLES} {tags} />

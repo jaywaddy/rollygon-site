@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageWrapper from "./ui/ImageWrapper.astro";
+import TagList from "@/components/TagList.astro";
+import { ALL_MODELS } from "@/content/config";
+import Button from "./ui/Button.astro";
+
+interface Props {
+	model: CollectionEntry<"models">;
+}
+
+const { model } = Astro.props;
+const { title, subTitle, id, tags, description } = model.data;
+---
+
+<div class="flex gap-8">
+	<ImageWrapper>
+		<iframe
+			title={title}
+			frameborder="0"
+			allowfullscreen
+			allowfullscreen="true"
+			allow="autoplay; fullscreen; xr-spatial-tracking"
+			xr-spatial-tracking
+			execution-while-out-of-viewport
+			execution-while-not-rendered
+			web-share
+			src={"https://sketchfab.com/models/" + id + "/embed"}
+			class="rounded-sm w-xl aspect-video"
+		>
+		</iframe>
+	</ImageWrapper>
+	<div class="flex flex-col gap-4">
+		<span class="heading-xs">Featured</span>
+		<h3>{title} - {subTitle}</h3>
+		<TagList contentArray={ALL_MODELS} {tags} />
+		<p>{description}</p>
+		<Button label="View full model details" href={model.slug} icon="arrow-up-right" />
+	</div>
+</div>
