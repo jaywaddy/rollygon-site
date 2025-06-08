@@ -1,0 +1,22 @@
+---
+import ModelCard from "@/components/ModelCard.astro";
+import { ALL_MODELS } from "@/content/config";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout pageTitle="Models">
+	<section class="wrapper flex flex-col gap-16 py-16">
+		<div class="flex flex-col gap-8">
+			<h2>Featured model</h2>
+			<div class="flex gap-8">
+				{ALL_MODELS.map((model) => <ModelCard {model} featured />)}
+			</div>
+		</div>
+		<div class="flex flex-col gap-8">
+			<h2>All models</h2>
+			<div class="flex gap-8">
+				{ALL_MODELS.map((model) => <ModelCard {model} />)}
+			</div>
+		</div>
+	</section>
+</SiteLayout>

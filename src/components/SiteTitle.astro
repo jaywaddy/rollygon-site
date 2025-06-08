@@ -1,9 +1,10 @@
 ---
-import LogoIcon from "@/icons/LogoIcon.astro";
-import Rollygon from "@/icons/Rollygon.astro";
+import Icon from "./ui/Icon.astro";
 ---
 
-<a aria-label="Rollygon" href="/" class="flex gap-1">
-	<LogoIcon />
-	<Rollygon />
+<a aria-label="Rollygon" href="/" class="flex items-center gap-2">
+	<span class="flex items-center justify-center bg-[var(--color-lime)] border-2 shadow-sm rounded-full aspect-1/1 w-8">
+		<Icon name="logo" />
+	</span>
+	<strong class="font-[Benz_Grotesk]">Rollygon</strong>
 </a>

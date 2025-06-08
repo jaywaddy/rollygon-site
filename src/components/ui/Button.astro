@@ -25,27 +25,27 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 	submit ? (
 		<button
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg bg-[var(--color-primary)] w-fit cursor-pointer"
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--bg)] w-fit cursor-pointer"
 		>
-			<span>{label}</span>
+			<strong>{label}</strong>
 			{icon && <Icon name={icon} />}
 		</button>
 	) : (
 		<a
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color-primary)] w-fit"
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--bg)] w-fit"
 			{href}
 		>
-			<span>{label}</span>
+			<strong>{label}</strong>
 			{icon && <Icon name={icon} />}
 		</a>
 	)
 }
 
-<style define:vars={{ "color-primary": selectButtonColor(primary) }}>
+<style define:vars={{ bg: selectButtonColor(primary) }}>
 	a,
 	button {
-		--color-cta-primary: red;
+		--color-cta-primary: var(--color-lime);
 		--color-cta-secondary: var(--color-neutral-50);
 	}
 </style>

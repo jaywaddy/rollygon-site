@@ -27,6 +27,7 @@ import GumroadIcon from '@/icons/GumroadIcon.astro';
 import YouTubeIcon from '@/icons/YouTubeIcon.astro';
 import Sketchfab from '@/icons/SketchfabIcon.astro';
 import BlueskyIcon from '@/icons/BlueskyIcon.astro';
+import LogoIcon from '@/icons/LogoIcon.astro';
 
 export type IconName = (
     | "arrow-left"
@@ -48,6 +49,7 @@ export type IconName = (
     | "clock"
     | "calendar"
     | "search"
+    | "logo"
     | "image"
     | "user"
     | "vertex"
@@ -68,17 +70,17 @@ interface Props {
     stroke?: string;
 }
 
-const { name, size = "16", color = "var(--color-text)", stroke } = Astro.props;
+const { name, size = "20", color = "var(--color-text)", stroke } = Astro.props;
 
 function clacStroke(stroke: string | undefined): string {
-    const defaultWidth = 1.5;
-    const defaultSize = 16;
+    const baseWidth = 2;
+    const baseSize = 20;
 
     if (stroke) {
         return stroke;
     }
 
-    return (defaultWidth / (Number(size) / defaultSize)).toString();
+    return (baseWidth / (Number(size) / baseSize)).toString();
 }
 ---
 
@@ -101,6 +103,7 @@ function clacStroke(stroke: string | undefined): string {
 {name === "clock" && <ClockIcon {color} {size} stroke={clacStroke(stroke)} />}
 {name === "calendar" && <CalendarIcon {color} {size} stroke={clacStroke(stroke)} />}
 {name === "search" && <SearchIcon {color} {size} stroke={clacStroke(stroke)} />}
+{name === "logo" && <LogoIcon {color} {size} />}
 {name === "image" && <ImageIcon {color} {size} stroke={clacStroke(stroke)} />}
 {name === "user" && <UserIcon {color} {size} stroke={clacStroke(stroke)} />}
 {name === "vertex" && <VertexIcon {color} {size} stroke={clacStroke(stroke)} />}

@@ -48,7 +48,7 @@ const topLevelPageTitle = topLevelPages.find((page) => page.title === pageTitle)
 					<div class="wrapper flex flex-col gap-8 w-2/3">
 						<h1>{SITE_HEADING}</h1>
 						<p class="heading-sub w-2/3">{SITE_SUB_HEADING}</p>
-						<Button label="Get free tools" href="/tools" icon="download" isFilled />
+						<Button label="Get free tools" href="/tools" icon="download" primary />
 					</div>
 				</div>
 			)
@@ -71,7 +71,6 @@ const topLevelPageTitle = topLevelPages.find((page) => page.title === pageTitle)
 
 <style is:global>
 	html {
-		color: var(--color-text);
 		height: 100%;
 	}
 </style>

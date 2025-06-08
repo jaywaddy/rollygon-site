@@ -12,12 +12,12 @@ const { content } = Astro.props;
 <div class="flex flex-col gap-2">
 	<span class="heading-xs">{calcReadTime(content.body)} min read</span>
 	<span
-		class="flex justify-start items-center w-full h-4 px-1 bg-black rounded-full"
+		class="flex justify-start items-center w-full h-4 px-1 bg-black rounded-[var(--radius-sm)]"
 		style={{ "--prog-w": "40px" }}
 	>
 		<span
 			data-article-progress
-			class="bg-[var(--color-yellow-300)] rounded-full min-w-2 max-w-full h-2"
+			class="bg-[var(--color-yellow)] rounded-[1px] min-w-2 max-w-full h-2"
 			onscroll="showScrollProgress()"></span>
 	</span>
 </div>

@@ -3,7 +3,6 @@ import Button from "@/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
 import type { TopLevelPage } from "@/layouts/SiteLayout.astro";
-import { undefined } from "astro:schema";
 
 interface Props {
 	topLevelPages: Array<TopLevelPage>;
@@ -67,7 +66,7 @@ function returnPage(input: TopLevelPage["title"]): TopLevelPage {
 				/>
 			</li>
 			<li>
-				<Button label="Get free tools" href="/tools" icon="download" />
+				<Button label="Get free tools" href="/tools" icon="download" primary />
 			</li>
 		</ul>
 	</nav>

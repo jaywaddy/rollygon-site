@@ -170,6 +170,13 @@
   },
   "active": "09ec6feffb457292",
   "lastOpenFiles": [
+    "components/ui/Model.astro",
+    "pages/models/index.astro",
+    "pages/models/[...slug].astro",
+    "pages/models",
+    "assets/fonts/BenzGrotesk.ttf",
+    "assets/fonts/BenzGroteskHeavy-z8Vo1.ttf",
+    "assets/fonts",
     "components/ui/Link.astro",
     "components/ui/Lin.astro",
     "content/models/fahrenheit.md",
@@ -177,8 +184,6 @@
     "content/models/farenheit.md",
     "content/models/basic-tools-pack.md",
     "content/models",
-    "components/ui/ImageWrapper.astro",
-    "components/Model.astro",
     "content/models/ahrenheit.md"
   ]
 }

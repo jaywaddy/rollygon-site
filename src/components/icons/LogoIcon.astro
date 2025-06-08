@@ -4,7 +4,7 @@ interface Props {
     size?: string;
 }
 
-const { color = "var(--color-blue-600)", size = "24" } = Astro.props;
+const { color, size } = Astro.props;
 ---
 
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

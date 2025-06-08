@@ -1,40 +1,47 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ImageWrapper from "./ui/ImageWrapper.astro";
 import TagList from "@/components/TagList.astro";
 import { ALL_MODELS } from "@/content/config";
 import Button from "./ui/Button.astro";
+import Model from "./ui/Model.astro";
+import Link from "./ui/Link.astro";
 
 interface Props {
 	model: CollectionEntry<"models">;
+	featured?: boolean;
 }
 
-const { model } = Astro.props;
+const { model, featured } = Astro.props;
 const { title, subTitle, id, tags, description } = model.data;
 ---
 
-<div class="flex gap-8">
-	<ImageWrapper>
-		<iframe
-			title={title}
-			frameborder="0"
-			allowfullscreen
-			allowfullscreen="true"
-			allow="autoplay; fullscreen; xr-spatial-tracking"
-			xr-spatial-tracking
-			execution-while-out-of-viewport
-			execution-while-not-rendered
-			web-share
-			src={"https://sketchfab.com/models/" + id + "/embed"}
-			class="rounded-sm w-xl aspect-video"
-		>
-		</iframe>
-	</ImageWrapper>
-	<div class="flex flex-col gap-4">
-		<span class="heading-xs">Featured</span>
-		<h3>{title} - {subTitle}</h3>
-		<TagList contentArray={ALL_MODELS} {tags} />
-		<p>{description}</p>
-		<Button label="View full model details" href={model.slug} icon="arrow-up-right" />
-	</div>
-</div>
+{
+	featured ? (
+		<div class="flex gap-8">
+			<Model {title} {id} />
+			<div class="flex flex-col gap-4">
+				<span class="heading-xs">Featured</span>
+				<h3>
+					{title} - {subTitle}
+				</h3>
+				<TagList contentArray={ALL_MODELS} {tags} />
+				<p>{description}</p>
+				<Button label="View full model details" href={"/models/" + model.slug} />
+			</div>
+		</div>
+	) : (
+		<div class="flex flex-col border-lg shadow-lg w-sm text-center">
+			<div class=" flex justify-center items-center p-2 border-bottom">
+				<div class=" border-2 rounded-sm bg-black w-full aspect-video" />
+			</div>
+			<div class="flex flex-col items-center gap-8 p-8 overflow-hidden rounded-b-lg bg-[var(--color-yellow)]">
+				<strong class="flex justify-center truncate w-full">
+					<Link label={title} href={"/models/" + model.slug} />
+				</strong>
+				<TagList contentArray={ALL_MODELS} {tags} />
+				<p class="h-[3em] line-clamp-2">{description}</p>
+				<Button label="View live demo" href={"/models/" + model.slug} />
+			</div>
+		</div>
+	)
+}

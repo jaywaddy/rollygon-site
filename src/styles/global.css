@@ -2,13 +2,22 @@
 @import "tailwindcss";
 
 @theme {
-    --color-text: var(--color-neutral-700);
+    --color-text: var(--color-neutral-950);
     --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-surface-primary) 50%);
+
+    --color-red: oklch(0.704 0.1619 27.07);
+    --color-orange: oklch(0.8007 0.1362 64.92);
+    --color-yellow: oklch(0.9095 0.181 99.31);
+    --color-lime: oklch(0.8864 0.2296 136.34);
+    --color-green: oklch(0.7949 0.2145 149.27);
+    --color-blue: oklch(0.8003 0.1199 219.73);
+    --color-purple: oklch(0.6689 0.2234 305.73);
+    --color-fucshia: oklch(0.741 0.2535 325.69);
 
     --color-surface-primary: var(--color-neutral-50);
     --color-surface-secondary: var(--color-neutral-100);
 
-    --stroke-width: 1.5;
+    --stroke-width: 2;
     --radius-sm: 4px;
     --radius-lg: 8px;
 }
@@ -17,20 +26,26 @@ html {
     scroll-padding-top: 92px;
 }
 
+@font-face {
+  font-family: "Benz Grotesk";
+  src: url("./src/assets/fonts/BenzGrotesk.ttf");
+}
+
 h1 {
+    font-family: "Benz Grotesk";
     font-size: 3rem;
     font-weight: bold;
-    line-height: 4rem;
+    line-height: 3rem;
 }
 
 h2 {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 h3 {
     font-size: 1.25rem;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 .content {
@@ -91,13 +106,6 @@ h3 {
     margin-inline: auto;
 }
 
-@utility text {
-    color: var(--color-text);
-}
-
-@utility text-dim {
-    color: var(--color-text-dim);
-}
 
 @utility border-sm {
     border: solid 2px;

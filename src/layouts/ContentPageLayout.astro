@@ -6,6 +6,7 @@ import Link from "@/ui/Link.astro";
 import { ALL_ARTICLES, ALL_MODELS, ALL_TOOLS } from "@/content/config";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import type { CollectionEntry } from "astro:content";
+import Model from "@/components/ui/Model.astro";
 
 interface Props {
 	content: CollectionEntry<"articles"> | CollectionEntry<"tools"> | CollectionEntry<"models">;
@@ -18,39 +19,43 @@ const { headings } = await content.render();
 
 <section class="wrapper flex gap-16 py-16 w-lg">
 	<div class="flex flex-col gap-8 w-full">
-		{
-			content.collection === "articles" && (
-				<Link label="Back to articles" href="/articles" iconLeft="arrow-left" underline />
-			)
-		}
-		{
-			content.collection === "tools" && (
-				<Link label="Back to tools" href="/tools" iconLeft="arrow-left" underline />
-			)
-		}
+		<Link
+			label={"Back to " + content.collection}
+			href={"/" + content.collection}
+			iconLeft="arrow-left"
+			underline
+		/>
 		<div class="flex flex-col gap-4">
 			<h1 class="heading-lg">{title}</h1>
 			{content.collection === "articles" && <TagList contentArray={ALL_ARTICLES} {tags} />}
 			{content.collection === "tools" && <TagList contentArray={ALL_TOOLS} {tags} />}
 			{content.collection === "models" && <TagList contentArray={ALL_MODELS} {tags} />}
 			<p>{description}</p>
-			{
-				content.collection === "articles" && (
-					<small class="text-dim">
-						{calcReadTime(content.body)} min read &bullet;
-						{formatDate(postDate)}
-					</small>
-				)
-			}
-			{
-				content.collection === "tools" && (
-					<small class="text-dim">
-						v{content.data.version} &bullet; {formatDate(postDate)}
-					</small>
-				)
-			}
+			<small>
+				{
+					content.collection === "articles" && (
+						<strong>
+							{calcReadTime(content.body)} min read &bullet;
+							{formatDate(postDate)}
+						</strong>
+					)
+				}
+				{
+					content.collection === "tools" && (
+						<strong>
+							v{content.data.version} &bullet; {formatDate(postDate)}
+						</strong>
+					)
+				}
+			</small>
 		</div>
-		<ImageWrapper placeholder />
+		{
+			content.collection === "models" ? (
+				<Model {title} id={content.data.id} />
+			) : (
+				<ImageWrapper />
+			)
+		}
 		<article class="content flex flex-col gap-8 scroll-mt-[92px]">
 			<slot />
 		</article>

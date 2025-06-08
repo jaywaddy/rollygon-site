@@ -7,8 +7,8 @@ interface Props {
 	label: string;
 	iconLeft?: IconName;
 	iconRight?: IconName;
-	size?: string;
-	isActive?: astroHTML.JSX.AriaAttributes["aria-current"];
+	size?: string | undefined;
+	isActive?: "page" | "false";
 	href?: string;
 	underline?: boolean;
 }
@@ -17,7 +17,7 @@ const {
 	href,
 	iconLeft = "none",
 	iconRight = "none",
-	size = "16",
+	size,
 	isActive = false,
 	underline = false,
 } = Astro.props;
@@ -31,9 +31,9 @@ const {
 	title={label}
 	class="flex flex-nowrap items-center gap-2 relative text-[var(--color-text)] max-w-fit"
 >
-	{iconLeft !== "none" && <Icon name={iconLeft} {size} stroke="1.5" />}
-	<span class="truncate w-full">{label}</span>
-	{iconRight !== "none" && <Icon name={iconRight} {size} stroke="1.5" />}
+	{iconLeft !== "none" && <Icon name={iconLeft} {size} />}
+	<strong class="truncate w-full">{label}</strong>
+	{iconRight !== "none" && <Icon name={iconRight} {size} />}
 </a>
 
 <style>

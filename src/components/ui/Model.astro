@@ -1,0 +1,27 @@
+---
+import ImageWrapper from "@/ui/ImageWrapper.astro";
+
+interface Props {
+	title: string;
+	id: string;
+}
+
+const { title, id } = Astro.props;
+---
+
+<div class="p-4 border-lg shadow-lg w-full">
+	<iframe
+		title={title}
+		frameborder="0"
+		allowfullscreen
+		allowfullscreen="true"
+		allow="autoplay; fullscreen; xr-spatial-tracking"
+		xr-spatial-tracking
+		execution-while-out-of-viewport
+		execution-while-not-rendered
+		web-share
+		src={"https://sketchfab.com/models/" + id + "/embed"}
+		class="w-full rounded-[4px] aspect-video"
+	>
+	</iframe>
+</div>

@@ -45,7 +45,9 @@ export function setTagColorTheme(input: string): ColorTheme {
 	style={setTagColorTheme(label)}
 >
 	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap"
-		><span>#</span>{label}</small
 	>
-	<small class="pl-2 py-[2px] border-l-2">{count}</small>
+		
+		<strong>#{label}</strong>
+	</small>
+	<small class="pl-2 py-[2px] border-l-2"><strong>{count}</strong></small>
 </span>

@@ -1,0 +1,23 @@
+---
+import { ALL_MODELS } from "@/content/config";
+import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+	return ALL_MODELS.map((model) => ({
+		params: {
+			slug: model.slug,
+		},
+		props: { model },
+	}));
+}
+
+const { model } = Astro.props;
+const { Content } = await model.render();
+---
+
+<SiteLayout pageTitle={model.data.title}>
+	<ContentPageLayout content={model}>
+		<Content />
+	</ContentPageLayout>
+</SiteLayout>
