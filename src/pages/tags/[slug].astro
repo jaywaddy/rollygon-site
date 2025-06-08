@@ -1,0 +1,90 @@
+---
+import ArticleCard from "@/components/ArticleCard.astro";
+import ModelCard from "@/components/ModelCard.astro";
+import ToolCard from "@/components/ToolCard.astro";
+import {
+	type Collection,
+	ALL_ARTICLES,
+	ALL_CONTENT,
+	ALL_MODELS,
+	ALL_TOOLS,
+} from "@/content/config";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import { slugify, titleCase } from "@/scripts/utilities";
+
+export async function getStaticPaths() {
+	const parameters = ALL_CONTENT.map((content) =>
+		content.data.tags.map((tag) => ({
+			params: {
+				slug: slugify(tag),
+			},
+			props: { content },
+		})),
+	).flat();
+	return parameters;
+}
+
+const { content } = Astro.props;
+const { slug } = Astro.params;
+
+function checkIfTrue(list: Array<Collection>): boolean {
+	return list
+		.map((content) => content.data.tags.map((tag) => slugify(tag).includes(slug)))
+		.flat()
+		.includes(true);
+}
+---
+
+<SiteLayout pageTitle={slug}>
+	<div class="bg-surface-secondary border-bottom py-16">
+		<div class="wrapper flex items-center gap-8 w-2/3">
+			<h1>Tag: #{titleCase(slug)}</h1>
+		</div>
+	</div>
+	<section class="wrapper flex flex-col gap-16 py-16">
+		{
+			checkIfTrue(ALL_MODELS) && (
+				<div class="flex flex-col gap-8">
+					<h2>Models</h2>
+					{ALL_MODELS.map((content) => {
+						return (
+							content.data.tags.find((tag) => slugify(tag) === slug) && (
+								<ModelCard model={content} />
+							)
+						);
+					})}
+				</div>
+			)
+		}
+		{
+			checkIfTrue(ALL_TOOLS) && (
+				<div class="flex flex-col gap-8">
+					<h2>Tools</h2>
+					<div class="flex gap-8">
+						{ALL_TOOLS.map((content) => {
+							return (
+								content.data.tags.find((tag) => slugify(tag) === slug) && (
+									<ToolCard tool={content} />
+								)
+							);
+						})}
+					</div>
+				</div>
+			)
+		}
+		{
+			checkIfTrue(ALL_ARTICLES) && (
+				<div class="flex flex-col gap-8">
+					<h2>Articles</h2>
+					{ALL_ARTICLES.map((content) => {
+						return (
+							content.data.tags.find((tag) => slugify(tag) === slug) && (
+								<ArticleCard article={content} />
+							)
+						);
+					})}
+				</div>
+			)
+		}
+	</section>
+</SiteLayout>

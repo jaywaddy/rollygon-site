@@ -9,7 +9,10 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 
 <SiteLayout pageTitle="Home">
 	<section class="wrapper flex flex-col gap-8 py-16">
-		<h2>Newest models</h2>
+		<div class="flex items-baseline gap-4">
+			<h2>Newest models</h2>
+			<Link label="View all models" href="/models" underline />
+		</div>
 		<ModelCard model={ALL_MODELS[0]} featured />
 	</section>
 	<section id="tools" class="wrapper flex flex-col gap-4 py-16">

@@ -1,4 +1,7 @@
-import { z, defineCollection, type CollectionEntry, getCollection } from "astro:content"
+import { glob } from "astro/loaders";
+import { z, defineCollection, type CollectionEntry, getCollection } from "astro:content";
+
+export type Collection = CollectionEntry<"articles" | "tools" | "models">;
 
 const articleCollection = defineCollection({
     type: "content",
@@ -18,7 +21,7 @@ const toolCollection = defineCollection({
         postDate: z.date(),
         description: z.string(),
         price: z.string(),
-        image: z.string(),
+        image: z.string().optional(),
         tags: z.array(z.string()),
         version: z.number(),
     })
@@ -36,6 +39,7 @@ const modelCollection = defineCollection({
         tags: z.array(z.string()),
     })
 });
+
 
 export const collections = {
     articles: articleCollection,
@@ -67,3 +71,10 @@ export const ALL_MODELS: Array<CollectionEntry<"models">> = (
 	(olderDate: CollectionEntry<"models">, newerDate: CollectionEntry<"models">) =>
 		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
 );
+
+export const ALL_CONTENT = [
+    ...ALL_ARTICLES,
+    ...ALL_TOOLS,
+    ...ALL_MODELS
+];
+

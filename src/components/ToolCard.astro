@@ -3,27 +3,29 @@ import Icon from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
 import type { CollectionEntry } from "astro:content";
 import Badge from "@/ui/Badge.astro";
+import TagList from "./TagList.astro";
 
 interface Props {
 	tool: CollectionEntry<"tools">;
 }
 
 const { tool } = Astro.props;
-const { title, description, version, price } = tool.data;
+const { title, description, version, price, tags } = tool.data;
 ---
 
-<div class="flex flex-col border-lg shadow-lg w-sm text-center">
-	<div class="relative flex justify-center items-center py-16 border-bottom">
+<div class="flex flex-col border-lg shadow-lg w-sm text-left">
+	<div class="relative flex justify-center items-center py-16 border-bottom aspect-video">
 		<Icon name="tool" size="64" />
 		<span class="absolute top-2 right-3"><Badge label={price} /></span>
 		<small class="absolute bottom-2 right-3">v{version}</small>
 	</div>
-	<div class="flex flex-col items-center gap-8 p-8 overflow-hidden">
-		<strong class="flex justify-center truncate w-full">
+	<div class="flex flex-col gap-8 p-8 overflow-hidden">
+		<h3 class="flex justify-left truncate w-full">
 			{title}
-		</strong>
+		</h3>
+		<TagList {tags} />
 		<p class="h-[3em] line-clamp-2">{description}</p>
-		<div class="flex flex-wrap justify-center gap-2">
+		<div class="flex flex-wrap justify-left gap-2">
 			<Button label="View details" href={"/tools/" + tool.slug} />
 			<Button label="Download" href={"/tools/" + tool.slug} icon="download" primary />
 		</div>

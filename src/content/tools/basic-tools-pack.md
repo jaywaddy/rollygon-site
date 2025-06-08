@@ -8,6 +8,7 @@ contentType: tool
 price: Free
 tags:
     - Blender
+    - Geometry Nodes
 ---
 
 This holds the information and specs about the tool along witht the download link.

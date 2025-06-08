@@ -3,13 +3,12 @@ import SideBar from "@/components/SideBar.astro";
 import TagList from "@/components/TagList.astro";
 import ImageWrapper from "@/components/ui/ImageWrapper.astro";
 import Link from "@/ui/Link.astro";
-import { ALL_ARTICLES, ALL_MODELS, ALL_TOOLS } from "@/content/config";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
-import type { CollectionEntry } from "astro:content";
 import Model from "@/components/ui/Model.astro";
+import type { Collection } from "@/content/config";
 
 interface Props {
-	content: CollectionEntry<"articles"> | CollectionEntry<"tools"> | CollectionEntry<"models">;
+	content: Collection;
 }
 
 const { content } = Astro.props;
@@ -26,10 +25,8 @@ const { headings } = await content.render();
 			underline
 		/>
 		<div class="flex flex-col gap-4">
-			<h1 class="heading-lg">{title}</h1>
-			{content.collection === "articles" && <TagList contentArray={ALL_ARTICLES} {tags} />}
-			{content.collection === "tools" && <TagList contentArray={ALL_TOOLS} {tags} />}
-			{content.collection === "models" && <TagList contentArray={ALL_MODELS} {tags} />}
+			<h1>{title}</h1>
+			<TagList {tags} />
 			<p>{description}</p>
 			<small>
 				{

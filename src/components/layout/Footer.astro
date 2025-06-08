@@ -8,10 +8,10 @@ import ContactLinks from "../ContactLinks.astro";
 <footer class="mt-auto w-full bg-surface">
 	<ContactForm />
 	<nav class="wrapper grid grid-cols-4 gap-4 m-auto py-12">
-		<ul>
-			<li><SiteTitle /></li>
-			<li><ContactLinks /></li>
-		</ul>
+		<div class="flex flex-col gap-8">
+			<SiteTitle />
+			<ContactLinks />
+		</div>
 		<ul>
 			<li><strong class="heading-xs">Heading</strong></li>
 			<li><Link label="Example Link" href="/" underline /></li>

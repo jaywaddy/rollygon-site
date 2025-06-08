@@ -30,3 +30,10 @@ export function calcReadTime(article: string): number {
 
 	return Math.ceil(calcWordCount(article) / wordsPerMinute);
 }
+
+export function titleCase(input: string):string {
+    return input
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+}

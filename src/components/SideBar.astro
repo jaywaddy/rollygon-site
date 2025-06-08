@@ -3,11 +3,11 @@ import type { MarkdownHeading } from "astro";
 import AboutSection from "@/layout/AboutSection.astro";
 import TableOfContents from "@/ui/TableOfContents.astro";
 import ReadTimeIndicator from "@/ui/ReadTimeIndicator.astro";
-import type { CollectionEntry } from "astro:content";
+import type { Collection } from "@/content/config";
 
 interface Props {
     headings: Array<MarkdownHeading>;
-    content: CollectionEntry<"articles"> | CollectionEntry<"tools"> | CollectionEntry<"models">;
+    content: Collection;
 }
 
 const { headings, content } = Astro.props;
