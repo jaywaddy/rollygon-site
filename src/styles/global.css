@@ -135,14 +135,14 @@ h3 {
 }
 
 @utility shadow-sm-hover {
-    &:hover {
+    &:hover, &:focus-visible {
         transform: translate(1px, 1px);
         box-shadow: 1px 1px 0;
     }
 }
 
 @utility shadow-lg-hover {
-    &:hover {
+    &:hover, &:focus-visible {
         transform: translate(2px, 2px);
         box-shadow: 2px 2px 0;
     }

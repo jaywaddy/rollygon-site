@@ -2,27 +2,12 @@
 import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
-import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants.ts";
-import Button from "@/components/ui/Button.astro";
 
 interface Props {
 	pageTitle: string;
 }
 
-export interface TopLevelPage {
-	title: "Home" | "Tools" | "Models" | "Articles" | "About";
-	href: string;
-}
-
-const topLevelPages: Array<TopLevelPage> = [
-	{ title: "Home", href: "/" },
-	{ title: "Tools", href: "/tools" },
-	{ title: "Models", href: "/models" },
-	{ title: "Articles", href: "/articles" },
-	{ title: "About", href: "/about" },
-];
 const { pageTitle } = Astro.props;
-const topLevelPageTitle = topLevelPages.find((page) => page.title === pageTitle)?.title;
 ---
 
 <!doctype html>
@@ -41,27 +26,7 @@ const topLevelPageTitle = topLevelPages.find((page) => page.title === pageTitle)
 		<title>Rollygon | {pageTitle}</title>
 	</head>
 	<body class="flex flex-col min-h-full bg-surface">
-		<Header {topLevelPages} />
-		{
-			pageTitle === topLevelPageTitle && topLevelPageTitle === "Home" && (
-				<div class="bg-surface-secondary border-bottom py-16">
-					<div class="wrapper flex flex-col gap-8 w-2/3">
-						<h1>{SITE_HEADING}</h1>
-						<p class="heading-sub w-2/3">{SITE_SUB_HEADING}</p>
-						<Button label="Get free tools" href="/tools" icon="download" primary />
-					</div>
-				</div>
-			)
-		}
-		{
-			pageTitle === topLevelPageTitle && topLevelPageTitle !== "Home" && (
-				<div class="bg-surface-secondary border-bottom py-16">
-					<div class="wrapper flex flex-col gap-8 w-2/3">
-						<h1>{pageTitle}</h1>
-					</div>
-				</div>
-			)
-		}
+		<Header />
 		<main>
 			<slot />
 		</main>

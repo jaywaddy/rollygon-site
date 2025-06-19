@@ -5,9 +5,12 @@ import ToolCard from "@/components/ToolCard.astro";
 import Link from "@/ui/Link.astro";
 import { ALL_MODELS, LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import PageTitle from "@/components/layout/PageTitle.astro";
+import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
 ---
 
 <SiteLayout pageTitle="Home">
+	<PageTitle heading={SITE_HEADING} subHeading={SITE_SUB_HEADING} />
 	<section class="wrapper flex flex-col gap-8 py-16">
 		<div class="flex items-baseline gap-4">
 			<h2>Newest models</h2>

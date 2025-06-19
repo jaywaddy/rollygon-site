@@ -1,0 +1,76 @@
+---
+import Button from "@/ui/Button.astro";
+
+interface Props {
+	heading: string;
+	subHeading?: string;
+}
+
+const { heading, subHeading } = Astro.props;
+---
+
+<div id="page-title" class="bg-gray-700 border-bottom py-16">
+	<div class="wrapper flex flex-col gap-8 w-2/3">
+		<h1 data-content={heading}>{heading}</h1>
+        {
+            subHeading && (
+                <p data-content={subHeading} class="heading-sub w-2/3">{subHeading}</p>
+                <Button label="Get free tools" href="/tools" icon="download" primary />
+            )
+        }
+	</div>
+</div>
+
+<style>
+	#page-title {
+        position: relative;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-image: url("/backgrounds/bg-7.png");
+            animation: page-title-marquee 10s linear infinite;
+            opacity: 0.5;
+            content: "";
+        }
+	}
+
+    h1, p {
+        position: relative;
+        z-index: 1;
+        color: white;
+        &:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: attr(data-content);
+            color: transparent;
+            text-shadow:
+                0 0 1em var(--color-gray-800),
+                0 0 4em var(--color-gray-800);
+            z-index: -1;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+		#page-title {
+			&::before {
+				animation: none;
+			}
+		}
+	}
+
+    @keyframes page-title-marquee {
+        0% {
+            background-position:  0px 0px;
+        }
+
+        100% {
+            background-position: -64px 32px;
+        }
+    }
+</style>

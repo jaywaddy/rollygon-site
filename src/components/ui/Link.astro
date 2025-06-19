@@ -37,7 +37,8 @@ const {
 </a>
 
 <style>
-	a:hover {
+	a:hover,
+	&:focus-visible {
 		color: var(--color-text-dim);
 	}
 
@@ -46,7 +47,8 @@ const {
 	}
 
 	a[aria-current="page"] {
-		&:hover {
+		&:hover,
+		&:focus-visible {
 			color: inherit;
 		}
 

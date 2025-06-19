@@ -1,5 +1,6 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
+import PageTitle from "@/components/layout/PageTitle.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
 import {
@@ -16,16 +17,32 @@ export async function getStaticPaths() {
 	const parameters = ALL_CONTENT.map((content) =>
 		content.data.tags.map((tag) => ({
 			params: {
+				tag: 4,
 				slug: slugify(tag),
 			},
+			content: content,
 			props: { content },
 		})),
 	).flat();
 	return parameters;
 }
 
-const { content } = Astro.props;
 const { slug } = Astro.params;
+const dataList = ALL_CONTENT.filter((content) => content.data.tags.includes(getFileSlug(slug)));
+const tagName = dataList.map((content) =>
+	content.data.tags.find((tag) => tag === getFileSlug(slug)),
+)[0];
+
+function getFileSlug(input: string): string {
+	const exceptions = [{ title: "B&M", slug: "bm" }];
+	const exception = exceptions.find((exception) => exception.slug);
+
+	if (input === exception?.slug) {
+		return "B&M";
+	}
+
+	return titleCase(input);
+}
 
 function checkIfTrue(list: Array<Collection>): boolean {
 	return list
@@ -35,24 +52,22 @@ function checkIfTrue(list: Array<Collection>): boolean {
 }
 ---
 
-<SiteLayout pageTitle={slug}>
-	<div class="bg-surface-secondary border-bottom py-16">
-		<div class="wrapper flex items-center gap-8 w-2/3">
-			<h1>Tag: #{titleCase(slug)}</h1>
-		</div>
-	</div>
+<SiteLayout pageTitle={"Tag: #" + tagName}>
+	<PageTitle heading={"Tag: #" + tagName} />
 	<section class="wrapper flex flex-col gap-16 py-16">
 		{
 			checkIfTrue(ALL_MODELS) && (
 				<div class="flex flex-col gap-8">
 					<h2>Models</h2>
-					{ALL_MODELS.map((content) => {
-						return (
-							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ModelCard model={content} />
-							)
-						);
-					})}
+					<div class="grid grid-cols-3 gap-8">
+						{ALL_MODELS.map((content) => {
+							return (
+								content.data.tags.find((tag) => slugify(tag) === slug) && (
+									<ModelCard model={content} />
+								)
+							);
+						})}
+					</div>
 				</div>
 			)
 		}

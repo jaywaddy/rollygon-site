@@ -2,14 +2,8 @@
 import Button from "@/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
-import type { TopLevelPage } from "@/layouts/SiteLayout.astro";
-
-interface Props {
-	topLevelPages: Array<TopLevelPage>;
-}
 
 const currentPath = new URL(Astro.request.url).pathname;
-const { topLevelPages } = Astro.props;
 
 function toggleActiveLink(label: string): "page" | "false" {
 	if (currentPath === label) {
@@ -18,16 +12,6 @@ function toggleActiveLink(label: string): "page" | "false" {
 
 	return "false";
 }
-
-function returnPage(input: TopLevelPage["title"]): TopLevelPage {
-	const page = topLevelPages.find((page) => page.title === input);
-
-	if (page) {
-		return page;
-	}
-
-	return topLevelPages[0];
-}
 ---
 
 <header class="bg-[var(--color-surface-primary)] border-bottom sticky top-0 w-full z-10">
@@ -35,35 +19,19 @@ function returnPage(input: TopLevelPage["title"]): TopLevelPage {
 		<SiteTitle />
 		<ul class="flex items-center gap-8">
 			<li>
-				<Link
-					label={returnPage("Home").title}
-					href={returnPage("Home").href}
-					isActive={toggleActiveLink(returnPage("Home").href)}
-				/>
+				<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
 			</li>
 			<li>
-				<Link
-					label={returnPage("Tools").title}
-					isActive={toggleActiveLink(returnPage("Tools").href)}
-				/>
+				<Link label="Tools" isActive={toggleActiveLink("/tools")} />
 			</li>
 			<li>
-				<Link
-					label={returnPage("Models").title}
-					isActive={toggleActiveLink(returnPage("Models").href)}
-				/>
+				<Link label="Models" isActive={toggleActiveLink("/models")} />
 			</li>
 			<li>
-				<Link
-					label={returnPage("Articles").title}
-					isActive={toggleActiveLink(returnPage("Articles").href)}
-				/>
+				<Link label="Articles" isActive={toggleActiveLink("/articles")} />
 			</li>
 			<li>
-				<Link
-					label={returnPage("About").title}
-					isActive={toggleActiveLink(returnPage("About").href)}
-				/>
+				<Link label="About" isActive={toggleActiveLink("/about")} />
 			</li>
 			<li>
 				<Button label="Get free tools" href="/tools" icon="download" primary />

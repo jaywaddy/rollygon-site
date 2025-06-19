@@ -1,9 +1,9 @@
 ---
 import TagList from "@/components/TagList.astro";
-import Button from "./ui/Button.astro";
-import Model from "./ui/Model.astro";
-import Link from "./ui/Link.astro";
+import Button from "@/ui/Button.astro";
+import Model from "@/ui/Model.astro";
 import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
 
 interface Props {
 	model: CollectionEntry<"models">;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { model, featured } = Astro.props;
-const { title, subTitle, id, tags, description } = model.data;
+const { title, subTitle, id, tags, description, image } = model.data;
 ---
 
 {
@@ -29,15 +29,22 @@ const { title, subTitle, id, tags, description } = model.data;
 			</div>
 		</div>
 	) : (
-		<div class="flex flex-col justify-start border-lg shadow-lg w-sm">
-			<div class=" flex justify-center items-center p-2 border-bottom">
-				<div class=" border-2 rounded-sm bg-black w-full aspect-video" />
+		<div class="flex flex-col justify-start border-lg shadow-lg">
+			<div class="flex justify-center items-center p-2 border-bottom">
+				<Image
+					src={"/images/" + image}
+					alt={title + " - " + subTitle}
+					class="border-sm w-full aspect-video"
+					width="100"
+					height="100"
+					format="webp"
+				/>
 			</div>
-			<div class="flex flex-col items-start gap-8 p-8 overflow-hidden rounded-b-lg ">
+			<div class="flex flex-col items-start gap-8 p-8 overflow-hidden rounded-b-lg">
 				<h3 class="flex justify-left truncate w-full">{title}</h3>
 				<TagList {tags} />
 				<p class="h-[3em] line-clamp-2">{description}</p>
-				<Button label="View live demo" href={"/models/" + model.slug} />
+				<Button label="View live model" href={"/models/" + model.slug} />
 			</div>
 		</div>
 	)

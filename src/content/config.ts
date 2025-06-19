@@ -1,4 +1,3 @@
-import { glob } from "astro/loaders";
 import { z, defineCollection, type CollectionEntry, getCollection } from "astro:content";
 
 export type Collection = CollectionEntry<"articles" | "tools" | "models">;
@@ -21,7 +20,8 @@ const toolCollection = defineCollection({
         postDate: z.date(),
         description: z.string(),
         price: z.string(),
-        image: z.string().optional(),
+        image: z.string(),
+        href: z.string(),
         tags: z.array(z.string()),
         version: z.number(),
     })
