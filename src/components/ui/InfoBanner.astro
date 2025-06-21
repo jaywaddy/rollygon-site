@@ -1,10 +1,29 @@
 ---
 import Badge from "@/ui/Badge.astro";
 import Icon from "@/ui/Icon.astro";
+
+interface Props {
+	size?: "sm" | "lg";
+}
+
+const { size = "sm" } = Astro.props;
 ---
 
-<a href="/about" class="flex items-center gap-2 border-lg shadow-lg p-2 w-fit bg-surface">
-	<Icon name="user" />
-	<strong>He/him</strong>&bullet;<strong>Rolly</strong>
-	<Badge label="Commissions closed!" color="red" />
-</a>
+{
+	size === "sm" && (
+		<a href="/about" class="flex items-center gap-2 border-lg shadow-lg p-2 w-fit bg-surface">
+			<Icon name="user" />
+			<strong>He/him</strong>&bullet;<strong class="text-nowrap">Jay Rolly</strong>
+			<Badge label="Commissions closed!" color="red" />
+		</a>
+	)
+}
+{
+	size === "lg" && (
+		<a href="/about" class="flex items-center gap-2 border-lg shadow-lg p-2 w-fit bg-surface">
+			<Icon name="user" />
+			<strong>He/him</strong>&bullet;<strong class="text-nowrap">Jay Rolly</strong>
+			<Badge label="Commissions closed!" color="red" />
+		</a>
+	)
+}

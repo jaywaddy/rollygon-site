@@ -3,6 +3,7 @@ import ArticleCard from "@/components/ArticleCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
+import Link from "@/components/ui/Link.astro";
 import {
 	type Collection,
 	ALL_ARTICLES,
@@ -52,13 +53,27 @@ function checkIfTrue(list: Array<Collection>): boolean {
 }
 ---
 
-<SiteLayout pageTitle={"Tag: #" + tagName}>
+<SiteLayout pageTitle={"Tag: #" + tagName} description={"Loading content tagged with #" + tagName}>
 	<PageTitle heading={"Tag: #" + tagName} />
+	<div class="py-8 border-bottom">
+		<div class="wrapper flex justify-between items-center">
+			<ul class="flex gap-8">
+				<li><Link label="Models" href="#models" /></li>
+				<li><Link label="Tools" href="#tools" /></li>
+				<li><Link label="Articles" href="#articles" /></li>
+			</ul>
+			<input
+				type="text"
+				placeholder="Search tags"
+				class="border-sm rounded-full px-4 py-2 w-sm"
+			/>
+		</div>
+	</div>
 	<section class="wrapper flex flex-col gap-16 py-16">
 		{
 			checkIfTrue(ALL_MODELS) && (
 				<div class="flex flex-col gap-8">
-					<h2>Models</h2>
+					<h2 id="models">Models</h2>
 					<div class="grid grid-cols-3 gap-8">
 						{ALL_MODELS.map((content) => {
 							return (
@@ -74,7 +89,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 		{
 			checkIfTrue(ALL_TOOLS) && (
 				<div class="flex flex-col gap-8">
-					<h2>Tools</h2>
+					<h2 id="tools">Tools</h2>
 					<div class="flex gap-8">
 						{ALL_TOOLS.map((content) => {
 							return (
@@ -90,7 +105,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 		{
 			checkIfTrue(ALL_ARTICLES) && (
 				<div class="flex flex-col gap-8">
-					<h2>Articles</h2>
+					<h2 id="articles">Articles</h2>
 					{ALL_ARTICLES.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (

@@ -2,11 +2,35 @@
 import Icon from "./ui/Icon.astro";
 ---
 
-<a aria-label="Rollygon" href="/" class="flex items-center gap-2">
+<a aria-label="Rollygon" href="/" class="flex items-center gap-2 z-10">
 	<span
-		class="flex items-center justify-center bg-[var(--color-lime)] border-2 shadow-sm rounded-full aspect-1/1 w-12"
+		class="site-logo flex items-center justify-center bg-[var(--color-lime)] border-2 shadow-sm rounded-full aspect-1/1 w-12"
 	>
 		<Icon name="logo" size="28" />
 	</span>
-	<strong class="font-[Benz_Grotesk] text-[1.5em]">Rollygon</strong>
+	<span class="font-[Benz_Grotesk] text-[1.5em]">Rollygon</span>
 </a>
+
+<style>
+	[aria-label="Rollygon"] {
+		&:hover .site-logo,
+		&:focus .sitelogo {
+			position: relative;
+			overflow: hidden;
+
+			&::before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-image: var(--bg-2);
+				opacity: 0.1;
+
+				transform: scale(2) rotate(1deg);
+				animation: button-marquee 10s linear infinite;
+				content: "";
+			}
+		}
+	}
+</style>

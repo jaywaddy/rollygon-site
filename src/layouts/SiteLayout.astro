@@ -5,9 +5,10 @@ import Header from "@/components/layout/Header.astro";
 
 interface Props {
 	pageTitle: string;
+	description?: string;
 }
 
-const { pageTitle } = Astro.props;
+const { pageTitle, description = "Rollygon" } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +16,7 @@ const { pageTitle } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,6 +1,6 @@
 ---
 import type { IconName } from "@/ui/Icon.astro";
-import Icon from "./Icon.astro";
+import Icon from "@/ui/Icon.astro";
 
 interface Props {
 	submit?: boolean;
@@ -49,6 +49,8 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 		--color-cta-secondary: var(--color-neutral-50);
 
 		position: relative;
+		overflow: hidden;
+
 		&:hover {
 			text-shadow:
 				0 0 8px var(--bg),
@@ -56,6 +58,7 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 
 			&::before {
 				background-image: url("/backgrounds/bg-2.png");
+				transform: scale(2);
 
 				position: absolute;
 				top: 0;
@@ -64,27 +67,9 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 				height: 100%;
 
 				content: "";
-				animation: marquee 5s linear infinite;
-				opacity: 0.2;
+				animation: button-marquee 5s linear infinite;
+				opacity: 0.1;
 			}
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		a,
-		button {
-			&:hover::before {
-				animation: none;
-			}
-		}
-	}
-
-	@keyframes marquee {
-		0% {
-			background-position: 0;
-		}
-		100% {
-			background-position: 64px;
 		}
 	}
 </style>

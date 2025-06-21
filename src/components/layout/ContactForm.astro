@@ -3,16 +3,24 @@ import Button from "@/ui/Button.astro";
 import Input from "@/ui/Input.astro";
 import Textarea from "@/ui/Textarea.astro";
 import AboutSection from "@/layout/AboutSection.astro";
+import Card from "../Card.astro";
 ---
 
-<section class="flex border-top border-bottom bg-surface-secondary">
+<section
+	class="background-marquee flex border-top border-bottom bg-blue"
+	style={{
+		"--bg": "var(--color-blue)",
+		"--bg-url": "var(--bg-5)",
+	}}
+>
 	<div class="wrapper flex gap-16 py-16">
-		<section class="flex flex-col gap-8">
-			<h2 class="heading-md">What should I build next?</h2>
-			<p>
-				If you have an idea that could improve my workflow, I'd love to hear it. Let's work
-				together and build better custom and high quality coaster models!
-			</p>
+		<div class="marquee-content flex flex-col gap-8">
+			<Card title="What should I build next?">
+				<p>
+					If you have an idea that could improve my workflow, I'd love to hear it. Let's
+					work together and build better custom and high quality coaster models!
+				</p>
+			</Card>
 			<form action="" method="POST" class="grid gap-2 w-full">
 				<Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
 				<Input label="Email*" type="email" id="contact-email" required />
@@ -21,7 +29,7 @@ import AboutSection from "@/layout/AboutSection.astro";
 					<Button label="Start a conversation" icon="send" submit primary />
 				</div>
 			</form>
-		</section>
+		</div>
 		<AboutSection />
 	</div>
 </section>

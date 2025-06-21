@@ -22,6 +22,29 @@ const { content } = Astro.props;
 	</span>
 </div>
 
+<style>
+	[data-article-progress] {
+		position: relative;
+
+		&::before {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-image: url("/backgrounds/bg-2.png");
+			opacity: 0.2;
+			content: "";
+
+			animation: marquee 5s linear infinite;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-article-progress]::before {
+			animation: none;
+		}
+	}
+</style>
+
 <script is:inline>
 	const progressIndicator = document.querySelector("[data-article-progress]");
 

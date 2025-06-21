@@ -7,13 +7,17 @@ import { ALL_MODELS, LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
+import Card from "@/components/Card.astro";
+import Button from "@/components/ui/Button.astro";
+import ImageWrapper from "@/components/ui/ImageWrapper.astro";
+import InfoBanner from "@/components/ui/InfoBanner.astro";
 ---
 
 <SiteLayout pageTitle="Home">
 	<PageTitle heading={SITE_HEADING} subHeading={SITE_SUB_HEADING} />
 	<section class="wrapper flex flex-col gap-8 py-16">
 		<div class="flex items-baseline gap-4">
-			<h2>Newest models</h2>
+			<h2>Newest model</h2>
 			<Link label="View all models" href="/models" underline />
 		</div>
 		<ModelCard model={ALL_MODELS[0]} featured />
@@ -25,6 +29,32 @@ import { SITE_HEADING, SITE_SUB_HEADING } from "@/scripts/constants";
 		</div>
 		<div class="flex gap-8 w-full">
 			{LATEST_TOOLS.map((tool) => <ToolCard {tool} />)}
+		</div>
+	</section>
+	<section
+		class="background-marquee bg-[var(--bg)] border-top border-bottom py-16"
+		style={{
+			"--bg": "var(--color-purple)",
+			"--bg-url": "var(--bg-1)",
+		}}
+	>
+		<div class="wrapper flex gap-16">
+			<Card title="About me">
+				<p>
+					My name is Jay--but, you can call me Rolly (rhymes with "jolly")--and I make
+					roller coasters out of polygons. I also build tools that make coaster
+					manufacturer specific tracks, supports, etc. that help me create realistic
+					coaster models.
+				</p>
+				<div class="flex gap-2">
+					<Button label="Get to know me" href="/about" />
+					<Button label="Send a message" href="mailto:" icon="email" />
+				</div>
+			</Card>
+			<div class="relative flex justify-center">
+				<ImageWrapper size="400px" shape="round" aspect="1/1" placeholder />
+				<div class="absolute top-2 rotate-4"><InfoBanner /></div>
+			</div>
 		</div>
 	</section>
 	<section id="articles" class="wrapper flex flex-col gap-8 py-16 w-2/3">

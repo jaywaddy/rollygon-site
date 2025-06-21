@@ -1,13 +1,26 @@
 ---
 import Link from "@/ui/Link.astro";
 import Icon from "@/ui/Icon.astro";
+
+interface Props {
+	socials?: boolean;
+}
+
+const { socials } = Astro.props;
 ---
 
 <div class="flex flex-col gap-8">
-	<div class="flex flex-col gap-1">
-		<p class="flex gap-2 items-center"><Icon name="compass" />Sacramento, CA</p>
-		<Link label="example@email.com" href="mailto:" iconLeft="email" underline />
-	</div>
+	{
+		!socials && (
+			<div class="flex flex-col gap-1">
+				<p class="flex gap-2 items-center">
+					<Icon name="compass" />
+					Sacramento, CA
+				</p>
+				<Link label="example@email.com" href="mailto:" iconLeft="email" underline />
+			</div>
+		)
+	}
 	<div class="flex gap-4 mt-2">
 		<a data-icon-fill aria-label="gumroad" href="https://rollygon.gumroad.com/">
 			<Icon name="gumroad" size="24" />
