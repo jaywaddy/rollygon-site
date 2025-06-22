@@ -180,7 +180,7 @@ a[data-icon-fill]:hover > svg > path {
         width: 100%;
         height: 100%;
 
-        background-image: var(--bg-url);
+        background-image: var(--pattern);
         transform: scale(2) rotate(-1deg);
         animation: background-marquee 10s linear infinite;
         opacity: 0.1;
@@ -189,7 +189,7 @@ a[data-icon-fill]:hover > svg > path {
     }
 
     & [data-shadow] {
-        text-shadow: 0 0 1em var(--bg);
+        text-shadow: 0 0 1em var(--color);
     }
 }
 

@@ -1,50 +1,18 @@
 ---
-import {
-	type Color,
-	type ColorTheme,
-	Red,
-	Orange,
-	Yellow,
-	Green,
-	Blue,
-	Purple,
-	Fuchsia,
-	White,
-} from "@/scripts/colors";
+import { type ColorName, Color, setStyles } from "@/scripts/interface";
 
 interface Props {
 	label: string;
-	color?: Color;
+	color?: ColorName;
 }
 
 const { label, color = "neutral" } = Astro.props;
-
-function setBadgeColorTheme(input: string): ColorTheme {
-	const badgeThemes = [
-		{ name: "red", theme: Red },
-		{ name: "orange", theme: Orange },
-		{ name: "yellow", theme: Yellow },
-		{ name: "green", theme: Green },
-		{ name: "Free", theme: Green },
-		{ name: "blue", theme: Blue },
-		{ name: "purple", theme: Purple },
-		{ name: "fuchsia", theme: Fuchsia },
-		{ name: "white", theme: White },
-	];
-	const specifiedTheme = badgeThemes.find((theme) => theme.name === input)?.theme;
-
-	if (specifiedTheme) {
-		return specifiedTheme;
-	}
-
-	return White;
-}
 ---
 
 <small
 	data-badge
-	class="border-sm bg-[var(--bg)] rounded-sm py-[2px] px-2 w-fit"
-	style={setBadgeColorTheme(color || label)}
+	class="border-sm bg-[var(--color)] rounded-sm py-[2px] px-2 w-fit"
+	style={setStyles(Color[color])}
 >
 	<strong class="text-nowrap">{label}</strong>
 </small>

@@ -1,15 +1,5 @@
 ---
-import {
-	type ColorTheme,
-	Red,
-	Orange,
-	Yellow,
-	Green,
-	Blue,
-	Purple,
-	Fuchsia,
-	White,
-} from "@/scripts/colors";
+import { Color, setStyles, type ColorName } from "@/scripts/interface";
 
 interface Props {
 	label: string;
@@ -18,35 +8,33 @@ interface Props {
 
 const { label, count } = Astro.props;
 
-export function setTagColorTheme(input: string): ColorTheme {
+export function setTagColorTheme(input: string): string {
 	interface ColoredTag {
 		name: string;
-		color: ColorTheme;
+		color: ColorName;
 	}
 
 	const coloredTags: Array<ColoredTag> = [
-		{ name: "Guide", color: Blue },
-		{ name: "Tool", color: Yellow },
-		{ name: "Update", color: Orange },
-		{ name: "Coaster", color: Purple },
-		{ name: "Intamin", color: Red },
-		{ name: "B&M", color: Blue },
-		{ name: "Blender", color: Orange },
+		{ name: "Guide", color: "blue" },
+		{ name: "Tool", color: "yellow" },
+		{ name: "Update", color: "orange" },
+		{ name: "Coaster", color: "purple" },
+		{ name: "Intamin", color: "red" },
+		{ name: "B&M", color: "blue" },
+		{ name: "Blender", color: "orange" },
 	];
 	const tag = coloredTags.find((tag) => tag.name === input);
 
-	return tag?.color || White;
+	return tag?.color || "neutral";
 }
 ---
 
 <span
 	data-tag
-	class="flex items-center bg-[var(--bg)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
-	style={setTagColorTheme(label)}
+	class="flex items-center bg-[var(--color)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
+	style={setStyles(Color[setTagColorTheme(label)])}
 >
-	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap"
-	>
-		
+	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap">
 		<strong>#{label}</strong>
 	</small>
 	<small class="pl-2 py-[2px] border-l-2"><strong>{count}</strong></small>

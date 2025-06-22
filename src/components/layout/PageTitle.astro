@@ -1,4 +1,5 @@
 ---
+import { setStyles, Color, Pattern } from "@/scripts/interface";
 import Button from "@/ui/Button.astro";
 
 interface Props {
@@ -8,15 +9,12 @@ interface Props {
     color?: string;
 }
 
-const { heading, subHeading, pattern = "var(--bg-7)", color = "var(--color-blue)" } = Astro.props;
+const { heading, subHeading, pattern = "7", color = "blue" } = Astro.props;
 ---
 
 <div
-    class="background-marquee bg-[var(--bg)] border-bottom py-16"
-    style={{
-        "--bg": color,
-        "--bg-url": pattern
-    }}
+    class="background-marquee bg-[var(--color)] border-bottom py-16"
+    style={setStyles(Color[color], Pattern[pattern])}
 >
 	<div class="wrapper flex flex-col gap-8 w-2/3">
 		<h1 data-content={heading} data-shadow>{heading}</h1>

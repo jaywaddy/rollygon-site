@@ -1,10 +1,16 @@
 ---
-import Icon from "./ui/Icon.astro";
+import Icon from "@/ui/Icon.astro";
+import { Color, Pattern, setStyles } from "@/scripts/interface";
 ---
 
-<a aria-label="Rollygon" href="/" class="flex items-center gap-2 z-10">
+<a
+	aria-label="Rollygon"
+	href="/"
+	class="flex items-center gap-2 z-10"
+	style={setStyles(Color.lime, Pattern["2"])}
+>
 	<span
-		class="site-logo flex items-center justify-center bg-[var(--color-lime)] border-2 shadow-sm rounded-full aspect-1/1 w-12"
+		class="site-logo flex items-center justify-center bg-[var(--color)] border-2 shadow-sm rounded-full aspect-1/1 w-12"
 	>
 		<Icon name="logo" size="28" />
 	</span>
@@ -24,7 +30,7 @@ import Icon from "./ui/Icon.astro";
 				left: 0;
 				width: 100%;
 				height: 100%;
-				background-image: var(--bg-2);
+				background-image: var(--pattern);
 				opacity: 0.1;
 
 				transform: scale(2) rotate(1deg);

@@ -1,6 +1,7 @@
 ---
 import { calcReadTime } from "@/scripts/utilities";
 import type { CollectionEntry } from "astro:content";
+import { setStyles, Color, Pattern } from "@/scripts/interface";
 
 interface Props {
 	content: CollectionEntry<"articles"> | CollectionEntry<"tools">;
@@ -13,11 +14,11 @@ const { content } = Astro.props;
 	<span class="heading-xs">{calcReadTime(content.body)} min read</span>
 	<span
 		class="flex justify-start items-center w-full h-4 px-1 bg-black rounded-[var(--radius-sm)]"
-		style={{ "--prog-w": "40px" }}
+		style={setStyles(Color.lime, Pattern["2"]) + "--prog-w: 40px"}
 	>
 		<span
 			data-article-progress
-			class="bg-[var(--color-lime)] rounded-[1px] min-w-2 max-w-full h-2"
+			class="bg-[var(--color)] rounded-[1px] min-w-2 max-w-full h-2"
 			onscroll="showScrollProgress()"></span>
 	</span>
 </div>
@@ -30,7 +31,7 @@ const { content } = Astro.props;
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			background-image: url("/backgrounds/bg-2.png");
+			background-image: var(--pattern);
 			opacity: 0.2;
 			content: "";
 

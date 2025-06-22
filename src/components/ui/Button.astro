@@ -1,4 +1,5 @@
 ---
+import { Color, Pattern, setStyles } from "@/scripts/interface";
 import type { IconName } from "@/ui/Icon.astro";
 import Icon from "@/ui/Icon.astro";
 
@@ -12,20 +13,23 @@ interface Props {
 
 const { submit, label, href, icon = "arrow-right", primary } = Astro.props;
 
-function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
+function toggleButtonColor(isPrimary: boolean | undefined): string {
 	if (isPrimary) {
-		return "var(--color-cta-primary)";
+		return Color.lime;
 	}
 
-	return "var(--color-cta-secondary)";
+	return Color.neutral;
 }
+
+console.log(setStyles(toggleButtonColor(primary), Pattern["2"]));
 ---
 
 {
 	submit ? (
 		<button
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--bg)] w-fit cursor-pointer"
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color)] w-fit cursor-pointer"
+			style={setStyles(toggleButtonColor(primary), Pattern["2"])}
 		>
 			<strong>{label}</strong>
 			{icon && <Icon name={icon} />}
@@ -33,7 +37,8 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 	) : (
 		<a
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--bg)] w-fit"
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color)] w-fit"
+			style={setStyles(toggleButtonColor(primary), Pattern["2"])}
 			{href}
 		>
 			<strong>{label}</strong>
@@ -42,22 +47,19 @@ function selectButtonColor(isPrimary: typeof Astro.props.primary): string {
 	)
 }
 
-<style define:vars={{ bg: selectButtonColor(primary) }}>
+<style>
 	a,
 	button {
-		--color-cta-primary: var(--color-lime);
-		--color-cta-secondary: var(--color-neutral-50);
-
 		position: relative;
 		overflow: hidden;
 
 		&:hover {
 			text-shadow:
-				0 0 8px var(--bg),
-				0 0 16px var(--bg);
+				0 0 8px var(--color),
+				0 0 16px var(--color);
 
 			&::before {
-				background-image: url("/backgrounds/bg-2.png");
+				background-image: var(--pattern);
 				transform: scale(2);
 
 				position: absolute;
