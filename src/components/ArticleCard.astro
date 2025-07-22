@@ -14,12 +14,20 @@ interface Props {
 
 const { article, featured } = Astro.props;
 const { title, description, tags, postDate, image } = article.data;
+
+function toggle(image: string): string {
+	if (image) {
+		return "64px";
+	}
+
+	return "12px";
+}
 ---
 
 {
 	featured ? (
 		<div class="flex gap-16 w-full">
-			<ImageWrpper size="50%" placeholder />
+			<ImageWrpper size="50%" />
 			<div class="flex flex-col gap-4 w-full">
 				<span class="heading-xs">Featured</span>
 				<h3 class="heading-sm flex items-center gap-2">{title}</h3>
@@ -34,20 +42,30 @@ const { title, description, tags, postDate, image } = article.data;
 			</div>
 		</div>
 	) : (
-		<div class="flex gap-8 w-2/3">
-			<ImageWrpper size="sm" shape="round" aspect="1/1" placeholder />
-			<div class="flex flex-col gap-2">
+		<div
+			class="relative flex gap-8 w-1/2"
+			style={{
+				"--img-border-radius": toggle(image),
+			}}
+		>
+			<div class="flex flex-col gap-4 border-lg shadow-lg rounded-br-[var(--img-border-radius)] p-8">
 				<h3 class="heading-sm flex items-center gap-2">
 					<Link label={title} href={"/articles/" + article.slug} underline />
 				</h3>
 				<TagList {tags} />
 				<p class="line-clamp-2">{description}</p>
-				<small>
-					<strong>
-						{calcReadTime(article.body)} min read &bullet; {formatDate(postDate)}
-					</strong>
+				<Button label="Read full post" href={"articles/" + article.slug} />
+				<small class="flex gap-1.5">
+					<strong>{calcReadTime(article.body)} min read</strong>
+					&bullet;
+					<strong>{formatDate(postDate)}</strong>
 				</small>
 			</div>
+			{image && (
+				<div class="absolute -bottom-3 -right-3">
+					<ImageWrpper size="128px" shape="round" aspect="1/1" src={image} />
+				</div>
+			)}
 		</div>
 	)
 }

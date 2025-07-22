@@ -1,14 +1,15 @@
 ---
 import Icon from "@/ui//Icon.astro";
+import Image from "astro/components/Image.astro";
 
 interface Props {
 	size?: string;
 	shape?: "rect" | "round";
 	aspect?: "1/1" | "16/9";
-	placeholder?: boolean;
+	src?: string;
 }
 
-const { size = "auto", shape = "rect", aspect = "16/9", placeholder = false } = Astro.props;
+const { size = "auto", shape = "rect", aspect = "16/9", src = "" } = Astro.props;
 
 function calcRadius(border: string, input: typeof shape): string {
 	if (border === "outer" && input === "rect") {
@@ -42,11 +43,16 @@ function calcSize(input: typeof size): string | undefined {
 
 	return input;
 }
+
+function calcPath(input: string): string {
+	return `url("/images/${input}")`;
+}
 ---
 
 <div
 	class="flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-surface border-2 shadow-lg"
 	style={{
+		"--img-path": calcPath(src),
 		"--img-w": calcSize(size),
 		"--img-aspect": aspect,
 		"--outter-radius": calcRadius("outer", shape),
@@ -54,8 +60,22 @@ function calcSize(input: typeof size): string | undefined {
 	}}
 >
 	<div
-		class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--inner-radius)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-900"
+		class="box-content flex justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--inner-radius)] border-8 border-[var(--color-surface-primary)] w-full bg-gray-900 overflow-clip"
 	>
-		{placeholder ? <Icon name="image" size="64" color="white" /> : <slot />}
+		{
+			src ? (
+				<div data-img class="w-full h-full" />
+			) : (
+				<Icon name="image" size="64" color="white" />
+			)
+		}
 	</div>
 </div>
+
+<style>
+	[data-img] {
+		background-image: var(--img-path);
+		background-size: cover;
+		background-position: center;
+	}
+</style>
