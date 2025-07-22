@@ -14,26 +14,3 @@ import ContactLinks from "@/components/ContactLinks.astro";
 		</div>
 	</div>
 </div>
-
-<style>
-	h2 {
-		position: relative;
-		z-index: 0;
-		text-shadow:
-			0 0 1em var(--color-surface-primary),
-			0 0 1em var(--color-surface-primary),
-			0 0 1em var(--color-surface-primary);
-
-		&::before {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			content: "";
-			background-image: url("/backgrounds/bg-5.png");
-			opacity: 0.1;
-			z-index: -1;
-		}
-	}
-</style>
