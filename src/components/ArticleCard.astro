@@ -43,12 +43,12 @@ function toggle(image: string): string {
 		</div>
 	) : (
 		<div
-			class="relative flex gap-8 w-1/2"
+			class="relative flex gap-8 w-full"
 			style={{
 				"--img-border-radius": toggle(image),
 			}}
 		>
-			<div class="flex flex-col gap-4 border-lg shadow-lg rounded-br-[var(--img-border-radius)] p-8">
+			<div class="flex flex-col gap-4 border-lg shadow-lg rounded-br-[var(--img-border-radius)] p-8 bg-white">
 				<h3 class="heading-sm flex items-center gap-2">
 					<Link label={title} href={"/articles/" + article.slug} underline />
 				</h3>

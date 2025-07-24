@@ -11,7 +11,7 @@ export type ColorName = (
     | "blue"
     | "purple"
     | "fucshia"
-    | "neutral"
+    | "white"
 );
 
 export type PatternName = (
@@ -33,7 +33,7 @@ export const Color: Input = {
     blue: "var(--color-blue)",
     purple: "var(--color-purple)",
     fucshia: "var(--color-fucshia)",
-    neutral: "var(--color-surface-primary)"
+    white: "var(--color-surface-primary)"
 }
 
 export const Pattern: Input = {
@@ -46,9 +46,9 @@ export const Pattern: Input = {
     "7": "var(--bg-7)",
 }
 
-export function setStyles(color?: string, pattern?: string) {
-    const colorStyles = `--color: ${color};`;
-    const patternStyles = `--pattern: ${pattern};`;
+export function setStyles(alias: string, color?: string, pattern?: string) {
+    const colorStyles = `--${alias}-color: ${color};`;
+    const patternStyles = `--${alias}-pattern: ${pattern};`;
 
     if (color && pattern) {
         return colorStyles + patternStyles;

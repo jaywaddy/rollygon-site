@@ -25,14 +25,14 @@ export function setTagColorTheme(input: string): string {
 	];
 	const tag = coloredTags.find((tag) => tag.name === input);
 
-	return tag?.color || "neutral";
+	return tag?.color || "white";
 }
 ---
 
 <span
 	data-tag
-	class="flex items-center bg-[var(--color)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
-	style={setStyles(Color[setTagColorTheme(label)])}
+	class="flex items-center bg-[var(--tag-color)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
+	style={setStyles("tag", Color[setTagColorTheme(label)])}
 >
 	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap">
 		<strong>#{label}</strong>

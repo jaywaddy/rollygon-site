@@ -1,6 +1,5 @@
 ---
 import Icon from "@/ui//Icon.astro";
-import Image from "astro/components/Image.astro";
 
 interface Props {
 	size?: string;
@@ -13,11 +12,11 @@ const { size = "auto", shape = "rect", aspect = "16/9", src = "" } = Astro.props
 
 function calcRadius(border: string, input: typeof shape): string {
 	if (border === "outer" && input === "rect") {
-		return "0.5em";
+		return "0.75em";
 	}
 
 	if (border === "inner" && input === "rect") {
-		return "0.75em";
+		return "0.875em";
 	}
 
 	return "50%";

@@ -14,11 +14,11 @@ const { content } = Astro.props;
 	<span class="heading-xs">{calcReadTime(content.body)} min read</span>
 	<span
 		class="flex justify-start items-center w-full h-4 px-1 bg-black rounded-[var(--radius-sm)]"
-		style={setStyles(Color.lime, Pattern["2"]) + "--prog-w: 40px"}
+		style={setStyles("indicator", Color.lime, Pattern["2"]) + "--prog-w: 40px"}
 	>
 		<span
 			data-article-progress
-			class="bg-[var(--color)] rounded-[1px] min-w-2 max-w-full h-2"
+			class="bg-[var(--indicator-color)] rounded-[1px] min-w-2 max-w-full h-2"
 			onscroll="showScrollProgress()"></span>
 	</span>
 </div>
@@ -31,7 +31,7 @@ const { content } = Astro.props;
 			position: absolute;
 			width: 100%;
 			height: 100%;
-			background-image: var(--pattern);
+			background-image: var(--indicator-pattern);
 			opacity: 0.2;
 			content: "";
 

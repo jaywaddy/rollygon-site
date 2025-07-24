@@ -8,12 +8,13 @@ import { setStyles, Color, Pattern } from "@/scripts/interface";
 ---
 
 <section
-	class="background-marquee flex border-top border-bottom bg-blue"
-	style={setStyles(Color.blue, Pattern["7"])}
+	class="background-marquee flex border-top border-bottom"
+	style={setStyles("marquee", Color.purple, Pattern["1"])}
 >
 	<div class="wrapper flex gap-16 py-16">
 		<div class="marquee-content flex flex-col gap-8">
-			<Card title="What should I build next?">
+			<h2 data-shadow>What should I build next?</h2>
+			<Card>
 				<p>
 					If you have an idea that could improve my workflow, I'd love to hear it. Let's
 					work together and build better custom and high quality coaster models!

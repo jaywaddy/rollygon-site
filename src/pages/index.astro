@@ -11,58 +11,58 @@ import Card from "@/components/Card.astro";
 import Button from "@/components/ui/Button.astro";
 import ImageWrapper from "@/components/ui/ImageWrapper.astro";
 import InfoBanner from "@/components/ui/InfoBanner.astro";
-import { setStyles, Color, Pattern } from "@/scripts/interface";
-import { Image } from "astro:assets";
 ---
 
-<SiteLayout pageTitle="Home">
-	<PageTitle heading={SITE_HEADING} subHeading={SITE_SUB_HEADING} />
-	<section class="wrapper flex flex-col gap-8 py-16">
-		<div class="flex items-baseline gap-4">
-			<h2>Newest model</h2>
-			<Link label="View all models" href="/models" underline />
+<SiteLayout pageTitle="Home" color="blue" pattern="7">
+	<div class="wrapper flex flex-col gap-8 mt-32">
+		<h1>{SITE_HEADING}</h1>
+		<div class="w-fit">
+			<Card>
+				<p>{SITE_SUB_HEADING}</p>
+			</Card>
 		</div>
+		<Button label="Get free tools" href="/tools" icon="download" primary />
+	</div>
+	<section class="wrapper flex flex-col gap-8">
+		<h2 data-shadow>Newest model</h2>
 		<ModelCard model={ALL_MODELS[0]} featured />
+		<Link label="View all models" href="/models" underline />
 	</section>
-	<section id="tools" class="wrapper flex flex-col gap-4 py-16">
-		<div class="flex items-baseline gap-4">
-			<h2 class="heading-md">Newst tools</h2>
-			<Link label="View all tools" href="/tools" underline />
-		</div>
+	<section id="tools" class="wrapper flex flex-col gap-4">
+		<h2 data-shadow class="heading-md">Newst tools</h2>
 		<div class="flex gap-8 w-full">
 			{LATEST_TOOLS.map((tool) => <ToolCard {tool} />)}
 		</div>
+		<Link data-shadow label="View all tools" href="/tools" underline />
 	</section>
-	<section
-		class="background-marquee bg-[var(--color)] border-top border-bottom py-16"
-		style={setStyles(Color.purple, Pattern["1"])}
-	>
+	<section>
 		<div class="wrapper flex gap-16">
-			<Card title="About me">
-				<p>
-					My name is Jay&mdash;but, you can call me Rolly (rhymes with "jolly")&mdash;and
-					I make roller coasters out of polygons. I also build tools that make coaster
-					manufacturer specific tracks, supports, etc. that help me create realistic
-					coaster models.
-				</p>
-				<div class="flex gap-2">
-					<Button label="Get to know me" href="/about" />
-					<Button label="Send a message" href="mailto:" icon="email" />
-				</div>
-			</Card>
+			<div class="flex flex-col gap-4">
+				<h2 data-shadow>About me</h2>
+				<Card title="About me">
+					<p>
+						My name is Jay&mdash;but, you can call me Rolly (rhymes with
+						"jolly")&mdash;and I make roller coasters out of polygons. I also build
+						tools that make coaster manufacturer specific tracks, supports, etc. that
+						help me create realistic coaster models.
+					</p>
+					<div class="flex gap-2">
+						<Button label="Get to know me" href="/about" />
+						<Button label="Send a message" href="mailto:" icon="email" />
+					</div>
+				</Card>
+			</div>
 			<div class="relative flex justify-center">
 				<ImageWrapper size="400px" shape="round" aspect="1/1" />
 				<div class="absolute top-2 rotate-4"><InfoBanner /></div>
 			</div>
 		</div>
 	</section>
-	<section id="articles" class="wrapper flex flex-col gap-8 py-16 w-2/3">
-		<div class="flex items-baseline gap-4">
-			<h2 class="heading-md">Newest articles & updates</h2>
-			<Link label="View all articles" href="/articles" underline />
-		</div>
-		<div class="flex flex-col gap-8 w-full">
+	<section id="articles" class="wrapper flex flex-col gap-8 w-2/3 mb-16">
+		<h2 data-shadow class="heading-md">Newest articles & updates</h2>
+		<div class="grid grid-cols-2 gap-8 w-full">
 			{LATEST_ARTICLES.map((article) => <ArticleCard {article} />)}
 		</div>
+		<Link data-shadow label="View all articles" href="/articles" underline />
 	</section>
 </SiteLayout>

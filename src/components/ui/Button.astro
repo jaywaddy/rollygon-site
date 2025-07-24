@@ -18,7 +18,7 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 		return Color.lime;
 	}
 
-	return Color.neutral;
+	return Color.white;
 }
 ---
 
@@ -26,8 +26,8 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 	submit ? (
 		<button
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color)] w-fit cursor-pointer"
-			style={setStyles(toggleButtonColor(primary), Pattern["2"])}
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer"
+			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
 		>
 			<strong>{label}</strong>
 			{icon && <Icon name={icon} />}
@@ -35,8 +35,8 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 	) : (
 		<a
 			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--color)] w-fit"
-			style={setStyles(toggleButtonColor(primary), Pattern["2"])}
+			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit"
+			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
 			{href}
 		>
 			<strong>{label}</strong>
@@ -53,11 +53,11 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 
 		&:hover {
 			text-shadow:
-				0 0 8px var(--color),
-				0 0 16px var(--color);
+				0 0 8px var(--button-color),
+				0 0 16px var(--button-color);
 
 			&::before {
-				background-image: var(--pattern);
+				background-image: var(--button-pattern);
 				transform: scale(2);
 
 				position: absolute;

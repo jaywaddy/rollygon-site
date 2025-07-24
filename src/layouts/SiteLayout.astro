@@ -2,13 +2,18 @@
 import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
+import { setStyles, Color, Pattern } from "@/scripts/interface";
+import type { ColorName } from "@/scripts/interface";
+import type { PatternName } from "@/scripts/interface";
 
 interface Props {
 	pageTitle: string;
 	description?: string;
+	color?: ColorName;
+	pattern?: PatternName;
 }
 
-const { pageTitle, description = "Rollygon" } = Astro.props;
+const { pageTitle, description = "Rollygon", color = "white", pattern = "none" } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,7 +34,10 @@ const { pageTitle, description = "Rollygon" } = Astro.props;
 	</head>
 	<body class="flex flex-col min-h-full bg-surface">
 		<Header />
-		<main>
+		<main
+			class="flex flex-col gap-16 background-marquee"
+			style={setStyles("marquee", Color[color], Pattern[pattern])}
+		>
 			<slot />
 		</main>
 		<Footer />

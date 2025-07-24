@@ -7,21 +7,28 @@ interface Props {
 const { title, id } = Astro.props;
 ---
 
-<div class="p-4 border-lg shadow-lg w-full">
-	<iframe
-		title={title}
-		frameborder="0"
-		allowfullscreen
-		allowfullscreen="true"
-		allow="autoplay; fullscreen; xr-spatial-tracking"
-		xr-spatial-tracking
-		execution-while-out-of-viewport
-		execution-while-not-rendered
-		web-share
-		src={"https://sketchfab.com/models/" +
-			id +
-			"/embed?autostart=1&annotations_visible=1&transparent=0&ui_theme=dark&dnt=1"}
-		class="w-full rounded-[4px] aspect-video"
+<div class="relative flex-1 aspect-video p-4 border-lg shadow-lg bg-white">
+	<div
+		class="absolute inset-4 flex justify-center items-center rounded-[var(--radius-sm)] bg-black text-white"
 	>
-	</iframe>
+		Loading...
+	</div>
+	<div class="absolute inset-4">
+		<iframe
+			title={title}
+			frameborder="0"
+			allowfullscreen
+			allowfullscreen="true"
+			allow="autoplay; fullscreen; xr-spatial-tracking"
+			xr-spatial-tracking
+			execution-while-out-of-viewport
+			execution-while-not-rendered
+			web-share
+			src={"https://sketchfab.com/models/" +
+				id +
+				"/embed?autostart=1&annotations_visible=1&transparent=0&ui_theme=dark&dnt=1"}
+			class="inset-4 rounded-[var(--radius-sm)] w-full h-full"
+		>
+		</iframe>
+	</div>
 </div>

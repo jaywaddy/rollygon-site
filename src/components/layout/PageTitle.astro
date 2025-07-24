@@ -1,6 +1,6 @@
 ---
-import { setStyles, Color, Pattern } from "@/scripts/interface";
 import Button from "@/ui/Button.astro";
+import Card from "../Card.astro";
 
 interface Props {
 	heading: string;
@@ -9,18 +9,17 @@ interface Props {
     color?: string;
 }
 
-const { heading, subHeading, pattern = "7", color = "blue" } = Astro.props;
+const { heading, subHeading, pattern = "7" } = Astro.props;
 ---
 
-<div
-    class="background-marquee bg-[var(--color)] border-bottom py-16"
-    style={setStyles(Color[color], Pattern[pattern])}
->
+<div class=" py-16">
 	<div class="wrapper flex flex-col gap-8 w-2/3">
 		<h1 data-content={heading} data-shadow>{heading}</h1>
         {
             subHeading && (
-                <p data-content={subHeading} data-shadow class="heading-sub w-2/3">{subHeading}</p>
+                <Card>
+                    <p data-content={subHeading} class="heading-sub">{subHeading}</p>
+                </Card>
                 <Button label="Get free tools" href="/tools" icon="download" primary />
             )
         }

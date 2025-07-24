@@ -11,8 +11,8 @@ const { label, color = "neutral" } = Astro.props;
 
 <small
 	data-badge
-	class="border-sm bg-[var(--color)] rounded-sm py-[2px] px-2 w-fit"
-	style={setStyles(Color[color])}
+	class="border-sm bg-[var(--badge-color)] rounded-sm py-[2px] px-2 w-fit"
+	style={setStyles("badge", Color[color])}
 >
 	<strong class="text-nowrap">{label}</strong>
 </small>
