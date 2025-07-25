@@ -12,16 +12,14 @@ interface Props {
 const { heading, subHeading, pattern = "7" } = Astro.props;
 ---
 
-<div class=" py-16">
-	<div class="wrapper flex flex-col gap-8 w-2/3">
-		<h1 data-content={heading} data-shadow>{heading}</h1>
-        {
-            subHeading && (
-                <Card>
-                    <p data-content={subHeading} class="heading-sub">{subHeading}</p>
-                </Card>
-                <Button label="Get free tools" href="/tools" icon="download" primary />
-            )
-        }
-	</div>
+<div class="wrapper flex flex-col gap-8 w-2/3">
+    <h1 data-content={heading} data-shadow>{heading}</h1>
+    {
+        subHeading && (
+            <Card>
+                <p data-content={subHeading} class="heading-sub">{subHeading}</p>
+            </Card>
+            <Button label="Get free tools" href="/tools" icon="download" primary />
+        )
+    }
 </div>

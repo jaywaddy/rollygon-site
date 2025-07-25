@@ -184,9 +184,9 @@ a[data-icon-fill]:hover > svg > path {
 
         background-image: var(--marquee-pattern);
         transform: scale(2) rotate(-1deg);
-        animation: background-marquee 10s linear infinite;
+        animation: background-marquee 16s linear infinite;
 
-        opacity: 0.1;
+        opacity: 0.05;
         content: "";
         z-index: -10;
     }

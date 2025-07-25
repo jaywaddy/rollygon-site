@@ -35,10 +35,12 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 	<body class="flex flex-col min-h-full bg-surface">
 		<Header />
 		<main
-			class="flex flex-col gap-16 background-marquee"
+			class="background-marquee"
 			style={setStyles("marquee", Color[color], Pattern[pattern])}
 		>
-			<slot />
+			<div class="wrapper flex flex-col gap-16 my-16">
+				<slot />
+			</div>
 		</main>
 		<Footer />
 	</body>

@@ -1,13 +1,15 @@
 ---
 import PageTitle from "@/components/layout/PageTitle.astro";
+import SearchBar from "@/components/SearchBar.astro";
 import ToolCard from "@/components/ToolCard.astro";
 import { ALL_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 ---
 
-<SiteLayout pageTitle="Tools" color="yellow" pattern="5">
+<SiteLayout pageTitle="Tools" pattern="5">
 	<PageTitle heading="Tools" />
-	<section class="wrapper py-16">
+	<SearchBar />
+	<section class="flex flex-col gap-16">
 		<div class="flex flex-col gap-8">
 			<h2>All tools</h2>
 			<div class="flex gap-8">

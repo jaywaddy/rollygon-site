@@ -11,24 +11,20 @@ import Card from "@/components/Card.astro";
 import Button from "@/components/ui/Button.astro";
 import ImageWrapper from "@/components/ui/ImageWrapper.astro";
 import InfoBanner from "@/components/ui/InfoBanner.astro";
+import SearchBar from "@/components/SearchBar.astro";
 ---
 
-<SiteLayout pageTitle="Home" color="blue" pattern="7">
-	<div class="wrapper flex flex-col gap-8 mt-32">
+<SiteLayout pageTitle="Home" color="blue" pattern="5">
+	<div class="flex flex-col gap-8">
 		<h1>{SITE_HEADING}</h1>
-		<div class="w-fit">
-			<Card>
-				<p>{SITE_SUB_HEADING}</p>
-			</Card>
-		</div>
-		<Button label="Get free tools" href="/tools" icon="download" primary />
+		<SearchBar />
 	</div>
-	<section class="wrapper flex flex-col gap-8">
+	<section class="flex flex-col gap-8">
 		<h2 data-shadow>Newest model</h2>
 		<ModelCard model={ALL_MODELS[0]} featured />
 		<Link label="View all models" href="/models" underline />
 	</section>
-	<section id="tools" class="wrapper flex flex-col gap-4">
+	<section id="tools" class="flex flex-col gap-4">
 		<h2 data-shadow class="heading-md">Newst tools</h2>
 		<div class="flex gap-8 w-full">
 			{LATEST_TOOLS.map((tool) => <ToolCard {tool} />)}
@@ -36,7 +32,7 @@ import InfoBanner from "@/components/ui/InfoBanner.astro";
 		<Link data-shadow label="View all tools" href="/tools" underline />
 	</section>
 	<section>
-		<div class="wrapper flex gap-16">
+		<div class="flex gap-16">
 			<div class="flex flex-col gap-4">
 				<h2 data-shadow>About me</h2>
 				<Card title="About me">
@@ -58,7 +54,7 @@ import InfoBanner from "@/components/ui/InfoBanner.astro";
 			</div>
 		</div>
 	</section>
-	<section id="articles" class="wrapper flex flex-col gap-8 w-2/3 mb-16">
+	<section id="articles" class="flex flex-col gap-8 w-2/3">
 		<h2 data-shadow class="heading-md">Newest articles & updates</h2>
 		<div class="grid grid-cols-2 gap-8 w-full">
 			{LATEST_ARTICLES.map((article) => <ArticleCard {article} />)}

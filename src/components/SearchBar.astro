@@ -1,0 +1,32 @@
+---
+import Icon from "./ui/Icon.astro";
+import Link from "./ui/Link.astro";
+---
+
+<div class="flex items-center justify-between border-lg shadow-lg p-4 bg-white">
+	<nav class="ml-2">
+		<ul class="flex gap-4">
+			<li><Link label="Link 1" /></li>
+			<li><Link label="Link 2" /></li>
+			<li><Link label="Link 3" /></li>
+		</ul>
+	</nav>
+	<div data-search class="flex gap-1 border-sm px-2 py-1">
+		<input type="text" class="" placeholder="Search tags" />
+		<span class="">
+			<Icon name="search" />
+		</span>
+	</div>
+</div>
+
+<style>
+	[data-search] {
+		&:has(input:focus) {
+			outline: solid 1px blue;
+		}
+
+		& > input {
+			outline: none;
+		}
+	}
+</style>
