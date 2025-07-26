@@ -1,16 +1,30 @@
 ---
 import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
-import ContactLinks from "@/components/ContactLinks.astro";
+import Icon from "../ui/Icon.astro";
+import SocialLink from "@/components/SocialLink.astro";
 ---
 
-<div class="flex flex-col gap-8 w-fit">
-	<div class="relative flex flex-col mb-24">
-		<ImageWrapper size="md" shape="round" aspect="1/1" />
-		<div class="absolute top-2 rotate-4"><InfoBanner /></div>
-		<div class="absolute -bottom-22 flex flex-col gap-2 bg-surface border-lg shadow-lg p-4">
-			<p>I'm Jay (or Rolly), and I make roller coasters out of polygons!</p>
-			<ContactLinks socials />
-		</div>
+<div
+	class="relative flex flex-col mb-24 w-[320px] h-[320px]"
+	style={{
+		"--radius": "32px",
+	}}
+>
+	<ImageWrapper size="md" shape="round" aspect="1/1" />
+	<div class="absolute top-2 -rotate-4">
+		<InfoBanner />
 	</div>
+	<p class="absolute card-sm bottom-2 rotate-2">
+		I'm Jay (or Rolly), and I make roller coasters out of polygons!
+	</p>
+	<SocialLink icon="gumroad" href="https://rollygon.gumroad.com/" rotation="105" />
+	<SocialLink icon="sketchfab" href="https://sketchfab.com/Rollygon" rotation="125" />
+	<SocialLink
+		icon="youtube"
+		title="YouTube"
+		href="https://youtube.com/@Rollygon"
+		rotation="145"
+	/>
+	<SocialLink icon="bluesky" href="https://rollygon.bsky.social/" rotation="165" />
 </div>

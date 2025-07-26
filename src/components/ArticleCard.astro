@@ -5,7 +5,6 @@ import TagList from "@/components/TagList.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities.ts";
 import type { CollectionEntry } from "astro:content";
 import Button from "@/ui/Button.astro";
-import { ALL_ARTICLES } from "@/content/config";
 
 interface Props {
 	article: CollectionEntry<"articles">;
@@ -43,7 +42,7 @@ function toggle(image: string): string {
 		</div>
 	) : (
 		<div
-			class="relative flex gap-8 w-full"
+			class="relative grid-1 flex gap-8 w-full"
 			style={{
 				"--img-border-radius": toggle(image),
 			}}

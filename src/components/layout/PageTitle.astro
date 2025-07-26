@@ -1,24 +1,20 @@
 ---
 import Button from "@/ui/Button.astro";
-import Card from "../Card.astro";
 
 interface Props {
 	heading: string;
 	subHeading?: string;
-    pattern?: string;
     color?: string;
 }
 
-const { heading, subHeading, pattern = "7" } = Astro.props;
+const { heading, subHeading } = Astro.props;
 ---
 
 <div class="wrapper flex flex-col gap-8 w-2/3">
     <h1 data-content={heading} data-shadow>{heading}</h1>
     {
         subHeading && (
-            <Card>
-                <p data-content={subHeading} class="heading-sub">{subHeading}</p>
-            </Card>
+            <p data-content={subHeading} class="card-lg heading-sub">{subHeading}</p>
             <Button label="Get free tools" href="/tools" icon="download" primary />
         )
     }

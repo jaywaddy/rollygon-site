@@ -1,0 +1,57 @@
+---
+import Icon, { type IconName } from "@/ui/Icon.astro";
+import { titleCase } from "@/scripts/utilities";
+
+interface Props {
+	title?: string;
+	icon: IconName;
+	href: string;
+	rotation?: string;
+}
+
+function getTitle(input: IconName): string {
+	return input.charAt(0).toUpperCase() + input.slice(1);
+}
+
+const { icon, title = getTitle(icon), href, rotation } = Astro.props;
+---
+
+<div
+	data-social
+	style={{ "--icon-rotation": rotation + "deg" }}
+	class=`absolute rotate-(--icon-rotation) w-full aspect-square pointer-events-none`
+>
+	<a
+		data-icon-fill
+		class=`absolute card-sm rounded-full w-fit -rotate-(--icon-rotation) -top-8 pointer-events-auto`
+		aria-label={title}
+		title={title}
+		href={href}
+	>
+		<span><Icon name={icon} size="24" /></span>
+	</a>
+</div>
+
+<style>
+	[data-icon-fill] {
+		position: relative;
+		overflow: hidden;
+
+		&:hover,
+		&:focus {
+			background-color: var(--color-lime);
+
+			&::before {
+				background-image: var(--bg-2);
+				transform: scale(2);
+
+				position: absolute;
+				inset: 0;
+
+				content: "";
+				animation: button-marquee 5s linear infinite;
+				opacity: 0.1;
+			}
+		}
+	}
+</style>

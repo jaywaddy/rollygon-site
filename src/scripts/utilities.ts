@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icon.astro";
+
 export function slugify (input: string): string {
     return input
         .replace(/^\s+|\s+$/g, "")
@@ -35,5 +37,5 @@ export function titleCase(input: string):string {
     return input
         .split("-")
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
+        .join(" ");    
 }
