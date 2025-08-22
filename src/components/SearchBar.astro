@@ -1,26 +1,54 @@
 ---
-import Icon from "./ui/Icon.astro";
-import Link from "./ui/Link.astro";
+import Icon from "@/ui/Icon.astro";
+import Link from "@/ui/Link.astro";
+
+interface Props {
+	searchLinks?: Array<{ label: string; href: string }>;
+}
+
+const defaultSearchLinks = [
+	{ label: "Coasters", href: "/tags/coaster" },
+	{ label: "Guides", href: "/tags/guide" },
+];
+
+const { searchLinks = defaultSearchLinks } = Astro.props;
 ---
 
 <div class="flex items-center justify-between border-lg shadow-lg p-4 bg-white">
 	<nav class="ml-2">
-		<ul class="flex gap-4">
-			<li><Link label="Link 1" /></li>
-			<li><Link label="Link 2" /></li>
-			<li><Link label="Link 3" /></li>
+		<ul class="flex gap-8">
+			{
+				searchLinks.map((link) => (
+					<li>
+						<Link label={link.label} href={link.href} />
+					</li>
+				))
+			}
 		</ul>
 	</nav>
-	<div data-search class="flex gap-1 border-sm px-2 py-1">
-		<input type="text" class="" placeholder="Search tags" />
-		<span class="">
-			<Icon name="search" />
-		</span>
-	</div>
+	<form action="">
+		<div class="relative">
+			<input
+				type="search"
+				name="search"
+				id="search"
+				style={{ "--search-width": 360 - 16 + "px" }}
+				class="flex gap-1 border-sm pl-2 pr-8 py-1 w-(--search-width)"
+				class="w-full"
+				placeholder="Search tags"
+				min="2"
+				max="32"
+				required
+			/>
+			<button type="submit" class="absolute top-2 right-2 cursor-pointer">
+				<Icon name="search" />
+			</button>
+		</div>
+	</form>
 </div>
 
 <style>
-	[data-search] {
+	/* #search {
 		&:has(input:focus) {
 			outline: solid 1px blue;
 		}
@@ -28,5 +56,5 @@ import Link from "./ui/Link.astro";
 		& > input {
 			outline: none;
 		}
-	}
+	} */
 </style>

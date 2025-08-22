@@ -13,16 +13,20 @@ interface Props {
 const { headings, content } = Astro.props;
 ---
 
-<aside class="flex flex-col gap-8 py-16">
+<aside class="flex flex-col gap-8 w-[360px]">
     <AboutSection />
-    {headings.length > 1 && (
-        <hr />
-        <div class="sticky top-[128px] flex flex-col gap-8">
-            <TableOfContents {headings} />
-            {content.collection === "articles" && (
+    {
+        headings.length > 1 && (
+            <div data-toc class="sticky top-24 flex flex-col self-start gap-8 w-full">
                 <hr />
-                <ReadTimeIndicator {content} />
-            )}
-        </div>
-    )}
+                <TableOfContents {headings} />
+                {
+                    content.collection === "posts" && (
+                        <hr />
+                        <ReadTimeIndicator {content} />
+                    )
+                }
+            </div>
+        )
+    }
 </aside>

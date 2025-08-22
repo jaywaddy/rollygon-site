@@ -1,15 +1,14 @@
 ---
-import Icon, { type IconName } from "@/ui/Icon.astro";
-import { titleCase } from "@/scripts/utilities";
+import Icon from "@/ui/Icon.astro";
 
 interface Props {
 	title?: string;
-	icon: IconName;
+	icon: string;
 	href: string;
 	rotation?: string;
 }
 
-function getTitle(input: IconName): string {
+function getTitle(input: string): string {
 	return input.charAt(0).toUpperCase() + input.slice(1);
 }
 
@@ -28,7 +27,7 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 		title={title}
 		href={href}
 	>
-		<span><Icon name={icon} size="24" /></span>
+		<span><Icon name={icon} size="28" /></span>
 	</a>
 </div>
 
@@ -38,8 +37,9 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 		overflow: hidden;
 
 		&:hover,
-		&:focus {
-			background-color: var(--color-lime);
+		&:focus-visible {
+			transform: translate(2px, 2px);
+			box-shadow: 2px 2px 0;
 
 			&::before {
 				background-image: var(--bg-2);
@@ -50,7 +50,7 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 
 				content: "";
 				animation: button-marquee 5s linear infinite;
-				opacity: 0.1;
+				opacity: 0.05;
 			}
 		}
 	}

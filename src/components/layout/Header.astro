@@ -14,7 +14,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header class="bg-[var(--color-surface-primary)] border-bottom sticky top-0 w-full z-10">
+<header class="bg-white border-bottom sticky top-0 w-full z-10">
 	<nav class="wrapper flex items-center justify-between py-6">
 		<SiteTitle />
 		<ul class="flex items-center gap-8">
@@ -22,13 +22,13 @@ function toggleActiveLink(label: string): "page" | "false" {
 				<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
 			</li>
 			<li>
-				<Link label="Tools" isActive={toggleActiveLink("/tools")} />
-			</li>
-			<li>
 				<Link label="Models" isActive={toggleActiveLink("/models")} />
 			</li>
 			<li>
-				<Link label="Articles" isActive={toggleActiveLink("/articles")} />
+				<Link label="Tools" isActive={toggleActiveLink("/tools")} />
+			</li>
+			<li>
+				<Link label="Blog" isActive={toggleActiveLink("/blog")} />
 			</li>
 			<li>
 				<Link label="About" isActive={toggleActiveLink("/about")} />

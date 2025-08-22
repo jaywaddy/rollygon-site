@@ -12,6 +12,14 @@ interface Props {
 
 const { model, featured } = Astro.props;
 const { title, subTitle, id, tags, description, image } = model.data;
+
+function generateRotation(): string {
+	const min = -6;
+	const max = 6;
+	const randomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+
+	return randomInt + "deg";
+}
 ---
 
 {
@@ -28,26 +36,74 @@ const { title, subTitle, id, tags, description, image } = model.data;
 			</div>
 		</div>
 	) : (
-		<div class="relative flex flex-col justify-start border-lg shadow-lg bg-white">
-			<div class="absolute -inset-3 flex flex-col gap-2 ">
-				<h3 class="border-sm shadow-lg bg-white w-fit h-fit py-2 px-4">{title}</h3>
-				<div class="ml-8">
-					<TagList {tags} />
+		<div data-model-card class="relative">
+			<strong class=" absolute -inset-3 flex flex-col gap-2 border-sm shadow-lg bg-white w-fit h-fit py-2 px-4 z-1">
+				{title}
+			</strong>
+			<a
+				href={"/models/" + model.slug}
+				class="flex flex-col justify-start border-lg shadow-lg bg-white"
+			>
+				<div class="flex justify-center items-center p-2">
+					<Image
+						src={"/images/" + image}
+						alt={title + " - " + subTitle}
+						class="rounded-[var(--radius-sm)] w-full aspect-video"
+						width="100"
+						height="100"
+						format="webp"
+					/>
 				</div>
-			</div>
-			<div class="flex justify-center items-center p-2">
-				<Image
-					src={"/images/" + image}
-					alt={title + " - " + subTitle}
-					class="rounded-[var(--radius-sm)] w-full aspect-video"
-					width="100"
-					height="100"
-					format="webp"
-				/>
-			</div>
-			<div class="absolute -bottom-1 -right-1">
-				<Button label="View live model" href={"/models/" + model.slug} />
+			</a>
+			<div
+				data-hover-text
+				class="absolute invisible flex inset-3 justify-center items-center pointer-events-none"
+			>
+				<strong
+					style={{ "--text-rotation": generateRotation() }}
+					class="p-4 border-2 bg-white rounded-lg rotate-(--text-rotation)"
+				>
+					Click to view details
+				</strong>
 			</div>
 		</div>
 	)
 }
+
+<style>
+	[data-model-card] > a {
+		position: relative;
+		overflow: hidden;
+
+		&:hover::before {
+			position: absolute;
+			inset: calc(var(--spacing) * 2);
+			content: "";
+
+			background-color: var(--color-white);
+			border-radius: var(--radius-sm);
+
+			opacity: 0.2;
+		}
+	}
+
+	[data-model-card]:hover [data-hover-text] {
+		visibility: visible;
+		overflow: hidden;
+
+		border-radius: var(--radius-sm);
+
+		&::before {
+			position: absolute;
+			inset: 0;
+			content: "";
+
+			background-image: var(--bg-2);
+			border-radius: var(--radius-sm);
+
+			transform: scale(2);
+			animation: button-marquee 5s linear infinite;
+			opacity: 0.05;
+		}
+	}
+</style>

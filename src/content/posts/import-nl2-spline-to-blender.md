@@ -1,7 +1,7 @@
 ---
 title: Import NL2 Spline to Blender
-postDate: 2024-11-10
-image: ""
+postDate: 2024-11-12
+image: /posts/import-nl2-spline-to-blender.png
 description: Description of the article would go into this section right here. This could be between one to two sentences.
 contentType: article
 tags:

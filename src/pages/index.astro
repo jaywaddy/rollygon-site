@@ -1,21 +1,28 @@
 ---
 import { SITE_HEADING } from "@/scripts/constants";
-import { ALL_MODELS, LATEST_ARTICLES, LATEST_TOOLS } from "@/content/config";
+import { ALL_MODELS, LATEST_POSTS, LATEST_TOOLS } from "@/content/config";
 
 import AboutSection from "@/components/layout/AboutSection.astro";
-import ArticleCard from "@/components/ArticleCard.astro";
+import BlogPostCard from "@/components/BlogPostCard.astro";
 import Button from "@/components/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
+
+const searchLinks = [
+	{ label: "Coasters", href: "/tags/coaster" },
+	{ label: "Guides", href: "/tags/guide" },
+	{ label: "Updates", href: "/tags/update" },
+	{ label: "Articles", href: "/tags/article" },
+];
 ---
 
 <SiteLayout pageTitle="Home" color="blue" pattern="5">
-	<div class="flex flex-col gap-8">
+	<div class="flex flex-col gap-16">
 		<h1>{SITE_HEADING}</h1>
-		<SearchBar />
+		<SearchBar {searchLinks} />
 	</div>
 	<section class="flex flex-col gap-8">
 		<h2 data-shadow>Newest model</h2>
@@ -42,18 +49,22 @@ import ToolCard from "@/components/ToolCard.astro";
 					</p>
 					<div class="flex gap-2">
 						<Button label="Get to know me" href="/about" />
-						<Button label="Send a message" href="mailto:" icon="email" />
+						<Button
+							label="Send a message"
+							href="mailto:message@rollygon.com"
+							icon="email"
+						/>
 					</div>
 				</div>
 			</div>
 			<AboutSection />
 		</div>
 	</section>
-	<section id="articles" class="flex flex-col gap-8">
-		<h2 data-shadow class="heading-md">Newest articles & updates</h2>
+	<section id="posts" class="flex flex-col gap-8">
+		<h2 data-shadow class="heading-md">Newest guides & updates</h2>
 		<div class="grid grid-cols-2 gap-8 w-full">
-			{LATEST_ARTICLES.map((article) => <ArticleCard {article} />)}
+			{LATEST_POSTS.map((post) => <BlogPostCard {post} />)}
 		</div>
-		<Link data-shadow label="View all articles" href="/articles" underline />
+		<Link data-shadow label="View all posts" href="/blog" underline />
 	</section>
 </SiteLayout>

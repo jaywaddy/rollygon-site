@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable;
+  height: 100vh;
+}
+
 input,
 button,
 textarea,

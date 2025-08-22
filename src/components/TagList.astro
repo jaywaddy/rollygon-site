@@ -10,7 +10,7 @@ interface Props {
 const { tags } = Astro.props;
 
 function calcTagCount(input: string): number {
-	return ALL_CONTENT.map((article) => article.data.tags)
+	return ALL_CONTENT.map((post) => post.data.tags)
 		.flat(2)
 		.filter((match) => input === match).length;
 }

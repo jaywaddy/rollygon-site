@@ -1,13 +1,12 @@
 ---
 import { Color, Pattern, setStyles } from "@/scripts/interface";
-import type { IconName } from "@/ui/Icon.astro";
 import Icon from "@/ui/Icon.astro";
 
 interface Props {
 	submit?: boolean;
-	label: string;
+	label?: string;
 	href?: string;
-	icon?: IconName;
+	icon?: string;
 	primary?: boolean;
 }
 
@@ -25,6 +24,7 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 {
 	submit ? (
 		<button
+			type="submit"
 			title={label}
 			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer"
 			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
@@ -47,7 +47,8 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 
 <style>
 	a,
-	button {
+	button,
+	input {
 		position: relative;
 		overflow: hidden;
 
@@ -65,8 +66,10 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 
 				content: "";
 				animation: button-marquee 5s linear infinite;
-				opacity: 0.1;
+				opacity: 0.05;
 			}
 		}
 	}
 </style>
+
+<script lang="ts"></script>

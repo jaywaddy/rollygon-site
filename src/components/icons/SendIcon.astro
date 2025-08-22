@@ -1,20 +1,11 @@
 ---
 interface Props {
-    color?: string;
-    size?: string;
-    stroke?: string;
+	color: string;
 }
 
-const { color, size = "16", stroke="var(--stroke-width)" } = Astro.props;
+const { color } = Astro.props;
 ---
 
-<svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1202_2501)">
-<path d="M14.6663 1.33331L7.33301 8.66665M14.6663 1.33331L9.99967 14.6666L7.33301 8.66665M14.6663 1.33331L1.33301 5.99998L7.33301 8.66665" stroke={color} stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_1202_2501">
-<rect width={size} height={size} fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<path
+	d="M27.8892 2.087C29.1415 1.66346 30.3365 2.85848 29.913 4.11083L21.5244 28.9148C21.0723 30.2516 19.2353 30.3875 18.5914 29.1318L15.1609 22.4419C14.9167 21.9656 14.9274 21.3986 15.1894 20.9319L19.5367 13.1878C19.7999 12.719 19.281 12.2001 18.8122 12.4633L11.0681 16.8106C10.6014 17.0726 10.0344 17.0833 9.55811 16.8391L2.86818 13.4086C1.61248 12.7647 1.74839 10.9277 3.08518 10.4756L27.8892 2.087Z"
+	fill={color}></path>

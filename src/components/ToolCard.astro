@@ -3,25 +3,31 @@ import Icon from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
 import type { CollectionEntry } from "astro:content";
 import Badge from "./ui/Badge.astro";
+import Link from "./ui/Link.astro";
+import { slugify } from "@/scripts/utilities";
 
 interface Props {
 	tool: CollectionEntry<"tools">;
 }
 
 const { tool } = Astro.props;
-const { title, href, price } = tool.data;
+const { title, href, price, icon } = tool.data;
 ---
 
 <div class="flex items-center justify-between border-lg shadow-lg w-full p-4 bg-white">
 	<div class="flex items-center gap-4">
-		<Icon name="tool" size="32" />
-		<h3 class="flex justify-left truncate w-full">
-			{title}
+		<div
+			class="flex justify-center items-center border-lg shadow-lg w-12 rounded-full aspect-square bg-yellow"
+		>
+			<Icon name="track-generator" size="32" />
+		</div>
+		<h3 class="flex justify-left truncate w-fit">
+			<Link label={title} href=`/tools/${slugify(title)}` underline />
 		</h3>
 		<Badge label={price} />
 	</div>
 	<div class="flex gap-2">
-		<Button label="View details" href={"/tools/" + tool.slug} />
+		<Button label="View details" href={"/tools/" + slugify(title)} icon="arrow-right" />
 		<Button label="Download" {href} icon="download" primary />
 	</div>
 </div>

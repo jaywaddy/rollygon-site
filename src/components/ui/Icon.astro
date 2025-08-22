@@ -1,116 +1,76 @@
 ---
-import ArrowLeftIcon from '@/icons/ArrowLeftIcon.astro';
-import ArrowRightIcon from '@/icons/ArrowRightIcon.astro';
-import ArrowUpRightIcon from '@/icons/ArrowUpRightIcon.astro';
-import CalendarIcon from '@/icons/CalendarIcon.astro';
-import ClockIcon from '@/icons/ClockIcon.astro';
-import CompassIcon from '@/icons/CompassIcon.astro';
-import DownloadIcon from '@/icons/DownloadIcon.astro';
-import EmailIcon from '@/icons/EmailIcon.astro';
-import ExternalLinkIcon from '@/icons/ExternalLinkIcon.astro';
-import ImageIcon from '@/icons/ImageIcon.astro';
-import MenuCloseIcon from '@/icons/MenuCloseIcon.astro';
-import MenuHamburgerIcon from '@/icons/MenuHamburgerIcon.astro';
-import MenuHorizontalIcon from '@/icons/MenuHorizontalIcon.astro';
-import MenuVerticalIcon from '@/icons/MenuVerticalIcon.astro';
-import NetworkIcon from '@/icons/NetworkIcon.astro';
-import NgonIcon from '@/icons/NgonIcon.astro';
-import PackageIcon from '@/icons/PackageIcon.astro';
-import QuadIcon from '@/icons/QuadIcon.astro';
-import RssIcon from '@/icons/RssIcon.astro';
-import SearchIcon from '@/icons/SearchIcon.astro';
-import SendIcon from '@/icons/SendIcon.astro';
-import TollIcon from '@/icons/TollIcon.astro';
-import UserIcon from '@/icons/UserIcon.astro';
-import VertexIcon from '@/icons/VertexIcon.astro';
-import GumroadIcon from '@/icons/GumroadIcon.astro';
-import YouTubeIcon from '@/icons/YouTubeIcon.astro';
-import Sketchfab from '@/icons/SketchfabIcon.astro';
-import BlueskyIcon from '@/icons/BlueskyIcon.astro';
-import LogoIcon from '@/icons/LogoIcon.astro';
+// General Icons
+import ArrowLeftIcon from "@/icons/ArrowLeftIcon.astro";
+import ArrowRightIcon from "@/icons/ArrowRightIcon.astro";
+import DownloadIcon from "@/icons/DownloadIcon.astro";
+import ExternalLinkIcon from "@/icons/ExternalLinkIcon.astro";
+import ImageIcon from "@/icons/ImageIcon.astro";
+import LogoIcon from "@/icons/LogoIcon.astro";
+import SearchIcon from "@/icons/SearchIcon.astro";
+import SendIcon from "@/icons/SendIcon.astro";
+import UserIcon from "@/icons/UserIcon.astro";
 
-export type IconName = (
-    | "arrow-left"
-    | "arrow-right"
-    | "arrow-up-right"
-    | "download"
-    | "external-link"
-    | "email"
-    | "send"
-    | "compass"
-    | "network"
-    | "bundle"
-    | "tool"
-    | "menu-hamburger"
-    | "menu-meatball-v"
-    | "menu-meatball-h"
-    | "menu-close"
-    | "rss"
-    | "clock"
-    | "calendar"
-    | "search"
-    | "logo"
-    | "image"
-    | "user"
-    | "vertex"
-    | "tri"
-    | "quad"
-    | "ngon"
-    | "bluesky"
-    | "gumroad"
-    | "sketchfab"
-    | "youtube"
-    | "none"
-);
+// Social Icons
+import GumroadIcon from "@/icons/GumroadIcon.astro";
+import YouTubeIcon from "@/icons/YouTubeIcon.astro";
+import Sketchfab from "@/icons/SketchfabIcon.astro";
+import BlueskyIcon from "@/icons/BlueskyIcon.astro";
+
+// Tool Icons
+import Array from "@/icons/Array.astro";
+import CurveDeform from "@/icons/CurveDeform.astro";
+import FixedCurveRadius from "@/icons/FixedCurveRadius.astro";
+import FloatSwitch from "@/icons/FloatSwitch.astro";
+import GeometrySwitch from "@/icons/GeometrySwitch.astro";
+import IntegerSwitch from "@/icons/IntegerSwitch.astro";
+import MoveToUnit from "@/icons/MoveToUnit.astro";
+import ObjectSwitch from "@/icons/ObjectSwitch.astro";
+import RotationSwitch from "@/icons/RotationSwitch.astro";
+import SelectEdgeLoops from "@/icons/SelectEdgeLoops.astro";
+import SupportGenerator from "@/icons/SupportGenerator.astro";
+import TrackGenerator from "@/icons/TrackGenerator.astro";
+import UtilityNodes from "@/icons/UtilityNodes.astro";
+import VectorSwitch from "@/icons/VectorSwitch.astro";
 
 interface Props {
-    name: IconName;
-    size?: string;
-    color?: string;
-    stroke?: string;
+	name: string;
+	size?: string;
+	color?: string;
 }
 
-const { name, size = "20", color = "var(--color-text)", stroke } = Astro.props;
-
-function clacStroke(stroke: string | undefined): string {
-    const baseWidth = 2;
-    const baseSize = 20;
-
-    if (stroke) {
-        return stroke;
-    }
-
-    return (baseWidth / (Number(size) / baseSize)).toString();
-}
+const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 ---
 
-{name === "arrow-left" && <ArrowLeftIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "arrow-right" && <ArrowRightIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "arrow-up-right" && <ArrowUpRightIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "download" && <DownloadIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "external-link" && <ExternalLinkIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "email" && <EmailIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "send" && <SendIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "compass" && <CompassIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "network" && <NetworkIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "bundle" && <PackageIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "tool" && <TollIcon {color} {size} stroke={clacStroke(stroke)} stroke={clacStroke(stroke)} />}
-{name === "menu-hamburger" && <MenuHamburgerIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "menu-close" && <MenuCloseIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "menu-meatball-v" && <MenuVerticalIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "menu-meatball-h" && <MenuHorizontalIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "rss" && <RssIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "clock" && <ClockIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "calendar" && <CalendarIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "search" && <SearchIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "logo" && <LogoIcon {color} {size} />}
-{name === "image" && <ImageIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "user" && <UserIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "vertex" && <VertexIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "quad" && <QuadIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "ngon" && <NgonIcon {color} {size} stroke={clacStroke(stroke)} />}
-{name === "bluesky" && <BlueskyIcon {color} {size} />}
-{name === "gumroad" && <GumroadIcon {color} {size} />}
-{name === "sketchfab" && <Sketchfab {color} {size} />}
-{name === "youtube" && <YouTubeIcon {color} {size} />}
-{name === "none" && null}
+<svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+	<title>{name}</title>
+
+	{name === "arrow-left" && <ArrowLeftIcon {color} />}
+	{name === "arrow-right" && <ArrowRightIcon {color} />}
+	{name === "download" && <DownloadIcon {color} />}
+	{name === "external-link" && <ExternalLinkIcon {color} />}
+	{name === "image" && <ImageIcon {color} />}
+	{name === "logo" && <LogoIcon {color} />}
+	{name === "search" && <SearchIcon {color} />}
+	{name === "send" && <SendIcon {color} />}
+	{name === "user" && <UserIcon {color} />}
+
+	{name === "bluesky" && <BlueskyIcon {color} />}
+	{name === "gumroad" && <GumroadIcon {color} />}
+	{name === "sketchfab" && <Sketchfab {color} />}
+	{name === "youtube" && <YouTubeIcon {color} />}
+
+	{name === "array" && <Array {color} />}
+	{name === "curve-deform" && <CurveDeform {color} />}
+	{name === "fixed-curve-radius" && <FixedCurveRadius {color} />}
+	{name === "float-switch" && <FloatSwitch {color} />}
+	{name === "geometry-switch" && <GeometrySwitch {color} />}
+	{name === "integer-switch" && <IntegerSwitch {color} />}
+	{name === "move-to-unit" && <MoveToUnit {color} />}
+	{name === "object-switch" && <ObjectSwitch {color} />}
+	{name === "rotation-switch" && <RotationSwitch {color} />}
+	{name === "select-edge-loops" && <SelectEdgeLoops {color} />}
+	{name === "support-generator" && <SupportGenerator {color} />}
+	{name === "track-generator" && <TrackGenerator {color} />}
+	{name === "utility-nodes" && <UtilityNodes {color} />}
+	{name === "vector-switch" && <VectorSwitch {color} />}
+</svg>

@@ -1,0 +1,30 @@
+---
+import BlogPostCard from "@/components/BlogPostCard.astro";
+import PageTitle from "@/components/layout/PageTitle.astro";
+import SearchBar from "@/components/SearchBar.astro";
+import { ALL_POSTS } from "@/content/config";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+const searchLinks = [
+	{ label: "All", href: "/blog" },
+	{ label: "Guides", href: "/tags/guide" },
+	{ label: "Updates", href: "/tags/update" },
+	{ label: "Articles", href: "/tags/article" },
+	{ label: "Rolly", href: "/tags/rolly" },
+];
+---
+
+<SiteLayout pageTitle="Blog" pattern="5">
+	<PageTitle heading="Blog" />
+	<SearchBar {searchLinks} />
+	<section class="wrapper flex flex-col gap-16">
+		<div class="flex flex-col gap-8">
+			<h2>Newest post</h2>
+			<BlogPostCard post={ALL_POSTS[0]} featured />
+		</div>
+		<h2>All articles</h2>
+		<div class="grid grid-cols-2 gap-8">
+			{[...ALL_POSTS].splice(1, ALL_POSTS.length).map((post) => <BlogPostCard {post} />)}
+		</div>
+	</section>
+</SiteLayout>

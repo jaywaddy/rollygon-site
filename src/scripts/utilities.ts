@@ -1,5 +1,3 @@
-import type { IconName } from "@/components/ui/Icon.astro";
-
 export function slugify (input: string): string {
     return input
         .replace(/^\s+|\s+$/g, "")

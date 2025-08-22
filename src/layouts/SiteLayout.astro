@@ -22,7 +22,7 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={description} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg" href="/favicon.svg?" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,7 +32,7 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 		/>
 		<title>Rollygon | {pageTitle}</title>
 	</head>
-	<body class="flex flex-col min-h-full bg-surface">
+	<body class="flex flex-col min-h-full bg-white">
 		<Header />
 		<main
 			class="background-marquee"

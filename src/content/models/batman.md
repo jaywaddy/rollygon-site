@@ -1,5 +1,5 @@
 ---
-title: "Batman: the Ride"
+title: "Batman: The Ride"
 subTitle: B&M Inverted Coaster
 id: 04c6be01b8b6469d9b73d7444f2ed886
 postDate: 2025-07-07

@@ -1,0 +1,23 @@
+---
+import { ALL_POSTS } from "@/content/config";
+import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+	return ALL_POSTS.map((post) => ({
+		params: {
+			slug: post.slug,
+		},
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<SiteLayout pageTitle={post.data.title}>
+	<ContentPageLayout content={post}>
+		<Content />
+	</ContentPageLayout>
+</SiteLayout>

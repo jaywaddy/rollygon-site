@@ -1,12 +1,11 @@
 ---
 import { slugify } from "@/scripts/utilities";
 import Icon from "./Icon.astro";
-import type { IconName } from "./Icon.astro";
 
 interface Props {
 	label: string;
-	iconLeft?: IconName;
-	iconRight?: IconName;
+	iconLeft?: string;
+	iconRight?: string;
 	size?: string | undefined;
 	isActive?: "page" | "false";
 	href?: string;

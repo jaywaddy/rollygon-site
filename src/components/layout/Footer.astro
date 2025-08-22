@@ -4,33 +4,36 @@ import SiteTitle from "@/components/SiteTitle.astro";
 import ContactForm from "@/layout/ContactForm.astro";
 ---
 
-<footer class="mt-auto w-full bg-surface">
+<footer class="mt-auto w-full bg-white">
 	<ContactForm />
-	<nav class="wrapper grid grid-cols-4 gap-4 m-auto py-12">
-		<div class="flex flex-col gap-8">
+	<nav class="wrapper flex gap-16 py-16">
+		<div class="flex flex-col gap-2">
 			<SiteTitle />
 		</div>
-		<ul>
-			<li><strong class="heading-xs">Heading</strong></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-		</ul>
-		<ul>
-			<li><strong class="heading-xs">Heading</strong></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-		</ul>
-		<ul>
-			<li><strong class="heading-xs">Heading</strong></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-			<li><Link label="Example Link" href="/" underline /></li>
-		</ul>
+		<div class="grid grid-cols-4 gap-4 w-full">
+			<ul>
+				<li><Link label="Home" href="/" underline /></li>
+				<li><Link label="About" href="/about" underline /></li>
+			</ul>
+			<ul>
+				<li><Link label="All Models" href="/models" underline /></li>
+				<li><Link label="Coaster Models" href="/models/" underline /></li>
+				<li><Link label="Flat Ride Models" href="/models/" underline /></li>
+				<li><Link label="Train Models" href="/models/" underline /></li>
+			</ul>
+			<ul>
+				<li><Link label="All Tools" href="/tools" underline /></li>
+				<li><Link label="Essential Tools" href="/tools/" underline /></li>
+				<li><Link label="Track Gen. Tools" href="/tools/" underline /></li>
+				<li><Link label="Support Gen. Tools" href="/tools/" underline /></li>
+			</ul>
+			<ul>
+				<li><Link label="All Blog Posts" href="/blog" underline /></li>
+				<li><Link label="Articles" href="/blog/" underline /></li>
+				<li><Link label="Guides" href="/blog/" underline /></li>
+				<li><Link label="Updates" href="/blog/" underline /></li>
+			</ul>
+		</div>
 	</nav>
 	<div class="flex justify-center items-center py-4 bg-neutral-900 text-neutral-50">
 		<small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>

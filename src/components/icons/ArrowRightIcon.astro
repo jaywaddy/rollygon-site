@@ -1,13 +1,11 @@
 ---
 interface Props {
-    color?: string;
-    size?: string;
-    stroke?: string;
+	color: string;
 }
 
-const { color, size = "16", stroke="var(--stroke-width)" } = Astro.props;
+const { color } = Astro.props;
 ---
 
-<svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3.33301 7.99998H12.6663M12.6663 7.99998L7.99967 3.33331M12.6663 7.99998L7.99967 12.6666" stroke={color} stroke-width={stroke} stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+<path
+	d="M14.2324 4.8991C15.2087 3.92279 16.7922 3.92279 17.7686 4.8991L27.1016 14.2321C28.0779 15.2084 28.0779 16.7919 27.1016 17.7682L17.7686 27.1013C16.7922 28.0776 15.2087 28.0776 14.2324 27.1013C13.2561 26.1249 13.2561 24.5414 14.2324 23.5651L19.2979 18.4997H6.66699C5.28628 18.4997 4.16699 17.3804 4.16699 15.9997C4.16717 14.6191 5.28639 13.4997 6.66699 13.4997H19.2969L14.2324 8.43426C13.2563 7.45799 13.2563 5.87537 14.2324 4.8991Z"
+	fill={color}></path>

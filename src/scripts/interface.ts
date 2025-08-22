@@ -33,7 +33,7 @@ export const Color: Input = {
     blue: "var(--color-blue)",
     purple: "var(--color-purple)",
     fucshia: "var(--color-fucshia)",
-    white: "var(--color-surface-primary)"
+    white: "var(--color-white)"
 }
 
 export const Pattern: Input = {

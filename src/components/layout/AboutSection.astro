@@ -1,16 +1,10 @@
 ---
 import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
-import Icon from "../ui/Icon.astro";
 import SocialLink from "@/components/SocialLink.astro";
 ---
 
-<div
-	class="relative flex flex-col mb-24 w-[320px] h-[320px]"
-	style={{
-		"--radius": "32px",
-	}}
->
+<div class="relative flex flex-col w-[320px] h-[320px]" style={{ "--radius": "32px" }}>
 	<ImageWrapper size="md" shape="round" aspect="1/1" />
 	<div class="absolute top-2 -rotate-4">
 		<InfoBanner />
