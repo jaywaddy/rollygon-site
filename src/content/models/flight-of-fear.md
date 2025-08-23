@@ -5,6 +5,11 @@ id: 2fe3479533184f8788caf28dad9b9c1e
 postDate: 2024-11-10
 image: poltergeist.png
 description: "A 1:1 recreation of Poltergeist - Six Flags Fiesta Texas (a.k.a: Joker’s Jinx - Six Flags America, Flight of Fear - Kings Dominion and Kings Island, Crazy Cobra - Discoveryland) I made all in the month of August!"
+modelStats:
+  - 0
+  - 1.7k
+  - 10.8k
+  - 0
 tags:
     - Coaster
     - Premier

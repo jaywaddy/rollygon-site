@@ -5,6 +5,11 @@ id: ed52a51adea94716b27ea4ed5534c8c4
 postDate: 2024-11-09
 image: fahrenheit.png
 description: Things were heating up in July, so I decided to build the hottest ride I could think of, Fahrenheit at Hersheypark! 
+modelStats:
+  - 0
+  - 1.7k
+  - 10.8k
+  - 0
 tags:
     - Coaster
     - Intamin

@@ -37,6 +37,7 @@ const modelCollection = defineCollection({
         id: z.string(),
         postDate: z.date(),
         description: z.string(),
+        modelStats: z.array(z.any()),
         image: z.string(),
         tags: z.array(z.string()),
     })

@@ -6,9 +6,13 @@ import DownloadIcon from "@/icons/DownloadIcon.astro";
 import ExternalLinkIcon from "@/icons/ExternalLinkIcon.astro";
 import ImageIcon from "@/icons/ImageIcon.astro";
 import LogoIcon from "@/icons/LogoIcon.astro";
+import Ngons from "@/icons/Ngons.astro";
+import Quads from "@/icons/Quads.astro";
 import SearchIcon from "@/icons/SearchIcon.astro";
 import SendIcon from "@/icons/SendIcon.astro";
+import Triangles from "@/icons/Triangles.astro";
 import UserIcon from "@/icons/UserIcon.astro";
+import Verticies from "@/icons/Verticies.astro";
 
 // Social Icons
 import GumroadIcon from "@/icons/GumroadIcon.astro";
@@ -32,8 +36,45 @@ import TrackGenerator from "@/icons/TrackGenerator.astro";
 import UtilityNodes from "@/icons/UtilityNodes.astro";
 import VectorSwitch from "@/icons/VectorSwitch.astro";
 
+export const GENERAL_ICONS: Array<string> = [
+	"arrow-left",
+	"arrow-right",
+	"download",
+	"external-link",
+	"image",
+	"logo",
+	"ngons",
+	"quads",
+	"search",
+	"send",
+	"tris",
+	"user",
+	"verts",
+];
+
+export const SOCIAL_ICONS: Array<string> = ["bluesky", "gumroad", "sketchfab", "youtube"];
+
+export const TOOL_ICONS: Array<string> = [
+	"array",
+	"curve-deform",
+	"fixed-curve-radius",
+	"float-switch",
+	"geometry-switch",
+	"integer-switch",
+	"move-to-unit",
+	"object-switch",
+	"rotation-switch",
+	"select-edge-loops",
+	"support-generator",
+	"track-generator",
+	"utility-nodes",
+	"vector-switch",
+];
+
+export const ICON_NAMES: Array<string> = [...GENERAL_ICONS, ...SOCIAL_ICONS, ...TOOL_ICONS];
+
 interface Props {
-	name: string;
+	name: (typeof ICON_NAMES)[number];
 	size?: string;
 	color?: string;
 }
@@ -50,9 +91,13 @@ const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 	{name === "external-link" && <ExternalLinkIcon {color} />}
 	{name === "image" && <ImageIcon {color} />}
 	{name === "logo" && <LogoIcon {color} />}
+	{name === "ngons" && <Ngons {color} />}
+	{name === "quads" && <Quads {color} />}
 	{name === "search" && <SearchIcon {color} />}
 	{name === "send" && <SendIcon {color} />}
+	{name === "tris" && <Triangles {color} />}
 	{name === "user" && <UserIcon {color} />}
+	{name === "verts" && <Verticies {color} />}
 
 	{name === "bluesky" && <BlueskyIcon {color} />}
 	{name === "gumroad" && <GumroadIcon {color} />}
