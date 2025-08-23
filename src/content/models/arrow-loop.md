@@ -6,10 +6,10 @@ postDate: 2024-01-29
 image: arrow-loop.png
 description: The track and supports of the first loop of a classic Arrow Looper layout.
 modelStats:
-  - none
-  - 1.7k
+  - 11.6k
+  - 23.4k
   - 10.8k
-  - none
+  - 0
 tags:
   - Element
   - Arrow

@@ -2,14 +2,14 @@
 title: Fahrenheit
 subTitle: Intamin Vertical Lift Coaster
 id: ed52a51adea94716b27ea4ed5534c8c4
-postDate: 2024-11-09
+postDate: 2024-08-23
 image: fahrenheit.png
 description: Things were heating up in July, so I decided to build the hottest ride I could think of, Fahrenheit at Hersheypark! 
 modelStats:
-  - 0
-  - 1.7k
-  - 10.8k
-  - 0
+  - 502.7k
+  - 851.2k
+  - 419.6k
+  - 108
 tags:
     - Coaster
     - Intamin

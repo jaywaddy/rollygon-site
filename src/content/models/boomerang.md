@@ -6,10 +6,10 @@ postDate: 2025-02-14
 image: flashback.png
 description: This the scariest, short coaster I could think of. A Vekoma Boomerang called Flashback. This recreation mostly takes insporation Flying Cobras at Carowinds.
 modelStats:
-  - 0
-  - 1.7k
-  - 10.8k
-  - 0
+  - 61.8k
+  - 140.9k
+  - 61.6k
+  - 496
 tags:
   - Coaster
   - Vekoma

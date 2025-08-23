@@ -4,7 +4,7 @@ import Button from "@/ui/Button.astro";
 import Model from "@/ui/Model.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
-import Icon from "./ui/Icon.astro";
+import ModelStats from "@/ui/ModelStats.astro";
 
 interface Props {
 	model: CollectionEntry<"models">;
@@ -32,21 +32,8 @@ function generateRotation(): string {
 					{title} - {subTitle}
 				</h3>
 				<TagList {tags} />
-				<p>{description}</p>
-				<ul data-statistics>
-					<li>
-						<Icon name="verts" /> <strong>{modelStats[0]}</strong> Verts
-					</li>
-					<li>
-						<Icon name="tris" /> <strong>{modelStats[1]}</strong> Tris
-					</li>
-					<li>
-						<Icon name="quads" /> <strong>{modelStats[2]}</strong> Quads
-					</li>
-					<li>
-						<Icon name="ngons" /> <strong>{modelStats[3]}</strong> N-gons
-					</li>
-				</ul>
+				<p class="line-clamp-3">{description}</p>
+				<ModelStats {model} />
 				<Button label="View details" href={"/models/" + model.slug} />
 			</div>
 		</div>
@@ -119,17 +106,6 @@ function generateRotation(): string {
 			transform: scale(2);
 			animation: button-marquee 5s linear infinite;
 			opacity: 0.05;
-		}
-	}
-
-	[data-statistics] {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-
-		& > li {
-			display: flex;
-			align-items: center;
-			gap: 0.5em;
 		}
 	}
 </style>

@@ -75,6 +75,9 @@ export const ALL_MODELS: Array<CollectionEntry<"models">> = (
 		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
 );
 
+export const LATEST_MODELS: Array<CollectionEntry<"models">> = [...ALL_MODELS].splice(0, 1);
+
+
 export const ALL_CONTENT = [
     ...ALL_POSTS,
     ...ALL_TOOLS,

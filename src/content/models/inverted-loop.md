@@ -6,10 +6,10 @@ postDate: 2024-04-11
 image: inverted-loop.png
 description: The track and supports of the first loop of a classic Arrow Looper layout.
 modelStats:
-  - 0
-  - 1.7k
-  - 10.8k
-  - 0
+  - 31.7k
+  - 65.4k
+  - 31.2k
+  - 248
 tags:
   - Element
 ---

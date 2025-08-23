@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "@/ui/Icon.astro";
+
+interface Props {
+	model: CollectionEntry<"models">;
+}
+
+const { model } = Astro.props;
+const { modelStats } = model.data;
+---
+
+<ul data-statistics class="grid grid-cols-2">
+	<li>
+		<Icon name="verts" />
+		<strong>{modelStats[0]}</strong> Verts
+	</li>
+	<li>
+		<Icon name="tris" />
+		<strong>{modelStats[1]}</strong> Tris
+	</li>
+	<li>
+		<Icon name="quads" />
+		<strong>{modelStats[2]}</strong> Quads
+	</li>
+	<li>
+		<Icon name="ngons" />
+		<strong>{modelStats[3]}</strong> N-gons
+	</li>
+</ul>
+
+<style>
+	[data-statistics] > li {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+	}
+</style>

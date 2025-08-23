@@ -1,6 +1,6 @@
 ---
 import { SITE_HEADING } from "@/scripts/constants";
-import { ALL_MODELS, LATEST_POSTS, LATEST_TOOLS } from "@/content/config";
+import { LATEST_MODELS, LATEST_POSTS, LATEST_TOOLS } from "@/content/config";
 
 import AboutSection from "@/components/layout/AboutSection.astro";
 import BlogPostCard from "@/components/BlogPostCard.astro";
@@ -26,7 +26,7 @@ const searchLinks = [
 	</div>
 	<section class="flex flex-col gap-8">
 		<h2 data-shadow>Newest model</h2>
-		<ModelCard model={ALL_MODELS[0]} featured />
+		<ModelCard model={LATEST_MODELS[0]} featured />
 		<Link label="View all models" href="/models" underline />
 	</section>
 	<section id="tools" class="flex flex-col gap-4">

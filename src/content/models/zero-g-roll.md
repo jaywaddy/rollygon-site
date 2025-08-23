@@ -6,10 +6,10 @@ postDate: 2024-03-20
 image: zero-g-roll.png
 description: The track and supports of the first loop of a classic Arrow Looper layout.
 modelStats:
-  - 0
-  - 1.7k
-  - 10.8k
-  - 0
+  - 13.4k
+  - 22.9k
+  - 9.9k
+  - 9
 tags:
   - Element
   - B&M
