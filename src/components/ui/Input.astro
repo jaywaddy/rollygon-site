@@ -1,7 +1,7 @@
 ---
 interface Props {
 	label: string;
-	name: string;
+	name?: string;
 	id: string;
 	type: astroHTML.JSX.HTMLInputTypeAttribute;
 	placeholder?: string;
@@ -9,7 +9,7 @@ interface Props {
 	required?: boolean;
 }
 
-const { label, name, id, type, placeholder, value, required = false } = Astro.props;
+const { label, name = label, id, type, placeholder, value, required = false } = Astro.props;
 ---
 
 <label for={id} class="grid gap-1">
