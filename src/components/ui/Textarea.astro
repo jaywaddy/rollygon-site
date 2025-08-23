@@ -11,6 +11,10 @@ const { label, id, placeholder, value } = Astro.props;
 
 <label for={id} class="grid gap-2">
 	<small>{label}</small>
-	<textarea name={label} {id} {placeholder} {value} class="border-lg shadow-lg bg-white px-3 py-2"
-	></textarea>
+	<textarea
+		name="Message"
+		{id}
+		{placeholder}
+		{value}
+		class="border-lg shadow-lg bg-white px-3 py-2"></textarea>
 </label>

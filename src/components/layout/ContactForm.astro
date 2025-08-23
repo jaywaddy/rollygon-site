@@ -17,9 +17,19 @@ import { setStyles, Color, Pattern } from "@/scripts/interface";
 				If you have an idea that could improve my workflow, I'd love to hear it. Let's work
 				together and build better custom and high quality coaster models!
 			</p>
-			<form action="" onsubmit="onSubmit()" method="POST" class="grid gap-2 w-full">
-				<Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
-				<Input label="Email*" type="email" id="contact-email" required />
+			<form
+				action="https://formsubmit.co/message@rollygon.com"
+				method="POST"
+				class="grid gap-2 w-full"
+			>
+				<Input
+					label="Name (@handle:platform)*"
+					name="Name"
+					type="text"
+					id="contact-name"
+					required
+				/>
+				<Input label="Email*" name="Email" type="email" id="contact-email" required />
 				<Textarea label="Message*" id="contact-meessage" />
 				<div class="mt-6">
 					<Button label="Start a conversation" icon="send" submit primary />
@@ -29,9 +39,3 @@ import { setStyles, Color, Pattern } from "@/scripts/interface";
 		<AboutSection />
 	</div>
 </section>
-
-<script lang="ts">
-	function onSubmit() {
-		alert("Form submitted!");
-	}
-</script>
