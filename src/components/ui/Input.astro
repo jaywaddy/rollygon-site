@@ -13,7 +13,7 @@ const { label, name = label, id, type, placeholder, value, required = false } = 
 ---
 
 <label for={id} class="grid gap-1">
-	<small>{label}</small>
+	<small>{label}{required && "*"}</small>
 	<input
 		{name}
 		{id}

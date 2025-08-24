@@ -18,13 +18,16 @@ import { setStyles, Color, Pattern } from "@/scripts/interface";
 				together and build better custom and high quality coaster models!
 			</p>
 			<form
-				action="https://formsubmit.co/rollygon@gmail.com"
+				action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e"
 				method="POST"
 				class="grid gap-2 w-full"
 			>
-				<Input label="Name (@handle:platform)*" type="text" id="contact-name" required />
-				<Input label="Email*" type="email" id="contact-email" required />
-				<Textarea label="Message*" id="contact-meessage" />
+				<input type="text" name="_honey" style="display:none" />
+				<input type="hidden" name="_subject" value="New submission!" />
+				<input type="hidden" name="_captcha" value="false" />
+				<Input label="Name (@handle:platform)" type="text" id="contact-name" required />
+				<Input label="Email" type="email" id="contact-email" required />
+				<Textarea label="Message" id="contact-meessage" />
 				<div class="mt-6">
 					<Button label="Start a conversation" icon="send" submit primary />
 				</div>
