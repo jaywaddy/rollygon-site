@@ -5,7 +5,7 @@ import SearchBar from "@/components/SearchBar.astro";
 import { ALL_POSTS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
-const searchLinks = [
+const searchTags = [
 	{ label: "All", href: "/blog" },
 	{ label: "Guides", href: "/tags/guide" },
 	{ label: "Updates", href: "/tags/update" },
@@ -16,7 +16,7 @@ const searchLinks = [
 
 <SiteLayout pageTitle="Blog" pattern="5">
 	<PageTitle heading="Blog" />
-	<SearchBar {searchLinks} />
+	<SearchBar {searchTags} />
 	<section class="wrapper flex flex-col gap-16">
 		<div class="flex flex-col gap-8">
 			<h2>Newest post</h2>

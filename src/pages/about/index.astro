@@ -1,0 +1,13 @@
+---
+import PageTitle from "@/components/layout/PageTitle.astro";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+import * as aboutContent from "./about.md";
+import { Content } from "./about.md";
+
+const { title } = aboutContent.frontmatter;
+---
+
+<SiteLayout pageTitle={title}>
+	<PageTitle heading={title} />
+	<Content />
+</SiteLayout>

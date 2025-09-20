@@ -3,7 +3,7 @@ import Icon from "@/ui/Icon.astro";
 import Link from "@/ui/Link.astro";
 
 interface Props {
-	searchLinks?: Array<{ label: string; href: string }>;
+	searchTags?: Array<{ label: string; href: string }>;
 }
 
 const defaultSearchLinks = [
@@ -11,16 +11,16 @@ const defaultSearchLinks = [
 	{ label: "Guides", href: "/tags/guide" },
 ];
 
-const { searchLinks = defaultSearchLinks } = Astro.props;
+const { searchTags = defaultSearchLinks } = Astro.props;
 ---
 
 <div class="flex items-center justify-between border-lg shadow-lg p-4 bg-white">
 	<nav class="ml-2">
 		<ul class="flex gap-8">
 			{
-				searchLinks.map((link) => (
+				searchTags.map((tag) => (
 					<li>
-						<Link label={link.label} href={link.href} />
+						<Link label={tag.label} href={tag.href} />
 					</li>
 				))
 			}
@@ -35,7 +35,8 @@ const { searchLinks = defaultSearchLinks } = Astro.props;
 				style={{ "--search-width": 360 - 16 + "px" }}
 				class="flex gap-1 border-sm pl-2 pr-8 py-1 w-(--search-width)"
 				class="w-full"
-				placeholder="Search tags"
+				placeholder="Search currently disabled"
+				disabled
 				min="2"
 				max="32"
 				required
@@ -48,13 +49,7 @@ const { searchLinks = defaultSearchLinks } = Astro.props;
 </div>
 
 <style>
-	/* #search {
-		&:has(input:focus) {
-			outline: solid 1px blue;
-		}
-
-		& > input {
-			outline: none;
-		}
-	} */
+	input[type="search"][disabled] {
+		background-color: var(--color-disabled-bg);
+	}
 </style>

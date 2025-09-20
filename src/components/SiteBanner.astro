@@ -1,0 +1,17 @@
+---
+import { setStyles } from "@/scripts/interface";
+
+interface props {
+	label: string;
+	bgColor: string;
+}
+
+const { label, bgColor } = Astro.props;
+---
+
+<div
+	class="flex justify-center py-4 bg-(--banner-bg) border-bottom"
+	style={{ "--banner-bg": "var(--color-" + bgColor + ")" }}
+>
+	<strong>{label}</strong>
+</div>

@@ -169,8 +169,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "09ec6feffb457292",
+  "active": "2ac4ad48d991e031",
   "lastOpenFiles": [
+    "pages/about/about.md",
+    "pages/about/index.astro",
+    "pages/about/about.astro",
+    "pages/about",
+    "components/SiteBanner.astro",
     "content/drafts/how-to-use-tools-by-rollygon.md",
     "content/drafts/How to Use Tools by Rollygon.md",
     "content/posts/article-1.md",
@@ -203,10 +208,6 @@
     "pages/tags/[tag].astro",
     "pages/tags/index.astro",
     "pages/articles/[slug].astro",
-    "pages/models/[slug].astro",
-    "pages/tools/[slug].astro",
-    "pages/tools/[tool].astro",
-    "pages/tags/[...slug].astro",
     "content/models/farenheit.md",
     "content/models/basic-tools-pack.md",
     "content/models/ahrenheit.md"

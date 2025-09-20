@@ -13,6 +13,8 @@
     --color-blue: oklch(0.8003 0.1199 219.73);
     --color-purple: oklch(0.6689 0.2234 305.73);
     --color-fucshia: oklch(0.741 0.2535 325.69);
+    --color-disabled-bg: oklch(0.9021 0.0143 270);
+    --color-disabled-body: oklch(0.6409 0.0143 270);
 
     --stroke-width: 2;
     --radius-lg: calc(var(--spacing) * 3);
@@ -207,7 +209,7 @@ h3 {
 
 @media (max-width: 40rem) {
     .wrapper {
-        width: 100%;
+        width: 100vw;
         padding: 2rem;
     }
 }
