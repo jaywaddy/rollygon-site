@@ -11,7 +11,7 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import ToolCard from "@/components/ToolCard.astro";
 
-const searchLinks = [
+const searchTags = [
 	{ label: "Coasters", href: "/tags/coaster" },
 	{ label: "Guides", href: "/tags/guide" },
 	{ label: "Updates", href: "/tags/update" },
@@ -22,7 +22,7 @@ const searchLinks = [
 <SiteLayout pageTitle="Home" color="blue" pattern="5">
 	<div class="flex flex-col gap-16">
 		<h1>{SITE_HEADING}</h1>
-		<SearchBar {searchLinks} />
+		<SearchBar {searchTags} />
 	</div>
 	<section class="flex flex-col gap-8">
 		<h2 data-shadow>Newest model</h2>

@@ -1,5 +1,6 @@
 ---
 title: About
+date: 09/20/2025
 ---
 
 ## The reason
