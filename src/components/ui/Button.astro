@@ -39,7 +39,7 @@ function toggleButtonColor(isPrimary: boolean | undefined): string {
 			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
 			{href}
 		>
-			<strong>{label}</strong>
+			<strong class="text-nowrap">{label}</strong>
 			{icon && <Icon name={icon} />}
 		</a>
 	)

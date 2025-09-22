@@ -82,7 +82,7 @@ interface Props {
 const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 ---
 
-<svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+<svg class="w-fit" width={size} height={size} viewBox="0 0 32 32" fill="none">
 	<title>{name}</title>
 
 	{name === "arrow-left" && <ArrowLeftIcon {color} />}

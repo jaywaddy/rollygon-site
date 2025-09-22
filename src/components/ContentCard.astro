@@ -1,0 +1,96 @@
+---
+import Icon from "@/ui/Icon.astro";
+import Button from "@/ui/Button.astro";
+import type { CollectionEntry } from "astro:content";
+import Badge from "./ui/Badge.astro";
+import { calcReadTime, formatDate, slugify } from "@/scripts/utilities";
+import TagList from "./TagList.astro";
+
+interface Props {
+    type: "tool" | "post";
+	content: CollectionEntry<"tools" | "posts">;
+}
+
+const { content } = Astro.props;
+const { title, tags } = content.data;
+---
+
+<div class="relative flex items-center justify-between gap-8 border-lg shadow-lg p-4 bg-white">
+    {
+        content.collection === "tools" && (
+            <div class="flex items-center gap-4">
+                <h3 class="flex justify-left truncate w-fit">{title}</h3>
+                <small>v{content.data.version}</small>
+                <Badge label={content.data.price} />
+            </div>
+        )
+    }
+    {
+        content.collection === "posts" && (
+            <div class="flex items-center justify-between w-full">
+                <h3 class="flex justify-left truncate w-fit">{title}</h3>
+                <strong>
+                    <small class="flex gap-2">
+						<strong>{calcReadTime(content.body)} min read</strong>
+						&bullet;
+						<strong>{formatDate(content.data.postDate)}</strong>
+					</small>
+                </strong>
+            </div>
+        )
+    }
+	<div class="flex gap-2">
+        {
+            content.collection === "tools" && (
+                <Button label="View details" href={"/tools/" + slugify(title)} icon="arrow-right" />
+                <Button label="Download" href={content.data.href} icon="download" primary />
+            )
+        }
+        {
+            content.collection === "posts" && (
+                <Button label="Read post" href={"/blog/" + slugify(title)} icon="arrow-right" />
+            )
+        }
+	</div>
+    {
+        (content.data.image && content.collection === "posts") && (
+            <div
+                data-img
+                style={{"--img-path": "url('/images" + content.data.image + "')"}}
+                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square"
+            />
+        )
+    }
+    {
+        (content.data.image && content.collection === "tools") && (
+            <div
+                data-img
+                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange"
+            >
+                <Icon name={content.data.icon} size="64" />
+            </div>
+        )
+    }
+    <div class="absolute -bottom-4">
+        <TagList {tags} />
+    </div>
+</div>
+
+<style>
+    [data-img] {
+        background-image: var(--img-path);
+        background-size: cover;
+        background-position: center;
+
+        &::after {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 999px;
+            border: solid white 4px;
+            content: "";
+        }
+    }
+</style>

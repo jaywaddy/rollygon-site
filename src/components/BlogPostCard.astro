@@ -6,6 +6,7 @@ import { calcReadTime, formatDate } from "@/scripts/utilities.ts";
 import type { CollectionEntry } from "astro:content";
 import Button from "@/ui/Button.astro";
 import { slugify } from "@/scripts/utilities.ts";
+import ContentCard from "./ContentCard.astro";
 
 interface Props {
 	post: CollectionEntry<"posts">;
@@ -14,14 +15,6 @@ interface Props {
 
 const { post, featured } = Astro.props;
 const { title, description, tags, postDate, image } = post.data;
-
-function toggle(image: string): string {
-	if (image) {
-		return "64px";
-	}
-
-	return "12px";
-}
 ---
 
 {
@@ -46,30 +39,6 @@ function toggle(image: string): string {
 			</div>
 		</div>
 	) : (
-		<div
-			class="relative grid-1 flex gap-8 w-full"
-			style={{
-				"--img-border-radius": toggle(image),
-			}}
-		>
-			<div class="flex flex-col gap-4 card-lg rounded-br-[var(--img-border-radius)] p-8">
-				<h3 class="heading-sm flex items-center gap-2">
-					<Link label={title} href={"/blog/" + post.slug} underline />
-				</h3>
-				<TagList {tags} />
-				<p class="line-clamp-2">{description}</p>
-				<Button label="Read full post" href={"blog/" + post.slug} />
-				<small class="flex gap-1.5">
-					<strong>{formatDate(postDate)}</strong>
-					&bullet;
-					<strong>{calcReadTime(post.body)} min read</strong>
-				</small>
-			</div>
-			{image && (
-				<div class="absolute -bottom-3 -right-3">
-					<ImageWrpper size="128px" shape="round" aspect="1/1" src={image} />
-				</div>
-			)}
-		</div>
+		<ContentCard type="post" content={post} />
 	)
 }

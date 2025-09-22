@@ -3,13 +3,12 @@ import { SITE_HEADING } from "@/scripts/constants";
 import { LATEST_MODELS, LATEST_POSTS, LATEST_TOOLS } from "@/content/config";
 
 import AboutSection from "@/components/layout/AboutSection.astro";
-import BlogPostCard from "@/components/BlogPostCard.astro";
 import Button from "@/components/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import ModelCard from "@/components/ModelCard.astro";
-import ToolCard from "@/components/ToolCard.astro";
+import ContentCard from "@/components/ContentCard.astro";
 
 const searchTags = [
 	{ label: "Coasters", href: "/tags/coaster" },
@@ -29,16 +28,9 @@ const searchTags = [
 		<ModelCard model={LATEST_MODELS[0]} featured />
 		<Link label="View all models" href="/models" underline />
 	</section>
-	<section id="tools" class="flex flex-col gap-4">
-		<h2 data-shadow class="heading-md">Newst tools</h2>
-		<div class="flex gap-8 w-full">
-			{LATEST_TOOLS.map((tool) => <ToolCard {tool} />)}
-		</div>
-		<Link data-shadow label="View all tools" href="/tools" underline />
-	</section>
 	<section>
 		<div class="flex gap-16">
-			<div class="flex flex-col gap-4">
+			<div class="flex flex-col gap-8">
 				<h2 data-shadow>About me</h2>
 				<div class="card-lg">
 					<p>
@@ -60,10 +52,17 @@ const searchTags = [
 			<AboutSection />
 		</div>
 	</section>
+	<section id="tools" class="flex flex-col gap-8">
+		<h2 data-shadow class="heading-md">Newst tools</h2>
+		<div class="flex flex-col gap-8">
+			{LATEST_TOOLS.map((tool) => <ContentCard type="tool" content={tool} />)}
+		</div>
+		<Link data-shadow label="View all tools" href="/tools" underline />
+	</section>
 	<section id="posts" class="flex flex-col gap-8">
 		<h2 data-shadow class="heading-md">Newest guides & updates</h2>
-		<div class="grid grid-cols-2 gap-8 w-full">
-			{LATEST_POSTS.map((post) => <BlogPostCard {post} />)}
+		<div class="flex flex-col gap-8">
+			{LATEST_POSTS.map((post) => <ContentCard type="post" content={post} />)}
 		</div>
 		<Link data-shadow label="View all posts" href="/blog" underline />
 	</section>

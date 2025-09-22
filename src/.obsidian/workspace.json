@@ -171,6 +171,7 @@
   },
   "active": "09ec6feffb457292",
   "lastOpenFiles": [
+    "components/ContentCard.astro",
     "pages/about/about.md",
     "content/about/about.md",
     "content/about",
@@ -209,7 +210,6 @@
     "pages/tags/[slug].astro",
     "pages/tags/[tag].astro",
     "pages/tags/index.astro",
-    "content/models/farenheit.md",
-    "content/models/basic-tools-pack.md"
+    "content/models/farenheit.md"
   ]
 }
