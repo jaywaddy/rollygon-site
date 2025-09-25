@@ -25,7 +25,7 @@ const toolCollection = defineCollection({
         icon: z.string(),
         href: z.string(),
         tags: z.array(z.string()),
-        version: z.number(),
+        version: z.string(),
     })
 });
 

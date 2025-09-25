@@ -1,6 +1,6 @@
 ---
 title: B&M Track Generator
-version: 1.1
+version: v1.1
 postDate: 2024-11-10
 image: /tools/bm-track-generator.png
 icon: track-generator
@@ -10,6 +10,8 @@ price: $0+
 size: 69.9 MB
 tags:
   - Blender
+  - B&M
+  - Track Gen
 ---
 With version 1.1, track pieces can be both standard and inverted (as seen in the example).
 

@@ -20,7 +20,7 @@ const { title, tags } = content.data;
         content.collection === "tools" && (
             <div class="flex items-center gap-4">
                 <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                <small>v{content.data.version}</small>
+                <small>{content.data.version}</small>
                 <Badge label={content.data.price} />
             </div>
         )

@@ -1,17 +1,12 @@
 ---
 import BlogPostCard from "@/components/BlogPostCard.astro";
+import ContentCard from "@/components/ContentCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import ToolCard from "@/components/ToolCard.astro";
 import Link from "@/components/ui/Link.astro";
-import {
-	type Collection,
-	ALL_POSTS,
-	ALL_CONTENT,
-	ALL_MODELS,
-	ALL_TOOLS,
-} from "@/content/config";
+import { type Collection, ALL_POSTS, ALL_CONTENT, ALL_MODELS, ALL_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { slugify, titleCase } from "@/scripts/utilities";
 
@@ -78,11 +73,11 @@ function checkIfTrue(list: Array<Collection>): boolean {
 			checkIfTrue(ALL_TOOLS) && (
 				<div class="flex flex-col gap-8">
 					<h2 id="tools">Tools</h2>
-					<div class="flex gap-8">
+					<div class="flex flex-col gap-8">
 						{ALL_TOOLS.map((content) => {
 							return (
 								content.data.tags.find((tag) => slugify(tag) === slug) && (
-									<ToolCard tool={content} />
+									<ContentCard type="tool" {content} />
 								)
 							);
 						})}
@@ -92,15 +87,17 @@ function checkIfTrue(list: Array<Collection>): boolean {
 		}
 		{
 			checkIfTrue(ALL_POSTS) && (
-				<h2 id="articles">Articles</h2>
-				<div class="grid grid-cols-2 gap-8">
-					{ALL_POSTS.map((content) => {
-						return (
-							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<BlogPostCard post={content} />
-							)
-						);
-					})}
+				<div class="flex flex-col gap-8">
+					<h2 id="articles">Articles</h2>
+					<div class="flex flex-col gap-8">
+						{ALL_POSTS.map((content) => {
+							return (
+								content.data.tags.find((tag) => slugify(tag) === slug) && (
+									<ContentCard type="post" {content} />
+								)
+							);
+						})}
+					</div>
 				</div>
 			)
 		}

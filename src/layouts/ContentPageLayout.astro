@@ -42,7 +42,7 @@ const { headings } = await content.render();
 					{
 						content.collection === "tools" && (
 							<strong>
-								v{content.data.version} &bullet; {formatDate(postDate)}
+								{content.data.version} &bullet; {formatDate(postDate)}
 							</strong>
 						)
 					}
