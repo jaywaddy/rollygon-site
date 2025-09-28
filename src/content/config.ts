@@ -43,7 +43,6 @@ const modelCollection = defineCollection({
     })
 });
 
-
 export const collections = {
     posts: postCollection,
     tools: toolCollection,
@@ -77,10 +76,10 @@ export const ALL_MODELS: Array<CollectionEntry<"models">> = (
 
 export const LATEST_MODELS: Array<CollectionEntry<"models">> = [...ALL_MODELS].splice(0, 1);
 
-
 export const ALL_CONTENT = [
     ...ALL_POSTS,
     ...ALL_TOOLS,
     ...ALL_MODELS
 ];
 
+export const ALL_TAGS: Array<string> = [...new Set(ALL_CONTENT.map(content => content.data.tags).flat().sort())];

@@ -13,6 +13,8 @@
     --color-blue: oklch(0.8003 0.1199 219.73);
     --color-purple: oklch(0.6689 0.2234 305.73);
     --color-fucshia: oklch(0.741 0.2535 325.69);
+    --color-neutral: oklch(0.9202 0.0162 99.01);
+
     --color-disabled-bg: oklch(0.9021 0.0143 270);
     --color-disabled-body: oklch(0.6409 0.0143 270);
 
@@ -179,6 +181,31 @@ h3 {
 
     padding: calc(var(--spacing) * 8);
     box-shadow: 4px 4px 0;
+}
+
+@utility button-marquee {
+    position: relative;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    &:hover {
+        text-shadow:
+            0 0 8px var(--button-color),
+            0 0 16px var(--button-color);
+
+        &::before {
+            background-image: var(--bg-2);
+            transform: scale(2);
+
+            position: absolute;
+            inset: 0;
+
+            content: "";
+            animation: button-marquee 5s linear infinite;
+            opacity: 0.05;
+        }
+    }
 }
 
 @utility background-marquee {

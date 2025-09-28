@@ -1,75 +1,68 @@
 ---
 import { Color, Pattern, setStyles } from "@/scripts/interface";
-import Icon from "@/ui/Icon.astro";
+import Icon, { type ICON_NAME } from "./Icon.astro";
+import { slugify } from "@/scripts/utilities";
 
 interface Props {
-	submit?: boolean;
+	id?: string;
+	type?: "submit" | "toggle" | "link";
 	label?: string;
 	href?: string;
-	icon?: string;
+	icon?: ICON_NAME;
 	primary?: boolean;
 }
 
-const { submit, label, href, icon = "arrow-right", primary } = Astro.props;
+const { id, type = "link", label, href, icon = "arrow-right", primary } = Astro.props;
+const buttonClasses =
+	"flex items-center gap-1 button-marquee px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer";
+const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
 
-function toggleButtonColor(isPrimary: boolean | undefined): string {
+function setButtonColor(isPrimary: boolean | undefined): string {
 	if (isPrimary) {
 		return Color.lime;
 	}
 
-	return Color.white;
+	return Color.neutral;
 }
 ---
 
 {
-	submit ? (
-		<button
-			type="submit"
-			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer"
-			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
-		>
-			<strong>{label}</strong>
+	type === "submit" && (
+		<button {id} {type} title={label} class={buttonClasses} {style}>
+			{label && <strong class="text-nowrap">{label}</strong>}
 			{icon && <Icon name={icon} />}
 		</button>
-	) : (
-		<a
-			title={label}
-			class="flex items-center gap-1 px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit"
-			style={setStyles("button", toggleButtonColor(primary), Pattern["2"])}
-			{href}
-		>
-			<strong class="text-nowrap">{label}</strong>
+	)
+}
+{
+	type === "toggle" && (
+		<form action="toggle">
+			<label {id} title={label} class={buttonClasses} {style}>
+				<input type="checkbox" />
+				{label && <strong class="text-nowrap">{label}</strong>}
+				{icon && <Icon name={icon} />}
+			</label>
+		</form>
+	)
+}
+{
+	type === "link" && (
+		<a {id} title={label} class={buttonClasses} {style} {href}>
+			{label && <strong class="text-nowrap">{label}</strong>}
 			{icon && <Icon name={icon} />}
 		</a>
 	)
 }
 
 <style>
-	a,
-	button,
-	input {
-		position: relative;
-		overflow: hidden;
-
-		&:hover {
-			text-shadow:
-				0 0 8px var(--button-color),
-				0 0 16px var(--button-color);
-
-			&::before {
-				background-image: var(--bg-2);
-				transform: scale(2);
-
-				position: absolute;
-				inset: 0;
-
-				content: "";
-				animation: button-marquee 5s linear infinite;
-				opacity: 0.05;
-			}
+	label:has(input[type="checkbox"]) {
+		& input[type="checkbox"] {
+			display: none;
 		}
 	}
-</style>
 
-<script lang="ts"></script>
+	label:has(input[type="checkbox"]:checked) {
+		background-color: var(--color-lime);
+		text-shadow: none;
+	}
+</style>

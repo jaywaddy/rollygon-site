@@ -1,54 +1,47 @@
 ---
-import Icon from "@/ui/Icon.astro";
-import Link from "@/ui/Link.astro";
-
-interface Props {
-	searchTags?: Array<{ label: string; href: string }>;
-}
-
-const defaultSearchLinks = [
-	{ label: "Coasters", href: "/tags/coaster" },
-	{ label: "Guides", href: "/tags/guide" },
-];
-
-const { searchTags = defaultSearchLinks } = Astro.props;
+import TagList from "@/components/TagList.astro";
+import Button from "@/ui/Button.astro";
+import { ALL_TAGS } from "@/content/config";
 ---
 
-<div class="flex items-center justify-between border-lg shadow-lg p-4 bg-white">
-	<nav class="ml-2">
-		<ul class="flex gap-8">
-			{
-				searchTags.map((tag) => (
-					<li>
-						<Link label={tag.label} href={tag.href} />
-					</li>
-				))
-			}
-		</ul>
-	</nav>
-	<form action="">
-		<div class="relative">
-			<input
-				type="search"
-				name="search"
-				id="search"
-				style={{ "--search-width": 360 - 16 + "px" }}
-				class="flex gap-1 border-sm pl-2 pr-8 py-1 w-(--search-width)"
-				class="w-full"
-				placeholder="Search currently disabled"
-				disabled
-				min="2"
-				max="32"
-				required
-			/>
-			<button type="submit" class="absolute top-2 right-2 cursor-pointer">
-				<Icon name="search" />
-			</button>
+<div id="search-bar" class="flex flex-col justify-between gap-4 border-lg shadow-lg p-4 bg-white">
+	<nav class="flex justify-between w-full">
+		<Button id="filter-tag-button" label="Filter tags" icon="drop-down" type="toggle" />
+		<div class="flex gap-2">
+			<form action="">
+				<div class="relative">
+					<input
+						type="search"
+						name="search"
+						id="search"
+						style={{ "--search-width": 360 - 16 + "px" }}
+						class="flex gap-1 border-sm pl-2 pr-8 py-2 w-(--search-width)"
+						class="w-full"
+						placeholder="Search currently disabled"
+						disabled
+						min="2"
+						max="32"
+						required
+					/>
+				</div>
+			</form>
+			<Button icon="search" type="submit" />
 		</div>
-	</form>
+	</nav>
+	<div id="search-tag-list">
+		<TagList tags={ALL_TAGS} filter />
+	</div>
 </div>
 
 <style>
+	#search-tag-list {
+		display: none;
+	}
+
+	#search-bar:has(nav form label input:checked) > #search-tag-list {
+		display: block;
+	}
+
 	input[type="search"][disabled] {
 		background-color: var(--color-disabled-bg);
 	}

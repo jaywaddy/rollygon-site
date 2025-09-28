@@ -11,6 +11,7 @@ export type ColorName = (
     | "blue"
     | "purple"
     | "fucshia"
+    | "neutral"
     | "white"
 );
 
@@ -33,6 +34,7 @@ export const Color: Input = {
     blue: "var(--color-blue)",
     purple: "var(--color-purple)",
     fucshia: "var(--color-fucshia)",
+    neutral: "var(--color-neutral)",
     white: "var(--color-white)"
 }
 

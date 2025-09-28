@@ -3,6 +3,7 @@
 import ArrowLeftIcon from "@/icons/ArrowLeftIcon.astro";
 import ArrowRightIcon from "@/icons/ArrowRightIcon.astro";
 import DownloadIcon from "@/icons/DownloadIcon.astro";
+import DropDownIcon from "../icons/DropDownIcon.astro";
 import ExternalLinkIcon from "@/icons/ExternalLinkIcon.astro";
 import ImageIcon from "@/icons/ImageIcon.astro";
 import LogoIcon from "@/icons/LogoIcon.astro";
@@ -36,45 +37,43 @@ import TrackGenerator from "@/icons/TrackGenerator.astro";
 import UtilityNodes from "@/icons/UtilityNodes.astro";
 import VectorSwitch from "@/icons/VectorSwitch.astro";
 
-export const GENERAL_ICONS: Array<string> = [
-	"arrow-left",
-	"arrow-right",
-	"download",
-	"external-link",
-	"image",
-	"logo",
-	"ngons",
-	"quads",
-	"search",
-	"send",
-	"tris",
-	"user",
-	"verts",
-];
-
-export const SOCIAL_ICONS: Array<string> = ["bluesky", "gumroad", "sketchfab", "youtube"];
-
-export const TOOL_ICONS: Array<string> = [
-	"array",
-	"curve-deform",
-	"fixed-curve-radius",
-	"float-switch",
-	"geometry-switch",
-	"integer-switch",
-	"move-to-unit",
-	"object-switch",
-	"rotation-switch",
-	"select-edge-loops",
-	"support-generator",
-	"track-generator",
-	"utility-nodes",
-	"vector-switch",
-];
-
-export const ICON_NAMES: Array<string> = [...GENERAL_ICONS, ...SOCIAL_ICONS, ...TOOL_ICONS];
+export type ICON_NAME = (
+	| "arrow-left"
+	| "arrow-right"
+	| "download"
+	| "drop-down"
+	| "external-link"
+	| "image"
+	| "logo"
+	| "ngons"
+	| "quads"
+	| "search"
+	| "send"
+	| "tris"
+	| "user"
+	| "verts"
+	| "array"
+	| "curve-deform"
+	| "fixed-curve-radius"
+	| "float-switch"
+	| "geometry-switch"
+	| "integer-switch"
+	| "move-to-unit"
+	| "object-switch"
+	| "rotation-switch"
+	| "select-edge-loops"
+	| "support-generator"
+	| "track-generator"
+	| "utility-nodes"
+	| "vector-switch"
+	| "bluesky"
+	| "gumroad"
+	| "sketchfab"
+	| "youtube"
+);
 
 interface Props {
-	name: (typeof ICON_NAMES)[number];
+	name: ICON_NAME;
 	size?: string;
 	color?: string;
 }
@@ -88,6 +87,7 @@ const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 	{name === "arrow-left" && <ArrowLeftIcon {color} />}
 	{name === "arrow-right" && <ArrowRightIcon {color} />}
 	{name === "download" && <DownloadIcon {color} />}
+	{name === "drop-down" && <DropDownIcon {color} />}
 	{name === "external-link" && <ExternalLinkIcon {color} />}
 	{name === "image" && <ImageIcon {color} />}
 	{name === "logo" && <LogoIcon {color} />}

@@ -5,9 +5,10 @@ import Tag from "@/ui/Tag.astro";
 
 interface Props {
 	tags: Array<string> | undefined;
+	filter?: boolean;
 }
 
-const { tags } = Astro.props;
+const { tags, filter = false } = Astro.props;
 
 function calcTagCount(input: string): number {
 	return ALL_CONTENT.map((post) => post.data.tags)
@@ -16,16 +17,27 @@ function calcTagCount(input: string): number {
 }
 ---
 
-{
-	tags && (
-		<ul class="flex flex-wrap gap-1">
-			{tags.map((tag) => (
-				<li>
+<ul class="flex flex-wrap gap-1">
+	{
+		tags?.map((tag) => (
+			<li>
+				{filter ? (
+					<label>
+						<input type="checkbox" class="hidden" />
+						<Tag label={tag} count={calcTagCount(tag)} filter />
+					</label>
+				) : (
 					<a href={"/tags/" + slugify(tag)}>
 						<Tag label={tag} count={calcTagCount(tag)} />
 					</a>
-				</li>
-			))}
-		</ul>
-	)
-}
+				)}
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	label:has(input[type="checkbox"]:checked) {
+		--tag-filter-color: var(--color-lime);
+	}
+</style>

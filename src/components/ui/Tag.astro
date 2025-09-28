@@ -4,9 +4,10 @@ import { Color, setStyles, type ColorName } from "@/scripts/interface";
 interface Props {
 	label: string;
 	count: number;
+	filter?: boolean;
 }
 
-const { label, count } = Astro.props;
+const { label, filter, count } = Astro.props;
 
 export function setTagColorTheme(input: string): string {
 	interface ColoredTag {
@@ -27,13 +28,13 @@ export function setTagColorTheme(input: string): string {
 	];
 	const tag = coloredTags.find((tag) => tag.name === input);
 
-	return tag?.color || "white";
+	return tag?.color || "neutral";
 }
 ---
 
 <span
 	data-tag
-	class="flex items-center bg-[var(--tag-color)] border-sm shadow-sm shadow-sm-hover px-2 w-fit"
+	class={`flex items-center ${filter ? "bg-[var(--tag-filter-color)]" : "bg-[var(--tag-color)]"} border-sm shadow-sm shadow-sm-hover px-2 w-fit cursor-pointer select-none`}
 	style={setStyles("tag", Color[setTagColorTheme(label)])}
 >
 	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap">
