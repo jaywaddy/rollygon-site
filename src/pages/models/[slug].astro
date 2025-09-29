@@ -16,7 +16,7 @@ const { model } = Astro.props;
 const { Content } = await model.render();
 ---
 
-<SiteLayout pageTitle={model.data.title} color="green" pattern="5">
+<SiteLayout pageTitle={model.data.title} color="green" pattern="2">
 	<ContentPageLayout content={model}>
 		<Content />
 	</ContentPageLayout>

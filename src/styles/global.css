@@ -23,13 +23,13 @@
     --radius-sm: calc(var(--radius-lg) / 2);
     --radius-pill: calc(var(--spacing) * 99);
 
-    --bg-1: url("/backgrounds/bg-1.png");
-    --bg-2: url("/backgrounds/bg-2.png");
-    --bg-3: url("/backgrounds/bg-3.png");
-    --bg-4: url("/backgrounds/bg-4.png");
-    --bg-5: url("/backgrounds/bg-5.png");
-    --bg-6: url("/backgrounds/bg-6.png");
-    --bg-7: url("/backgrounds/bg-7.png");
+    --bg-1: url("/images/backgrounds/bg-pattern-1.svg");
+    --bg-2: url("/images/backgrounds/bg-pattern-2.svg");
+    --bg-3: url("/images/backgrounds/bg-pattern-3.svg");
+    --bg-4: url("/images/backgrounds/bg-pattern-4.svg");
+    --bg-5: url("/images/backgrounds/bg-pattern-5.svg");
+    --bg-6: url("/images/backgrounds/bg-pattern-6.svg");
+    --bg-7: url("/images/backgrounds/bg-pattern-7.svg");
 }
 
 html {
@@ -196,8 +196,7 @@ h3 {
             0 0 16px var(--button-color);
 
         &::before {
-            background-image: var(--bg-2);
-            transform: scale(2);
+            background-image: var(--bg-4);
 
             position: absolute;
             inset: 0;
@@ -224,7 +223,7 @@ h3 {
 
         background-image: var(--marquee-pattern);
         transform: scale(2.2) rotate(-1deg);
-        animation: background-marquee 16s linear infinite;
+        animation: background-marquee 32s linear infinite;
 
         opacity: 0.05;
         content: "";
@@ -308,7 +307,7 @@ h3 {
     }
 
     100% {
-        background-position: -64px 16px;
+        background-position: -64px 32px;
     }
 }
 

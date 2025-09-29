@@ -1,9 +1,9 @@
 ---
-import Icon from "@/ui/Icon.astro";
+import Icon, { type ICON_NAME } from "@/ui/Icon.astro";
 
 interface Props {
 	title?: string;
-	icon: string;
+	icon: ICON_NAME;
 	href: string;
 	rotation?: string;
 }
@@ -42,8 +42,7 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 			box-shadow: 2px 2px 0;
 
 			&::before {
-				background-image: var(--bg-2);
-				transform: scale(2);
+				background-image: var(--bg-4);
 
 				position: absolute;
 				inset: 0;
