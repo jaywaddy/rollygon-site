@@ -1,5 +1,5 @@
 ---
-import Icon from "@/ui/Icon.astro";
+import Icon, { matchIconNameType } from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
 import type { CollectionEntry } from "astro:content";
 import Badge from "./ui/Badge.astro";
@@ -67,7 +67,7 @@ const { title, tags } = content.data;
                 data-img
                 class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange"
             >
-                <Icon name={content.data.icon} size="64" />
+                <Icon name={matchIconNameType(content.data.icon)} size="64" />
             </div>
         )
     }

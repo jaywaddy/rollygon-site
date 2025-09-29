@@ -4,22 +4,17 @@ import ModelCard from "@/components/ModelCard.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import { ALL_MODELS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
-
-const searchTags = [
-	{ label: "Coasters", href: "/tags/coaster" },
-	{ label: "Elements", href: "/tags/element" },
-];
 ---
 
-<SiteLayout pageTitle="Models" pattern="5">
-	<PageTitle heading="Models" />
-	<SearchBar {searchTags} />
-	<section class="flex flex-col gap-16">
+<SiteLayout pageTitle="Models" color="green" pattern="5">
+	<div class="flex flex-col gap-8">
+		<PageTitle heading="Models" />
+		<SearchBar />
+	</div>
+	<div class="flex flex-col gap-8">
+		<h2>All models</h2>
 		<div class="flex flex-col gap-8">
-			<h2>All models</h2>
-			<div class="grid grid-cols-2 gap-8">
-				{ALL_MODELS.map((model) => <ModelCard {model} />)}
-			</div>
+			{ALL_MODELS.map((model) => <ModelCard {model} />)}
 		</div>
-	</section>
+	</div>
 </SiteLayout>

@@ -3,53 +3,38 @@ import PageTitle from "@/components/layout/PageTitle.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import * as aboutContent from "./about.md";
 import { Content } from "./about.md";
-import AboutSection from "@/components/layout/AboutSection.astro";
 import Button from "@/components/ui/Button.astro";
 import { formatDate } from "@/scripts/utilities";
 
 const { title, date } = aboutContent.frontmatter;
 ---
 
-<SiteLayout pageTitle={title}>
-	<section class="wrapper flex flex-col gap-16 w-full">
-		<PageTitle heading={title} />
-		<div class="flex gap-16">
-			<div class="flex flex-col gap-8 w-full">
-				<div class="card-lg max-w-[75ch]">
-					<p>
-						My name is Jay&mdash;but, you can call me Rolly (rhymes with
-						"jolly")&mdash;and I make roller coasters out of polygons. I also build
-						tools that make coaster manufacturer specific tracks, supports, etc. that
-						help me create realistic coaster models.
-					</p>
-					<div class="flex gap-2">
-						<Button
-							label="Gumroad"
-							icon="gumroad"
-							href="https://rollygon.gumroad.com"
-						/>
-						<Button
-							label="Sketchfab"
-							icon="sketchfab"
-							href="https://sketchfab.com/Rollygon"
-						/>
-						<Button
-							label="YouTube"
-							icon="youtube"
-							href="https://youtube.com/@Rollygon"
-						/>
-						<Button
-							label="Bluesky"
-							icon="bluesky"
-							href="https://rollygon.bsky.social"
-						/>
-					</div>
+<SiteLayout pageTitle={title} color="purple" pattern="5">
+	<PageTitle heading={title} />
+	<div class="flex gap-16">
+		<div class="flex flex-col gap-8 w-full">
+			<div class="card-lg max-w-[75ch]">
+				<p>
+					My name is Jay&mdash;but, you can call me Rolly (rhymes with "jolly")&mdash;and
+					I make roller coasters out of polygons. I also build tools that make coaster
+					manufacturer specific tracks, supports, etc. that help me create realistic
+					coaster models.
+				</p>
+				<div class="flex gap-2">
+					<Button label="Gumroad" icon="gumroad" href="https://rollygon.gumroad.com" />
+					<Button
+						label="Sketchfab"
+						icon="sketchfab"
+						href="https://sketchfab.com/Rollygon"
+					/>
+					<Button label="YouTube" icon="youtube" href="https://youtube.com/@Rollygon" />
+					<Button label="Bluesky" icon="bluesky" href="https://rollygon.bsky.social" />
 				</div>
-				<small>Last update: {formatDate(date)}</small>
-				<article class="content flex flex-col gap-8">
-					<Content />
-				</article>
 			</div>
+			<small>Last update: {formatDate(date)}</small>
+			<article class="content flex flex-col gap-8">
+				<Content />
+			</article>
 		</div>
-	</section>
+	</div>
 </SiteLayout>

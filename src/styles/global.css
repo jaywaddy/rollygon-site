@@ -114,6 +114,7 @@ h3 {
 
 @utility wrapper {
     margin-inline: auto;
+    padding-inline: calc(var(--spacing) * 16)
 }
 
 
@@ -210,6 +211,7 @@ h3 {
 
 @utility background-marquee {
     position: relative;
+    overflow: clip;
     inset: 0;
         
     background-color: var(--marquee-color);
@@ -221,16 +223,42 @@ h3 {
         inset: 25%;
 
         background-image: var(--marquee-pattern);
-        transform: scale(2) rotate(-1deg);
+        transform: scale(2.2) rotate(-1deg);
         animation: background-marquee 16s linear infinite;
 
         opacity: 0.05;
         content: "";
         z-index: -10;
     }
+}
 
-    & [data-shadow] {
-        text-shadow: 0 0 1em var(--marquee-color);
+@utility site-body {
+    --position: -18px;
+
+    position: relative;
+    background-color: color-mix(in srgb, var(--color-white) 85%, var(--marquee-color));
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 0;
+        z-index: -1;
+
+        content: "";
+        width: 18px;
+        height: 100%;
+
+        background-color: color-mix(in srgb, var(--color-white) 85%, var(--marquee-color));
+    }
+
+    &::before {
+        left: var(--position);
+        mask-image: url("/images/backgrounds/decorative-siding-1.svg");
+    }
+
+    &::after {
+        right: var(--position);
+        mask-image: url("/images/backgrounds/decorative-siding-2.svg");
     }
 }
 
@@ -255,7 +283,7 @@ h3 {
 
 @media (min-width: 80rem) {
     .wrapper {
-        width: 67.5rem;
+        width: 72rem;
     }
 }
 

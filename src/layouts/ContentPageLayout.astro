@@ -6,7 +6,7 @@ import Link from "@/ui/Link.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import Model from "@/components/ui/Model.astro";
 import type { Collection } from "@/content/config";
-import Icon from "@/components/ui/Icon.astro";
+import Icon, { matchIconNameType, type ICON_NAME } from "@/components/ui/Icon.astro";
 
 interface Props {
 	content: Collection;
@@ -17,55 +17,53 @@ const { title, description, postDate, tags, image } = content.data;
 const { headings } = await content.render();
 ---
 
-<section class="wrapper flex flex-col gap-16 w-full">
-	<Link
-		label={"Back to " + content.collection}
-		href={content.collection === "posts" ? "/blog" : "/" + content.collection}
-		iconLeft="arrow-left"
-		underline
-	/>
-	<div class="flex gap-16">
-		<div class="flex flex-col gap-8 w-full">
-			<div class="flex flex-col gap-4">
-				<h1>{title}</h1>
-				<TagList {tags} />
-				<p>{description}</p>
-				<small>
-					{
-						content.collection === "posts" && (
-							<strong>
-								{calcReadTime(content.body)} min read &bullet;
-								{formatDate(postDate)}
-							</strong>
-						)
-					}
-					{
-						content.collection === "tools" && (
-							<strong>
-								{content.data.version} &bullet; {formatDate(postDate)}
-							</strong>
-						)
-					}
-				</small>
-			</div>
-			{
-				content.collection === "models" ? (
-					<Model {title} id={content.data.id} />
-				) : (
-					<div class="relative">
-						{content.collection === "tools" && (
-							<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
-								<Icon name={content.data.icon} size="64" />
-							</div>
-						)}
-						<ImageWrapper src={image} />
-					</div>
-				)
-			}
-			<article class="content flex flex-col gap-8">
-				<slot />
-			</article>
+<Link
+	label={"Back to " + content.collection}
+	href={content.collection === "posts" ? "/blog" : "/" + content.collection}
+	iconLeft="arrow-left"
+	underline
+/>
+<div class="flex gap-16">
+	<div class="flex flex-col gap-8 w-full">
+		<div class="flex flex-col gap-4">
+			<h1>{title}</h1>
+			<TagList {tags} />
+			<p>{description}</p>
+			<small>
+				{
+					content.collection === "posts" && (
+						<strong>
+							{calcReadTime(content.body)} min read &bullet;
+							{formatDate(postDate)}
+						</strong>
+					)
+				}
+				{
+					content.collection === "tools" && (
+						<strong>
+							{content.data.version} &bullet; {formatDate(postDate)}
+						</strong>
+					)
+				}
+			</small>
 		</div>
-		<SideBar {headings} {content} />
+		{
+			content.collection === "models" ? (
+				<Model {title} id={content.data.id} />
+			) : (
+				<div class="relative">
+					{content.collection === "tools" && (
+						<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
+							<Icon name={matchIconNameType(content.data.icon)} size="64" />
+						</div>
+					)}
+					<ImageWrapper src={image} />
+				</div>
+			)
+		}
+		<article class="content flex flex-col gap-8">
+			<slot />
+		</article>
 	</div>
-</section>
+	<SideBar {headings} {content} />
+</div>

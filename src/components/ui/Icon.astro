@@ -78,6 +78,10 @@ interface Props {
 	color?: string;
 }
 
+export function matchIconNameType(iconName: any): ICON_NAME {
+	return iconName;
+}
+
 const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 ---
 

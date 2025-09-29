@@ -24,4 +24,5 @@ pnpm-debug.log*
 .idea/
 
 # folders
-src/content/drafts
+src/content/drafts/
+src/.obsidian/

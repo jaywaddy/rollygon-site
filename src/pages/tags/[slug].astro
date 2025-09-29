@@ -49,57 +49,60 @@ function checkIfTrue(list: Array<Collection>): boolean {
 }
 ---
 
-<SiteLayout pageTitle={"Tag: #" + tagName} description={"Loading content tagged with #" + tagName}>
+<SiteLayout
+	pageTitle={"Tag: #" + tagName}
+	description={"Loading content tagged with #" + tagName}
+	color="neutral"
+	pattern="5"
+>
 	<PageTitle heading={"Tag: #" + tagName} />
 	<SearchBar />
-	<section class="wrapper flex flex-col gap-16">
-		{
-			checkIfTrue(ALL_MODELS) && (
-				<div class="flex flex-col gap-8">
-					<h2 id="models">Models</h2>
-					<div class="grid grid-cols-2 gap-8">
-						{ALL_MODELS.map((content) => {
-							return (
-								content.data.tags.find((tag) => slugify(tag) === slug) && (
-									<ModelCard model={content} />
-								)
-							);
-						})}
-					</div>
+	{
+		checkIfTrue(ALL_MODELS) && (
+			<div class="flex flex-col gap-8">
+				<h2 id="models">Models</h2>
+				<div class="grid grid-cols-2 gap-8">
+					{ALL_MODELS.map((content) => {
+						return (
+							content.data.tags.find((tag) => slugify(tag) === slug) && (
+								<ModelCard model={content} />
+							)
+						);
+					})}
 				</div>
-			)
-		}
-		{
-			checkIfTrue(ALL_TOOLS) && (
+			</div>
+		)
+	}
+	{
+		checkIfTrue(ALL_TOOLS) && (
+			<div class="flex flex-col gap-8">
+				<h2 id="tools">Tools</h2>
 				<div class="flex flex-col gap-8">
-					<h2 id="tools">Tools</h2>
-					<div class="flex flex-col gap-8">
-						{ALL_TOOLS.map((content) => {
-							return (
-								content.data.tags.find((tag) => slugify(tag) === slug) && (
-									<ContentCard type="tool" {content} />
-								)
-							);
-						})}
-					</div>
+					{ALL_TOOLS.map((content) => {
+						return (
+							content.data.tags.find((tag) => slugify(tag) === slug) && (
+								<ContentCard type="tool" {content} />
+							)
+						);
+					})}
 				</div>
-			)
-		}
-		{
-			checkIfTrue(ALL_POSTS) && (
+			</div>
+		)
+	}
+	{
+		checkIfTrue(ALL_POSTS) && (
+			<div class="flex flex-col gap-8">
+				<h2 id="articles">Articles</h2>
 				<div class="flex flex-col gap-8">
-					<h2 id="articles">Articles</h2>
-					<div class="flex flex-col gap-8">
-						{ALL_POSTS.map((content) => {
-							return (
-								content.data.tags.find((tag) => slugify(tag) === slug) && (
-									<ContentCard type="post" {content} />
-								)
-							);
-						})}
-					</div>
+					{ALL_POSTS.map((content) => {
+						return (
+							content.data.tags.find((tag) => slugify(tag) === slug) && (
+								<ContentCard type="post" {content} />
+							)
+						);
+					})}
 				</div>
-			)
-		}
-	</section>
+			</div>
+		)
+	}
 </SiteLayout>
