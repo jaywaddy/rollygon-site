@@ -1,11 +1,9 @@
 ---
-import BlogPostCard from "@/components/BlogPostCard.astro";
 import ContentCard from "@/components/ContentCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import ModelCard from "@/components/ModelCard.astro";
 import SearchBar from "@/components/SearchBar.astro";
-import ToolCard from "@/components/ToolCard.astro";
-import Link from "@/components/ui/Link.astro";
+
 import { type Collection, ALL_POSTS, ALL_CONTENT, ALL_MODELS, ALL_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { slugify, titleCase } from "@/scripts/utilities";
@@ -53,7 +51,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 	pageTitle={"Tag: #" + tagName}
 	description={"Loading content tagged with #" + tagName}
 	color="neutral"
-	pattern="3"
+	pattern="4"
 >
 	<PageTitle heading={"Tag: #" + tagName} />
 	<SearchBar />

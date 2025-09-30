@@ -196,7 +196,7 @@ h3 {
             0 0 16px var(--button-color);
 
         &::before {
-            background-image: var(--bg-4);
+            background-image: var(--bg-6);
 
             position: absolute;
             inset: 0;
