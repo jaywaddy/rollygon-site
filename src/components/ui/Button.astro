@@ -1,7 +1,7 @@
 ---
 import { Color, Pattern, setStyles } from "@/scripts/interface";
 import Icon, { type ICON_NAME } from "./Icon.astro";
-import { slugify } from "@/scripts/utilities";
+import { titleCase } from "@/scripts/utilities";
 
 interface Props {
 	id?: string;
@@ -13,8 +13,10 @@ interface Props {
 }
 
 const { id, type = "link", label, href, icon = "arrow-right", primary } = Astro.props;
-const buttonClasses =
-	"flex items-center gap-1 button-marquee px-4 py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer";
+const buttonClasses = `
+	flex items-center gap-1 button-marquee py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer
+	${!label ? "px-2" : "px-4"}
+	`;
 const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
 
 function setButtonColor(isPrimary: boolean | undefined): string {
@@ -28,28 +30,28 @@ function setButtonColor(isPrimary: boolean | undefined): string {
 
 {
 	type === "submit" && (
-		<button {id} {type} title={label} class={buttonClasses} {style}>
+		<button {id} {type} title={label ? label : titleCase(icon)} class={buttonClasses} {style}>
 			{label && <strong class="text-nowrap">{label}</strong>}
-			{icon && <Icon name={icon} />}
+			{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
 		</button>
 	)
 }
 {
 	type === "toggle" && (
 		<form action="toggle">
-			<label {id} title={label} class={buttonClasses} {style}>
+			<label {id} title={label ? label : titleCase(icon)} class={buttonClasses} {style}>
 				<input type="checkbox" />
 				{label && <strong class="text-nowrap">{label}</strong>}
-				{icon && <Icon name={icon} />}
+				{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
 			</label>
 		</form>
 	)
 }
 {
 	type === "link" && (
-		<a {id} title={label} class={buttonClasses} {style} {href}>
+		<a {id} title={label ? label : titleCase(icon)} class={buttonClasses} {style} {href}>
 			{label && <strong class="text-nowrap">{label}</strong>}
-			{icon && <Icon name={icon} />}
+			{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
 		</a>
 	)
 }

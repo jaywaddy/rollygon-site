@@ -2,23 +2,49 @@
 import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
+import Button from "../ui/Button.astro";
+
+interface Props {
+	photo?: boolean;
+}
+
+const { photo } = Astro.props;
 ---
 
-<div class="relative flex flex-col w-[320px] h-[320px]" style={{ "--radius": "32px" }}>
-	<ImageWrapper size="md" shape="round" aspect="1/1" src="about.png" />
-	<div class="absolute top-2 -rotate-4">
-		<InfoBanner />
-	</div>
-	<p class="absolute card-sm bottom-2 rotate-2">
-		I'm Jay (or Rolly), and I make roller coasters out of polygons!
-	</p>
-	<SocialLink icon="gumroad" href="https://rollygon.gumroad.com/" rotation="105" />
-	<SocialLink icon="sketchfab" href="https://sketchfab.com/Rollygon" rotation="125" />
-	<SocialLink
-		icon="youtube"
-		title="YouTube"
-		href="https://youtube.com/@Rollygon"
-		rotation="145"
-	/>
-	<SocialLink icon="bluesky" href="https://rollygon.bsky.social/" rotation="165" />
-</div>
+{
+	photo ? (
+		<div class="relative flex flex-col w-[320px] h-[320px]" style={{ "--radius": "32px" }}>
+			<ImageWrapper size="md" shape="round" aspect="1/1" src="about.png" />
+			<div class="absolute top-2 -rotate-4">
+				<InfoBanner />
+			</div>
+			<p class="absolute card-sm bottom-2 rotate-2">
+				I'm Jay (or Rolly), and I make roller coasters out of polygons!
+			</p>
+			<SocialLink icon="gumroad" href="https://rollygon.gumroad.com/" rotation="105" />
+			<SocialLink icon="sketchfab" href="https://sketchfab.com/Rollygon" rotation="125" />
+			<SocialLink
+				icon="youtube"
+				title="YouTube"
+				href="https://youtube.com/@Rollygon"
+				rotation="145"
+			/>
+			<SocialLink icon="bluesky" href="https://rollygon.bsky.social/" rotation="165" />
+		</div>
+	) : (
+		<div
+			class="relative flex flex-col gap-4 w-[320px] h-[320px]"
+			style={{ "--radius": "32px" }}
+		>
+			<InfoBanner />
+			<p class="card-sm">I'm Jay (or Rolly), and I make roller coasters out of polygons!</p>
+			<div class="flex flex-row justify-between card-sm">
+				<Button icon="gumroad" href="" />
+				<Button icon="sketchfab" href="" />
+				<Button icon="youtube" href="" />
+				<Button icon="bluesky" href="" />
+				<Button icon="send" href="mailto:message@rollgy.com" />
+			</div>
+		</div>
+	)
+}

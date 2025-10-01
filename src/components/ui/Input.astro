@@ -12,7 +12,7 @@ interface Props {
 const { label, name = label, id, type, placeholder, value, required = false } = Astro.props;
 ---
 
-<label for={id} class="grid gap-1">
+<label for={id} class="flex flex-col gap-1">
 	<small>{label}{required && "*"}</small>
 	<input
 		{name}
@@ -21,6 +21,6 @@ const { label, name = label, id, type, placeholder, value, required = false } = 
 		{placeholder}
 		{value}
 		{required}
-		class="bg-white border-lg shadow-lg px-3 py-2"
+		class="bg-white border-sm px-3 py-2"
 	/>
 </label>
