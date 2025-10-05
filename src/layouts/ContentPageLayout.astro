@@ -18,67 +18,25 @@ const { collection, body } = content;
 const { headings } = await content.render();
 ---
 
-<Link label={`View all ${collection}`} href={`/${collection}`} underline />
-<!-- <div class="flex gap-16">
-	<div class="flex flex-col gap-8 w-full">
-		<div class="flex flex-col gap-4">
-			<h1>{title}</h1>
-			<TagList {tags} />
-			<p>{description}</p>
-			<small>
-				{
-					collection === "posts" && (
-						<strong>
-							{calcReadTime(body)} min read &bullet;
-							{formatDate(postDate)}
-						</strong>
-					)
-				}
-				{
-					collection === "tools" && (
-						<strong>
-							{content.data.version} &bullet; {formatDate(postDate)}
-						</strong>
-					)
-				}
-			</small>
-		</div>
-		{
-			content.collection === "models" ? (
-				<Model {title} id={content.data.id} />
-			) : (
-				<div class="relative">
-					{content.collection === "tools" && (
-						<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
-							<Icon name={matchIconNameType(content.data.icon)} size="64" />
-						</div>
-					)}
-					<ImageWrapper src={image} />
-				</div>
-			)
-		}
-		<article class="content flex flex-col gap-8">
-			<slot />
-		</article>
-	</div>
-	<SideBar {headings} {content} />
-</div> -->
 <div class="flex flex-col gap-16">
 	{
 		content.collection === "models" ? (
-			<Model {title} id={content.data.id} />
+			<div class="flex flex-col gap-8">
+				<Model {title} id={content.data.id} />
+				<Link label={`View all ${collection}`} href={`/${collection}`} underline />
+			</div>
 		) : (
-			<div class="relative mb-4">
+			<div class="relative flex flex-col gap-8">
 				{content.collection === "tools" && (
 					<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
 						<Icon name={matchIconNameType(content.data.icon)} size="64" />
 					</div>
 				)}
 				<ImageWrapper src={image} />
+				<Link label={`View all ${collection}`} href={`/${collection}`} underline />
 			</div>
 		)
 	}
-
 	<div class="flex gap-16">
 		<div class="flex flex-col gap-16">
 			<div class="flex flex-col gap-4">
@@ -119,7 +77,6 @@ const { headings } = await content.render();
 				<slot />
 			</article>
 		</div>
-
 		<SideBar {headings} {content} />
 	</div>
 </div>
