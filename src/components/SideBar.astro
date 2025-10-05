@@ -14,11 +14,9 @@ const { headings, content } = Astro.props;
 ---
 
 <aside class="flex flex-col gap-8 w-[360px]">
-    <AboutSection photo />
     {
         headings.length > 1 && (
-            <div data-toc class="sticky top-24 flex flex-col self-start gap-8 w-full">
-                <hr />
+            <div data-toc class="sticky top-32 flex flex-col self-start gap-8 w-full">
                 <TableOfContents {headings} />
                 {
                     content.collection === "posts" && (

@@ -13,7 +13,7 @@ import SearchIcon from "@/icons/SearchIcon.astro";
 import SendIcon from "@/icons/SendIcon.astro";
 import Triangles from "@/icons/Triangles.astro";
 import UserIcon from "@/icons/UserIcon.astro";
-import Verticies from "@/icons/Verticies.astro";
+import Vertex from "@/icons/Vertex.astro";
 
 // Social Icons
 import GumroadIcon from "@/icons/GumroadIcon.astro";
@@ -45,13 +45,13 @@ export type ICON_NAME = (
 	| "external-link"
 	| "image"
 	| "logo"
-	| "ngons"
-	| "quads"
+	| "ngon"
+	| "quad"
 	| "search"
 	| "send"
-	| "tris"
+	| "triangle"
 	| "user"
-	| "verts"
+	| "vertex"
 	| "array"
 	| "curve-deform"
 	| "fixed-curve-radius"
@@ -95,13 +95,13 @@ const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 	{name === "external-link" && <ExternalLinkIcon {color} />}
 	{name === "image" && <ImageIcon {color} />}
 	{name === "logo" && <LogoIcon {color} />}
-	{name === "ngons" && <Ngons {color} />}
-	{name === "quads" && <Quads {color} />}
+	{name === "ngon" && <Ngons {color} />}
+	{name === "quad" && <Quads {color} />}
 	{name === "search" && <SearchIcon {color} />}
 	{name === "send" && <SendIcon {color} />}
-	{name === "tris" && <Triangles {color} />}
+	{name === "triangle" && <Triangles {color} />}
 	{name === "user" && <UserIcon {color} />}
-	{name === "verts" && <Verticies {color} />}
+	{name === "vertex" && <Vertex {color} />}
 
 	{name === "bluesky" && <BlueskyIcon {color} />}
 	{name === "gumroad" && <GumroadIcon {color} />}

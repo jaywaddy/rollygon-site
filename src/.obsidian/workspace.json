@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "90fc74948b715f56",
+        "id": "9382469cbc3a3a02",
         "type": "tabs",
         "children": [
           {
-            "id": "09ec6feffb457292",
+            "id": "bb2075dd3cf10246",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -169,16 +169,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "09ec6feffb457292",
+  "active": "bb2075dd3cf10246",
   "lastOpenFiles": [
+    "pages/posts/index.astro",
+    "pages/posts/[slug].astro",
+    "pages/posts",
+    "components/FeaturedContent.astro",
+    "components/icons/Vertex.astro",
+    "components/FeaturedContenet.astro",
+    "components/FeaturedContenetCard.astro",
+    "content/drafts/site-log-001.md",
+    "content/drafts/site-log-002.md",
+    "Untitled",
     "assets/backgrounds/decorative-siding-2.svg",
     "assets/backgrounds/decorative-siding-1.svg",
     "assets/backgrounds",
     "assets/decorative-siding-2.svg",
     "assets/decorative-siding-1.svg",
     "components/DecorativeSiding.astro",
-    "content/drafts/site-log-001.md",
-    "content/drafts/site-log-002.md",
     "content/posts/import-nl2-spline-to-blender.md",
     "content/drafts/how-to-use-tools-by-rollygon.md",
     "content/tools/bm-support-generator.md",
@@ -188,15 +196,9 @@
     "components/ContentCard.astro",
     "pages/about/about.md",
     "content/about/about.md",
-    "content/about",
-    "pages/about/index.astro",
-    "pages/about/about.astro",
-    "pages/about",
-    "components/SiteBanner.astro",
     "content/drafts/How to Use Tools by Rollygon.md",
     "content/posts/article-1.md",
     "content/models/zero-g-roll.md",
-    "content/drafts",
     "content/models/inverted-loop.md",
     "content/models/the-canon.md",
     "content/models/arrow-loop.md",
@@ -212,7 +214,6 @@
     "assets/astro.svg",
     "assets/background.svg",
     "assets/images/fahrenheit.png",
-    "assets/images/fahrenheit-live.png",
-    "assets/images"
+    "assets/images/fahrenheit-live.png"
   ]
 }

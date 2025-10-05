@@ -1,0 +1,9 @@
+---
+interface Props {
+	color: string;
+}
+
+const { color } = Astro.props;
+---
+
+<circle cx="16" cy="16" r="14" fill={color}></circle>

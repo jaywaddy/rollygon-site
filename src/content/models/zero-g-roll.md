@@ -5,6 +5,7 @@ id: 5305bbc5cda24bdf8e23f24a256a708c
 postDate: 2024-03-20
 image: zero-g-roll.png
 description: The track and supports of the first loop of a classic Arrow Looper layout.
+size: 18.6 MB
 modelStats:
   - 13.4k
   - 22.9k

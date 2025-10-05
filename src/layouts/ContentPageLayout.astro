@@ -14,16 +14,12 @@ interface Props {
 
 const { content } = Astro.props;
 const { title, description, postDate, tags, image } = content.data;
+const { collection, body } = content;
 const { headings } = await content.render();
 ---
 
-<Link
-	label={"Back to " + content.collection}
-	href={content.collection === "posts" ? "/blog" : "/" + content.collection}
-	iconLeft="arrow-left"
-	underline
-/>
-<div class="flex gap-16">
+<Link label={`View all ${collection}`} href={`/${collection}`} underline />
+<!-- <div class="flex gap-16">
 	<div class="flex flex-col gap-8 w-full">
 		<div class="flex flex-col gap-4">
 			<h1>{title}</h1>
@@ -31,15 +27,15 @@ const { headings } = await content.render();
 			<p>{description}</p>
 			<small>
 				{
-					content.collection === "posts" && (
+					collection === "posts" && (
 						<strong>
-							{calcReadTime(content.body)} min read &bullet;
+							{calcReadTime(body)} min read &bullet;
 							{formatDate(postDate)}
 						</strong>
 					)
 				}
 				{
-					content.collection === "tools" && (
+					collection === "tools" && (
 						<strong>
 							{content.data.version} &bullet; {formatDate(postDate)}
 						</strong>
@@ -66,4 +62,64 @@ const { headings } = await content.render();
 		</article>
 	</div>
 	<SideBar {headings} {content} />
+</div> -->
+<div class="flex flex-col gap-16">
+	{
+		content.collection === "models" ? (
+			<Model {title} id={content.data.id} />
+		) : (
+			<div class="relative mb-4">
+				{content.collection === "tools" && (
+					<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
+						<Icon name={matchIconNameType(content.data.icon)} size="64" />
+					</div>
+				)}
+				<ImageWrapper src={image} />
+			</div>
+		)
+	}
+
+	<div class="flex gap-16">
+		<div class="flex flex-col gap-16">
+			<div class="flex flex-col gap-4">
+				<h1>{title}</h1>
+				<TagList {tags} />
+				<p>{description}</p>
+				<small class="flex gap-2">
+					{
+						collection === "posts" && (
+							<>
+								<strong>{formatDate(postDate)}</strong>
+								<span>&bullet;</span>
+								<strong>{calcReadTime(body)} min read</strong>
+							</>
+						)
+					}
+					{
+						collection === "tools" && (
+							<>
+								<strong>{formatDate(postDate)}</strong>
+								<span>&bullet;</span>
+								<strong>{content.data.version}</strong>
+							</>
+						)
+					}
+					{
+						collection === "models" && (
+							<>
+								<strong>{formatDate(postDate)}</strong>
+								<span>&bullet;</span>
+								<strong>{content.data.size}</strong>
+							</>
+						)
+					}
+				</small>
+			</div>
+			<article class="content flex flex-col gap-8">
+				<slot />
+			</article>
+		</div>
+
+		<SideBar {headings} {content} />
+	</div>
 </div>

@@ -5,6 +5,7 @@ id: 04c6be01b8b6469d9b73d7444f2ed886
 postDate: 2024-07-07
 image: batman.png
 description: This June, I put the spotlight one of the best clones out here, and B&M’s first invert model!
+size: 18.6 MB
 modelStats:
   - 182.9k
   - 291.2k

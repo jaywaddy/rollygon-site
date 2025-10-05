@@ -7,10 +7,10 @@ export function slugify (input: string): string {
         .replace(/-+/g, "-")
 }
 
-export function formatDate(date: Date): string {
+export function formatDate(date: Date, monthFormat?: "short"): string {
     return new Date(date).toLocaleString("en-US", {
         timeZone: "UTC",
-        month: "long",
+        month: monthFormat ? "short" : "long",
         day: "2-digit",
         year: "numeric",
     });

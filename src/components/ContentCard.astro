@@ -7,12 +7,13 @@ import { calcReadTime, formatDate, slugify } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
 
 interface Props {
-    type: "tool" | "post";
 	content: CollectionEntry<"tools" | "posts">;
 }
 
 const { content } = Astro.props;
 const { title, tags } = content.data;
+
+const { collection, slug } = content;
 ---
 
 <div class="relative flex items-center justify-between gap-8 border-lg shadow-lg p-4 bg-white">
@@ -42,13 +43,13 @@ const { title, tags } = content.data;
 	<div class="flex gap-2">
         {
             content.collection === "tools" && (
-                <Button label="View details" href={"/tools/" + slugify(title)} icon="arrow-right" />
+                <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" />
                 <Button label="Download" href={content.data.href} icon="download" primary />
             )
         }
         {
             content.collection === "posts" && (
-                <Button label="Read post" href={"/blog/" + slugify(title)} icon="arrow-right" />
+                <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" />
             )
         }
 	</div>

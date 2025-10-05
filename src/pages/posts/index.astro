@@ -1,0 +1,23 @@
+---
+import ContentCard from "@/components/ContentCard.astro";
+import FeaturedContent from "@/components/FeaturedContent.astro";
+import PageTitle from "@/components/layout/PageTitle.astro";
+import SearchBar from "@/components/SearchBar.astro";
+import { ALL_POSTS } from "@/content/config";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout pageTitle="Posts" color="neutral" pattern="3">
+	<div class="flex flex-col gap-4">
+		<PageTitle heading="Posts" />
+		<SearchBar />
+	</div>
+	<div class="flex flex-col gap-4">
+		<h2>Newest post</h2>
+		<FeaturedContent content={ALL_POSTS[0]} />
+	</div>
+	<h2>All articles</h2>
+	<div class="grid grid-cols-2 gap-8">
+		{[...ALL_POSTS].splice(1, ALL_POSTS.length).map((content) => <ContentCard {content} />)}
+	</div>
+</SiteLayout>

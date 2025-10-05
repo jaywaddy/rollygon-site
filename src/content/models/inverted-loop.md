@@ -5,6 +5,7 @@ id: 5fe6db4c42114bc296920eb07b3b453d
 postDate: 2024-04-11
 image: inverted-loop.png
 description: The track and supports of the first loop of a classic Arrow Looper layout.
+size: 18.6 MB
 modelStats:
   - 31.7k
   - 65.4k

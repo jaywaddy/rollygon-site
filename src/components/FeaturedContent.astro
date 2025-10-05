@@ -1,0 +1,100 @@
+---
+import Button from "@/ui/Button.astro";
+import type { CollectionEntry } from "astro:content";
+import { calcReadTime, formatDate } from "@/scripts/utilities";
+import TagList from "./TagList.astro";
+import ImageWrapper from "./ui/ImageWrapper.astro";
+import Model from "./ui/Model.astro";
+import Icon from "./ui/Icon.astro";
+
+interface Props {
+	content: CollectionEntry<"tools" | "posts" | "models">;
+	heading?: boolean;
+}
+
+const { content, heading } = Astro.props;
+const { title, tags, description, postDate } = content.data;
+const { collection, slug, body } = content;
+---
+
+<div class="flex flex-col gap-8">
+	{
+		content.collection === "models" ? (
+			<Model title={title} id={content.data.id} />
+		) : (
+			<ImageWrapper src={content.data.image} />
+		)
+	}
+	<div class="flex gap-8">
+		<div class="relative card-lg gap-2 h-fit">
+			{
+				heading ? (
+					<div class="flex gap-2 items-start">
+						<h1 class="truncate">{title}</h1>
+					</div>
+					<p class="mb-2">{description}</p>
+					<TagList {tags} />
+				) : (
+					<div class="flex gap-2 items-start justify-between">
+						<h2 class="truncate">{title}</h2>
+					</div>
+					<p class="mb-2">{description}</p>
+					<Button label="View details" href={`/${collection}/${slug}`} />
+				)
+			}
+			
+			
+		</div>
+		<div class="flex flex-col gap-4">
+			<div class="flex gap-4 w-[360px]">
+				<div class="card-sm items-center justify-center w-full text-nowrap">
+					<strong>{formatDate(postDate, "short")}</strong>
+				</div>
+				<div class="card-sm items-center justify-center w-full text-nowrap">
+
+					{
+						content.collection === "posts" ? (
+							<strong>{calcReadTime(body)} min read</strong>
+						)
+						: (
+							<strong>{content.data.size}</strong>
+						)
+					}
+				</div>
+			</div>
+			<div class="card-sm gap-8 justify-between h-full">
+				<TagList {tags} />
+				{
+					collection === "models" && (
+						<ul class="grid grid-cols-2 just gap-4 text-nowrap">
+							<li class="flex gap-1 items-center w-fit">
+								<Icon name="vertex" size="24" />
+								<span>
+									<strong>{content.data.modelStats[0]}</strong> Verts
+								</span>
+							</li>
+							<li class="flex gap-1 items-center w-fit">
+								<Icon name="triangle" size="24" />
+								<span>
+									<strong>{content.data.modelStats[1]}</strong> Tris
+								</span>
+							</li>
+							<li class="flex gap-1 items-center w-fit">
+								<Icon name="quad" size="24" />
+								<span>
+									<strong>{content.data.modelStats[2]}</strong> Quads
+								</span>
+							</li>
+							<li class="flex gap-1 items-center w-fit">
+								<Icon name="ngon" size="24" />
+								<span>
+									<strong>{content.data.modelStats[3]}</strong> N-gons
+								</span>
+							</li>
+						</ul>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</div>
