@@ -2,6 +2,7 @@
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import ModelCard from "@/components/ModelCard.astro";
+import Pagination from "@/components/Pagination.astro";
 import SearchBar from "@/components/SearchBar.astro";
 import { ALL_MODELS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
@@ -22,4 +23,5 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 			{ALL_MODELS.map((model) => <ModelCard {model} />)}
 		</div>
 	</div>
+	<Pagination />
 </SiteLayout>

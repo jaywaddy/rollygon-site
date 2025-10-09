@@ -8,16 +8,35 @@ interface Props {
 	type?: "submit" | "toggle" | "link";
 	label?: string;
 	href?: string;
+	iconLeft?: boolean;
 	icon?: ICON_NAME;
+	disabled?: boolean;
 	primary?: boolean;
 }
 
-const { id, type = "link", label, href, icon = "arrow-right", primary } = Astro.props;
+const {
+	id,
+	type = "link",
+	label,
+	href,
+	icon = "arrow-right",
+	primary,
+	iconLeft,
+	disabled,
+} = Astro.props;
 const buttonClasses = `
-	flex items-center gap-1 button-marquee py-2 border-sm shadow-lg shadow-lg-hover bg-[var(--button-color)] w-fit cursor-pointer
+	flex items-center justify-center gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer
+	${disabled ? "" : "button-marquee shadow-lg shadow-lg-hover"}
 	${!label ? "px-2" : "px-4"}
-	`;
+`;
 const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
+
+function setButtonTitle(label: string | undefined): string {
+	if (label) {
+		return label;
+	}
+	return titleCase(icon);
+}
 
 function setButtonColor(isPrimary: boolean | undefined): string {
 	if (isPrimary) {
@@ -26,37 +45,86 @@ function setButtonColor(isPrimary: boolean | undefined): string {
 
 	return Color.neutral;
 }
+
+function setIconSize(label: string | undefined): string {
+	if (label) {
+		return "16";
+	}
+
+	return "20";
+}
+
+function setIconColor(isDisabled: boolean | undefined): string {
+	if (isDisabled) {
+		return "var(--color-disabled-body)";
+	}
+	return "var(--color-text)";
+}
 ---
 
 {
 	type === "submit" && (
-		<button {id} {type} title={label ? label : titleCase(icon)} class={buttonClasses} {style}>
+		<button
+			{id}
+			data-disabled={disabled}
+			{type}
+			title={setButtonTitle(label)}
+			class={buttonClasses}
+			{style}
+		>
 			{label && <strong class="text-nowrap">{label}</strong>}
-			{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
+			{icon && <Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />}
 		</button>
 	)
 }
 {
 	type === "toggle" && (
 		<form action="toggle">
-			<label {id} title={label ? label : titleCase(icon)} class={buttonClasses} {style}>
+			<label
+				{id}
+				data-disabled={disabled}
+				title={label ? label : titleCase(icon)}
+				class={buttonClasses}
+				{style}
+			>
 				<input type="checkbox" />
 				{label && <strong class="text-nowrap">{label}</strong>}
-				{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
+				{icon && (
+					<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+				)}
 			</label>
 		</form>
 	)
 }
 {
 	type === "link" && (
-		<a {id} title={label ? label : titleCase(icon)} class={buttonClasses} {style} {href}>
+		<a
+			{id}
+			data-disabled={disabled}
+			title={label ? label : titleCase(icon)}
+			class={buttonClasses}
+			{style}
+			{href}
+		>
+			{iconLeft && (
+				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+			)}
 			{label && <strong class="text-nowrap">{label}</strong>}
-			{icon && <Icon name={icon} size={!label ? "24" : "16"} />}
+			{!iconLeft && icon !== "none" && (
+				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+			)}
 		</a>
 	)
 }
 
 <style>
+	[data-disabled="true"] {
+		color: var(--color-disabled-body);
+		background: var(--color-disabled-bg);
+		pointer-events: none;
+		cursor: not-allowed;
+	}
+
 	label:has(input[type="checkbox"]) {
 		& input[type="checkbox"] {
 			display: none;

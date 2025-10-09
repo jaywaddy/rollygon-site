@@ -171,6 +171,7 @@
   },
   "active": "bb2075dd3cf10246",
   "lastOpenFiles": [
+    "components/Pagination.astro",
     "pages/posts/index.astro",
     "pages/posts/[slug].astro",
     "pages/posts",
@@ -193,7 +194,6 @@
     "content/tools/utility-nodes.md",
     "content/tools/bm-support-generator copy.md",
     "content/tools/bm-track-generator.md",
-    "components/ContentCard.astro",
     "pages/about/about.md",
     "content/about/about.md",
     "content/drafts/How to Use Tools by Rollygon.md",

@@ -1,0 +1,20 @@
+---
+import Button from "./ui/Button.astro";
+
+interface Props {
+	placeholder?: boolean;
+}
+
+const { placeholder } = Astro.props;
+---
+
+<nav class="card-sm flex-row justify-between">
+	<Button label="Previous" icon="arrow-left" iconLeft disabled />
+	<ul class="flex gap-2">
+		<li><Button label="1" icon="none" primary /></li>
+		<li><Button label="2" icon="none" /></li>
+		<li><Button label="3" icon="none" /></li>
+		<li><Button label="4" icon="none" /></li>
+	</ul>
+	<Button label="Next" />
+</nav>

@@ -117,7 +117,6 @@ h3 {
     padding-inline: calc(var(--spacing) * 16)
 }
 
-
 @utility border-sm {
     border: solid 2px;
     border-radius: var(--radius-sm);
@@ -223,7 +222,7 @@ h3 {
 
         background-image: var(--marquee-pattern);
         transform: scale(2.2) rotate(-1deg);
-        animation: background-marquee 32s linear infinite;
+        animation: background-marquee 64s linear infinite;
 
         opacity: 0.05;
         content: "";
@@ -307,7 +306,7 @@ h3 {
     }
 
     100% {
-        background-position: -64px 32px;
+        background-position: -128px 64px;
     }
 }
 

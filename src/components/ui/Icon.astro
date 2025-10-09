@@ -38,6 +38,7 @@ import UtilityNodes from "@/icons/UtilityNodes.astro";
 import VectorSwitch from "@/icons/VectorSwitch.astro";
 
 export type ICON_NAME = (
+	| "none"
 	| "arrow-left"
 	| "arrow-right"
 	| "download"
@@ -87,6 +88,8 @@ const { name, size = "16", color = "var(--color-black)" } = Astro.props;
 
 <svg class="w-fit" width={size} height={size} viewBox="0 0 32 32" fill="none">
 	<title>{name}</title>
+
+	{name === "none" && undefined}
 
 	{name === "arrow-left" && <ArrowLeftIcon {color} />}
 	{name === "arrow-right" && <ArrowRightIcon {color} />}

@@ -6,7 +6,13 @@ import { ALL_TAGS } from "@/content/config";
 
 <div id="search-bar" class="flex flex-col justify-between gap-4 border-lg shadow-lg p-4 bg-white">
 	<nav class="flex justify-between w-full">
-		<Button id="filter-tag-button" label="Filter tags" icon="drop-down" type="toggle" />
+		<Button
+			id="filter-tag-button"
+			label="Filter tags"
+			icon="drop-down"
+			type="toggle"
+			disabled
+		/>
 		<div class="flex gap-2">
 			<form action="">
 				<div class="relative">
@@ -25,7 +31,7 @@ import { ALL_TAGS } from "@/content/config";
 					/>
 				</div>
 			</form>
-			<Button icon="search" type="submit" />
+			<Button icon="search" type="submit" disabled />
 		</div>
 	</nav>
 	<div id="search-tag-list">
@@ -43,6 +49,7 @@ import { ALL_TAGS } from "@/content/config";
 	}
 
 	input[type="search"][disabled] {
+		color: var(--color-disabled-body);
 		background-color: var(--color-disabled-bg);
 	}
 </style>
