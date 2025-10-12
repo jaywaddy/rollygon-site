@@ -18,10 +18,19 @@ const { collection, slug } = content;
 <div class="relative flex items-center justify-between gap-8 border-lg shadow-lg p-4 bg-white">
     {
         content.collection === "tools" && (
-            <div class="flex items-center gap-4">
-                <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                <small>{content.data.version}</small>
-                <Badge label={content.data.price} />
+            <div class="flex justify-between w-full">
+                <div class="flex items-center gap-4">
+                    <h3 class="flex justify-left truncate w-fit">{title}</h3>
+                    <small>{content.data.version}</small>
+                    <Badge label={content.data.price} />
+                </div>
+                <strong>
+                    <small class="flex gap-2">
+						<strong>{content.data.size}</strong>
+						&bullet;
+						<strong>{formatDate(content.data.postDate)}</strong>
+					</small>
+                </strong>
             </div>
         )
     }
@@ -43,7 +52,7 @@ const { collection, slug } = content;
         {
             content.collection === "tools" && (
                 <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" />
-                <Button label="Download" href={content.data.href} icon="download" primary />
+                <Button href={content.data.href} icon="download" primary />
             )
         }
         {
