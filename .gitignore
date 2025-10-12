@@ -24,5 +24,8 @@ pnpm-debug.log*
 .idea/
 
 # folders
-src/content/drafts/
-src/.obsidian/
+/src/content/drafts/
+/src/.obsidian
+
+# Local Netlify folder
+.netlify

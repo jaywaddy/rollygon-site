@@ -2,9 +2,25 @@
 import ContentCard from "@/components/ContentCard.astro";
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
+import Pagination from "@/components/Pagination.astro";
 import SearchBar from "@/components/SearchBar.astro";
-import { ALL_POSTS } from "@/content/config";
+
 import SiteLayout from "@/layouts/SiteLayout.astro";
+
+import { ALL_POSTS } from "@/content/config";
+import type { Page } from "astro";
+
+interface Props {
+	page: Page<any>;
+}
+
+export async function getStaticPaths({ paginate }: any): Promise<any> {
+	return paginate(ALL_POSTS, {
+		pageSize: 3,
+	});
+}
+
+const { page } = Astro.props;
 ---
 
 <SiteLayout pageTitle="Posts" color="neutral" pattern="3">
@@ -20,4 +36,5 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 	<div class="grid grid-cols-2 gap-8">
 		{[...ALL_POSTS].splice(1, ALL_POSTS.length).map((content) => <ContentCard {content} />)}
 	</div>
+	<Pagination {page} content={ALL_POSTS} />
 </SiteLayout>

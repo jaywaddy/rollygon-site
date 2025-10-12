@@ -1,20 +1,87 @@
 ---
-import Button from "./ui/Button.astro";
+import type { Page } from "astro";
+import Button from "@/ui/Button.astro";
+import type { Collection } from "@/content/config";
 
 interface Props {
-	placeholder?: boolean;
+	page: Page;
+	content: Array<Collection>;
 }
 
-const { placeholder } = Astro.props;
+const { page, content } = Astro.props;
+const { currentPage, lastPage, url } = page;
+const { next, prev, first, last } = url;
+
+const pageList = makePageList();
+
+function makePageList(): Array<number> {
+	const prevPage = currentPage - 1;
+	const nextPage = currentPage + 1;
+	const followingPage = nextPage + 1;
+	const leadingPage = prevPage - 1;
+
+	const setFirstValue = () => {
+		if (prevPage <= 0) {
+			return followingPage;
+		}
+
+		return prevPage;
+	};
+
+	const setLastValue = () => {
+		if (nextPage <= lastPage) {
+			return nextPage;
+		}
+
+		return leadingPage;
+	};
+
+	return [setFirstValue(), currentPage, setLastValue()].sort();
+}
 ---
 
-<nav class="card-sm flex-row justify-between">
-	<Button label="Previous" icon="arrow-left" iconLeft disabled />
-	<ul class="flex gap-2">
-		<li><Button label="1" icon="none" primary /></li>
-		<li><Button label="2" icon="none" /></li>
-		<li><Button label="3" icon="none" /></li>
-		<li><Button label="4" icon="none" /></li>
-	</ul>
-	<Button label="Next" />
-</nav>
+{
+	lastPage > 1 && (
+		<nav aria-label="Content pages" class="card-sm flex-row justify-between">
+			<Button
+				label="Prev"
+				icon="arrow-left"
+				iconLeft
+				disabled={url.prev === undefined && true}
+				href={prev}
+			/>
+			<ul class="flex gap-2 items-center">
+				{!pageList.includes(1) && (
+					<li>
+						<Button label="1" icon="none" href={first} primary={currentPage === 1} />
+					</li>
+				)}
+				{!pageList.includes(1) && pageList[0] - 1 > 1 && <li class="px-2">...</li>}
+				{pageList.map((pageNumber) => (
+					<li>
+						<Button
+							label={pageNumber.toString()}
+							icon="none"
+							href={`/${content[0].collection}/${pageNumber === 1 ? "" : pageNumber}`}
+							primary={currentPage === pageNumber}
+						/>
+					</li>
+				))}
+				{!pageList.includes(lastPage) && pageList[pageList.length - 1] + 1 < lastPage && (
+					<li class="px-2">...</li>
+				)}
+				<li>
+					{!pageList.includes(lastPage) && (
+						<Button
+							label={lastPage.toString()}
+							icon="none"
+							href={last}
+							primary={currentPage === lastPage}
+						/>
+					)}
+				</li>
+			</ul>
+			<Button label="Next" disabled={url.next === undefined && true} href={next} />
+		</nav>
+	)
+}
