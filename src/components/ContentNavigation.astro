@@ -1,0 +1,63 @@
+---
+import Button from "@/ui/Button.astro";
+import type { Collection } from "@/content/config";
+
+interface Props {
+	content: Collection;
+	contentCollection: Array<Collection>;
+	index: number;
+}
+
+function setPrevHref(): string {
+	if (index - 1 < 0) {
+		return contentCollection[0].slug;
+	}
+
+	return contentCollection[index - 1].slug;
+}
+
+function setNextHref(): string {
+	const max = contentCollection.length - 1;
+
+	if (index + 1 >= max) {
+		return contentCollection[max].slug;
+	}
+
+	return contentCollection[index + 1].slug;
+}
+
+function setDisabled(type: "next" | "prev"): boolean {
+	if (Astro.url.pathname === `/${content.collection}/${setPrevHref()}` && type === "prev") {
+		return true;
+	}
+
+	if (Astro.url.pathname === `/${content.collection}/${setNextHref()}` && type === "next") {
+		return true;
+	}
+
+	return false;
+}
+
+const { content, contentCollection, index } = Astro.props;
+---
+
+<nav class="card-sm flex-row justify-between">
+	<Button
+		label={`All ${content.collection}`}
+		icon="arrow-left"
+		iconLeft
+		href={`/${content.collection}`}
+	/>
+	<ul class="flex gap-2">
+		<li>
+			<Button
+				label="Prev"
+				icon="arrow-left"
+				iconLeft
+				href=`/${content.collection}/${setPrevHref()}`
+				disabled={setDisabled("prev")}
+			/>
+		</li>
+		<li><Button label="Next" href={setNextHref()} disabled={setDisabled("next")} /></li>
+	</ul>
+</nav>

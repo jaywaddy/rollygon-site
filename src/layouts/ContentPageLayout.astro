@@ -1,18 +1,20 @@
 ---
+import ContentNavigation from "@/components/ContentNavigation.astro";
+import ImageWrapper from "@/components/ui/ImageWrapper.astro";
+import Model from "@/components/ui/Model.astro";
 import SideBar from "@/components/SideBar.astro";
 import TagList from "@/components/TagList.astro";
-import ImageWrapper from "@/components/ui/ImageWrapper.astro";
-import Link from "@/ui/Link.astro";
+
 import { calcReadTime, formatDate } from "@/scripts/utilities";
-import Model from "@/components/ui/Model.astro";
 import type { Collection } from "@/content/config";
-import Icon, { matchIconNameType, type ICON_NAME } from "@/components/ui/Icon.astro";
 
 interface Props {
 	content: Collection;
+	contentCollection: Array<Collection>;
+	index: number;
 }
 
-const { content } = Astro.props;
+const { content, contentCollection, index } = Astro.props;
 const { title, description, postDate, tags, image } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
@@ -22,18 +24,13 @@ const { headings } = await content.render();
 	{
 		content.collection === "models" ? (
 			<div class="flex flex-col gap-8">
+				<ContentNavigation {content} {contentCollection} {index} />
 				<Model {title} id={content.data.id} />
-				<Link label={`View all ${collection}`} href={`/${collection}`} underline />
 			</div>
 		) : (
 			<div class="relative flex flex-col gap-8">
-				{content.collection === "tools" && (
-					<div class="absolute -top-4 -left-4 flex justify-center items-center border-lg shadow-lg rounded-full w-24 aspect-square z-10 bg-yellow">
-						<Icon name={matchIconNameType(content.data.icon)} size="64" />
-					</div>
-				)}
+				<ContentNavigation {content} {contentCollection} {index} />
 				<ImageWrapper src={image} />
-				<Link label={`View all ${collection}`} href={`/${collection}`} underline />
 			</div>
 		)
 	}

@@ -4,20 +4,20 @@ import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 export async function getStaticPaths() {
-	return ALL_TOOLS.map((tool) => ({
+	return ALL_TOOLS.map((tool, index) => ({
 		params: {
 			slug: tool.slug,
 		},
-		props: { tool },
+		props: { tool, index },
 	}));
 }
 
-const { tool } = Astro.props;
+const { tool, index } = Astro.props;
 const { Content } = await tool.render();
 ---
 
 <SiteLayout pageTitle={tool.data.title} color="yellow" pattern="3">
-	<ContentPageLayout content={tool}>
+	<ContentPageLayout content={tool} contentCollection={ALL_TOOLS} {index}>
 		<Content />
 	</ContentPageLayout>
 </SiteLayout>

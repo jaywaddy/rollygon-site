@@ -171,6 +171,7 @@
   },
   "active": "bb2075dd3cf10246",
   "lastOpenFiles": [
+    "components/ContentNavigation.astro",
     "pages/tools/[...page].astro",
     "pages/posts/[...page].astro",
     "pages/models/[...page].astro",
@@ -181,7 +182,6 @@
     "pages/posts/index.astro",
     "pages/posts/[slug].astro",
     "pages/posts",
-    "components/FeaturedContent.astro",
     "content/drafts/site-log-001.md",
     "content/drafts/site-log-002.md",
     "assets/backgrounds/decorative-siding-2.svg",

@@ -3,7 +3,7 @@ import Icon, { matchIconNameType } from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
 import type { CollectionEntry } from "astro:content";
 import Badge from "./ui/Badge.astro";
-import { calcReadTime, formatDate, slugify } from "@/scripts/utilities";
+import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
 
 interface Props {
@@ -12,7 +12,6 @@ interface Props {
 
 const { content } = Astro.props;
 const { title, tags } = content.data;
-
 const { collection, slug } = content;
 ---
 

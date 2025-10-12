@@ -4,20 +4,20 @@ import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 export async function getStaticPaths() {
-	return ALL_POSTS.map((post) => ({
+	return ALL_POSTS.map((post, index) => ({
 		params: {
 			slug: post.slug,
 		},
-		props: { post },
+		props: { post, index },
 	}));
 }
 
-const { post } = Astro.props;
+const { post, index } = Astro.props;
 const { Content } = await post.render();
 ---
 
 <SiteLayout pageTitle={post.data.title} color="neutral" pattern="3">
-	<ContentPageLayout content={post}>
+	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
 </SiteLayout>
