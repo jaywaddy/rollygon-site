@@ -32,7 +32,7 @@ const { page } = Astro.props;
 		<h2>Newest post</h2>
 		<FeaturedContent content={ALL_POSTS[0]} />
 	</div>
-	<h2>All articles</h2>
+	<h2>All posts</h2>
 	<div class="grid grid-cols-2 gap-8">
 		{[...ALL_POSTS].splice(1, ALL_POSTS.length).map((content) => <ContentCard {content} />)}
 	</div>
