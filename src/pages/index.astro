@@ -1,6 +1,6 @@
 ---
 import { SITE_HEADING } from "@/scripts/constants";
-import { ALL_MODELS, LATEST_POSTS, LATEST_TOOLS } from "@/content/config";
+import { ALL_POSTS, ALL_TOOLS } from "@/content/config";
 
 import AboutSection from "@/components/layout/AboutSection.astro";
 import Button from "@/components/ui/Button.astro";
@@ -8,10 +8,11 @@ import ContentCard from "@/components/ContentCard.astro";
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import Link from "@/ui/Link.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
 ---
 
 <SiteLayout pageTitle="Home" color="blue" pattern="1">
-	<section class="flex flex-col gap-4">
+	<section class="layout-sm">
 		<h1>{SITE_HEADING}</h1>
 		<div class="flex gap-16">
 			<div class="card-lg gap-4 h-fit">
@@ -30,22 +31,22 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 		</div>
 	</section>
 
-	<section class="flex flex-col gap-4">
-		<h2 data-shadow>Newest model</h2>
-		<FeaturedContent content={ALL_MODELS[4]} />
+	<section class="layout-sm">
+		<h2 data-shadow>Featured model</h2>
+		<FeaturedContent content={FEATURED_MODEL} />
 		<Link label="View all models" href="/models" underline />
 	</section>
-	<section class="flex flex-col gap-4">
-		<h2 data-shadow class="heading-md">Newst tools</h2>
-		<div class="flex flex-col gap-8 mb-2">
-			{LATEST_TOOLS.map((content) => <ContentCard {content} />)}
+	<section class="layout-sm">
+		<h2 data-shadow class="heading-md">Featured tools</h2>
+		<div class="layout-md mb-2">
+			{FEATURED_TOOLS.map((content) => <ContentCard {content} />)}
 		</div>
 		<Link data-shadow label="View all tools" href="/tools" underline />
 	</section>
 	<section class="flex flex-col gap-4">
-		<h2 data-shadow class="heading-md">Newest posts</h2>
-		<div class="flex flex-col gap-8 mb-2">
-			{LATEST_POSTS.map((content) => <ContentCard {content} />)}
+		<h2 data-shadow class="heading-md">Featured posts</h2>
+		<div class="layout-md mb-2">
+			{FEATURED_POSTS.map((content) => <ContentCard {content} />)}
 		</div>
 		<Link data-shadow label="View all posts" href="/posts" underline />
 	</section>

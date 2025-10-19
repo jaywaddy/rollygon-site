@@ -1,14 +1,15 @@
 ---
 import Button from "@/ui/Button.astro";
-import type { CollectionEntry } from "astro:content";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
 import ImageWrapper from "./ui/ImageWrapper.astro";
 import Model from "./ui/Model.astro";
 import Icon from "./ui/Icon.astro";
+import type { Collection } from "@/content/config";
+import VideoEmbed from "./VideoEmbed.astro";
 
 interface Props {
-	content: CollectionEntry<"tools" | "posts" | "models">;
+	content: Collection;
 	heading?: boolean;
 }
 
@@ -21,12 +22,14 @@ const { collection, slug, body } = content;
 	{
 		content.collection === "models" ? (
 			<Model title={title} id={content.data.id} />
+		) : content.collection === "posts" && content.data.embed ? (
+			<VideoEmbed embed={content.data.embed}/>
 		) : (
 			<ImageWrapper src={content.data.image} />
 		)
 	}
 	<div class="flex gap-8">
-		<div class="relative card-lg gap-2 h-fit">
+		<div class="relative card-lg gap-2 w-full h-fit">
 			{
 				heading ? (
 					<div class="flex gap-2 items-start">

@@ -1,5 +1,5 @@
 ---
-title: Flight of Fear
+title: Poltergeist
 subTitle: Premier Rides LIM Launch Coaster
 id: 2fe3479533184f8788caf28dad9b9c1e
 postDate: 2024-11-10

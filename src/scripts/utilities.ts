@@ -1,3 +1,5 @@
+import type { Collection } from "@/content/config";
+
 export function slugify (input: string): string {
     return input
         .replace(/^\s+|\s+$/g, "")
@@ -36,4 +38,8 @@ export function titleCase(input: string):string {
         .split("-")
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");    
+}
+
+export function findContent (contentArray: Array<Collection>, slug: string) {
+    return contentArray.find(content => content.slug === slug) || contentArray[0];
 }

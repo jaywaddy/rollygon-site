@@ -1,0 +1,18 @@
+---
+interface Props {
+	embed: string;
+}
+
+const { embed } = Astro.props;
+---
+
+<div class="card-sm">
+	<iframe
+		class="aspect-video rounded-sm"
+		src={`https://www.youtube.com/embed/${embed}`}
+		title="YouTube video player"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		referrerpolicy="strict-origin-when-cross-origin"
+		allowfullscreen></iframe>
+</div>

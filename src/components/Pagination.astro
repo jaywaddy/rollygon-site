@@ -12,31 +12,39 @@ const { page, content } = Astro.props;
 const { currentPage, lastPage, url } = page;
 const { next, prev, first, last } = url;
 
-const pageList = makePageList();
+const pageList = makePageList([]);
 
-function makePageList(): Array<number> {
+function makePageList(array: Array<number>): Array<number> {
 	const prevPage = currentPage - 1;
 	const nextPage = currentPage + 1;
 	const followingPage = nextPage + 1;
 	const leadingPage = prevPage - 1;
 
-	const setFirstValue = () => {
-		if (prevPage <= 0) {
-			return followingPage;
-		}
+	array.push(currentPage);
 
-		return prevPage;
-	};
+	if (prevPage <= 0) {
+		array.push(followingPage);
+	} else {
+		array.push(prevPage);
+	}
 
-	const setLastValue = () => {
-		if (nextPage <= lastPage) {
-			return nextPage;
-		}
+	if (nextPage <= lastPage) {
+		array.push(nextPage);
+	} else {
+		array.push(leadingPage);
+	}
 
-		return leadingPage;
-	};
+	if (lastPage < 3 && currentPage < lastPage) {
+		array.sort();
+		array.pop();
+	}
 
-	return [setFirstValue(), currentPage, setLastValue()].sort();
+	if (lastPage < 3 && currentPage === lastPage) {
+		array.sort();
+		array.shift();
+	}
+
+	return array.sort();
 }
 ---
 

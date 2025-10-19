@@ -1,11 +1,9 @@
 ---
 title: Import NL2 Spline to Blender
 postDate: 2024-11-12
-image: /posts/import-nl2-spline-to-blender.png
+image: /posts/import-nl2-spline-to-blender/header.png
 description: Description of the article would go into this section right here. This could be between one to two sentences.
-contentType: article
 tags:
-    - Coaster
     - Guide
     - Blender
     - NoLimits 2

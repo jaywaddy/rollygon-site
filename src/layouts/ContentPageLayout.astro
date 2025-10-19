@@ -7,6 +7,7 @@ import TagList from "@/components/TagList.astro";
 
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
+import VideoEmbed from "@/components/VideoEmbed.astro";
 
 interface Props {
 	content: Collection;
@@ -30,7 +31,11 @@ const { headings } = await content.render();
 		) : (
 			<div class="relative flex flex-col gap-8">
 				<ContentNavigation {content} {contentCollection} {index} />
-				<ImageWrapper src={image} />
+				{content.collection === "posts" && content.data.embed ? (
+					<VideoEmbed embed={content.data.embed} />
+				) : (
+					<ImageWrapper src={image} />
+				)}
 			</div>
 		)
 	}

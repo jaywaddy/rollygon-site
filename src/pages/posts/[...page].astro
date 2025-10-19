@@ -8,6 +8,7 @@ import SearchBar from "@/components/SearchBar.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 import { ALL_POSTS } from "@/content/config";
+import { FEATURED_POSTS } from "@/scripts/constants";
 import type { Page } from "astro";
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: any): Promise<any> {
 	return paginate(ALL_POSTS, {
-		pageSize: 3,
+		pageSize: 10,
 	});
 }
 
@@ -29,12 +30,14 @@ const { page } = Astro.props;
 		<SearchBar />
 	</div>
 	<div class="flex flex-col gap-4">
-		<h2>Newest post</h2>
-		<FeaturedContent content={ALL_POSTS[0]} />
+		<h2>Featured post</h2>
+		<FeaturedContent content={FEATURED_POSTS[0]} />
 	</div>
-	<h2>All posts</h2>
-	<div class="flex flex-col gap-8 w-full">
-		{[...ALL_POSTS].splice(0, ALL_POSTS.length - 1).map((content) => <ContentCard {content} />)}
+	<div class="flex flex-col gap-4">
+		<h2>All posts</h2>
+		<div class="flex flex-col gap-8 w-full">
+			{page.data.map((content) => <ContentCard {content} />)}
+		</div>
 	</div>
 	<Pagination {page} content={ALL_POSTS} />
 </SiteLayout>

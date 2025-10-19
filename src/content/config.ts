@@ -1,4 +1,3 @@
-import { NEW_POSTS_COUNT, NEW_TOOLS_COUNT } from "@/scripts/constants";
 import { z, defineCollection, type CollectionEntry, getCollection } from "astro:content";
 
 export type Collection = CollectionEntry<"posts" | "tools" | "models">;
@@ -9,8 +8,9 @@ const postCollection = defineCollection({
         title: z.string(),
         postDate: z.date(),
         description: z.string(),
-        image: z.string(),
+        image: z.optional(z.string()),
         tags: z.array(z.string()),
+        embed: z.optional(z.string()),
     })
 });
 
@@ -58,8 +58,6 @@ export const ALL_POSTS: Array<CollectionEntry<"posts">> = (
 		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
 );
 
-export const LATEST_POSTS: Array<CollectionEntry<"posts">> = [...ALL_POSTS].splice(0, NEW_POSTS_COUNT);
-
 export const ALL_TOOLS: Array<CollectionEntry<"tools">> = (
 	await getCollection("tools")
 ).sort(
@@ -67,16 +65,12 @@ export const ALL_TOOLS: Array<CollectionEntry<"tools">> = (
 		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
 );
 
-export const LATEST_TOOLS: Array<CollectionEntry<"tools">> = [...ALL_TOOLS].splice(0, NEW_TOOLS_COUNT);
-
 export const ALL_MODELS: Array<CollectionEntry<"models">> = (
 	await getCollection("models")
 ).sort(
 	(olderDate: CollectionEntry<"models">, newerDate: CollectionEntry<"models">) =>
 		newerDate.data.postDate.valueOf() - olderDate.data.postDate.valueOf(),
 );
-
-export const LATEST_MODELS: Array<CollectionEntry<"models">> = [...ALL_MODELS].splice(0, 1);
 
 export const ALL_CONTENT = [
     ...ALL_POSTS,

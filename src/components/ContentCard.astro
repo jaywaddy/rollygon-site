@@ -1,13 +1,13 @@
 ---
 import Icon, { matchIconNameType } from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
-import type { CollectionEntry } from "astro:content";
 import Badge from "./ui/Badge.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
+import type { Collection } from "@/content/config";
 
 interface Props {
-	content: CollectionEntry<"tools" | "posts">;
+	content: Collection;
 }
 
 const { content } = Astro.props;
@@ -28,7 +28,7 @@ const { collection, slug } = content;
                     <small class="flex gap-2">
 						<strong>{content.data.size}</strong>
 						&bullet;
-						<strong>{formatDate(content.data.postDate)}</strong>
+						<strong>{formatDate(content.data.postDate, "short")}</strong>
 					</small>
                 </strong>
             </div>
@@ -42,7 +42,7 @@ const { collection, slug } = content;
                     <small class="flex gap-2">
 						<strong>{calcReadTime(content.body)} min read</strong>
 						&bullet;
-						<strong>{formatDate(content.data.postDate)}</strong>
+						<strong>{formatDate(content.data.postDate, "short")}</strong>
 					</small>
                 </strong>
             </div>
@@ -58,6 +58,11 @@ const { collection, slug } = content;
         {
             content.collection === "posts" && (
                 <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" />
+            )
+        }
+        {
+            content.collection === "posts" && content.data.embed && (
+                <Button href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
             )
         }
 	</div>

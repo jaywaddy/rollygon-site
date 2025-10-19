@@ -122,6 +122,24 @@ h3 {
     padding-inline: calc(var(--spacing) * 16)
 }
 
+@utility layout-sm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+}
+
+@utility layout-md {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 8);
+}
+
+@utility layout-lg {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 16);
+}
+
 @utility border-sm {
     border: solid 2px;
     border-radius: var(--radius-sm);
@@ -265,7 +283,7 @@ h3 {
     }
 }
 
-@media (max-width: 40rem) {
+/* @media (max-width: 40rem) {
     .wrapper {
         width: 100vw;
         padding: 2rem;
@@ -282,9 +300,9 @@ h3 {
     .wrapper {
         width: 50rem;
     }
-}
+} */
 
-@media (min-width: 80rem) {
+@media (min-width: 76rem) {
     .wrapper {
         width: 72rem;
     }
