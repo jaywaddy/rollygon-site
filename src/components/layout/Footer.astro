@@ -1,36 +1,80 @@
 ---
+import { ALL_MODELS, ALL_POSTS } from "@/content/config";
+import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
 import Link from "@/ui/Link.astro";
-import SiteTitle from "@/components/SiteTitle.astro";
+import Badge from "@/ui/Badge.astro";
+import Button from "../ui/Button.astro";
+import SiteTitle from "../SiteTitle.astro";
+
+const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATURED_MODEL.slug);
 ---
 
-<footer class="mt-auto w-full border-t-2">
-	<nav class="wrapper flex gap-16 py-16">
-		<div class="flex flex-col gap-2">
-			<SiteTitle />
-		</div>
-		<div class="grid grid-cols-4 gap-4 w-full">
-			<ul>
-				<li><Link label="Home" href="/" underline /></li>
-				<li><Link label="About" href="/about" underline /></li>
-			</ul>
-			<ul>
-				<li><Link label="All Models" href="/models" underline /></li>
-				<li><Link label="Coaster Models" href="/tags/coaster" underline /></li>
-				<li><Link label="Coaster Element Models" href="/tags/element" underline /></li>
-			</ul>
-			<ul>
-				<li><Link label="All Tools" href="/tools" underline /></li>
-				<li><Link label="Track Generation Tools" href="/tags/track-gen" underline /></li>
-				<li>
-					<Link label="Support Generation Tools" href="/tags/support-gen" underline />
-				</li>
-				<li><Link label="Utility Nodes" href="/tags/utility-nodes" underline /></li>
-			</ul>
-			<ul>
-				<li><Link label="All Blog Posts" href="/blog" underline /></li>
-				<li><Link label="Guides" href="/tags/guide" underline /></li>
-			</ul>
-		</div>
+<footer class="border-t-2">
+	<section data-footer-banner class="wrapper flex justify-between py-16 border-b">
+		<SiteTitle />
+		<ul class="w-[320px]">
+			<li><small class="uppercase">Socials</small></li>
+			<li class="flex flex-wrap gap-2">
+				<Button icon="gumroad" href="https://rollygon.gumroad.com/" />
+				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" />
+				<Button icon="youtube" href="https://youtube.com/@Rollygon" />
+				<Button icon="bluesky" href="https://rollygon.bsky.social/" />
+				<Button icon="send" href="mailto:message@rollgy.com" />
+			</li>
+		</ul>
+	</section>
+	<nav class="wrapper flex flex-wrap gap-16 py-16">
+		<ul>
+			<li><small class="uppercase">Navigation</small></li>
+			<li><Link label="Home" href="/" underline /></li>
+			<li><Link label="Models" href="/models" underline /></li>
+			<li><Link label="Tools" href="/tools" underline /></li>
+			<li><Link label="Posts" href="/posts" underline /></li>
+			<li><Link label="About" href="/about" underline /></li>
+		</ul>
+		<ul>
+			<li><small class="uppercase">Models</small></li>
+			<li>
+				<Link
+					label={FEATURED_MODEL.data.title}
+					href={`/models/${FEATURED_MODEL.slug}`}
+					underline
+				/>
+				{ALL_MODELS[0] === FEATURED_MODEL && <Badge label="NEW!" color="lime" />}
+			</li>
+			<li class="flex gap-2">
+				<Link
+					label={featuredModelList[0].data.title}
+					href={`/models/${featuredModelList[0].slug}`}
+					underline
+				/>
+				{ALL_MODELS[0] === featuredModelList[0] && <Badge label="NEW!" color="lime" />}
+			</li>
+			<li>
+				<Link
+					label={featuredModelList[1].data.title}
+					href={`/models/${featuredModelList[1].slug}`}
+					underline
+				/>
+				{ALL_MODELS[0] === featuredModelList[1] && <Badge label="NEW!" color="lime" />}
+			</li>
+		</ul>
+		<ul>
+			<li><small class="uppercase">Tools</small></li>
+			{
+				FEATURED_TOOLS.map((tool) => (
+					<Link label={tool.data.title} href={`/tools/${tool.slug}`} underline />
+				))
+			}
+		</ul>
+		<ul>
+			<li><small class="uppercase">Posts</small></li>
+			{
+				FEATURED_POSTS.map((post) => (
+					<Link label={post.data.title} href={`/tools/${post.slug}`} underline />
+				))
+			}
+		</ul>
 	</nav>
 	<div class="flex justify-center items-center py-4 bg-neutral-900 text-neutral-50">
 		<small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>
@@ -50,5 +94,12 @@ import SiteTitle from "@/components/SiteTitle.astro";
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+	}
+
+	[data-footer-banner]::after {
+		position: absolute;
+		overflow: hidden;
+		content: "";
+		inset: 0;
 	}
 </style>
