@@ -40,7 +40,6 @@ const modelCollection = defineCollection({
         description: z.string(),
         size: z.string(),
         modelStats: z.array(z.any()),
-        image: z.string(),
         tags: z.array(z.string()),
     })
 });

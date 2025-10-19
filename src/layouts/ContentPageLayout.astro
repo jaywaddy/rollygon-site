@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { content, contentCollection, index } = Astro.props;
-const { title, description, postDate, tags, image } = content.data;
+const { title, description, postDate, tags } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
 ---
@@ -34,7 +34,7 @@ const { headings } = await content.render();
 				{content.collection === "posts" && content.data.embed ? (
 					<VideoEmbed embed={content.data.embed} />
 				) : (
-					<ImageWrapper src={image} />
+					<ImageWrapper src={`/${content.collection}/${content.slug}/header.png`} />
 				)}
 			</div>
 		)

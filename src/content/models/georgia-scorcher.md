@@ -3,7 +3,6 @@ title: Georgia Scorcher
 subTitle: B&M Stand-Up Coaster
 id: f425043b3fed4024a8ed04973712ad96
 postDate: 2024-06-01
-image: georgia-scorcher.png
 description: "For this month we’re taking a trip to Six Flags: Over Georgia for one of the best standup coasters built by B&M! This model highlights of the track and supports of the coaster."
 size: 18.6 MB
 modelStats:

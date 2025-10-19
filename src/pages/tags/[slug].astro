@@ -79,7 +79,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 					{ALL_TOOLS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ContentCard type="tool" {content} />
+								<ContentCard {content} />
 							)
 						);
 					})}
@@ -95,7 +95,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 					{ALL_POSTS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ContentCard type="post" {content} />
+								<ContentCard {content} />
 							)
 						);
 					})}

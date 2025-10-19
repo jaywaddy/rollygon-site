@@ -56,7 +56,7 @@ function makePageList(array: Array<number>): Array<number> {
 				icon="arrow-left"
 				iconLeft
 				disabled={url.prev === undefined && true}
-				href={prev}
+				href={prev || "/"}
 			/>
 			<ul class="flex gap-2 items-center">
 				{!pageList.includes(1) && (

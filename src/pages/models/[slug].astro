@@ -1,8 +1,10 @@
 ---
+import ContentCard from "@/components/ContentCard.astro";
 import ModelCard from "@/components/ModelCard.astro";
-import { ALL_MODELS } from "@/content/config";
+import { ALL_MODELS, ALL_POSTS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { titleCase } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
 	return ALL_MODELS.map((model, index) => ({
@@ -15,6 +17,9 @@ export async function getStaticPaths() {
 
 const { model, index } = Astro.props;
 const { Content } = await model.render();
+const modelUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
+	content.data.tags.includes(getTagName(model.slug)),
+);
 
 function setModelIndex(): number {
 	if (index + 1 >= ALL_MODELS.length) {
@@ -23,14 +28,34 @@ function setModelIndex(): number {
 
 	return index + 1;
 }
+
+function getTagName(input: string) {
+	const tag = titleCase(input);
+
+	if (tag === "Batman") {
+		return "Batman: The Ride";
+	}
+
+	return tag;
+}
 ---
 
 <SiteLayout pageTitle={model.data.title} color="green" pattern="3">
 	<ContentPageLayout content={model} contentCollection={ALL_MODELS} {index}>
 		<Content />
 	</ContentPageLayout>
-	<div class="flex flex-col gap-8">
+	{
+		modelUpdates.length > 0 && (
+			<section class="layout-md">
+				<h2>Build updates</h2>
+				{modelUpdates.map((content) => (
+					<ContentCard {content} />
+				))}
+			</section>
+		)
+	}
+	<section class="layout-md">
 		<h2>Next model</h2>
 		<ModelCard model={ALL_MODELS[setModelIndex()]} />
-	</div>
+	</section>
 </SiteLayout>

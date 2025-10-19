@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { model, featured } = Astro.props;
-const { title, subTitle, id, tags, description, image, modelStats } = model.data;
+const { title, subTitle, id, tags, description, image } = model.data;
 
 function generateRotation(): string {
 	const min = -6;
@@ -48,7 +48,7 @@ function generateRotation(): string {
 			>
 				<div class="flex justify-center items-center p-2">
 					<Image
-						src={"/images/" + image}
+						src={`/images/models/${model.slug}/header.png`}
 						alt={title + " - " + subTitle}
 						class="rounded-[var(--radius-sm)] w-full aspect-video"
 						width="1920"

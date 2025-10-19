@@ -1,5 +1,5 @@
 ---
-import { setStyles } from "@/scripts/interface";
+import { setStyles, Color, Pattern } from "@/scripts/interface";
 
 interface props {
 	label: string;
@@ -10,8 +10,8 @@ const { label, bgColor } = Astro.props;
 ---
 
 <div
-	class="flex justify-center py-4 bg-(--banner-bg) border-bottom"
-	style={{ "--banner-bg": "var(--color-" + bgColor + ")" }}
+	class="flex background-marquee justify-center py-4 bg-yellow border-bottom"
+	style={setStyles("marquee", Color[bgColor], Pattern[6])}
 >
 	<strong>{label}</strong>
 </div>

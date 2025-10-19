@@ -14,12 +14,12 @@ const { photo } = Astro.props;
 {
 	photo ? (
 		<div class="relative flex flex-col w-[320px] h-[320px]" style={{ "--radius": "32px" }}>
-			<ImageWrapper size="md" shape="round" aspect="1/1" src="about.png" />
+			<ImageWrapper size="md" shape="round" aspect="1/1" src="/about/about.png" />
 			<div class="absolute top-2 -rotate-4">
 				<InfoBanner />
 			</div>
 			<p class="absolute card-sm bottom-2 rotate-2">
-				I'm Jay (or Rolly), and I make roller coasters out of polygons!
+				I'm Rolly (or Jay), and I make roller coasters out of polygons!
 			</p>
 			<SocialLink icon="gumroad" href="https://rollygon.gumroad.com/" rotation="105" />
 			<SocialLink icon="sketchfab" href="https://sketchfab.com/Rollygon" rotation="125" />
@@ -37,7 +37,7 @@ const { photo } = Astro.props;
 			style={{ "--radius": "32px" }}
 		>
 			<InfoBanner />
-			<p class="card-sm">I'm Jay (or Rolly), and I make roller coasters out of polygons!</p>
+			<p class="card-sm">I'm Rolly (or Jay), and I make roller coasters out of polygons!</p>
 			<div class="flex flex-row justify-between card-sm">
 				<Button icon="gumroad" href="https://rollygon.gumroad.com/" />
 				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" />

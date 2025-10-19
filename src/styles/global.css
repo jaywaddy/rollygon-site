@@ -241,6 +241,7 @@ h3 {
     &::before {
         position: absolute;
         overflow: hidden;
+        height: 110%;
         inset: 25%;
 
         background-image: var(--marquee-pattern);
