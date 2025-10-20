@@ -71,7 +71,7 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 			<li><small class="uppercase">Posts</small></li>
 			{
 				FEATURED_POSTS.map((post) => (
-					<Link label={post.data.title} href={`/tools/${post.slug}`} underline />
+					<Link label={post.data.title} href={`/posts/${post.slug}`} underline />
 				))
 			}
 		</ul>

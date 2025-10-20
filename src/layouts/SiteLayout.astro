@@ -7,6 +7,7 @@ import type { ColorName } from "@/scripts/interface";
 import type { PatternName } from "@/scripts/interface";
 import SiteBanner from "@/components/SiteBanner.astro";
 import ContactForm from "@/components/layout/ContactForm.astro";
+import Button from "@/components/ui/Button.astro";
 
 interface Props {
 	pageTitle: string;
@@ -38,10 +39,10 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 		<Header />
 		<SiteBanner label="Site under construction; pardon the dust!" bgColor="yellow" />
 		<main
-			class="background-marquee"
+			class="background-marquee z-1"
 			style={setStyles("marquee", Color[color], Pattern[pattern])}
 		>
-			<section class="site-body wrapper flex flex-col gap-16 py-16">
+			<section class="site-body wrapper layout-lg py-16">
 				<slot />
 				<ContactForm />
 			</section>

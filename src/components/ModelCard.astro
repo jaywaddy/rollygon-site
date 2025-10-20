@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { model, featured } = Astro.props;
-const { title, subTitle, id, tags, description, image } = model.data;
+const { title, subTitle, id, tags, description } = model.data;
 
 function generateRotation(): string {
 	const min = -6;
