@@ -1,0 +1,2 @@
+{"rule":"EN_A_VS_AN","sentence":"^\\QIf you would like to set up your files ahead of time, I suggest having an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Dummy\\+|Dummy's\\+)[0-9]+\\Q folder inside your NoLimits project and also using an \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Dummy\\+|Dummy's\\+)[0-9]+\\Q folder for Blender.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QEventually I realized that it was time to switch frameworks that would allow me to create my own shadcn/ui-like, reusable elements.\\E$"}

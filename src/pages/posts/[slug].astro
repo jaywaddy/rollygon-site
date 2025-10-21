@@ -3,6 +3,7 @@ import ContentCard from "@/components/ContentCard.astro";
 import { ALL_POSTS } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { findContent } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
 	return ALL_POSTS.map((post, index) => ({
@@ -31,6 +32,12 @@ function setPostIndex(): number {
 	</ContentPageLayout>
 	<div class="flex flex-col gap-8">
 		<h2>Next post</h2>
-		<ContentCard content={ALL_POSTS[setPostIndex()]} />
+		{
+			post.data.next ? (
+				<ContentCard content={findContent(ALL_POSTS, post.data.next)} />
+			) : (
+				<ContentCard content={ALL_POSTS[setPostIndex()]} />
+			)
+		}
 	</div>
 </SiteLayout>

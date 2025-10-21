@@ -1,15 +1,16 @@
 ---
 title: Import NL2 Spline to Blender
-postDate: 2024-11-12
-image: /posts/import-nl2-spline-to-blender/header.png
+postDate: 2025-10-17
+image: true
 description: Description of the article would go into this section right here. This could be between one to two sentences.
+next: site-log-002
 tags:
     - Guide
     - Blender
     - NoLimits 2
 ---
 
-Congrats! You've finished your NoLimits coaster layout! 🎉  Now it's time to turn it into a 3D model for printing, for importing as a TMTK item in Planet Coaster, or *just because you can!* This guide will help you begin the next stage of your project: by exporting both the spline and supports into Blender, and then (eventually) you'll get a model to export to all that fun stuff mentioned earlier.
+Congrats! You've finished your NoLimits 2 coaster layout! 🎉 Now it's time to turn it into a 3D model for printing, for importing as a TMTK item in Planet Coaster, or *just because you can!* This guide will help you begin the next stage of your project: by exporting both the spline and supports into Blender, and then (eventually) you'll get a model to export to all that fun stuff mentioned earlier.
 
 ## Downloads & Setup
 
@@ -21,9 +22,9 @@ To pull this off, you'll need four things:
 
 (I'm looking for ways to do this with the standard version of NoLimits 2, but for now you'll need to have the Professional version for this method to work.)
 
-For Blender, I typically use the most recent version so that my tools like Track and Support generators are always up to date. This guide will be using version 4.5+, but if anything becomes depreciated, please reach out to me and I'll make updates.
+For Blender, I typically use the most recent version so that my tools like Track and Support generators are always up-to-date. This guide will be using version 4.5+, but if anything becomes depreciated, please reach out to me and I'll make updates.
 
-If you would like to set up your files ahead of time, I suggest having an `exports` folder inside of your NoLimits project and also using an `add-ons`  folder for Blender. For now, go ahead a take your zip files you just downloaded and drop them in that `add-ons` folder. I'll show you how to install them when we open Blender later.
+If you would like to set up your files ahead of time, I suggest having an `exports` folder inside your NoLimits project and also using an `add-ons` folder for Blender. For now, go ahead a take your zip files you just downloaded and drop them in that `add-ons` folder. I'll show you how to install them when we open Blender later.
 
 To install the Track and Support Blender add-ons listed above, open your Blender preferences with `Ctrl/CMD ,` or go under the `Edit` menu then `Preferences`. In here, you'll find the `Add-ons` menu. For version 4.5 and up, you'll have to hit the drop-down menu and choose `Install from disk`. And now, find that `add-ons` folder and select the .zip files to install them. Do this for both add-ons, and you're done with this part.
 
@@ -49,7 +50,7 @@ When your "coaster" is selected, go to the `Professional` tab. In here, you'll h
 
 With splines, you'll have two Spline Export Options. The Distance Between Points is the amount of detail in your spline. So, the lower the number, the more detailed spline you get. (Too much detail can slow down your computer by a lot!) For now, `0.5` meters is perfectly fine and the option I use the most.
 
-The second option here is the spline type. *You should always chose center of rails!* This will be the origin point for the track
+The second option here is the spline type. *You should always choose center of rails!* This will be the origin point for the track
 
 ![Figure 4](/images/posts/import-nl2-spline-to-blender/figure-03.png)
 
@@ -61,23 +62,23 @@ Ok, Blender time!
 
 ## Blender
 
-Once everything is installed from the initial setup, you wont have to worry about that part ever again which is great! From this point on, whenever you open Blender, all you'll need to do is click `File` > `Import`.
+Once everything is installed from the initial setup, you won't have to worry about that part ever again which is great! From this point on, whenever you open Blender, all you'll need to do is click `File` > `Import`.
 
 ![Figure 5](/images/posts/import-nl2-spline-to-blender/figure-05.gif)
 
-To import the spline, select `NoLimits 2 Professional Track Data (.csv)`, and for supports select `NoLimits 2 Professional Supports (*.xml)`. Find your  `exports` folder from your NoLimits project, and import each spline and support file *individually*. 
+To import the spline, select `NoLimits 2 Professional Track Data (.csv)`, and for supports select `NoLimits 2 Professional Supports (*.xml)`. Find your `exports` folder from your NoLimits project, and import each spline and support file *individually*. 
 
 Yes, each file must *individually* be imported into Blender. So, on my end I'll have to import my track spline and all 5 parts of my support files separately. Having the files separated makes working in chunks much easier both in the NoLimits Editor and in Blender, especially with projects as complicated as this one.
 
 ![Figure 6](/images/posts/import-nl2-spline-to-blender/figure-06.png)
 
-After importing the track spline and support files into Blender, notice the track spline's Z-rotation and support Z-rotations don't align. The best way of resolving this is to rotate the track spline on the Z-axis by 180 degrees. It's more efficient than rotating all of the support objects. 
+After importing the track spline and support files into Blender, notice the track spline's Z-rotation and support Z-rotations don't align. The best way of resolving this is to rotate the track spline on the Z-axis by 180 degrees. It's more efficient than rotating each support object individually. 
 
 ![Figure 7](/images/posts/import-nl2-spline-to-blender/figure-07.gif)
 
 *Don't forget to either apply your rotation in object mode!*
 
-### Track  Mesh
+### Track Mesh
 
 If you don't have any track modeled yet, use the default cube. Shape it however you want, but make sure the `center of rails` (or the top of the cube in this example) falls on `Z-position: 0` and the length of the track runs on the X-axis. It's also a good idea to have it centered on the Y-axis.
 
@@ -87,9 +88,9 @@ In this example, I'll position the cube and remove the faces running along the X
 
 Congrats! You've made your first track design!
 
-Next, we'll add two (2) modifiers to deform the track mesh to the shape of the spline: the `Array` and  `Curve` modifiers *in that order.*
+Next, we'll add two (2) modifiers to deform the track mesh to the shape of the spline: the `Array` and `Curve` modifiers *in that order.*
 
-In the Array modifier, set the `Fit Type` to `Fit Curve` and the `Curve`  to the imported spline. For the Curve modifier, also set the `Curve` to the same spline. 
+In the Array modifier, set the `Fit Type` to `Fit Curve` and the `Curve` to the imported spline. For the Curve modifier, also set the `Curve` to the same spline. 
 
 ![Figure 9](/images/posts/import-nl2-spline-to-blender/figure-09.png)
 
@@ -107,7 +108,7 @@ Sometimes, you may notice after adding these modifiers is that the spline points
 
 ### Situational Bug: Janky Inversions
 
-If your spline reaches a perfect 90 or 180 degree tilt, usually on inversions, it may cause issues.
+If your spline reaches perfect 90 or 180-degree tilts (usually on inversions) it may cause issues.
 
 ![Figure 11](/images/posts/import-nl2-spline-to-blender/figure-11.png)
 
@@ -116,9 +117,9 @@ If your spline reaches a perfect 90 or 180 degree tilt, usually on inversions, i
 
 ![Figure 12](/images/posts/import-nl2-spline-to-blender/figure-12.gif)
 
-In this example, the corkscrew still has a janky transition on the point with a 180 degree tilt. While in `edit mode`, notice the spline points' tilt amount jumps from `-176d` (Point A) to `179d` (Point B).
+In this example, the corkscrew still has a janky transition on the point with a 180-degree tilt. While in `edit mode`, notice the spline points' tilt amount jumps from `-176d` (Point A) to `179d` (Point B).
 
-(This part of the spline is twisting 355 degrees; almost a full tilt rotation within 0.5 meters. The usual twist amount is between 0 to 10 degrees of tilt in this distance.)
+(This part of the spline is twisting 355 degrees; almost a full tilt rotation within 0.5 meters. The usual twist amount is between 0 and 10 degrees of tilt in this distance.)
 
 ![Figure 13](/images/posts/import-nl2-spline-to-blender/figure-13.gif)
 

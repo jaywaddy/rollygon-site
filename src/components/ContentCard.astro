@@ -17,7 +17,7 @@ const { collection, slug } = content;
 
 <div class="relative flex items-center justify-between gap-8 border-lg shadow-lg p-4 bg-white">
     {
-        content.collection === "tools" && (
+        collection === "tools" && (
             <div class="flex justify-between w-full">
                 <div class="flex items-center gap-4">
                     <h3 class="flex justify-left truncate w-fit">{title}</h3>
@@ -35,7 +35,7 @@ const { collection, slug } = content;
         )
     }
     {
-        content.collection === "posts" && (
+        collection === "posts" && (
             <div class="flex items-center justify-between w-full">
                 <h3 class="flex justify-left truncate w-fit">{title}</h3>
                 <strong>
@@ -50,13 +50,13 @@ const { collection, slug } = content;
     }
 	<div class="flex gap-2">
         {
-            content.collection === "tools" && (
+            collection === "tools" && (
                 <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" />
                 <Button href={content.data.href} icon="download" primary />
             )
         }
         {
-            content.collection === "posts" && (
+            collection === "posts" && (
                 <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" />
             )
         }
@@ -67,16 +67,16 @@ const { collection, slug } = content;
         }
 	</div>
     {
-        (content.data.image && content.collection === "posts") && (
+        (collection === "posts" && content.data.image) && (
             <div
                 data-img
-                style={{"--img-path": "url('/images" + content.data.image + "')"}}
+                style={{"--img-path": `url("/images/${collection}/${content.slug}/header.png")`}}
                 class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square"
             />
         )
     }
     {
-        (content.data.image && content.collection === "tools") && (
+        (collection === "tools" && content.data.image) && (
             <div
                 data-img
                 class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange"

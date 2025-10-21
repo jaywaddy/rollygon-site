@@ -24,8 +24,8 @@ const { collection, slug, body } = content;
 			<Model title={title} id={content.data.id} />
 		) : content.collection === "posts" && content.data.embed ? (
 			<VideoEmbed embed={content.data.embed}/>
-		) : (
-			<ImageWrapper src={content.data.image} />
+		) : content.data.image && (
+			<ImageWrapper src={`/${collection}/${slug}/header.png`} />
 		)
 	}
 	<div class="flex gap-8">

@@ -11,14 +11,10 @@
             "id": "75d1768d7a04ba4f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "src/content/posts/import-nl2-spline-to-blender.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "import-nl2-spline-to-blender"
+              "title": "New tab"
             }
           }
         ]
@@ -171,6 +167,17 @@
   },
   "active": "75d1768d7a04ba4f",
   "lastOpenFiles": [
+    "public/images/posts/site-log-002/header.png",
+    "public/images/posts/site-log-002",
+    "public/images/posts/site-log-001/header.png",
+    "public/images/posts/site-log-001",
+    "src/content/posts/site-log-002.md",
+    "src/content/drafts/post-template.md",
+    "src/content/drafts/_post-template.md",
+    "src/content/drafts/site-log-001.md",
+    "src/content/posts/site-log-001.md",
+    "src/content/drafts/how-to-use-tools-by-rollygon.md",
+    "src/content/posts/import-nl2-spline-to-blender.md",
     "public/images/tools/bm-track-generator/header.png",
     "public/images/tools/bm-track-generator",
     "public/images/tools/bm-support-generator/header.png",
@@ -185,14 +192,10 @@
     "public/images/models/poltergeist/_header.png",
     "src/content/models/flashback.md",
     "public/images/models/poltergeist/header-0.png",
-    "public/images/models/poltergeist/flight-of-fear.png",
-    "public/images/models/fahrenheit/header.png",
     "public/images/models/fahrenheit",
     "public/images/models/untitled folder",
     "public/images/models/poltergeist",
     "public/images/models/georgia-scorcher",
-    "public/images/models/batman",
-    "public/images/models/flashback",
     "src/content/models/poltergeist.md",
     "src/content/posts/flashback-002.md",
     "src/content/posts/flashback-001 copy.md",
@@ -209,13 +212,6 @@
     "src/content/posts/poltergeist-017.md",
     "src/content/posts/poltergeist-016 copy.md",
     "src/content/posts/poltergeist-016.md",
-    "src/content/posts/poltergeist-015 copy.md",
-    "src/content/posts/poltergeist-015.md",
-    "src/content/posts/poltergeist-014 copy.md",
-    "src/content/posts/poltergeist-014.md",
-    "src/content/posts/poltergeist-013 copy.md",
-    "src/content/posts/poltergeist-013.md",
-    "src/content/posts/poltergeist-012 copy.md",
-    "src/content/posts/poltergeist-012.md"
+    "src/content/posts/poltergeist-015 copy.md"
   ]
 }

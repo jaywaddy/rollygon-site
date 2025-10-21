@@ -8,9 +8,10 @@ const postCollection = defineCollection({
         title: z.string(),
         postDate: z.date(),
         description: z.string(),
-        image: z.optional(z.string()),
+        image: z.optional(z.boolean()),
         tags: z.array(z.string()),
         embed: z.optional(z.string()),
+        next: z.optional(z.string()),
     })
 });
 
@@ -22,10 +23,11 @@ const toolCollection = defineCollection({
         description: z.string(),
         size: z.string(),
         price: z.string(),
-        image: z.string(),
+        image: z.optional(z.string()),
         icon: z.string(),
         href: z.string(),
         tags: z.array(z.string()),
+        next: z.optional(z.string()),
         version: z.string(),
     })
 });
