@@ -15,7 +15,7 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: any): Promise<any> {
 	return paginate(ALL_TOOLS, {
-		pageSize: 3,
+		pageSize: 10,
 	});
 }
 

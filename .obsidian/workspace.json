@@ -167,6 +167,10 @@
   },
   "active": "75d1768d7a04ba4f",
   "lastOpenFiles": [
+    "src/content/tools/premier-rides-track-generator.md",
+    "src/content/tools/premier-rides-support-generator copy.md",
+    "src/content/tools/premier-rides-support-generator.md",
+    "src/content/tools/bm-support-generator copy.md",
     "public/images/posts/site-log-002/header.png",
     "public/images/posts/site-log-002",
     "public/images/posts/site-log-001/header.png",
@@ -191,7 +195,6 @@
     "public/images/models/poltergeist/header.png",
     "public/images/models/poltergeist/_header.png",
     "src/content/models/flashback.md",
-    "public/images/models/poltergeist/header-0.png",
     "public/images/models/fahrenheit",
     "public/images/models/untitled folder",
     "public/images/models/poltergeist",
@@ -209,9 +212,6 @@
     "src/content/posts/poltergeist-018 copy.md",
     "src/content/posts/poltergeist-018.md",
     "src/content/posts/poltergeist-017 copy.md",
-    "src/content/posts/poltergeist-017.md",
-    "src/content/posts/poltergeist-016 copy.md",
-    "src/content/posts/poltergeist-016.md",
-    "src/content/posts/poltergeist-015 copy.md"
+    "src/content/posts/poltergeist-017.md"
   ]
 }
