@@ -8,6 +8,7 @@ import TagList from "@/components/TagList.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
 import VideoEmbed from "@/components/VideoEmbed.astro";
+import Button from "@/components/ui/Button.astro";
 
 interface Props {
 	content: Collection;
@@ -45,7 +46,7 @@ const { headings } = await content.render();
 				<h1>{title}</h1>
 				<TagList {tags} />
 				<p>{description}</p>
-				<small class="flex gap-2">
+				<small class="flex flex-col gap-2">
 					{
 						collection === "posts" && (
 							<>
@@ -57,11 +58,12 @@ const { headings } = await content.render();
 					}
 					{
 						collection === "tools" && (
-							<>
+							<div>
 								<strong>{formatDate(postDate)}</strong>
 								<span>&bullet;</span>
 								<strong>{content.data.version}</strong>
-							</>
+							</div>
+							<Button label="Download tool" icon="download" href={content.data.href} primary />
 						)
 					}
 					{
