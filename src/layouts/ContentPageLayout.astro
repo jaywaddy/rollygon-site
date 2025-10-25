@@ -20,6 +20,14 @@ const { content, contentCollection, index } = Astro.props;
 const { title, description, postDate, tags } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
+
+function setButtonLabel(): string {
+	if (collection === "tools" && content.data.price === "$0+") {
+		return "Download"
+	}
+
+	return "Buy";
+}
 ---
 
 <div class="flex flex-col gap-16">
@@ -46,36 +54,36 @@ const { headings } = await content.render();
 				<h1>{title}</h1>
 				<TagList {tags} />
 				<p>{description}</p>
-				<small class="flex flex-col gap-2">
+				<div class="layout-sm">
 					{
 						collection === "posts" && (
-							<>
+							<small>
 								<strong>{formatDate(postDate)}</strong>
 								<span>&bullet;</span>
 								<strong>{calcReadTime(body)} min read</strong>
-							</>
+							</small>
 						)
 					}
 					{
 						collection === "tools" && (
-							<div>
+							<small>
 								<strong>{formatDate(postDate)}</strong>
 								<span>&bullet;</span>
 								<strong>{content.data.version}</strong>
-							</div>
-							<Button label="Download tool" icon="download" href={content.data.href} primary />
+							</small>
+							<Button label={`${setButtonLabel()} tool`} icon="download" href={content.data.href} primary />
 						)
 					}
 					{
 						collection === "models" && (
-							<>
+							<small>
 								<strong>{formatDate(postDate)}</strong>
 								<span>&bullet;</span>
 								<strong>{content.data.size}</strong>
-							</>
+							</small>
 						)
 					}
-				</small>
+				</div>
 			</div>
 			<article class="content flex flex-col gap-8">
 				<slot />

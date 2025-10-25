@@ -1,4 +1,5 @@
 import type { Collection } from "@/content/config";
+import { SOCIAL_LINKS } from "@/scripts/constants";
 
 export function slugify (input: string): string {
     return input

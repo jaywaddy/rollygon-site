@@ -17,12 +17,12 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 
 <div
 	data-social
-	style={{ "--icon-rotation": rotation + "deg" }}
-	class=`absolute rotate-(--icon-rotation) w-full aspect-square pointer-events-none`
+	style={{ "--icon-rotation": `${rotation}deg` }}
+	class="absolute rotate-(--icon-rotation) w-full aspect-square pointer-events-none"
 >
 	<a
 		data-icon-fill
-		class=`absolute card-sm rounded-full w-fit -rotate-(--icon-rotation) -top-8 pointer-events-auto`
+		class="absolute card-sm rounded-full w-fit -rotate-(--icon-rotation) -top-8 pointer-events-auto"
 		aria-label={title}
 		title={title}
 		href={href}
@@ -42,7 +42,7 @@ const { icon, title = getTitle(icon), href, rotation } = Astro.props;
 			box-shadow: 2px 2px 0;
 
 			&::before {
-				background-image: var(--bg-4);
+				background-image: var(--bg-6);
 
 				position: absolute;
 				inset: 0;

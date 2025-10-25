@@ -1,5 +1,5 @@
 ---
-title: Premier Rides Support Generator
+title: Premier Rides Track Generator
 version: v0.1 (Preview)
 postDate: 2025-10-24
 icon: track-generator

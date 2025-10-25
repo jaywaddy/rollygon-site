@@ -3,6 +3,7 @@ import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
+import { SOCIAL_LINKS } from "@/scripts/constants";
 
 interface Props {
 	photo?: boolean;
@@ -21,17 +22,25 @@ const { photo } = Astro.props;
 			<p class="absolute card-sm bottom-2 rotate-2">
 				I'm Rolly (or Jay), and I make roller coasters out of polygons!
 			</p>
-			<SocialLink icon="gumroad" href="https://rollygon.gumroad.com/" rotation="105" />
-			<SocialLink icon="sketchfab" href="https://sketchfab.com/Rollygon" rotation="125" />
 			<SocialLink
-				icon="youtube"
-				title="YouTube"
-				href="https://youtube.com/@Rollygon"
+				icon={SOCIAL_LINKS.gumroad.icon}
+				href={SOCIAL_LINKS.gumroad.href}
+				rotation="105"
+			/>
+			<SocialLink
+				icon={SOCIAL_LINKS.sketchfab.icon}
+				href={SOCIAL_LINKS.sketchfab.href}
+				rotation="125"
+			/>
+			<SocialLink
+				title={SOCIAL_LINKS.youtube.title}
+				icon={SOCIAL_LINKS.youtube.icon}
+				href={SOCIAL_LINKS.youtube.href}
 				rotation="145"
 			/>
 			<SocialLink
-				icon="bluesky"
-				href="https://bsky.app/profile/rollygon.com"
+				icon={SOCIAL_LINKS.bluesky.icon}
+				href={SOCIAL_LINKS.bluesky.href}
 				rotation="165"
 			/>
 		</div>
@@ -43,11 +52,11 @@ const { photo } = Astro.props;
 			<InfoBanner />
 			<p class="card-sm">I'm Rolly (or Jay), and I make roller coasters out of polygons!</p>
 			<div class="flex flex-row justify-between card-sm">
-				<Button icon="gumroad" href="https://rollygon.gumroad.com/" />
-				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" />
-				<Button icon="youtube" href="https://youtube.com/@Rollygon" />
-				<Button icon="bluesky" href="https://bsky.app/profile/rollygon.com" />
-				<Button icon="send" href="mailto:message@rollgy.com" />
+				<Button icon={SOCIAL_LINKS.gumroad.icon} href={SOCIAL_LINKS.gumroad.href} />
+				<Button icon={SOCIAL_LINKS.sketchfab.icon} href={SOCIAL_LINKS.sketchfab.href} />
+				<Button icon={SOCIAL_LINKS.youtube.icon} href={SOCIAL_LINKS.youtube.href} />
+				<Button icon={SOCIAL_LINKS.bluesky.icon} href={SOCIAL_LINKS.bluesky.href} />
+				<Button icon={SOCIAL_LINKS.email.icon} href={SOCIAL_LINKS.email.href} />
 			</div>
 		</div>
 	)
