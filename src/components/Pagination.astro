@@ -57,6 +57,7 @@ function makePageList(array: Array<number>): Array<number> {
 				iconLeft
 				disabled={url.prev === undefined && true}
 				href={prev || "/"}
+				responsive
 			/>
 			<ul class="flex gap-2 items-center">
 				{!pageList.includes(1) && (
@@ -89,7 +90,7 @@ function makePageList(array: Array<number>): Array<number> {
 					)}
 				</li>
 			</ul>
-			<Button label="Next" disabled={url.next === undefined && true} href={next} />
+			<Button label="Next" disabled={url.next === undefined && true} href={next} responsive />
 		</nav>
 	)
 }

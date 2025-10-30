@@ -30,8 +30,10 @@ export function setTagColorTheme(input: string): string {
 	class={`flex items-center ${filter ? "bg-[var(--tag-filter-color)]" : "bg-[var(--tag-color)]"} border-sm shadow-sm shadow-sm-hover px-2 w-fit cursor-pointer select-none`}
 	style={setStyles("tag", Color[setTagColorTheme(label)])}
 >
-	<small class="pr-2 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap">
+	<small
+		class="pr-2 max-sm:pr-0 py-[2px] max-w-[24ch] overflow-hidden overflow-ellipsis whitespace-nowrap"
+	>
 		<strong>#{label}</strong>
 	</small>
-	<small class="pl-2 py-[2px] border-l-2"><strong>{count}</strong></small>
+	<small class="pl-2 py-[2px] border-l-2 max-sm:hidden"><strong>{count}</strong></small>
 </span>

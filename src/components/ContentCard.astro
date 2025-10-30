@@ -21,10 +21,12 @@ const { collection, slug } = content;
             <div class="flex justify-between w-full">
                 <div class="flex items-center gap-4">
                     <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                    <small>{content.data.version}</small>
-                    <Badge label={content.data.price} />
+                    <small class="max-sm:hidden">{content.data.version}</small>
+                    <span class="max-sm:hidden">
+                        <Badge label={content.data.price} />
+                    </span>
                 </div>
-                <strong>
+                <strong class="max-sm:hidden">
                     <small class="flex gap-2">
 						<strong>{content.data.size}</strong>
 						&bullet;
@@ -38,7 +40,7 @@ const { collection, slug } = content;
         collection === "posts" && (
             <div class="flex items-center justify-between w-full">
                 <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                <strong>
+                <strong class="max-sm:hidden">
                     <small class="flex gap-2">
 						<strong>{calcReadTime(content.body)} min read</strong>
 						&bullet;
@@ -51,18 +53,22 @@ const { collection, slug } = content;
 	<div class="flex gap-2">
         {
             collection === "tools" && (
-                <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" />
-                <Button href={content.data.href} icon="download" primary />
+                <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
+                <div class="max-sm:hidden">
+                    <Button href={content.data.href} icon="download" primary />
+                </div>
             )
         }
         {
             collection === "posts" && (
-                <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" />
+                <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
             )
         }
         {
             content.collection === "posts" && content.data.embed && (
-                <Button href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
+                <div class="max-sm:hidden">
+                    <Button href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
+                </div>
             )
         }
 	</div>
@@ -71,7 +77,7 @@ const { collection, slug } = content;
             <div
                 data-img
                 style={{"--img-path": `url("/images/${collection}/${content.slug}/header.png")`}}
-                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square"
+                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square max-sm:hidden"
             />
         )
     }
@@ -79,7 +85,7 @@ const { collection, slug } = content;
         (collection === "tools" && content.data.icon) && (
             <div
                 data-img
-                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange"
+                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange max-sm:hidden"
             >
                 <Icon name={matchIconNameType(content.data.icon)} size="64" />
             </div>

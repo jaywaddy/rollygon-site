@@ -12,6 +12,7 @@ interface Props {
 	icon?: ICON_NAME;
 	disabled?: boolean;
 	primary?: boolean;
+	responsive?: boolean;
 }
 
 const {
@@ -23,11 +24,12 @@ const {
 	primary,
 	iconLeft,
 	disabled,
+	responsive,
 } = Astro.props;
 const buttonClasses = `
 	flex items-center justify-center gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer
 	${disabled ? "" : "button-marquee shadow-lg shadow-lg-hover"}
-	${!label ? "px-2" : "px-4"}
+	${!label ? "px-2" : "px-4 max-sm:px-2"}
 `;
 const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
 
@@ -72,7 +74,9 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			class={buttonClasses}
 			{style}
 		>
-			{label && <strong class="text-nowrap">{label}</strong>}
+			{label && (
+				<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+			)}
 			{icon && <Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />}
 		</button>
 	)
@@ -88,7 +92,9 @@ function setIconColor(isDisabled: boolean | undefined): string {
 				{style}
 			>
 				<input type="checkbox" />
-				{label && <strong class="text-nowrap">{label}</strong>}
+				{label && (
+					<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+				)}
 				{icon && (
 					<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
 				)}
@@ -109,7 +115,9 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			{iconLeft && (
 				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
 			)}
-			{label && <strong class="text-nowrap">{label}</strong>}
+			{label && (
+				<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+			)}
 			{!iconLeft && icon !== "none" && (
 				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
 			)}
