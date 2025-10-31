@@ -7,13 +7,21 @@ interface Props {
 const { title, id } = Astro.props;
 ---
 
-<div class="relative flex-1 aspect-video p-4 border-lg shadow-lg bg-white">
+<div
+	class:list={[
+		"overflow-clip relative flex-1 aspect-video p-4 border-lg shadow-lg bg-white",
+		"max-sm:aspect-10/15",
+	]}
+>
 	<div
-		class="absolute inset-4 flex justify-center items-center rounded-[var(--radius-sm)] bg-black text-white"
+		class:list={[
+			"absolute inset-2 flex justify-center items-center rounded-[var(--radius-sm)] bg-black text-white",
+			"max-sm:inset-0",
+		]}
 	>
 		Loading...
 	</div>
-	<div class="absolute inset-2">
+	<div class:list={["absolute inset-2", "max-sm:inset-0"]}>
 		<iframe
 			title={title}
 			frameborder="0"
@@ -27,7 +35,7 @@ const { title, id } = Astro.props;
 			src={"https://sketchfab.com/models/" +
 				id +
 				"/embed?autostart=1&annotations_visible=1&transparent=0&ui_theme=dark&dnt=1"}
-			class="inset-4 rounded-[var(--radius-sm)] w-full h-full"
+			class="inset-2 rounded-[var(--radius-sm)] w-full h-full"
 		>
 		</iframe>
 	</div>

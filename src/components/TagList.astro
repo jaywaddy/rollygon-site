@@ -1,14 +1,15 @@
 ---
 import { ALL_CONTENT } from "@/content/config";
+import type { HTML } from "@/scripts/constants";
 import { slugify } from "@/scripts/utilities.ts";
 import Tag from "@/ui/Tag.astro";
 
-interface Props {
+interface Props extends HTML {
 	tags: Array<string> | undefined;
 	filter?: boolean;
 }
 
-const { tags, filter = false } = Astro.props;
+const { tags, filter = false, class: className } = Astro.props;
 
 function calcTagCount(input: string): number {
 	return ALL_CONTENT.map((post) => post.data.tags)
@@ -17,7 +18,7 @@ function calcTagCount(input: string): number {
 }
 ---
 
-<ul class="flex flex-wrap gap-1">
+<ul class:list={["flex flex-wrap gap-1", className]}>
 	{
 		tags?.map((tag) => (
 			<li>

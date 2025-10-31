@@ -19,7 +19,7 @@
     --color-disabled-body: oklch(0.6409 0.0143 270);
 
     --color-shadow: color-mix(in srgb, black, rgba(0, 0, 0, 0) 80%);
-    --color-shadow-hover: color-mix(in srgb, black, rgba(0, 0, 0, 0) 50%);
+    --color-shadow-hover: var(--color-black);
     --stroke-width: 2;
     --radius-lg: calc(var(--spacing) * 3);
     --radius-sm: calc(var(--radius-lg) / 2);
@@ -171,7 +171,6 @@ h3 {
 
 @utility shadow-sm-hover {
     &:hover, &:focus-visible {
-        transition: 0.1s;
         transform: translate(1px, 1px);
         box-shadow: 1px 1px 0 var(--color-shadow-hover);
     }
@@ -179,7 +178,6 @@ h3 {
 
 @utility shadow-lg-hover {
     &:hover, &:focus-visible {
-        transition: 0.1s;
         transform: translate(2px, 2px);
         box-shadow: 2px 2px 0 var(--color-shadow-hover);
     }

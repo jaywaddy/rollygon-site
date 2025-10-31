@@ -5,8 +5,10 @@ import * as aboutContent from "./about.md";
 import { Content } from "./about.md";
 import Button from "@/components/ui/Button.astro";
 import { formatDate } from "@/scripts/utilities";
+import { SOCIAL_LINKS } from "@/scripts/constants";
 
 const { title, date } = aboutContent.frontmatter;
+const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINKS;
 ---
 
 <SiteLayout pageTitle={title} color="purple" pattern="5">
@@ -15,20 +17,36 @@ const { title, date } = aboutContent.frontmatter;
 		<div class="flex flex-col gap-8 w-full">
 			<div class="card-lg max-w-[75ch]">
 				<p>
-					My name is Jay&mdash;but, you can call me Rolly (rhymes with "jolly")&mdash;and
-					I make roller coasters out of polygons. I also build tools that make coaster
-					manufacturer specific tracks, supports, etc. that help me create realistic
-					coaster models.
+					My name is Rolly (rhymes with "jolly") and I make roller coasters out of
+					polygons. I also build tools that make coaster manufacturer specific tracks,
+					supports, etc. that help me create realistic coaster models.
 				</p>
+				<span>Social links:</span>
 				<div class="flex gap-2">
-					<Button label="Gumroad" icon="gumroad" href="https://rollygon.gumroad.com" />
 					<Button
-						label="Sketchfab"
-						icon="sketchfab"
-						href="https://sketchfab.com/Rollygon"
+						label={gumroad.title}
+						icon={gumroad.icon}
+						href={gumroad.href}
+						responsive
 					/>
-					<Button label="YouTube" icon="youtube" href="https://youtube.com/@Rollygon" />
-					<Button label="Bluesky" icon="bluesky" href="https://rollygon.bsky.social" />
+					<Button
+						label={sketchfab.title}
+						icon={sketchfab.icon}
+						href={sketchfab.href}
+						responsive
+					/>
+					<Button
+						label={youtube.title}
+						icon={youtube.icon}
+						href={youtube.href}
+						responsive
+					/>
+					<Button
+						label={bluesky.title}
+						icon={bluesky.icon}
+						href={bluesky.href}
+						responsive
+					/>
 				</div>
 			</div>
 			<small>Last update: {formatDate(date)}</small>

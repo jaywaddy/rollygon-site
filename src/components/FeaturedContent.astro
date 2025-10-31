@@ -18,7 +18,7 @@ const { title, tags, description, postDate } = content.data;
 const { collection, slug, body } = content;
 ---
 
-<div class="flex flex-col gap-8">
+<div class:list={["flex flex-col gap-8", "max-sm:gap-4"]}>
 	{
 		content.collection === "models" ? (
 			<Model title={title} id={content.data.id} />
@@ -28,7 +28,7 @@ const { collection, slug, body } = content;
 			<ImageWrapper src={`/${collection}/${slug}/header.png`} />
 		)
 	}
-	<div class="flex gap-8">
+	<div class:list={["flex gap-8", "max-sm:flex-col max-sm:gap-4"]}>
 		<div class="relative card-lg gap-2 w-full h-fit">
 			{
 				heading ? (
@@ -38,8 +38,9 @@ const { collection, slug, body } = content;
 					<p class="mb-2">{description}</p>
 					<TagList {tags} />
 				) : (
-					<div class="flex gap-2 items-start justify-between">
+					<div class="flex flex-col gap-2">
 						<h2 class="truncate">{title}</h2>
+						<TagList {tags} />
 					</div>
 					<p class="mb-2">{description}</p>
 					<Button label="View details" href={`/${collection}/${slug}`} />
@@ -53,7 +54,7 @@ const { collection, slug, body } = content;
 				<div class="card-sm items-center justify-center w-full text-nowrap">
 					<strong>{formatDate(postDate, "short")}</strong>
 				</div>
-				<div class="card-sm items-center justify-center w-full text-nowrap">
+				<div class="card-sm w-fit text-nowrap">
 
 					{
 						content.collection === "posts" ? (
@@ -65,30 +66,28 @@ const { collection, slug, body } = content;
 					}
 				</div>
 			</div>
-			<div class="card-sm gap-8 justify-between h-full">
-				<TagList {tags} />
 				{
 					collection === "models" && (
-						<ul class="grid grid-cols-2 just gap-4 text-nowrap">
-							<li class="flex gap-1 items-center w-fit">
+						<ul class="flex flex-wrap just gap-4 text-nowrap">
+							<li class="card-sm flex-row gap-1 w-fit">
 								<Icon name="vertex" size="24" />
 								<span>
 									<strong>{content.data.modelStats[0]}</strong> Verts
 								</span>
 							</li>
-							<li class="flex gap-1 items-center w-fit">
+							<li class="card-sm flex-row gap-1 w-fit">
 								<Icon name="triangle" size="24" />
 								<span>
 									<strong>{content.data.modelStats[1]}</strong> Tris
 								</span>
 							</li>
-							<li class="flex gap-1 items-center w-fit">
+							<li class="card-sm flex-row gap-1 w-fit">
 								<Icon name="quad" size="24" />
 								<span>
 									<strong>{content.data.modelStats[2]}</strong> Quads
 								</span>
 							</li>
-							<li class="flex gap-1 items-center w-fit">
+							<li class="card-sm flex-row gap-1 w-fit">
 								<Icon name="ngon" size="24" />
 								<span>
 									<strong>{content.data.modelStats[3]}</strong> N-gons
@@ -97,7 +96,6 @@ const { collection, slug, body } = content;
 						</ul>
 					)
 				}
-			</div>
 		</div>
 	</div>
 </div>

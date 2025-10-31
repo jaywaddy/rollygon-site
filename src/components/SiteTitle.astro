@@ -12,7 +12,7 @@ const { class: className } = Astro.props;
 	aria-label="Rollygon"
 	href="/"
 	class:list={["flex items-center gap-2", className]}
-	style={setStyles("logo", Color.lime, Pattern["2"])}
+	style={setStyles("logo", Color.lime, Pattern["2"]) + "--color-shadow: var(--color-black)"}
 >
 	<span
 		class="site-logo flex items-center justify-center bg-[var(--logo-color)] border-2 shadow-sm rounded-full aspect-1/1 w-12"
