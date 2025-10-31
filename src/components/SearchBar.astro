@@ -5,7 +5,7 @@ import { ALL_TAGS } from "@/content/config";
 ---
 
 <div id="search-bar" class="flex flex-col justify-between gap-4 border-lg shadow-lg p-4 bg-white">
-	<nav class="flex justify-between w-full">
+	<nav class="flex justify-between gap-2">
 		<Button
 			id="filter-tag-button"
 			label="Filter tags"
@@ -15,21 +15,21 @@ import { ALL_TAGS } from "@/content/config";
 		/>
 		<div class="flex gap-2">
 			<form action="">
-				<div class="relative">
-					<input
-						type="search"
-						name="search"
-						id="search"
-						style={{ "--search-width": 360 - 16 + "px" }}
-						class="flex gap-1 border-sm pl-2 pr-8 py-2 w-(--search-width)"
-						class="w-full"
-						placeholder="Search currently disabled"
-						disabled
-						min="2"
-						max="32"
-						required
-					/>
-				</div>
+				<input
+					type="search"
+					name="search"
+					id="search"
+					style={{ "--search-width": `${360 - 16}px` }}
+					class:list={[
+						"flex gap-1 border-sm pl-2 pr-8 py-2 w-full max-w-(--search-width)",
+						"max-sm:w-fill",
+					]}
+					placeholder="Search"
+					disabled
+					min="2"
+					max="32"
+					required
+				/>
 			</form>
 			<Button icon="search" type="submit" disabled />
 		</div>

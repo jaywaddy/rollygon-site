@@ -9,6 +9,7 @@ import { calcReadTime, formatDate } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
 import VideoEmbed from "@/components/VideoEmbed.astro";
 import Button from "@/components/ui/Button.astro";
+import TableOfContents from "@/components/ui/TableOfContents.astro";
 
 interface Props {
 	content: Collection;
@@ -85,10 +86,11 @@ function setButtonLabel(): string {
 					}
 				</div>
 			</div>
+			{ headings.length > 0 && <TableOfContents {headings} /> }
 			<article class="content flex flex-col gap-8">
 				<slot />
 			</article>
 		</div>
-		<SideBar {headings} {content} />
+		<SideBar class="max-sm:hidden" {headings} {content} />
 	</div>
 </div>

@@ -4,13 +4,15 @@ import type { MarkdownHeading } from "astro";
 
 interface Props {
 	headings: Array<MarkdownHeading>;
+	compact?: boolean;
 }
 
-const { headings } = Astro.props;
+const { headings, compact } = Astro.props;
 ---
 
 <nav class="sticky flex flex-col gap-8">
-	<span class="heading-xs">Table of Contents</span>
+	{!compact && <hr />}
+	{compact ? <span class="heading-xs">Table of Contents</span> : <h2>Table of Contents</h2>}
 	<ol class="flex flex-col gap-4 list-decimal">
 		{
 			headings.map((heading) =>
@@ -28,4 +30,5 @@ const { headings } = Astro.props;
 			)
 		}
 	</ol>
+	{!compact && <hr />}
 </nav>

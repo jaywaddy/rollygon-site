@@ -6,7 +6,7 @@ interface Props {
 const { embed } = Astro.props;
 ---
 
-<div class="card-sm">
+<div class:list={["card-sm p-2 overflow-clip", "max-sm:p-0"]}>
 	<iframe
 		class="aspect-video rounded-sm"
 		src={`https://www.youtube.com/embed/${embed}`}

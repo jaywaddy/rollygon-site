@@ -1,23 +1,23 @@
 ---
 import type { MarkdownHeading } from "astro";
-import AboutSection from "@/layout/AboutSection.astro";
 import TableOfContents from "@/ui/TableOfContents.astro";
 import ReadTimeIndicator from "@/ui/ReadTimeIndicator.astro";
 import type { Collection } from "@/content/config";
+import type { HTML } from "@/scripts/constants";
 
-interface Props {
+interface Props extends HTML {
     headings: Array<MarkdownHeading>;
     content: Collection;
 }
 
-const { headings, content } = Astro.props;
+const { headings, content, class: className } = Astro.props;
 ---
 
-<aside class="flex flex-col gap-8 w-[360px]">
+<aside class:list={["flex flex-col gap-8 w-[360px]", className]}>
     {
         headings.length > 1 && (
             <div data-toc class="sticky top-32 flex flex-col self-start gap-8 w-full">
-                <TableOfContents {headings} />
+                <TableOfContents {headings} compact />
                 {
                     content.collection === "posts" && (
                         <hr />

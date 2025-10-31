@@ -5,6 +5,7 @@ import Model from "@/ui/Model.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import ModelStats from "@/ui/ModelStats.astro";
+import Icon from "./ui/Icon.astro";
 
 interface Props {
 	model: CollectionEntry<"models">;
@@ -39,14 +40,19 @@ function generateRotation(): string {
 		</div>
 	) : (
 		<div data-model-card class="relative">
-			<strong class=" absolute -inset-3 flex flex-col gap-2 border-sm shadow-lg bg-white w-fit h-fit py-2 px-4 z-1">
+			<strong
+				class:list={[
+					"absolute -inset-3 flex flex-col gap-2 border-sm shadow-lg bg-white w-fit h-fit py-2 px-4 z-1",
+					"max-sm:-inset-x-2",
+				]}
+			>
 				{title}
 			</strong>
 			<a
 				href={"/models/" + model.slug}
-				class="flex flex-col justify-start border-lg shadow-lg bg-white"
+				class="flex flex-col justify-start overflow-clip border-lg shadow-lg bg-white"
 			>
-				<div class="flex justify-center items-center p-2">
+				<div class:list={["flex justify-center items-center p-2", "max-sm:p-0"]}>
 					<Image
 						src={`/images/models/${model.slug}/header.png`}
 						alt={title + " - " + subTitle}
@@ -59,13 +65,16 @@ function generateRotation(): string {
 			</a>
 			<div
 				data-hover-text
-				class="absolute invisible flex inset-3 justify-center items-center pointer-events-none"
+				class:list={[
+					"absolute invisible flex inset-3 justify-center items-center pointer-events-none",
+					"max-sm:visible",
+				]}
 			>
 				<strong
 					style={{ "--text-rotation": generateRotation() }}
-					class="p-4 border-2 bg-white rounded-lg rotate-(--text-rotation)"
+					class="flex gap-2 items-center p-3 border-2 bg-neutral rounded-sm rotate-(--text-rotation) shadow-lg"
 				>
-					Click to view details
+					View details <Icon name="arrow-right" />
 				</strong>
 			</div>
 		</div>
