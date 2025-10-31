@@ -2,8 +2,9 @@
 import { Color, Pattern, setStyles } from "@/scripts/interface";
 import Icon, { type ICON_NAME } from "./Icon.astro";
 import { titleCase } from "@/scripts/utilities";
+import type { HTML } from "@/scripts/constants";
 
-interface Props {
+interface Props extends HTML {
 	id?: string;
 	type?: "submit" | "toggle" | "link";
 	label?: string;
@@ -25,12 +26,13 @@ const {
 	iconLeft,
 	disabled,
 	responsive,
+	class: className,
 } = Astro.props;
-const buttonClasses = `
-	flex items-center justify-center gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer
-	${disabled ? "" : "button-marquee shadow-lg shadow-lg-hover"}
-	${!label ? "px-2" : "px-4 max-sm:px-2"}
-`;
+const buttonClasses = [
+	"flex items-center justify-center gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer",
+	disabled ? "" : "button-marquee shadow-lg shadow-lg-hover",
+	!label ? "px-2" : "px-4 max-sm:px-2",
+];
 const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
 
 function setButtonTitle(label: string | undefined): string {
@@ -71,11 +73,11 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			data-disabled={disabled}
 			{type}
 			title={setButtonTitle(label)}
-			class={buttonClasses}
+			class:list={[buttonClasses, className]}
 			{style}
 		>
 			{label && (
-				<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
 			)}
 			{icon && <Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />}
 		</button>
@@ -88,12 +90,14 @@ function setIconColor(isDisabled: boolean | undefined): string {
 				{id}
 				data-disabled={disabled}
 				title={label ? label : titleCase(icon)}
-				class={buttonClasses}
+				class:list={[buttonClasses, className]}
 				{style}
 			>
 				<input type="checkbox" />
 				{label && (
-					<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+					<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>
+						{label}
+					</strong>
 				)}
 				{icon && (
 					<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
@@ -108,7 +112,7 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			{id}
 			data-disabled={disabled}
 			title={label ? label : titleCase(icon)}
-			class={buttonClasses}
+			class:list={[buttonClasses, className]}
 			{style}
 			{href}
 		>
@@ -116,7 +120,7 @@ function setIconColor(isDisabled: boolean | undefined): string {
 				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
 			)}
 			{label && (
-				<strong class={`text-nowrap ${responsive && "max-sm:hidden"}`}>{label}</strong>
+				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
 			)}
 			{!iconLeft && icon !== "none" && (
 				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />

@@ -3,18 +3,21 @@ import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
-import { SOCIAL_LINKS } from "@/scripts/constants";
+import { SOCIAL_LINKS, type HTML } from "@/scripts/constants";
 
-interface Props {
+interface Props extends HTML {
 	photo?: boolean;
 }
 
-const { photo } = Astro.props;
+const { photo, class: className } = Astro.props;
 ---
 
 {
 	photo ? (
-		<div class="relative flex flex-col w-[320px] h-[320px]" style={{ "--radius": "32px" }}>
+		<div
+			class:list={["relative flex flex-col w-[320px] h-[320px]", className]}
+			style={{ "--radius": "32px" }}
+		>
 			<ImageWrapper size="md" shape="round" aspect="1/1" src="/about/about.png" />
 			<div class="absolute top-2 -rotate-4">
 				<InfoBanner />
@@ -46,7 +49,7 @@ const { photo } = Astro.props;
 		</div>
 	) : (
 		<div
-			class="relative flex flex-col gap-4 w-[320px] h-[320px]"
+			class:list={["relative flex flex-col gap-4 w-[320px] h-[320px]", className]}
 			style={{ "--radius": "32px" }}
 		>
 			<InfoBanner />

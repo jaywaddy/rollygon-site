@@ -1,12 +1,17 @@
 ---
 import Icon from "@/ui/Icon.astro";
 import { Color, Pattern, setStyles } from "@/scripts/interface";
+import type { HTML } from "@/scripts/constants";
+
+interface Props extends HTML {}
+
+const { class: className } = Astro.props;
 ---
 
 <a
 	aria-label="Rollygon"
 	href="/"
-	class="flex items-center gap-2 z-10"
+	class:list={["flex items-center gap-2", className]}
 	style={setStyles("logo", Color.lime, Pattern["2"])}
 >
 	<span

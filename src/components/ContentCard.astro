@@ -15,7 +15,7 @@ const { title, tags } = content.data;
 const { collection, slug } = content;
 ---
 
-<div class="relative flex items-center justify-between gap-8 border-lg shadow-lg p-4 bg-white">
+<div class="relative card-sm flex-row">
     {
         collection === "tools" && (
             <div class="flex justify-between w-full">
@@ -54,9 +54,7 @@ const { collection, slug } = content;
         {
             collection === "tools" && (
                 <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
-                <div class="max-sm:hidden">
-                    <Button href={content.data.href} icon="download" primary />
-                </div>
+                <Button class="max-sm:hidden" href={content.data.href} icon="download" primary />
             )
         }
         {
@@ -66,9 +64,7 @@ const { collection, slug } = content;
         }
         {
             content.collection === "posts" && content.data.embed && (
-                <div class="max-sm:hidden">
-                    <Button href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
-                </div>
+                <Button class="max-sm:hidden" href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
             )
         }
 	</div>

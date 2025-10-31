@@ -44,7 +44,9 @@ function calcPath(input: string): string {
 ---
 
 <div
-	class="relative flex flex-1 justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg"
+	class:list={[
+		"relative flex flex-1 justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg overflow-clip",
+	]}
 	style={{
 		"--img-path": calcPath(src),
 		"--img-w": calcSize(size),
@@ -54,7 +56,10 @@ function calcPath(input: string): string {
 	}}
 >
 	<div
-		class="absolute inset-2 flex justify-center items-center rounded-[var(--inner-radius)] bg-black overflow-clip"
+		class:list={[
+			"absolute inset-2 flex justify-center items-center rounded-[var(--inner-radius)] bg-black overflow-clip",
+			"max-sm:inset-0",
+		]}
 	>
 		{
 			src ? (

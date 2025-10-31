@@ -2,6 +2,10 @@ import type { ICON_NAME } from "@/components/ui/Icon.astro";
 import { ALL_MODELS, ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import { findContent } from "@/scripts/utilities";
 
+export interface HTML {
+    class?: string;
+}
+
 const SITE_LOGS: Array<Collection> = ALL_POSTS.filter((content) =>
 	content.data.tags.includes("Site Log")
 );

@@ -1,8 +1,9 @@
 ---
 import { slugify } from "@/scripts/utilities";
 import Icon, { type ICON_NAME } from "./Icon.astro";
+import type { HTML } from "@/scripts/constants";
 
-interface Props {
+interface Props extends HTML {
 	label: string;
 	iconLeft?: ICON_NAME;
 	iconRight?: ICON_NAME;
@@ -20,6 +21,7 @@ const {
 	size,
 	isActive = false,
 	underline = false,
+	class: className,
 } = Astro.props;
 ---
 
@@ -29,7 +31,10 @@ const {
 	data-underline={underline}
 	href={href ? href : `/${slugify(label)}`}
 	title={label}
-	class="flex flex-nowrap items-center gap-2 relative text-[var(--color-text)] max-w-fit"
+	class:list={[
+		"flex flex-nowrap items-center gap-2 relative text-[var(--color-text)] max-w-fit",
+		className,
+	]}
 >
 	{iconLeft !== "none" && <Icon name={iconLeft} {size} />}
 	<strong class="truncate w-full">{label}</strong>

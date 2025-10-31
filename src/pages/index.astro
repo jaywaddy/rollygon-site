@@ -21,10 +21,15 @@ import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/consta
 				</p>
 				<div class="flex gap-2">
 					<Button label="Get to know me" href="/about" />
-					<Button label="Send a message" href="mailto:message@rollygon.com" icon="send" />
+					<Button
+						class="max-sm:hidden"
+						label="Send a message"
+						href="mailto:message@rollygon.com"
+						icon="send"
+					/>
 				</div>
 			</div>
-			<AboutSection photo />
+			<AboutSection class="max-sm:hidden" photo />
 		</div>
 	</section>
 
