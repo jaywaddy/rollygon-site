@@ -5,10 +5,10 @@ import * as aboutContent from "./about.md";
 import { Content } from "./about.md";
 import Button from "@/components/ui/Button.astro";
 import { formatDate } from "@/scripts/utilities";
-import { SOCIAL_LINKS } from "@/scripts/constants";
+import { SOCIAL_LINK } from "@/scripts/constants";
 
 const { title, date } = aboutContent.frontmatter;
-const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINKS;
+const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINK;
 ---
 
 <SiteLayout pageTitle={title} color="purple" pattern="5">

@@ -22,7 +22,7 @@ export const FEATURED_POSTS: Array<Collection> = [
     SITE_LOGS[1]
 ];
 
-export const SOCIAL_LINKS: {[key: string]: { title: string, icon: ICON_NAME, href: string}} = {
+export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href: string}} = {
     gumroad: { title: "Gumroad", icon: "gumroad", href: "https://rollygon.gumroad.com/" },
     youtube: { title: "YouTube", icon: "youtube", href: "https://youtube.com/@Rollygon" },
     sketchfab: { title: "Sketchfab", icon: "sketchfab", href: "https://sketchfab.com/Rollygon" },

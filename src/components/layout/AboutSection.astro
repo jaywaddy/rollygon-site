@@ -3,7 +3,7 @@ import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
-import { SOCIAL_LINKS, type HTML } from "@/scripts/constants";
+import { SOCIAL_LINK, type HTML } from "@/scripts/constants";
 
 interface Props extends HTML {
 	photo?: boolean;
@@ -26,24 +26,24 @@ const { photo, class: className } = Astro.props;
 				I'm Rolly (or Jay), and I make roller coasters out of polygons!
 			</p>
 			<SocialLink
-				icon={SOCIAL_LINKS.gumroad.icon}
-				href={SOCIAL_LINKS.gumroad.href}
+				icon={SOCIAL_LINK.gumroad.icon}
+				href={SOCIAL_LINK.gumroad.href}
 				rotation="105"
 			/>
 			<SocialLink
-				icon={SOCIAL_LINKS.sketchfab.icon}
-				href={SOCIAL_LINKS.sketchfab.href}
+				icon={SOCIAL_LINK.sketchfab.icon}
+				href={SOCIAL_LINK.sketchfab.href}
 				rotation="125"
 			/>
 			<SocialLink
-				title={SOCIAL_LINKS.youtube.title}
-				icon={SOCIAL_LINKS.youtube.icon}
-				href={SOCIAL_LINKS.youtube.href}
+				title={SOCIAL_LINK.youtube.title}
+				icon={SOCIAL_LINK.youtube.icon}
+				href={SOCIAL_LINK.youtube.href}
 				rotation="145"
 			/>
 			<SocialLink
-				icon={SOCIAL_LINKS.bluesky.icon}
-				href={SOCIAL_LINKS.bluesky.href}
+				icon={SOCIAL_LINK.bluesky.icon}
+				href={SOCIAL_LINK.bluesky.href}
 				rotation="165"
 			/>
 		</div>
@@ -55,11 +55,11 @@ const { photo, class: className } = Astro.props;
 			<InfoBanner />
 			<p class="card-sm">I'm Rolly (or Jay), and I make roller coasters out of polygons!</p>
 			<div class="flex flex-row justify-between card-sm">
-				<Button icon={SOCIAL_LINKS.gumroad.icon} href={SOCIAL_LINKS.gumroad.href} />
-				<Button icon={SOCIAL_LINKS.sketchfab.icon} href={SOCIAL_LINKS.sketchfab.href} />
-				<Button icon={SOCIAL_LINKS.youtube.icon} href={SOCIAL_LINKS.youtube.href} />
-				<Button icon={SOCIAL_LINKS.bluesky.icon} href={SOCIAL_LINKS.bluesky.href} />
-				<Button icon={SOCIAL_LINKS.email.icon} href={SOCIAL_LINKS.email.href} />
+				<Button icon={SOCIAL_LINK.gumroad.icon} href={SOCIAL_LINK.gumroad.href} />
+				<Button icon={SOCIAL_LINK.sketchfab.icon} href={SOCIAL_LINK.sketchfab.href} />
+				<Button icon={SOCIAL_LINK.youtube.icon} href={SOCIAL_LINK.youtube.href} />
+				<Button icon={SOCIAL_LINK.bluesky.icon} href={SOCIAL_LINK.bluesky.href} />
+				<Button icon={SOCIAL_LINK.email.icon} href={SOCIAL_LINK.email.href} />
 			</div>
 		</div>
 	)
