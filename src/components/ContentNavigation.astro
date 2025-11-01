@@ -8,7 +8,7 @@ interface Props {
 	index: number;
 }
 
-function setPrevHref(): string {
+function setNextHref(): string {
 	if (index - 1 < 0) {
 		return contentCollection[0].slug;
 	}
@@ -16,7 +16,7 @@ function setPrevHref(): string {
 	return contentCollection[index - 1].slug;
 }
 
-function setNextHref(): string {
+function setPrevHref(): string {
 	const max = contentCollection.length - 1;
 
 	if (index + 1 >= max) {

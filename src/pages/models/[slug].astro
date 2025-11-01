@@ -22,11 +22,15 @@ const modelUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
 );
 
 function setModelIndex(): number {
-	if (index + 1 >= ALL_MODELS.length) {
+	if (index >= ALL_MODELS.length) {
 		return 0;
 	}
 
-	return index + 1;
+	if (index - 1 < 0) {
+		return ALL_MODELS.length - 1;
+	}
+
+	return index - 1;
 }
 
 function getTagName(input: string) {

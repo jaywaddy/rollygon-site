@@ -14,10 +14,16 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header class:list={["bg-white border-bottom sticky top-0 z-10 py-6", "max-sm:py-4"]}>
-	<nav class="wrapper flex items-center justify-between">
+<header id="header" class:list={["bg-white border-bottom sticky top-0 z-10 py-6", "max-sm:py-4"]}>
+	<nav class="relative wrapper flex items-center justify-between">
 		<SiteTitle />
-		<ul class:list={["flex items-center gap-8", "max-sm:hidden"]}>
+		<ul
+			id="site-navigation"
+			class:list={[
+				"flex items-center gap-8",
+				"max-sm:hidden max-sm:absolute max-sm:items-start max-sm:top-18 max-sm:right-3 max-sm:card-lg",
+			]}
+		>
 			<li>
 				<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
 			</li>
@@ -33,9 +39,16 @@ function toggleActiveLink(label: string): "page" | "false" {
 			<li>
 				<Link label="About" isActive={toggleActiveLink("/about")} />
 			</li>
-			<li>
+			<li class="max-sm:hidden">
 				<Button label="Get free tools" href="/tools" icon="download" primary />
 			</li>
 		</ul>
+		<Button class:list={["hidden", "max-sm:flex"]} label="Menu" icon="none" type="toggle" />
 	</nav>
 </header>
+
+<style>
+	#header:has(nav form label input:checked) #site-navigation {
+		display: flex;
+	}
+</style>

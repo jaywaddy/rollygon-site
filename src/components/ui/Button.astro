@@ -29,7 +29,7 @@ const {
 	class: className,
 } = Astro.props;
 const buttonClasses = [
-	"flex items-center justify-center gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer",
+	"flex items-center justify-center overflow-clip gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer",
 	disabled ? "" : "button-marquee shadow-lg shadow-lg-hover",
 	!label ? "px-2" : "px-4 max-sm:px-2",
 ];
@@ -73,24 +73,26 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			data-disabled={disabled}
 			{type}
 			title={setButtonTitle(label)}
-			class:list={[buttonClasses, className]}
+			class:list={[buttonClasses, className, "border-sm"]}
 			{style}
 		>
 			{label && (
 				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
 			)}
-			{icon && <Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />}
+			{icon && icon !== "none" && (
+				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+			)}
 		</button>
 	)
 }
 {
 	type === "toggle" && (
-		<form action="toggle">
+		<form class:list={[className]} action="toggle">
 			<label
 				{id}
 				data-disabled={disabled}
 				title={label ? label : titleCase(icon)}
-				class:list={[buttonClasses, className]}
+				class:list={[buttonClasses]}
 				{style}
 			>
 				<input type="checkbox" />
@@ -99,7 +101,7 @@ function setIconColor(isDisabled: boolean | undefined): string {
 						{label}
 					</strong>
 				)}
-				{icon && (
+				{icon && icon !== "none" && (
 					<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
 				)}
 			</label>

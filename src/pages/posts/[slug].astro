@@ -18,11 +18,15 @@ const { post, index } = Astro.props;
 const { Content } = await post.render();
 
 function setPostIndex(): number {
-	if (index + 1 >= ALL_POSTS.length) {
+	if (index >= ALL_POSTS.length) {
 		return 0;
 	}
 
-	return index + 1;
+	if (index - 1 < 0) {
+		return ALL_POSTS.length - 1;
+	}
+
+	return index - 1;
 }
 ---
 

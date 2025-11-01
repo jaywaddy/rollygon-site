@@ -20,11 +20,15 @@ const toolUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
 );
 
 function setToolIndex(): number {
-	if (index + 1 >= ALL_TOOLS.length) {
+	if (index >= ALL_TOOLS.length) {
 		return 0;
 	}
 
-	return index + 1;
+	if (index - 1 < 0) {
+		return ALL_POSTS.length - 1;
+	}
+
+	return index - 1;
 }
 ---
 
