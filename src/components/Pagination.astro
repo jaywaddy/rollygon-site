@@ -2,6 +2,7 @@
 import type { Page } from "astro";
 import Button from "@/ui/Button.astro";
 import type { Collection } from "@/content/config";
+import Link from "./ui/Link.astro";
 
 interface Props {
 	page: Page;
@@ -50,7 +51,7 @@ function makePageList(array: Array<number>): Array<number> {
 
 {
 	lastPage > 1 && (
-		<nav aria-label="Content pages" class="card-sm flex-row justify-between">
+		<nav aria-label="Content pages" class="card-sm flex-row items-center justify-between">
 			<Button
 				label="Prev"
 				icon="arrow-left"
@@ -59,7 +60,7 @@ function makePageList(array: Array<number>): Array<number> {
 				href={prev || "/"}
 				responsive
 			/>
-			<ul class="flex gap-2 items-center">
+			<ul class:list={["flex gap-2 items-center", "max-sm:hidden"]}>
 				{!pageList.includes(1) && (
 					<li>
 						<Button label="1" icon="none" href={first} primary={currentPage === 1} />
@@ -88,6 +89,44 @@ function makePageList(array: Array<number>): Array<number> {
 							primary={currentPage === lastPage}
 						/>
 					)}
+				</li>
+			</ul>
+			<ul class:list={["hidden", "max-sm:flex max-sm:gap-4"]}>
+				<li>
+					<Link label="1" href={`/${content[0].collection}`} underline />
+				</li>
+				{currentPage === 1 && <li>...</li>}
+				{currentPage === lastPage && <li>...</li>}
+				{currentPage === 2 && currentPage !== lastPage - 1 && (
+					<li>
+						<strong>{currentPage}</strong>
+					</li>
+					<li>...</li>
+				)}
+				{currentPage === lastPage - 1 && currentPage !== 2 && (
+					<li>...</li>
+					<li>
+						<strong>{currentPage}</strong>
+					</li>
+				)}
+				{currentPage === lastPage - 1 && currentPage === 2 && (
+					<li>
+						<strong>{currentPage}</strong>
+					</li>
+				)}
+				{currentPage > 2 && currentPage < lastPage - 1 && (
+					<li>...</li>
+					<li>
+						<strong>{currentPage}</strong>
+					</li>
+					<li>...</li>
+				)}
+				<li>
+					<Link
+						label={lastPage.toString()}
+						href={`/${content[0].collection}/${lastPage}`}
+						underline
+					/>
 				</li>
 			</ul>
 			<Button label="Next" disabled={url.next === undefined && true} href={next} responsive />

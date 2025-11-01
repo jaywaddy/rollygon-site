@@ -46,11 +46,9 @@ const { collection, slug, body } = content;
 					<Button label="View details" href={`/${collection}/${slug}`} />
 				)
 			}
-			
-			
 		</div>
 		<div class="flex flex-col gap-4">
-			<div class="flex gap-4 w-[360px]">
+			<div class="flex gap-4 min-w-[360px]">
 				<div class="card-sm items-center justify-center w-full text-nowrap">
 					<strong>{formatDate(postDate, "short")}</strong>
 				</div>
