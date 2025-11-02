@@ -4,7 +4,8 @@ import Button from "@/ui/Button.astro";
 import Badge from "./ui/Badge.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
-import type { Collection } from "@/content/config";
+import { ALL_TOOLS, type Collection } from "@/content/config";
+import ImageWrapper from "./ui/ImageWrapper.astro";
 
 interface Props {
 	content: Collection;
@@ -18,7 +19,7 @@ const { collection, slug } = content;
 <div class="relative card-sm flex-row">
     {
         collection === "tools" && (
-            <div class="flex justify-between w-full">
+            <div class="flex items-center justify-between w-full">
                 <div class="flex items-center gap-4">
                     <h3 class="flex justify-left truncate w-fit">{title}</h3>
                     <small class="max-sm:hidden">{content.data.version}</small>
@@ -69,19 +70,23 @@ const { collection, slug } = content;
         }
 	</div>
     {
-        (collection === "posts" && content.data.image) && (
-            <div
-                data-img
-                style={{"--img-path": `url("/images/${collection}/${content.slug}/header.png")`}}
-                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square max-sm:hidden"
-            />
+        collection === "posts" && content.data.image && (
+            <div class="absolute -top-2 -left-28 max-sm:hidden">
+                <ImageWrapper
+                    src={`${collection}/${content.slug}/header.png`}
+                    alt={content.data.title}
+                    size="sm"
+                    aspect="1/1"
+                    shape="round"
+                />
+            </div>
         )
     }
     {
         (collection === "tools" && content.data.icon) && (
             <div
-                data-img
-                class="absolute -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange max-sm:hidden"
+                data-icon
+                class="absolute -top-2 -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange max-sm:hidden"
             >
                 <Icon name={matchIconNameType(content.data.icon)} size="64" />
             </div>
@@ -93,11 +98,7 @@ const { collection, slug } = content;
 </div>
 
 <style>
-    [data-img] {
-        background-image: var(--img-path);
-        background-size: cover;
-        background-position: center;
-
+    [data-icon] {
         &::after {
             position: absolute;
 

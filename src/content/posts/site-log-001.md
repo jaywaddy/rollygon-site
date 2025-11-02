@@ -2,8 +2,8 @@
 title: Site Log 1
 postDate: 2025-09-30
 description: The newest updates to Rollygon.com
-image: true
 next: site-log-002
+image: true
 tags:
     - Site Log
 ---

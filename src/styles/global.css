@@ -249,7 +249,7 @@ h3 {
         inset: 25%;
 
         background-image: var(--marquee-pattern);
-        transform: scale(2.2);
+        transform: scale(2.2) rotate(1deg);
         animation: background-marquee 64s linear infinite;
 
         opacity: 0.05;

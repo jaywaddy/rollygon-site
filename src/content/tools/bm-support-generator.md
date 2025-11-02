@@ -2,7 +2,6 @@
 title: B&M Support Generator
 version: v1.0
 postDate: 2024-11-10
-image: /tools/bm-support-generator.png
 icon: support-generator
 description: Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/support_generator_bm

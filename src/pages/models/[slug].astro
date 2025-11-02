@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { model, index } = Astro.props;
 const { Content } = await model.render();
 const modelUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
-	content.data.tags.includes(getTagName(model.slug)),
+	content.data.tags.includes(titleCase(model.slug)),
 );
 
 function setModelIndex(): number {
@@ -31,16 +31,6 @@ function setModelIndex(): number {
 	}
 
 	return index - 1;
-}
-
-function getTagName(input: string) {
-	const tag = titleCase(input);
-
-	if (tag === "Batman") {
-		return "Batman: The Ride";
-	}
-
-	return tag;
 }
 ---
 

@@ -25,17 +25,17 @@ const { page } = Astro.props;
 ---
 
 <SiteLayout pageTitle="Posts" color="neutral" pattern="3">
-	<div class="flex flex-col gap-4">
+	<div class="layout-sm">
 		<PageTitle heading="Posts" />
 		<SearchBar />
 	</div>
-	<div class="flex flex-col gap-4">
+	<div class="layout-sm">
 		<h2>Featured post</h2>
 		<FeaturedContent content={FEATURED_POSTS[0]} />
 	</div>
-	<div class="flex flex-col gap-4">
+	<div class="layout-sm">
 		<h2>All posts</h2>
-		<div class="flex flex-col gap-8 w-full">
+		<div class="layout-md w-full">
 			{page.data.map((content) => <ContentCard {content} />)}
 		</div>
 	</div>

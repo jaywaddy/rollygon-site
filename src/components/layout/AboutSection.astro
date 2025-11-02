@@ -49,7 +49,7 @@ const { photo, class: className } = Astro.props;
 		</div>
 	) : (
 		<div
-			class:list={["relative flex flex-col gap-4 w-[320px] h-[320px]", className]}
+			class:list={["relative layout-sm w-[320px] h-[320px]", className]}
 			style={{ "--radius": "32px" }}
 		>
 			<InfoBanner />

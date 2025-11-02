@@ -10,10 +10,10 @@ interface Props {
 const { headings, compact } = Astro.props;
 ---
 
-<nav class="sticky flex flex-col gap-8">
+<nav class="sticky layout-md">
 	{!compact && <hr />}
 	{compact ? <span class="heading-xs">Table of Contents</span> : <h2>Table of Contents</h2>}
-	<ol class="flex flex-col gap-4 list-decimal">
+	<ol class="layout-sm list-decimal">
 		{
 			headings.map((heading) =>
 				heading.depth > 2 ? (

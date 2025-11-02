@@ -14,7 +14,7 @@ const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINK;
 <SiteLayout pageTitle={title} color="purple" pattern="5">
 	<PageTitle heading={title} />
 	<div class="flex gap-16">
-		<div class="flex flex-col gap-8 w-full">
+		<div class="layout-md w-full">
 			<div class="card-lg max-w-[75ch]">
 				<p>
 					My name is Rolly (rhymes with "jolly") and I make roller coasters out of
@@ -50,7 +50,7 @@ const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINK;
 				</div>
 			</div>
 			<small>Last update: {formatDate(date)}</small>
-			<article class="content flex flex-col gap-8">
+			<article class="content layout-md">
 				<Content />
 			</article>
 		</div>

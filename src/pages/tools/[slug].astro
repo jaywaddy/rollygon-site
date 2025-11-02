@@ -25,7 +25,7 @@ function setToolIndex(): number {
 	}
 
 	if (index - 1 < 0) {
-		return ALL_POSTS.length - 1;
+		return ALL_TOOLS.length - 1;
 	}
 
 	return index - 1;
@@ -46,7 +46,7 @@ function setToolIndex(): number {
 			</section>
 		)
 	}
-	<div class="flex flex-col gap-8">
+	<div class="layout-md">
 		<h2>Next tool</h2>
 		<ContentCard content={ALL_TOOLS[setToolIndex()]} />
 	</div>

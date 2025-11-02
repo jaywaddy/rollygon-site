@@ -13,6 +13,7 @@ modelStats:
 tags:
   - Coaster
   - B&M
+  - Batman
 ---
 
 📺 Watch the full [YouTube playlist](https://www.youtube.com/playlist?list=PLXwho03cbrPIpFDewX2aVeYMJsTCfnsac) of me building this model live.

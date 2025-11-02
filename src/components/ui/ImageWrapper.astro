@@ -1,14 +1,23 @@
 ---
-import Icon from "@/ui//Icon.astro";
+import type { HTML } from "@/scripts/constants";
+import { Image } from "astro:assets";
 
-interface Props {
-	size?: string;
+interface Props extends HTML {
+	size?: "sm" | "lg";
 	shape?: "rect" | "round";
 	aspect?: "1/1" | "16/9" | "3/1";
 	src?: string;
+	alt: string;
 }
 
-const { size = "auto", shape = "rect", aspect = "16/9", src = "" } = Astro.props;
+const {
+	size = "auto",
+	shape = "rect",
+	aspect = "16/9",
+	src = "",
+	alt = "",
+	class: className,
+} = Astro.props;
 
 function calcRadius(border: string, input: typeof shape): string {
 	if (border === "outer" && input === "rect") {
@@ -24,7 +33,7 @@ function calcRadius(border: string, input: typeof shape): string {
 
 function calcSize(input: typeof size): string | undefined {
 	const sizes: Array<{ name: string; size: string }> = [
-		{ name: "sm", size: "148px" },
+		{ name: "sm", size: "96px" },
 		{ name: "md", size: "320px" },
 		{ name: "lg", size: "586px" },
 		{ name: "auto", size: "auto" },
@@ -45,7 +54,9 @@ function calcPath(input: string): string {
 
 <div
 	class:list={[
-		"relative flex flex-1 justify-center items-center aspect-[var(--img-aspect)] rounded-[var(--outter-radius)] w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg overflow-clip",
+		"relative flex flex-1 justify-center items-center aspect-(--img-aspect) w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg overflow-clip",
+		shape === "round" ? "rounded-full" : "rounded-(--outter-radius)",
+		className,
 	]}
 	style={{
 		"--img-path": calcPath(src),
@@ -57,24 +68,13 @@ function calcPath(input: string): string {
 >
 	<div
 		class:list={[
-			"absolute inset-2 flex justify-center items-center rounded-[var(--inner-radius)] bg-black overflow-clip",
+			"absolute flex justify-center items-center rounded-[var(--inner-radius)] bg-black overflow-clip",
+			shape === "round" ? "rounded-full" : "rounded-(--inner-radius)",
+			size === "sm" ? "inset-1" : "inset-2",
 			"max-sm:inset-0",
 		]}
 	>
-		{
-			src ? (
-				<div data-img class="w-full h-full" />
-			) : (
-				<Icon name="image" size="64" color="white" />
-			)
-		}
+		{aspect === "1/1" && <Image src={`/images/${src}`} width="1080" height="1080" {alt} />}
+		{aspect === "16/9" && <Image src={`/images/${src}`} width="1920" height="1080" {alt} />}
 	</div>
 </div>
-
-<style>
-	[data-img] {
-		background-image: var(--img-path);
-		background-size: cover;
-		background-position: center;
-	}
-</style>

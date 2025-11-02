@@ -2,7 +2,6 @@
 title: Utility Nodes
 version: v1.1
 postDate: 2024-11-10
-image: /tools/utility-nodes.png
 icon: utility-nodes
 description: Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/utility-nodes
@@ -11,9 +10,9 @@ size: 2.8 MB
 tags:
   - Blender
 ---
-Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
+Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any `.blend` file.
 
-This tool let's you dynamically:
+This tool lets you dynamically:
 - Pick the color, resolution, and radius of each support beam
 - Add or remove flanges, footers, or mounting braces
 - Adjust the rotation, X/Y-position, and length of footers

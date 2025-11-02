@@ -6,13 +6,7 @@ import { ALL_TAGS } from "@/content/config";
 
 <div id="search-bar" class="flex flex-col justify-between gap-4 border-lg shadow-lg p-4 bg-white">
 	<nav class="flex justify-between gap-2">
-		<Button
-			id="filter-tag-button"
-			label="Filter tags"
-			icon="drop-down"
-			type="toggle"
-			disabled
-		/>
+		<Button id="filter-tag-button" label="All tags" icon="drop-down" type="toggle" />
 		<div class="flex gap-2">
 			<form action="">
 				<input
@@ -35,7 +29,7 @@ import { ALL_TAGS } from "@/content/config";
 		</div>
 	</nav>
 	<div id="search-tag-list">
-		<TagList tags={ALL_TAGS} filter />
+		<TagList tags={ALL_TAGS} />
 	</div>
 </div>
 

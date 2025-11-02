@@ -1,9 +1,10 @@
 ---
 import ContentCard from "@/components/ContentCard.astro";
-import { ALL_POSTS } from "@/content/config";
+import ModelCard from "@/components/ModelCard.astro";
+import { ALL_MODELS, ALL_POSTS } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { findContent } from "@/scripts/utilities";
+import { findContent, slugify } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
 	return ALL_POSTS.map((post, index) => ({
@@ -16,6 +17,7 @@ export async function getStaticPaths() {
 
 const { post, index } = Astro.props;
 const { Content } = await post.render();
+const model = ALL_MODELS.find((model) => model.slug === post.slug.split("-")[0]);
 
 function setPostIndex(): number {
 	if (index >= ALL_POSTS.length) {
@@ -34,7 +36,15 @@ function setPostIndex(): number {
 	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
-	<div class="flex flex-col gap-8">
+	{
+		model && (
+			<div class="layout-md">
+				<h2>View model</h2>
+				<ModelCard {model} />
+			</div>
+		)
+	}
+	<div class="layout-md">
 		<h2>Next post</h2>
 		{
 			post.data.next ? (

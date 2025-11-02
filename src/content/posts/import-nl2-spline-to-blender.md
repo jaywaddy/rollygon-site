@@ -1,9 +1,9 @@
 ---
 title: Import NL2 Spline to Blender
 postDate: 2025-10-17
-image: true
 description: Description of the article would go into this section right here. This could be between one to two sentences.
 next: site-log-002
+image: true
 tags:
     - Guide
     - Blender
