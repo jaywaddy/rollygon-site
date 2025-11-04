@@ -237,7 +237,6 @@ h3 {
 @utility background-marquee {
     position: relative;
     overflow: clip;
-    inset: 0;
         
     background-color: var(--marquee-color);
     z-index: 0;

@@ -1,7 +1,7 @@
 ---
 title: Utility Nodes
 version: v1.1
-postDate: 2024-11-10
+postDate: 2025-08-10
 icon: utility-nodes
 description: Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/utility-nodes

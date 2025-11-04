@@ -4,7 +4,7 @@ import Button from "@/ui/Button.astro";
 import Badge from "./ui/Badge.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
-import { ALL_TOOLS, type Collection } from "@/content/config";
+import { type Collection } from "@/content/config";
 import ImageWrapper from "./ui/ImageWrapper.astro";
 
 interface Props {
@@ -12,8 +12,16 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const { title, tags } = content.data;
+const { title, tags, postDate, lastUpdated } = content.data;
 const { collection, slug } = content;
+
+function getPostDate() {
+    if (lastUpdated) {
+        return lastUpdated;
+    }
+
+    return postDate;
+}
 ---
 
 <div class="relative card-sm flex-row">
@@ -31,7 +39,7 @@ const { collection, slug } = content;
                     <small class="flex gap-2">
 						<strong>{content.data.size}</strong>
 						&bullet;
-						<strong>{formatDate(content.data.postDate, "short")}</strong>
+						<strong>{formatDate(getPostDate(), "short")}</strong>
 					</small>
                 </strong>
             </div>
@@ -45,7 +53,7 @@ const { collection, slug } = content;
                     <small class="flex gap-2">
 						<strong>{calcReadTime(content.body)} min read</strong>
 						&bullet;
-						<strong>{formatDate(content.data.postDate, "short")}</strong>
+						<strong>{formatDate(getPostDate(), "short")}</strong>
 					</small>
                 </strong>
             </div>

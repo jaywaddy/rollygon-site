@@ -1,7 +1,7 @@
 ---
 title: B&M Track Generator
 version: v1.1
-postDate: 2024-11-10
+postDate: 2025-08-25
 icon: track-generator
 description: A Blender 4.2 geometry node group that takes both mesh and a curve to dynamically generate a B&M track piece.
 href: https://rollygon.gumroad.com/l/track_generator_bm

@@ -1,16 +1,17 @@
 ---
+import type { HTML } from "@/scripts/constants";
 import Link from "./Link.astro";
 import type { MarkdownHeading } from "astro";
 
-interface Props {
+interface Props extends HTML {
 	headings: Array<MarkdownHeading>;
 	compact?: boolean;
 }
 
-const { headings, compact } = Astro.props;
+const { headings, compact, class: className } = Astro.props;
 ---
 
-<nav class="sticky layout-md">
+<nav class:list={["sticky layout-md", className]}>
 	{!compact && <hr />}
 	{compact ? <span class="heading-xs">Table of Contents</span> : <h2>Table of Contents</h2>}
 	<ol class="layout-sm list-decimal">

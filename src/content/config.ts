@@ -12,6 +12,7 @@ const postCollection = defineCollection({
         image: z.optional(z.boolean()),
         embed: z.optional(z.string()),
         next: z.optional(z.string()),
+        lastUpdated: z.optional(z.date()),
     })
 });
 
@@ -26,8 +27,9 @@ const toolCollection = defineCollection({
         icon: z.string(),
         href: z.string(),
         tags: z.array(z.string()),
-        next: z.optional(z.string()),
         version: z.string(),
+        next: z.optional(z.string()),
+        lastUpdated: z.optional(z.date()),
     })
 });
 
@@ -42,6 +44,7 @@ const modelCollection = defineCollection({
         size: z.string(),
         modelStats: z.array(z.any()),
         tags: z.array(z.string()),
+        lastUpdated: z.optional(z.date()),
     })
 });
 

@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { content, contentCollection, index } = Astro.props;
-const { title, description, postDate, tags } = content.data;
+const { title, description, postDate, tags, lastUpdated } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
 
@@ -84,9 +84,12 @@ function setButtonLabel(): string {
 							</small>
 						)
 					}
+					{
+						lastUpdated && <small>Last updated: {formatDate(lastUpdated)}</small>
+					}
 				</div>
 			</div>
-			{ headings.length > 0 && <TableOfContents {headings} /> }
+			{ headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> }
 			<article class="content layout-md">
 				<slot />
 			</article>
