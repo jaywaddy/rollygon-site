@@ -18,12 +18,12 @@ const { photo, class: className } = Astro.props;
 			class:list={["relative flex flex-col w-[320px] h-[320px]", className]}
 			style={{ "--radius": "32px" }}
 		>
-			<ImageWrapper size="md" shape="round" aspect="1/1" src="/about/about.png" />
+			<ImageWrapper alt="About photo" size="md" shape="round" aspect="1/1" src="/about/about.png" />
 			<div class="absolute top-2 -rotate-4">
 				<InfoBanner />
 			</div>
 			<p class="absolute card-sm bottom-2 rotate-2">
-				I'm Rolly (or Jay), and I make roller coasters out of polygons!
+				I'm Jay, and I make roller coasters out of polygons!
 			</p>
 			<SocialLink
 				icon={SOCIAL_LINK.gumroad.icon}
