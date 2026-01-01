@@ -55,14 +55,14 @@ function calcPath(input: string): string {
 <div
 	class:list={[
 		"relative flex flex-1 justify-center items-center aspect-(--img-aspect) w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg overflow-clip",
-		shape === "round" ? "rounded-full" : "rounded-(--outter-radius)",
+		shape === "round" ? "rounded-full" : "rounded-(--outer-radius)",
 		className,
 	]}
 	style={{
 		"--img-path": calcPath(src),
 		"--img-w": calcSize(size),
 		"--img-aspect": aspect,
-		"--outter-radius": calcRadius("outer", shape),
+		"--outer-radius": calcRadius("outer", shape),
 		"--inner-radius": calcRadius("inner", shape),
 	}}
 >

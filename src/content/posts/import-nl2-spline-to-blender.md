@@ -1,7 +1,7 @@
 ---
 title: Import NL2 Spline to Blender
 postDate: 2025-10-17
-description: Description of the article would go into this section right here. This could be between one to two sentences.
+description: How to import a coaster pline from NoLimits 2 into Blender
 next: site-log-002
 image: true
 tags:
@@ -155,4 +155,4 @@ I'm also looking to make more tools for this process to make it easier for other
 
 Thanks for reading!
 
--Rolly
+-Jay

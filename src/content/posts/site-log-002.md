@@ -41,5 +41,5 @@ A month ago, I made some awesome QOL upgrades to my [B&M Support Generator](/too
 
 As for the site, if it's not the search bar, then it will be mobile design for sure! I definitely started this project off as desktop only (being that I want people to be able to download my tools for Blender, a desktop application), and haven't even designed any mobile elements at all at this time! So, stay tuned for that&mdash;soon I hope.
 
--Rolly
+-Jay
 

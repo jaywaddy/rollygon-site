@@ -28,4 +28,4 @@ At the time of posting this, I've solidified some guidelines for how to execute 
 
 I'd love to continue creating site logs to document some of the less obvious progress that continues happening beyond the scope of my coaster models and tools!
 
--Rolly
+-Jay
