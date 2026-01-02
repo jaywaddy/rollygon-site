@@ -19,9 +19,20 @@ This gives me guard rails as to how far I can go down an unrelated rabbit hole. 
 
 The main fix was adding a toggle to the `Vertical Mount (Lg)` that either locks its rotation to match the curve tangent or stay parallel to the ground to make A-shaped supports.
 
+<div class="image-row">
+
+![Figure 1](/images/posts/not-the-dark-knight-update-1/figure-01.png)
+![Figure 2](/images/posts/not-the-dark-knight-update-1/figure-02.png)
+
+</div>
+
 Additionally, I made the texturing of `Vertical Mount (Sm)` a bit more accurate (for solid colors) and fixed a bug for the `Mounting Plate` on the `Universal Mount`.
+
+![Figure 3](/images/posts/not-the-dark-knight-update-1/figure-03.png)
+
 
 ## Track Modeling
 
 After fixing the Support Tool, I finished the loop section. I didn't bother to organize the collections or even texture the track mounting brackets, but the actual modeling for this section is mostly completed. I'll have to fix up the highly angled supports.
 
+![Figure 4](/images/posts/not-the-dark-knight-update-1/figure-04.png)
