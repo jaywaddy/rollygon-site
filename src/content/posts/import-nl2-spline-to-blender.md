@@ -1,6 +1,7 @@
 ---
 title: Import NL2 Spline to Blender
 postDate: 2025-10-17
+postUpdate: 2026-01-23
 description: How to import a coaster pline from NoLimits 2 into Blender
 next: site-log-002
 image: true
@@ -76,9 +77,11 @@ After importing the track spline and support files into Blender, notice the trac
 
 ![Figure 7](/images/posts/import-nl2-spline-to-blender/figure-07.gif)
 
-*Don't forget to either apply your rotation in object mode!*
+*Don't forget to apply your rotation in object mode!*
 
 ### Track Mesh
+
+Now would be a great time to find a [track generator tool](/tags/track-gen) to model the track for your project.
 
 If you don't have any track modeled yet, use the default cube. Shape it however you want, but make sure the `center of rails` (or the top of the cube in this example) falls on `Z-position: 0` and the length of the track runs on the X-axis. It's also a good idea to have it centered on the Y-axis.
 

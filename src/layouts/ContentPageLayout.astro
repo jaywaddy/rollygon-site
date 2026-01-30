@@ -66,6 +66,14 @@ function setButtonLabel(): string {
 						)
 					}
 					{
+						collection === "posts" && content.data.postUpdate && (
+							<small>
+								<em>Updated:</em>
+								<em>{formatDate(content.data.postUpdate)}</em>
+							</small>
+						)
+					}
+					{
 						collection === "tools" && (
 							<small>
 								<strong>{formatDate(postDate)}</strong>

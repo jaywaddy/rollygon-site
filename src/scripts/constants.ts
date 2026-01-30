@@ -17,9 +17,9 @@ export const FEATURED_TOOLS: Array<Collection> = [
     ALL_TOOLS[1],
 ];
 export const FEATURED_POSTS: Array<Collection> = [
-    findContent(ALL_POSTS, "import-nl2-spline-to-blender"),
-    SITE_LOGS[0],
-    SITE_LOGS[1]
+    ALL_POSTS[0],
+    ALL_POSTS[1],
+    ALL_POSTS[2],
 ];
 
 export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href: string}} = {

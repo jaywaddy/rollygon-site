@@ -7,6 +7,7 @@ const postCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         postDate: z.date(),
+        postUpdate: z.optional(z.date()),
         description: z.string(),
         tags: z.array(z.string()),
         image: z.optional(z.boolean()),
