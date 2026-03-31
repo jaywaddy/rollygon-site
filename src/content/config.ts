@@ -83,3 +83,6 @@ export const ALL_CONTENT = [
 ];
 
 export const ALL_TAGS: Array<string> = [...new Set(ALL_CONTENT.map(content => content.data.tags).flat().sort())];
+
+
+// UI Refresh init test
