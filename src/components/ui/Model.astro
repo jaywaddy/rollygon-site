@@ -15,7 +15,7 @@ const { title, id } = Astro.props;
 >
 	<div
 		class:list={[
-			"absolute inset-2 flex justify-center items-center rounded-[var(--radius-sm)] bg-black text-white",
+			"absolute inset-2 flex justify-center items-center rounded-(--radius-sm) bg-black text-white",
 			"max-sm:inset-0",
 		]}
 	>
@@ -35,7 +35,7 @@ const { title, id } = Astro.props;
 			src={"https://sketchfab.com/models/" +
 				id +
 				"/embed?autostart=1&annotations_visible=1&transparent=0&ui_theme=dark&dnt=1"}
-			class="inset-2 rounded-[var(--radius-sm)] w-full h-full"
+			class="inset-2 rounded-(--radius-sm) w-full h-full"
 		>
 		</iframe>
 	</div>

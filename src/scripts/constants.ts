@@ -1,4 +1,4 @@
-import type { ICON_NAME } from "@/components/ui/Icon.astro";
+import { type ICON_NAME } from "@/ui/Icon.astro";
 import { ALL_MODELS, ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import { findContent } from "@/scripts/utilities";
 
@@ -10,12 +10,14 @@ const SITE_LOGS: Array<Collection> = ALL_POSTS.filter((content) =>
 	content.data.tags.includes("Site Log")
 );
 
-export const FEATURED_MODEL = findContent(ALL_MODELS, "poltergeist");
+export const FEATURED_MODEL = findContent(ALL_MODELS, "the-dark-knight");
+
 export const FEATURED_TOOLS: Array<Collection> = [
-    findContent(ALL_TOOLS, "bm-support-generator"),
     ALL_TOOLS[0],
     ALL_TOOLS[1],
+    ALL_TOOLS[2],
 ];
+
 export const FEATURED_POSTS: Array<Collection> = [
     ALL_POSTS[0],
     ALL_POSTS[1],
