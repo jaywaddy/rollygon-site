@@ -30,12 +30,12 @@ function getPostDate() {
             <div class="flex items-center justify-between w-full">
                 <div class="flex items-center gap-4">
                     <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                    <small class="max-sm:hidden">{content.data.version}</small>
-                    <span class="max-sm:hidden">
+                    <small >{content.data.version}</small>
+                    <span >
                         <Badge label={content.data.price} />
                     </span>
                 </div>
-                <strong class="max-sm:hidden">
+                <strong>
                     <small class="flex gap-2">
 						<strong>{content.data.size}</strong>
 						&bullet;
@@ -49,7 +49,7 @@ function getPostDate() {
         collection === "posts" && (
             <div class="flex items-center justify-between w-full">
                 <h3 class="flex justify-left truncate w-fit">{title}</h3>
-                <strong class="max-sm:hidden">
+                <strong>
                     <small class="flex gap-2">
 						<strong>{calcReadTime(content.body)} min read</strong>
 						&bullet;
@@ -63,7 +63,7 @@ function getPostDate() {
         {
             collection === "tools" && (
                 <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
-                <Button class="max-sm:hidden" href={content.data.href} icon="download" primary />
+                <Button href={content.data.href} icon="download" iconOnly/>
             )
         }
         {
@@ -73,7 +73,7 @@ function getPostDate() {
         }
         {
             content.collection === "posts" && content.data.embed && (
-                <Button class="max-sm:hidden" href={`http://youtu.be/${content.data.embed}`} icon="youtube" primary />
+                <Button href={`http://youtu.be/${content.data.embed}`} icon="youtube" iconOnly />
             )
         }
 	</div>

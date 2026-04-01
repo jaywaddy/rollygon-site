@@ -45,7 +45,6 @@ const { content, contentCollection, index } = Astro.props;
 	<Button
 		label={`All ${content.collection}`}
 		icon="arrow-left"
-		iconLeft
 		href={`/${content.collection}`}
 	/>
 	<ul class="flex gap-2">
@@ -53,7 +52,6 @@ const { content, contentCollection, index } = Astro.props;
 			<Button
 				label="Prev"
 				icon="arrow-left"
-				iconLeft
 				href=`/${content.collection}/${setPrevHref()}`
 				disabled={setDisabled("prev")}
 			/>

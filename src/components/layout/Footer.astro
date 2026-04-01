@@ -14,16 +14,16 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 		data-footer-banner
 		class:list={["wrapper flex justify-between py-16 border-b", "max-sm:flex-col max-sm:gap-8"]}
 	>
-		<SiteTitle class="max-sm:hidden" />
+		<SiteTitle />
 		<Link class="hidden max-sm:block" label="@Rollygon" href="/" />
 		<ul class="w-[320px]">
 			<li><small class="uppercase">Socials</small></li>
 			<li class="flex flex-wrap gap-2">
-				<Button icon="gumroad" href="https://rollygon.gumroad.com/" />
-				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" />
-				<Button icon="youtube" href="https://youtube.com/@Rollygon" />
-				<Button icon="bluesky" href="https://bsky.app/profile/rollygon.com" />
-				<Button icon="send" href="mailto:message@rollgy.com" />
+				<Button icon="gumroad" href="https://rollygon.gumroad.com/" iconOnly />
+				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" iconOnly />
+				<Button icon="youtube" href="https://youtube.com/@Rollygon" iconOnly />
+				<Button icon="bluesky" href="https://bsky.app/profile/rollygon.com" iconOnly />
+				<Button icon="send" href="mailto:message@rollgy.com" iconOnly />
 			</li>
 		</ul>
 	</section>

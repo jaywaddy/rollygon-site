@@ -1,5 +1,4 @@
 ---
-import { Color, Pattern, setStyles } from "@/scripts/interface";
 import Icon, { type ICON_NAME } from "./Icon.astro";
 import { titleCase } from "@/scripts/utilities";
 import type { HTML } from "@/scripts/constants";
@@ -9,10 +8,10 @@ interface Props extends HTML {
 	type?: "submit" | "toggle" | "link";
 	label?: string;
 	href?: string;
-	iconLeft?: boolean;
+	iconRight?: boolean;
 	icon?: ICON_NAME;
+	iconOnly?: boolean;
 	disabled?: boolean;
-	primary?: boolean;
 	responsive?: boolean;
 }
 
@@ -22,48 +21,17 @@ const {
 	label,
 	href,
 	icon = "arrow-right",
-	primary,
-	iconLeft,
+	iconRight = false,
+	iconOnly = false,
 	disabled,
 	responsive,
 	class: className,
 } = Astro.props;
-const buttonClasses = [
-	"flex items-center justify-center overflow-clip gap-1 py-2 border-sm bg-[var(--button-color)] max-w-fit min-w-11 min-h-11 cursor-pointer",
-	disabled ? "" : "button-marquee shadow-lg shadow-lg-hover",
-	!label ? "px-2" : "px-4 max-sm:px-2",
+
+const buttonStyles = [
+	"button"
 ];
-const style = setStyles("button", setButtonColor(primary), Pattern["2"]);
 
-function setButtonTitle(label: string | undefined): string {
-	if (label) {
-		return label;
-	}
-	return titleCase(icon);
-}
-
-function setButtonColor(isPrimary: boolean | undefined): string {
-	if (isPrimary) {
-		return Color.lime;
-	}
-
-	return Color.neutral;
-}
-
-function setIconSize(label: string | undefined): string {
-	if (label) {
-		return "16";
-	}
-
-	return "20";
-}
-
-function setIconColor(isDisabled: boolean | undefined): string {
-	if (isDisabled) {
-		return "var(--color-disabled-body)";
-	}
-	return "var(--color-text)";
-}
 ---
 
 {
@@ -71,16 +39,16 @@ function setIconColor(isDisabled: boolean | undefined): string {
 		<button
 			{id}
 			data-disabled={disabled}
+			data-icon-only={iconOnly}
 			{type}
-			title={setButtonTitle(label)}
-			class:list={[buttonClasses, className, "border-sm"]}
-			{style}
+			title={label}
+			class:list={[buttonStyles, className]}
 		>
 			{label && (
 				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
 			)}
 			{icon && icon !== "none" && (
-				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+				<Icon name={icon} {disabled} />
 			)}
 		</button>
 	)
@@ -91,9 +59,9 @@ function setIconColor(isDisabled: boolean | undefined): string {
 			<label
 				{id}
 				data-disabled={disabled}
+				data-icon-only={iconOnly}
 				title={label ? label : titleCase(icon)}
-				class:list={[buttonClasses]}
-				{style}
+				class:list={[buttonStyles, className]}
 			>
 				<input type="checkbox" />
 				{label && (
@@ -102,7 +70,7 @@ function setIconColor(isDisabled: boolean | undefined): string {
 					</strong>
 				)}
 				{icon && icon !== "none" && (
-					<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+					<Icon name={icon} {disabled} />
 				)}
 			</label>
 		</form>
@@ -113,40 +81,67 @@ function setIconColor(isDisabled: boolean | undefined): string {
 		<a
 			{id}
 			data-disabled={disabled}
+			data-icon-only={iconOnly}
 			title={label ? label : titleCase(icon)}
-			class:list={[buttonClasses, className]}
-			{style}
+			class:list={[buttonStyles, className]}
 			{href}
 		>
-			{iconLeft && (
-				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+			{!iconRight && (
+				<Icon name={icon} {disabled} />
 			)}
 			{label && (
 				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
 			)}
-			{!iconLeft && icon !== "none" && (
-				<Icon name={icon} size={setIconSize(label)} color={setIconColor(disabled)} />
+			{iconRight && icon !== "none" && (
+				<Icon name={icon} {disabled} />
 			)}
 		</a>
 	)
 }
 
 <style>
+	.button {
+		--padding: calc(var(--spacing) * 3);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: calc(var(--spacing) * 2);
+
+		border-radius: var(--radius-sm);
+		border: solid var(--outline) 1px;
+		color: var(--text);
+		background-color: var(--bg-light);
+
+		padding-block: var(--padding);
+		padding-inline: calc(var(--padding) * 2);
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--bg-hover);
+		}
+
+		&:active {
+			background-color: var(--bg-active);
+		}
+	}
+
 	[data-disabled="true"] {
-		color: var(--color-disabled-body);
-		background: var(--color-disabled-bg);
+		color: var(--text-muted);
+		background: var(--bg-muted);
+		border-color: var(--text-muted);
 		pointer-events: none;
 		cursor: not-allowed;
+	}
+
+	[data-icon-only="true"] {
+		padding-inline: var(--padding);
+		aspect-ratio: 1/1;
 	}
 
 	label:has(input[type="checkbox"]) {
 		& input[type="checkbox"] {
 			display: none;
 		}
-	}
-
-	label:has(input[type="checkbox"]:checked) {
-		background-color: var(--color-lime);
-		text-shadow: none;
 	}
 </style>

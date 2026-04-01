@@ -1,4 +1,6 @@
 ---
+import { titleCase } from "@/scripts/utilities";
+
 // General Icons
 import ArrowLeftIcon from "@/icons/ArrowLeftIcon.astro";
 import ArrowRightIcon from "@/icons/ArrowRightIcon.astro";
@@ -77,52 +79,61 @@ interface Props {
 	name: ICON_NAME;
 	size?: string;
 	color?: string;
+	disabled?: boolean;
 }
 
 export function matchIconNameType(iconName: any): ICON_NAME {
 	return iconName;
 }
 
-const { name, size = "16", color = "var(--color-black)" } = Astro.props;
+const { name, size = "16", color = "var(--text)", disabled = false } = Astro.props;
+
+function setIconColor(isDisabled: boolean): string {
+	if (isDisabled) {
+		return "var(--text-muted)";
+	}
+
+	return color;
+}
 ---
 
 <svg class="w-fit" width={size} height={size} viewBox="0 0 32 32" fill="none">
-	<title>{name}</title>
+	<title>{titleCase(name)}</title>
 
 	{name === "none" && undefined}
 
-	{name === "arrow-left" && <ArrowLeftIcon {color} />}
-	{name === "arrow-right" && <ArrowRightIcon {color} />}
-	{name === "download" && <DownloadIcon {color} />}
-	{name === "drop-down" && <DropDownIcon {color} />}
-	{name === "external-link" && <ExternalLinkIcon {color} />}
-	{name === "image" && <ImageIcon {color} />}
-	{name === "logo" && <LogoIcon {color} />}
-	{name === "ngon" && <Ngons {color} />}
-	{name === "quad" && <Quads {color} />}
-	{name === "search" && <SearchIcon {color} />}
-	{name === "send" && <SendIcon {color} />}
-	{name === "triangle" && <Triangles {color} />}
-	{name === "user" && <UserIcon {color} />}
-	{name === "vertex" && <Vertex {color} />}
+	{name === "arrow-left" && <ArrowLeftIcon color={setIconColor(disabled)} />}
+	{name === "arrow-right" && <ArrowRightIcon color={setIconColor(disabled)} />}
+	{name === "download" && <DownloadIcon color={setIconColor(disabled)} />}
+	{name === "drop-down" && <DropDownIcon color={setIconColor(disabled)} />}
+	{name === "external-link" && <ExternalLinkIcon color={setIconColor(disabled)} />}
+	{name === "image" && <ImageIcon color={setIconColor(disabled)} />}
+	{name === "logo" && <LogoIcon color={setIconColor(disabled)} />}
+	{name === "ngon" && <Ngons color={setIconColor(disabled)} />}
+	{name === "quad" && <Quads color={setIconColor(disabled)} />}
+	{name === "search" && <SearchIcon color={setIconColor(disabled)} />}
+	{name === "send" && <SendIcon color={setIconColor(disabled)} />}
+	{name === "triangle" && <Triangles color={setIconColor(disabled)} />}
+	{name === "user" && <UserIcon color={setIconColor(disabled)} />}
+	{name === "vertex" && <Vertex color={setIconColor(disabled)} />}
 
-	{name === "bluesky" && <BlueskyIcon {color} />}
-	{name === "gumroad" && <GumroadIcon {color} />}
-	{name === "sketchfab" && <Sketchfab {color} />}
-	{name === "youtube" && <YouTubeIcon {color} />}
+	{name === "bluesky" && <BlueskyIcon color={setIconColor(disabled)} />}
+	{name === "gumroad" && <GumroadIcon color={setIconColor(disabled)} />}
+	{name === "sketchfab" && <Sketchfab color={setIconColor(disabled)} />}
+	{name === "youtube" && <YouTubeIcon color={setIconColor(disabled)} />}
 
-	{name === "array" && <Array {color} />}
-	{name === "curve-deform" && <CurveDeform {color} />}
-	{name === "fixed-curve-radius" && <FixedCurveRadius {color} />}
-	{name === "float-switch" && <FloatSwitch {color} />}
-	{name === "geometry-switch" && <GeometrySwitch {color} />}
-	{name === "integer-switch" && <IntegerSwitch {color} />}
-	{name === "move-to-unit" && <MoveToUnit {color} />}
-	{name === "object-switch" && <ObjectSwitch {color} />}
-	{name === "rotation-switch" && <RotationSwitch {color} />}
-	{name === "select-edge-loops" && <SelectEdgeLoops {color} />}
-	{name === "support-generator" && <SupportGenerator {color} />}
-	{name === "track-generator" && <TrackGenerator {color} />}
-	{name === "utility-nodes" && <UtilityNodes {color} />}
-	{name === "vector-switch" && <VectorSwitch {color} />}
+	{name === "array" && <Array color={setIconColor(disabled)} />}
+	{name === "curve-deform" && <CurveDeform color={setIconColor(disabled)} />}
+	{name === "fixed-curve-radius" && <FixedCurveRadius color={setIconColor(disabled)} />}
+	{name === "float-switch" && <FloatSwitch color={setIconColor(disabled)} />}
+	{name === "geometry-switch" && <GeometrySwitch color={setIconColor(disabled)} />}
+	{name === "integer-switch" && <IntegerSwitch color={setIconColor(disabled)} />}
+	{name === "move-to-unit" && <MoveToUnit color={setIconColor(disabled)} />}
+	{name === "object-switch" && <ObjectSwitch color={setIconColor(disabled)} />}
+	{name === "rotation-switch" && <RotationSwitch color={setIconColor(disabled)} />}
+	{name === "select-edge-loops" && <SelectEdgeLoops color={setIconColor(disabled)} />}
+	{name === "support-generator" && <SupportGenerator color={setIconColor(disabled)} />}
+	{name === "track-generator" && <TrackGenerator color={setIconColor(disabled)} />}
+	{name === "utility-nodes" && <UtilityNodes color={setIconColor(disabled)} />}
+	{name === "vector-switch" && <VectorSwitch color={setIconColor(disabled)} />}
 </svg>
