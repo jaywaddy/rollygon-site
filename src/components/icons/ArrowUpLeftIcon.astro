@@ -1,0 +1,13 @@
+---
+interface Props {
+	color: string;
+	size: string;
+}
+
+const { color, size } = Astro.props;
+---
+
+<path d="M22.6667 22.6663L9.33337 9.33301M9.33337 9.33301V22.6663M9.33337 9.33301H22.6667" stroke={color} stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+

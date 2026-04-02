@@ -20,7 +20,7 @@ const {
 	type = "link",
 	label,
 	href,
-	icon = "arrow-right",
+	icon = "arrow-up-left",
 	iconRight = false,
 	iconOnly = false,
 	disabled,
@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 
 const buttonStyles = [
-	"button"
+	"button text-nowrap"
 ];
 
 ---
@@ -42,36 +42,31 @@ const buttonStyles = [
 			data-icon-only={iconOnly}
 			{type}
 			title={label}
-			class:list={[buttonStyles, className]}
+			class:list={[buttonStyles, className, "text-nowrap"]}
 		>
-			{label && (
-				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
-			)}
-			{icon && icon !== "none" && (
-				<Icon name={icon} {disabled} />
-			)}
+			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
+			{label && label}
+			{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 		</button>
 	)
 }
 {
 	type === "toggle" && (
-		<form class:list={[className]} action="toggle">
+		<form 
+			{id}
+			class:list={[className]}
+			action="toggle"
+		>
 			<label
-				{id}
 				data-disabled={disabled}
 				data-icon-only={iconOnly}
 				title={label ? label : titleCase(icon)}
 				class:list={[buttonStyles, className]}
 			>
 				<input type="checkbox" />
-				{label && (
-					<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>
-						{label}
-					</strong>
-				)}
-				{icon && icon !== "none" && (
-					<Icon name={icon} {disabled} />
-				)}
+				{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
+				{label && !iconOnly && label}
+				{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 			</label>
 		</form>
 	)
@@ -86,35 +81,34 @@ const buttonStyles = [
 			class:list={[buttonStyles, className]}
 			{href}
 		>
-			{!iconRight && (
-				<Icon name={icon} {disabled} />
-			)}
-			{label && (
-				<strong class:list={["text-nowrap", responsive && "max-sm:hidden"]}>{label}</strong>
-			)}
-			{iconRight && icon !== "none" && (
-				<Icon name={icon} {disabled} />
-			)}
+			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
+			{label && !iconOnly && label}
+			{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 		</a>
 	)
 }
 
 <style>
 	.button {
-		--padding: calc(var(--spacing) * 3);
+		--padding: var(--space-3);
+
+		--padding-y: var(--padding);
+		--padding-x: calc(var(--padding-y) * 2);
+		--padding__icon-only: calc(var(--padding-y) + 4px);
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: calc(var(--spacing) * 2);
+		gap: var(--space-2);
 
+		min-height: 1.25rem;
 		border-radius: var(--radius-sm);
 		border: solid var(--outline) 1px;
 		color: var(--text);
 		background-color: var(--bg-light);
 
-		padding-block: var(--padding);
-		padding-inline: calc(var(--padding) * 2);
+		padding-block: var(--padding-y);
+		padding-inline: var(--padding-x);
 		cursor: pointer;
 
 		&:hover {
@@ -135,7 +129,7 @@ const buttonStyles = [
 	}
 
 	[data-icon-only="true"] {
-		padding-inline: var(--padding);
+		padding-inline: var(--padding__icon-only);
 		aspect-ratio: 1/1;
 	}
 

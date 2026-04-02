@@ -35,13 +35,10 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 		/>
 		<title>Rollygon | {pageTitle}</title>
 	</head>
-	<body class="flex flex-col min-h-full overflow-x-clip bg-white">
+	<body class="flex flex-col min-h-full overflow-x-clip bg-(--bg-dark)">
 		<Header />
-		<SiteBanner label="Site under construction; pardon the dust!" bgColor="yellow" />
-		<main
-			class="background-marquee z-1"
-			style={setStyles("marquee", Color[color], Pattern[pattern])}
-		>
+		<!-- <SiteBanner label="Site under construction; pardon the dust!" bgColor="yellow" /> -->
+		<main>
 			<section class="site-body wrapper layout-lg py-16">
 				<slot />
 				<ContactForm />

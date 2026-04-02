@@ -62,13 +62,13 @@ function getPostDate() {
 	<div class="flex gap-2">
         {
             collection === "tools" && (
-                <Button label="View details" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
+                <Button label="View details" href={`/${collection}/${slug}`} responsive />
                 <Button href={content.data.href} icon="download" iconOnly/>
             )
         }
         {
             collection === "posts" && (
-                <Button label="Read post" href={`/${collection}/${slug}`} icon="arrow-right" responsive />
+                <Button label="Read post" href={`/${collection}/${slug}`} responsive />
             )
         }
         {

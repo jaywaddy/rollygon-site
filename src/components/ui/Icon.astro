@@ -4,6 +4,7 @@ import { titleCase } from "@/scripts/utilities";
 // General Icons
 import ArrowLeftIcon from "@/icons/ArrowLeftIcon.astro";
 import ArrowRightIcon from "@/icons/ArrowRightIcon.astro";
+import ArrowUpLeftIcon from "@/icons/ArrowUpLeftIcon.astro";
 import DownloadIcon from "@/icons/DownloadIcon.astro";
 import DropDownIcon from "@/icons/DropDownIcon.astro";
 import ExternalLinkIcon from "@/icons/ExternalLinkIcon.astro";
@@ -13,6 +14,7 @@ import Ngons from "@/icons/Ngons.astro";
 import Quads from "@/icons/Quads.astro";
 import SearchIcon from "@/icons/SearchIcon.astro";
 import SendIcon from "@/icons/SendIcon.astro";
+import SunIcon from "@/icons/SunIcon.astro";
 import Triangles from "@/icons/Triangles.astro";
 import UserIcon from "@/icons/UserIcon.astro";
 import Vertex from "@/icons/Vertex.astro";
@@ -43,11 +45,13 @@ export type ICON_NAME = (
 	| "none"
 	| "arrow-left"
 	| "arrow-right"
+	| "arrow-up-left"
 	| "download"
 	| "drop-down"
 	| "external-link"
 	| "image"
 	| "logo"
+	| "logo-full"
 	| "ngon"
 	| "quad"
 	| "search"
@@ -65,6 +69,7 @@ export type ICON_NAME = (
 	| "object-switch"
 	| "rotation-switch"
 	| "select-edge-loops"
+	| "sun"
 	| "support-generator"
 	| "track-generator"
 	| "utility-nodes"
@@ -104,6 +109,7 @@ function setIconColor(isDisabled: boolean): string {
 
 	{name === "arrow-left" && <ArrowLeftIcon color={setIconColor(disabled)} />}
 	{name === "arrow-right" && <ArrowRightIcon color={setIconColor(disabled)} />}
+	{name === "arrow-up-left" && <ArrowUpLeftIcon color={setIconColor(disabled)} {size} />}
 	{name === "download" && <DownloadIcon color={setIconColor(disabled)} />}
 	{name === "drop-down" && <DropDownIcon color={setIconColor(disabled)} />}
 	{name === "external-link" && <ExternalLinkIcon color={setIconColor(disabled)} />}
@@ -113,6 +119,7 @@ function setIconColor(isDisabled: boolean): string {
 	{name === "quad" && <Quads color={setIconColor(disabled)} />}
 	{name === "search" && <SearchIcon color={setIconColor(disabled)} />}
 	{name === "send" && <SendIcon color={setIconColor(disabled)} />}
+	{name === "sun" && <SunIcon color={setIconColor(disabled)} />}
 	{name === "triangle" && <Triangles color={setIconColor(disabled)} />}
 	{name === "user" && <UserIcon color={setIconColor(disabled)} />}
 	{name === "vertex" && <Vertex color={setIconColor(disabled)} />}

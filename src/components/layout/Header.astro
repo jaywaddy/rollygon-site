@@ -14,7 +14,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header id="header" class:list={["bg-white border-bottom sticky top-0 z-10 py-6", "max-sm:py-4"]}>
+<header id="header" class:list={["bg-(--bg-light) border-bottom border-(--outline) sticky top-0 z-10 py-2", "max-sm:py-4"]}>
 	<nav class="relative wrapper flex items-center justify-between">
 		<SiteTitle />
 		<ul
@@ -39,16 +39,21 @@ function toggleActiveLink(label: string): "page" | "false" {
 			<li>
 				<Link label="About" isActive={toggleActiveLink("/about")} />
 			</li>
-			<li class="max-sm:hidden">
-				<Button label="Get free tools" href="/tools" icon="download" />
+			<li class="flex gap-2 max-sm:hidden">
+				<Button label="Get Tools" href="/tools" icon="download" />
+				<Button id="theme-toggle-button" label="Toggle Theme" icon="sun" type="toggle" iconOnly />
 			</li>
 		</ul>
-		<Button class:list={["hidden", "max-sm:flex"]} label="Menu" icon="none" type="toggle" />
+		<Button id="menu-toggle-button" class:list={["hidden", "max-sm:flex"]} label="Menu" icon="none" type="toggle" />
 	</nav>
 </header>
 
 <style>
-	#header:has(nav form label input:checked) #site-navigation {
-		display: flex;
+	#header {
+		border-bottom: 1px solid var(--outline);
+
+		&:has(#menu-toggle-button label input:checked) #site-navigation {
+			display: flex;
+		}
 	}
 </style>

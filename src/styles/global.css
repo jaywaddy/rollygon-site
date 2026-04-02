@@ -18,6 +18,7 @@
     --neutral-5: hsl(0 0 5);
     --neutral-0: hsl(0 0 0);
 
+    /* Dark theme */
     --text: var(--neutral-95);
     --text-muted: var(--neutral-70);
     --outline: var(--neutral-30);
@@ -29,6 +30,27 @@
     --bg-hover: var(--neutral-20);
     --bg-active: var(--neutral-30);
     --bg-muted: var(--neutral-30);
+
+    /* Light theme */
+    --alt-text: var(--neutral-5);
+    --alt-text-muted: var(--neutral-30);
+    --alt-outline: var(--neutral-70);
+
+    --alt-bg-light: var(--neutral-100);
+    --alt-bg: var(--neutral-95);
+    --alt-bg-dark: var(--neutral-90);
+
+    --alt-bg-hover: var(--neutral-95);
+    --alt-bg-active: var(--neutral-90);
+    --alt-bg-muted: var(--neutral-70);
+
+    --space-1: calc(var(--spacing) * 1);
+    --space-2: calc(var(--spacing) * 2);
+    --space-3: calc(var(--spacing) * 3);
+    --space-4: calc(var(--spacing) * 4);
+    --space-8: calc(var(--spacing) * 8);
+    --space-16: calc(var(--spacing) * 16);
+    --space-32: calc(var(--spacing) * 32);
 
     --radius-sm: 0.75rem;
     --radius-lg: 2.75rem;
@@ -48,10 +70,50 @@
         --bg-hover: var(--neutral-95);
         --bg-active: var(--neutral-90);
         --bg-muted: var(--neutral-70);
+
+        /* Alt theme */
+        --alt-text: var(--neutral-95);
+        --alt-text-muted: var(--neutral-70);
+        --alt-outline: var(--neutral-30);
+
+        --alt-bg-light: var(--neutral-10);
+        --alt-bg: var(--neutral-5);
+        --alt-bg-dark: var(--neutral-0);
+
+        --alt-bg-hover: var(--neutral-20);
+        --alt-bg-active: var(--neutral-30);
+        --alt-bg-muted: var(--neutral-30);
     }
 }
 
-@theme {
+body:has(#theme-toggle-button input:checked) {
+    --text: var(--neutral-5);
+    --text-muted: var(--neutral-30);
+    --outline: var(--neutral-70);
+
+    --bg-light: var(--neutral-100);
+    --bg: var(--neutral-95);
+    --bg-dark: var(--neutral-90);
+
+    --bg-hover: var(--neutral-95);
+    --bg-active: var(--neutral-90);
+    --bg-muted: var(--neutral-70);
+
+    /* Alt theme */
+    --alt-text: var(--neutral-95);
+    --alt-text-muted: var(--neutral-70);
+    --alt-outline: var(--neutral-30);
+
+    --alt-bg-light: var(--neutral-10);
+    --alt-bg: var(--neutral-5);
+    --alt-bg-dark: var(--neutral-0);
+
+    --alt-bg-hover: var(--neutral-20);
+    --alt-bg-active: var(--neutral-30);
+    --alt-bg-muted: var(--neutral-30);
+}
+
+/* @theme {
     --color-text: var(--color-black);
     --color-text-dim: color-mix(in srgb, var(--color-text), var(--color-white) 50%);
 
@@ -82,19 +144,34 @@
     --bg-5: url("/images/backgrounds/bg-pattern-5.svg");
     --bg-6: url("/images/backgrounds/bg-pattern-6.svg");
     --bg-7: url("/images/backgrounds/bg-pattern-7.svg");
-}
+} */
 
 html {
-    scroll-padding-top: calc(var(--spacing) * 32);
+    scroll-padding-top: var(--space-32);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    background-color: var(--bg-light);
+    border-radius: var(--radius-lg);
+    outline: solid 1px var(--outline);
+    padding: var(--space-8);
 }
 
 @font-face {
-  font-family: "Benz Grotesk";
-  src: url("/src/assets/fonts/BenzGrotesk.ttf");
+  font-family: "Outfit";
+  src: url("/src/assets/fonts/Outfit.ttf");
+}
+
+h1, h2, h3, p, a, li, strong, em, span {
+    font-family: "Outfit";
+    color: var(--text);
 }
 
 h1 {
-    font-family: "Benz Grotesk";
     font-size: 2.25rem;
     font-weight: 400;
     line-height: 3rem;
@@ -102,36 +179,33 @@ h1 {
 
 h2 {
     font-size: 1.75rem;
-    font-weight: 900;
+    font-weight: 400;
 }
 
 h3 {
     font-size: 1.25rem;
-    font-weight: 900;
+    font-weight: 400;
 }
 
-.content-outline {
-    border: solid var(--outline) 1px;
-}
-
-@utility content {
+.content {
     max-width: 72ch;
 
-    & a {
+    a {
         text-decoration: underline;
 
         &:hover {
-            opacity: 0.5;
+            color: var(--text-muted);
         }
     }
 
-    & > h2 {
+    h2 {
         margin-top: 1em;
     }
 
-    & p, & > a, & li, & strong, & em {
+    p, a, li, strong, em {
         font-family: "Libre Baskerville";
         font-size: 1.125em;
+        color: var(--text);
     }
 
     & ol, & ul {
@@ -144,10 +218,14 @@ h3 {
     }
 
     & code {
-        padding: 0.25em;
-        border-radius: 0.25em;
+        --padding: 0.25em;
+
+        padding-block: var(--padding);
+        padding-inline: calc(var(--padding) * 2);
+        border-radius: 0.325em;
         font-size: 0.75em;
-        background-color: var(--color-neutral-200);
+        /* color: var(--alt-text); */
+        background-color: var(--bg-muted);
     }
 
     & img {
@@ -275,7 +353,6 @@ h3 {
     cursor: pointer;
 
     &:hover {
-
         text-shadow:
             0 0 8px var(--button-color),
             0 0 16px var(--button-color);
@@ -316,7 +393,7 @@ h3 {
     }
 }
 
-@utility site-body {
+/* @utility site-body {
     --position: -18px;
 
     position: relative;
@@ -344,7 +421,7 @@ h3 {
         right: var(--position);
         mask-image: url("/images/backgrounds/decorative-siding-2.svg");
     }
-}
+} */
 
 @media (width < 40rem) {
     h1 {
