@@ -1,5 +1,5 @@
 ---
-import Icon, { matchIconNameType } from "@/ui/Icon.astro";
+// import Icon, { matchIconNameType } from "@/ui/Icon.astro";
 import Button from "@/ui/Button.astro";
 import Badge from "./ui/Badge.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
@@ -96,7 +96,7 @@ function getPostDate() {
                 data-icon
                 class="absolute -top-2 -left-28 flex justify-center items-center  border-lg shadow-lg w-24 rounded-full aspect-square bg-orange max-sm:hidden"
             >
-                <Icon name={matchIconNameType(content.data.icon)} size="64" />
+                {/* <Icon name={matchIconNameType(content.data.icon)} size="64" /> */}
             </div>
         )
     }

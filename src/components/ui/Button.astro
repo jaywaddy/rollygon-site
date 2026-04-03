@@ -29,7 +29,7 @@ const {
 } = Astro.props;
 
 const buttonStyles = [
-	"button text-nowrap"
+	"button"
 ];
 
 ---
@@ -100,6 +100,9 @@ const buttonStyles = [
 		align-items: center;
 		justify-content: center;
 		gap: var(--space-2);
+
+		font-weight: 600;
+		text-wrap: nowrap;
 
 		min-height: 1.25rem;
 		border-radius: var(--radius-sm);

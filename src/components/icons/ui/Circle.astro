@@ -1,0 +1,10 @@
+---
+interface Props {
+	color: string;
+	strokeWidth: string;
+}
+
+const { color, strokeWidth } = Astro.props;
+---
+
+<circle cx="16" cy="16" r="11" stroke={color} stroke-width={strokeWidth}/>
