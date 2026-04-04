@@ -11,11 +11,10 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 
 <footer class="border-t-2">
 	<section
-		data-footer-banner
 		class:list={["wrapper flex justify-between py-16 border-b", "max-sm:flex-col max-sm:gap-8"]}
 	>
 		<SiteTitle />
-		<Link class="hidden max-sm:block" label="@Rollygon" href="/" />
+		<!-- <Link class="hidden max-sm:block" label="@Rollygon" href="/" /> -->
 		<ul class="w-[320px]">
 			<li><small class="uppercase">Socials</small></li>
 			<li class="flex flex-wrap gap-2">
@@ -98,12 +97,5 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-	}
-
-	[data-footer-banner]::after {
-		position: absolute;
-		overflow: hidden;
-		content: "";
-		inset: 0;
 	}
 </style>

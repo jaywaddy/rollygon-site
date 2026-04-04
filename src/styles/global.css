@@ -2,23 +2,25 @@
 @import "tailwindcss";
 
 :root {
-    --neutral-100: hsl(0 0 100);
-    --neutral-95: hsl(0 0 95);
-    --neutral-90: hsl(0 0 90);
-    --neutral-85: hsl(0 0 85);
-    --neutral-80: hsl(0 0 80);
-    --neutral-70: hsl(0 0 70);
-    /* --neutral-60: hsl(0 0 60);
-    --neutral-50: hsl(0 0 50);
-    --neutral-40: hsl(0 0 40); */
-    --neutral-30: hsl(0 0 30);
-    --neutral-20: hsl(0 0 20);
-    --neutral-15: hsl(0 0 15);
-    --neutral-10: hsl(0 0 10);
-    --neutral-5: hsl(0 0 5);
-    --neutral-0: hsl(0 0 0);
+    --neutral-95: hsl(0 0% 95%);
+    --neutral-90: hsl(0 0% 90%);
+    --neutral-85: hsl(0 0% 85%);
+    --neutral-100: hsl(0 0% 100%);
+    --neutral-80: hsl(0 0% 80%);
+    --neutral-70: hsl(0 0% 70%);
+    --neutral-30: hsl(0 0% 30%);
+    --neutral-20: hsl(0 0% 20%);
+    --neutral-15: hsl(0 0% 15%);
+    --neutral-10: hsl(0 0% 10%);
+    --neutral-5: hsl(0 0% 5);
+    --neutral-0: hsl(0, 0%, 0%);
+
+    --green-50: hsl(100, 75%, 50%);
+    --green-30: hsl(100, 75%, 38%);
 
     /* Dark theme */
+    --brand: var(--green-30);
+
     --text: var(--neutral-95);
     --text-muted: var(--neutral-70);
     --outline: var(--neutral-30);
@@ -32,6 +34,8 @@
     --bg-muted: var(--neutral-30);
 
     /* Light theme */
+    --alt-brand: var(--green-50);
+
     --alt-text: var(--neutral-5);
     --alt-text-muted: var(--neutral-30);
     --alt-outline: var(--neutral-70);
@@ -56,13 +60,16 @@
     --radius-lg: 2.75rem;
     --radius-pill: 100vw;
 
-    --icon-stroke-width: 2px;
+    --border: solid var(--outline) 1px;
 
     --external-link: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA5IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjE2NjY3IDQuOTQ0NDRWNy42MTExMUM3LjE2NjY3IDcuODQ2ODYgNy4wNzMwMiA4LjA3Mjk1IDYuOTA2MzIgOC4yMzk2NUM2LjczOTYyIDguNDA2MzUgNi41MTM1MyA4LjUgNi4yNzc3OCA4LjVIMS4zODg4OUMxLjE1MzE0IDguNSAwLjkyNzA0OCA4LjQwNjM1IDAuNzYwMzQ5IDguMjM5NjVDMC41OTM2NSA4LjA3Mjk1IDAuNSA3Ljg0Njg2IDAuNSA3LjYxMTExVjIuNzIyMjJDMC41IDIuNDg2NDcgMC41OTM2NSAyLjI2MDM4IDAuNzYwMzQ5IDIuMDkzNjhDMC45MjcwNDggMS45MjY5OCAxLjE1MzE0IDEuODMzMzMgMS4zODg4OSAxLjgzMzMzSDQuMDU1NTZNNS44MzMzMyAwLjVIOC41TTguNSAwLjVWMy4xNjY2N004LjUgMC41TDMuNjExMTEgNS4zODg4OSIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==');
 }
 
 @media (prefers-color-scheme: light) {
     :root {
+        --brand: var(--green-50);
+        --alt-brand: var(--green-30);
+
         --text: var(--neutral-5);
         --text-muted: var(--neutral-30);
         --outline: var(--neutral-70);
@@ -88,11 +95,16 @@
         --alt-bg-active: var(--neutral-30);
         --alt-bg-muted: var(--neutral-30);
 
+        --border: solid var(--outline) 1px;
+
         --external-link: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA5IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjE2NjY3IDQuOTQ0NDRWNy42MTExMUM3LjE2NjY3IDcuODQ2ODYgNy4wNzMwMiA4LjA3Mjk1IDYuOTA2MzIgOC4yMzk2NUM2LjczOTYyIDguNDA2MzUgNi41MTM1MyA4LjUgNi4yNzc3OCA4LjVIMS4zODg4OUMxLjE1MzE0IDguNSAwLjkyNzA0OCA4LjQwNjM1IDAuNzYwMzQ5IDguMjM5NjVDMC41OTM2NSA4LjA3Mjk1IDAuNSA3Ljg0Njg2IDAuNSA3LjYxMTExVjIuNzIyMjJDMC41IDIuNDg2NDcgMC41OTM2NSAyLjI2MDM4IDAuNzYwMzQ5IDIuMDkzNjhDMC45MjcwNDggMS45MjY5OCAxLjE1MzE0IDEuODMzMzMgMS4zODg4OSAxLjgzMzMzSDQuMDU1NTZNNS44MzMzMyAwLjVIOC41TTguNSAwLjVWMy4xNjY2N004LjUgMC41TDMuNjExMTEgNS4zODg4OSIgc3Ryb2tlPSIjMGQwZDBkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==');
     }
 }
 
 body:has(#theme-toggle-button input:checked) {
+    --brand: var(--green-50);
+    --alt-brand: var(--green-30);
+
     --text: var(--neutral-5);
     --text-muted: var(--neutral-30);
     --outline: var(--neutral-70);
@@ -118,7 +130,11 @@ body:has(#theme-toggle-button input:checked) {
     --alt-bg-active: var(--neutral-30);
     --alt-bg-muted: var(--neutral-30);
 
+    --border: solid var(--outline) 1px;
+
     --external-link: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA5IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjE2NjY3IDQuOTQ0NDRWNy42MTExMUM3LjE2NjY3IDcuODQ2ODYgNy4wNzMwMiA4LjA3Mjk1IDYuOTA2MzIgOC4yMzk2NUM2LjczOTYyIDguNDA2MzUgNi41MTM1MyA4LjUgNi4yNzc3OCA4LjVIMS4zODg4OUMxLjE1MzE0IDguNSAwLjkyNzA0OCA4LjQwNjM1IDAuNzYwMzQ5IDguMjM5NjVDMC41OTM2NSA4LjA3Mjk1IDAuNSA3Ljg0Njg2IDAuNSA3LjYxMTExVjIuNzIyMjJDMC41IDIuNDg2NDcgMC41OTM2NSAyLjI2MDM4IDAuNzYwMzQ5IDIuMDkzNjhDMC45MjcwNDggMS45MjY5OCAxLjE1MzE0IDEuODMzMzMgMS4zODg4OSAxLjgzMzMzSDQuMDU1NTZNNS44MzMzMyAwLjVIOC41TTguNSAwLjVWMy4xNjY2N004LjUgMC41TDMuNjExMTEgNS4zODg4OSIgc3Ryb2tlPSIjMGQwZDBkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==');
+
+
 }
 
 /* @theme {
@@ -156,6 +172,10 @@ body:has(#theme-toggle-button input:checked) {
 
 html {
     scroll-padding-top: var(--space-32);
+}
+
+body {
+    background: var(--bg-dark);
 }
 
 .card {
@@ -339,8 +359,8 @@ h3 {
     flex-direction: column;
     gap:  calc(var(--spacing) * 4);
 
-    background-color: var(--color-white);
-    border: solid var(--color-black) 2px;
+    background-color: var(--bg-light);
+    border: var(--border);
     border-radius: var(--radius-lg);
 
     padding: calc(var(--spacing) * 4);

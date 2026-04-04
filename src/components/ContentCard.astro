@@ -3,7 +3,6 @@
 import Button from "@/ui/Button.astro";
 import Badge from "./ui/Badge.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
-import TagList from "./TagList.astro";
 import { type Collection } from "@/content/config";
 import ImageWrapper from "./ui/ImageWrapper.astro";
 
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const { title, tags, postDate, lastUpdated } = content.data;
+const { title, postDate, lastUpdated } = content.data;
 const { collection, slug } = content;
 
 function getPostDate() {
@@ -100,9 +99,6 @@ function getPostDate() {
             </div>
         )
     }
-    <div class="absolute -bottom-4">
-        <TagList {tags} />
-    </div>
 </div>
 
 <style>

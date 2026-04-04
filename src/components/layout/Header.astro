@@ -14,13 +14,12 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header id="header" class:list={["bg-(--bg-light) border-bottom border-(--outline) sticky top-0 z-10 py-2", "max-sm:py-4"]}>
+<header id="header" class:list={["max-sm:py-4"]}>
 	<nav class="relative wrapper flex items-center justify-between">
 		<SiteTitle />
 		<ul
 			id="site-navigation"
 			class:list={[
-				"flex items-center gap-8",
 				"max-sm:hidden max-sm:absolute max-sm:items-start max-sm:top-18 max-sm:right-3 max-sm:card-lg",
 			]}
 		>
@@ -50,10 +49,22 @@ function toggleActiveLink(label: string): "page" | "false" {
 
 <style>
 	#header {
+		position: sticky; 
+		inset: 0;
+		z-index: 10;
+
+		padding-block: var(--space-2);
 		border-bottom: 1px solid var(--outline);
+		background: var(--bg-light);
 
 		&:has(#menu-toggle-button label input:checked) #site-navigation {
 			display: flex;
 		}
+	}
+
+	#site-navigation {
+		display: flex;
+		align-items: center;
+		gap: var(--space-8);
 	}
 </style>
