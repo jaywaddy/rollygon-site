@@ -5,6 +5,7 @@ import Link from "@/ui/Link.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
+
 ---
 
 <SiteLayout pageTitle="Home">
@@ -19,7 +20,7 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 			badgeLabel="LATEST"
 			badgeStyle="primary"
 		/>
-		<FeaturedContent content={FEATURED_MODEL} />
+		<FeaturedContent content={FEATURED_MODEL}/>
 		<Link label="View all models" href="/models" underline />
 	</section>
 	<section class="layout-lg">

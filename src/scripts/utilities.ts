@@ -40,6 +40,6 @@ export function titleCase(input: string):string {
         .join(" ");    
 }
 
-export function findContent (contentArray: Array<Collection>, slug: string) {
+export function findContent (contentArray: Array<Collection>, slug: string): Collection {
     return contentArray.find(content => content.slug === slug) || contentArray[0];
 }

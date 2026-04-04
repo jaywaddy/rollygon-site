@@ -13,6 +13,7 @@ interface Props extends HTML {
 	iconOnly?: boolean;
 	disabled?: boolean;
 	responsive?: boolean;
+	primary?: boolean;
 }
 
 const {
@@ -25,12 +26,21 @@ const {
 	iconOnly = false,
 	disabled,
 	responsive,
+	primary,
 	class: className,
 } = Astro.props;
 
 const buttonStyles = [
 	"button"
 ];
+
+function setBackgroundColor (isPrimary: boolean | undefined): string {
+	if (isPrimary) {
+		return "--button-bg: var(--brand);";
+	}
+
+	return "--button-bg: var(--bg-light);";
+}
 
 ---
 
@@ -42,7 +52,8 @@ const buttonStyles = [
 			data-icon-only={iconOnly}
 			{type}
 			title={label}
-			class:list={[buttonStyles, className, "text-nowrap"]}
+			class:list={["button", className]}
+			style={setBackgroundColor(primary)}
 		>
 			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 			{label && label}
@@ -52,16 +63,14 @@ const buttonStyles = [
 }
 {
 	type === "toggle" && (
-		<form 
-			{id}
-			class:list={[className]}
-			action="toggle"
-		>
+		<form action="toggle" class:list={[className]}>
 			<label
+				{id}
 				data-disabled={disabled}
 				data-icon-only={iconOnly}
-				title={label ? label : titleCase(icon)}
-				class:list={[buttonStyles, className]}
+				title={label ? label : titleCase(icon)}						
+				class:list={["button", className]}
+				style={setBackgroundColor(primary)}
 			>
 				<input type="checkbox" />
 				{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
@@ -75,11 +84,12 @@ const buttonStyles = [
 	type === "link" && (
 		<a
 			{id}
+			{href}
 			data-disabled={disabled}
 			data-icon-only={iconOnly}
 			title={label ? label : titleCase(icon)}
-			class:list={[buttonStyles, className]}
-			{href}
+			class:list={["button", className]}			
+			style={setBackgroundColor(primary)}
 		>
 			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 			{label && !iconOnly && label}
@@ -90,9 +100,7 @@ const buttonStyles = [
 
 <style>
 	.button {
-		--padding: var(--space-3);
-
-		--padding-y: var(--padding);
+		--padding-y: var(--space-3);
 		--padding-x: calc(var(--padding-y) * 2);
 		--padding__icon-only: calc(var(--padding-y) + 4px);
 
@@ -108,7 +116,7 @@ const buttonStyles = [
 		border-radius: var(--radius-sm);
 		border: var(--border);
 		color: var(--text);
-		background-color: var(--bg-light);
+		background-color: var(--button-bg);
 
 		padding-block: var(--padding-y);
 		padding-inline: var(--padding-x);

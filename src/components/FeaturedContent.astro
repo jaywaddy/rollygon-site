@@ -3,10 +3,10 @@ import Button from "@/ui/Button.astro";
 import { calcReadTime, formatDate } from "@/scripts/utilities";
 import TagList from "./TagList.astro";
 import ImageWrapper from "./ui/ImageWrapper.astro";
-import Model from "@/ui/Model.astro";
+import AssetPoster from "@/ui/AssetPoster.astro";
 import Icon from "@/ui/Icon.astro";
 import type { Collection } from "@/content/config";
-import VideoEmbed from "./VideoEmbed.astro";
+// import VideoEmbed from "./VideoEmbed.astro";
 
 interface Props {
 	content: Collection;
@@ -21,9 +21,9 @@ const { collection, slug, body } = content;
 <div class:list={["layout-md", "max-sm:gap-4"]}>
 	{
 		content.collection === "models" ? (
-			<Model title={title} id={content.data.id} />
+			<AssetPoster title={title} modelID={content.data.id} />
 		) : content.collection === "posts" && content.data.embed ? (
-			<VideoEmbed embed={content.data.embed}/>
+			<AssetPoster title={title} videoEmbed={content.data.embed}/>
 		) : (
 			<ImageWrapper src={`/${collection}/${slug}/header.png`} alt={content.data.title} />
 		)
@@ -68,7 +68,7 @@ const { collection, slug, body } = content;
 					collection === "models" && (
 						<ul class="flex flex-wrap just gap-4 text-nowrap">
 							<li class="card-sm flex-row gap-1 w-fit">
-								<Icon name="vertex" size="24" />
+								<Icon name="circle" size="24" />
 								<span>
 									<strong>{content.data.modelStats[0]}</strong> Verts
 								</span>
@@ -80,13 +80,12 @@ const { collection, slug, body } = content;
 								</span>
 							</li>
 							<li class="card-sm flex-row gap-1 w-fit">
-								<Icon name="quad" size="24" />
+								<Icon name="square" size="24" />
 								<span>
 									<strong>{content.data.modelStats[2]}</strong> Quads
 								</span>
 							</li>
 							<li class="card-sm flex-row gap-1 w-fit">
-								<Icon name="ngon" size="24" />
 								<span>
 									<strong>{content.data.modelStats[3]}</strong> N-gons
 								</span>

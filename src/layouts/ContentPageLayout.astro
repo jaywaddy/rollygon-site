@@ -1,7 +1,7 @@
 ---
 import ContentNavigation from "@/components/ContentNavigation.astro";
 import ImageWrapper from "@/components/ui/ImageWrapper.astro";
-import Model from "@/components/ui/Model.astro";
+import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
 import TagList from "@/components/TagList.astro";
 
@@ -36,7 +36,7 @@ function setButtonLabel(): string {
 		content.collection === "models" ? (
 			<div class="layout-md">
 				<ContentNavigation {content} {contentCollection} {index} />
-				<Model {title} id={content.data.id} />
+				<AssetPoster {title} modelID={content.data.id} />
 			</div>
 		) : (
 			<div class="relative layout-md">

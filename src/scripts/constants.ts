@@ -6,9 +6,9 @@ export interface HTML {
     class?: string;
 }
 
-const SITE_LOGS: Array<Collection> = ALL_POSTS.filter((content) =>
-	content.data.tags.includes("Site Log")
-);
+// const SITE_LOGS: Array<Collection> = ALL_POSTS.filter((content) =>
+// 	content.data.tags.includes("Site Log")
+// );
 
 export const FEATURED_MODEL = findContent(ALL_MODELS, "the-dark-knight");
 
