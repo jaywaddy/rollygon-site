@@ -8,6 +8,9 @@
     --neutral-100: hsl(0 0% 100%);
     --neutral-80: hsl(0 0% 80%);
     --neutral-70: hsl(0 0% 70%);
+    --neutral-60: hsl(0 0% 60%);
+    --neutral-50: hsl(0 0% 50%);
+    --neutral-40: hsl(0 0% 40%);
     --neutral-30: hsl(0 0% 30%);
     --neutral-20: hsl(0 0% 20%);
     --neutral-15: hsl(0 0% 15%);
@@ -15,10 +18,19 @@
     --neutral-5: hsl(0 0% 5);
     --neutral-0: hsl(0, 0%, 0%);
 
-    --green-50: hsl(100, 75%, 50%);
-    --green-30: hsl(100, 75%, 38%);
+    --green-90: hsl(90, 75%, 90%);
+    --green-80: hsl(90, 75%, 80%);
+    --green-70: hsl(90, 75%, 70%);
+    --green-60: hsl(90, 75%, 60%);
+    --green-50: hsl(90, 75%, 50%);
+    --green-40: hsl(90, 75%, 38%);
+    --green-30: hsl(90, 75%, 30%);
+    --green-20: hsl(90, 75%, 20%);
+    --green-10: hsl(90, 75%, 10%);
 
     --text-sm: 0.75rem;
+
+    --content-width: 72ch;
 
     --space-1: calc(var(--spacing) * 1);
     --space-2: calc(var(--spacing) * 2);
@@ -26,25 +38,30 @@
     --space-4: calc(var(--spacing) * 4);
     --space-8: calc(var(--spacing) * 8);
     --space-16: calc(var(--spacing) * 16);
+    --space-24: calc(var(--spacing) * 24);
     --space-32: calc(var(--spacing) * 32);
 
-    --card-gap: var(--space-3);
+    --poster-inset: var(--space-2);
+    --card-padding: var(--space-8);
 
     --radius-sm: 0.75rem;
-    --radius-md: calc(var(--radius-sm) + var(--card-gap));
-    --radius-lg: calc(var(--radius-sm) + calc(var(--card-gap) * 2));
+    --radius-md: calc(var(--radius-lg) - var(--poster-inset));
+    --radius-lg: calc(var(--radius-sm) + var(--card-padding));
     --radius-pill: 100vw;
 }
 
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --brand: var(--green-30);
+    --brand: var(--green-40);
     --alt-brand: var(--green-50);
 
     --text: var(--neutral-95);
     --text-muted: var(--neutral-70);
+
     --outline: var(--neutral-30);
+    --outline__brand: var(--green-30);
+    --outline-hover__brand: var(--green-40);
 
     --bg-light: var(--neutral-10);
     --bg: var(--neutral-5);
@@ -54,7 +71,10 @@
     --bg-active: var(--neutral-30);
     --bg-muted: var(--neutral-30);
 
-    --alt-brand: var(--green-50);
+    --brand-outline: var(--green-30);
+    --brand-outline-hover: var(--green-50);
+    --brand-bg: var(--green-20);
+    --brand-bg-hover: var(--green-30);
 
     --alt-text: var(--neutral-5);
     --alt-text-muted: var(--neutral-30);
@@ -77,11 +97,13 @@
     color-scheme: light;
 
     --brand: var(--green-50);
-    --alt-brand: var(--green-30);
+    --alt-brand: var(--green-40);
 
     --text: var(--neutral-5);
-    --text-muted: var(--neutral-30);
+    --text-muted: var(--neutral-40);
+
     --outline: var(--neutral-70);
+
 
     --bg-light: var(--neutral-100);
     --bg: var(--neutral-95);
@@ -90,6 +112,11 @@
     --bg-hover: var(--neutral-95);
     --bg-active: var(--neutral-90);
     --bg-muted: var(--neutral-70);
+
+    --brand-outline: var(--green-30);
+    --brand-outline-hover: var(--green-50);
+    --brand-bg: var(--green-50);
+    --brand-bg-hover: var(--green-60);
 
     --alt-text: var(--neutral-95);
     --alt-text-muted: var(--neutral-70);
@@ -180,16 +207,16 @@ h3 {
         color: var(--text);
     }
 
-    & ol, & ul {
+    ol, ul {
         margin-top: -1em;
     }
 
-    & li {
+    li {
         margin-left: 2em;
         list-style: decimal;
     }
 
-    & code {
+    code {
         --padding: 0.25em;
 
         padding-block: var(--padding);
@@ -200,7 +227,7 @@ h3 {
         background-color: var(--bg-muted);
     }
 
-    & img {
+    img {
         width: 100%;
         border-radius: 0.75em;
     }

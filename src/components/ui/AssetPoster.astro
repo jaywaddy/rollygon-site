@@ -1,11 +1,14 @@
 ---
+import Image from 'astro/components/Image.astro';
+
 interface Props {
 	title: string;
 	modelID?: string;
 	videoEmbed?: string;
+	src?: string;
 }
 
-const { title, modelID, videoEmbed } = Astro.props;
+const { title, modelID, videoEmbed, src } = Astro.props;
 ---
 
 <div class="showcase-outer max-sm:aspect-10/15">
@@ -37,6 +40,9 @@ const { title, modelID, videoEmbed } = Astro.props;
 				allowfullscreen
 			></iframe>
 		)}
+		{src && (
+			<Image {src} alt={title} width={1080} height={720} />
+		)}
 	</div>
 </div>
 
@@ -63,11 +69,11 @@ const { title, modelID, videoEmbed } = Astro.props;
 
 		overflow: clip;
 	
-		inset: var(--card-gap);
+		inset: var(--poster-inset);
 		border: var(--border);
 		border-radius: var(--radius-md);
 
-		& iframe {
+		iframe {
 			width: 100%;
 			height: 100%;
 		}

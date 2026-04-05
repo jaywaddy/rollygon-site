@@ -39,7 +39,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 				<Link label="About" isActive={toggleActiveLink("/about")} />
 			</li>
 			<li class="flex gap-2 max-sm:hidden">
-				<Button label="Get Tools" href="/tools" icon="download" />
+				<Button label="Get Tools" href="/tools" icon="download" primary />
 				<Button id="theme-toggle-button" label="Toggle Theme" icon="theme-toggle" type="toggle" iconOnly />
 			</li>
 		</ul>
@@ -54,7 +54,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 		z-index: 10;
 
 		padding-block: var(--space-2);
-		border-bottom: 1px solid var(--outline);
+		border-bottom: var(--border);
 		background: var(--bg-light);
 
 		&:has(#menu-toggle-button label input:checked) #site-navigation {

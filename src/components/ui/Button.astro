@@ -12,7 +12,7 @@ interface Props extends HTML {
 	icon?: ICON_NAME;
 	iconOnly?: boolean;
 	disabled?: boolean;
-	responsive?: boolean;
+	fullWidth?: boolean;
 	primary?: boolean;
 }
 
@@ -25,18 +25,19 @@ const {
 	iconRight = false,
 	iconOnly = false,
 	disabled,
-	responsive,
+	fullWidth = false,
 	primary,
 	class: className,
 } = Astro.props;
 
-const buttonStyles = [
-	"button"
-];
-
 function setBackgroundColor (isPrimary: boolean | undefined): string {
 	if (isPrimary) {
-		return "--button-bg: var(--brand);";
+		return `
+			--bg-light: var(--brand-bg);
+			--bg-hover: var(--brand-bg-hover);
+			--outline: var(--brand-outline);
+			--outline-hover: var(--brand-outline-hover);
+		`;
 	}
 
 	return "--button-bg: var(--bg-light);";
@@ -50,6 +51,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 			{id}
 			data-disabled={disabled}
 			data-icon-only={iconOnly}
+			data-width={fullWidth}
 			{type}
 			title={label}
 			class:list={["button", className]}
@@ -68,6 +70,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 				{id}
 				data-disabled={disabled}
 				data-icon-only={iconOnly}
+				data-width={fullWidth}
 				title={label ? label : titleCase(icon)}						
 				class:list={["button", className]}
 				style={setBackgroundColor(primary)}
@@ -87,6 +90,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 			{href}
 			data-disabled={disabled}
 			data-icon-only={iconOnly}
+			data-width={fullWidth}
 			title={label ? label : titleCase(icon)}
 			class:list={["button", className]}			
 			style={setBackgroundColor(primary)}
@@ -107,7 +111,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: var(--space-2);
+		gap: var(--space-1);
 
 		font-weight: 600;
 		text-wrap: nowrap;
@@ -115,19 +119,22 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 		min-height: 1.25rem;
 		border-radius: var(--radius-sm);
 		border: var(--border);
+		border-color: var(--outline);
 		color: var(--text);
-		background-color: var(--button-bg);
+		background-color: var(--bg-light);
 
 		padding-block: var(--padding-y);
 		padding-inline: var(--padding-x);
 		cursor: pointer;
 
+		transition: all 0.1s;
+
 		&:hover {
-			background-color: var(--bg-hover);
+			background: var(--bg-hover);
 		}
 
 		&:active {
-			background-color: var(--bg-active);
+			background: var(--bg-active);
 		}
 	}
 
@@ -144,8 +151,12 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 		aspect-ratio: 1/1;
 	}
 
+	[data-width="false"] {
+		max-width: fit-content;
+	}
+
 	label:has(input[type="checkbox"]) {
-		& input[type="checkbox"] {
+		input[type="checkbox"] {
 			display: none;
 		}
 	}

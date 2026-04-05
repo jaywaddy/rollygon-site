@@ -43,3 +43,12 @@ export function titleCase(input: string):string {
 export function findContent (contentArray: Array<Collection>, slug: string): Collection {
     return contentArray.find(content => content.slug === slug) || contentArray[0];
 }
+
+export function setSlug(content: Collection): string {
+    return `/${content.collection}/${content.slug}`;
+}
+
+export function setImageSrc(content: Collection): string {
+    return `/images/${setSlug(content)}/header.png`;
+}
+

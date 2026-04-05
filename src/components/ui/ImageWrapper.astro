@@ -54,7 +54,7 @@ function calcPath(input: string): string {
 
 <div
 	class:list={[
-		"relative flex flex-1 justify-center items-center aspect-(--img-aspect) w-[var(--img-w)] min-w-[var(--img-w)] max-h-[var(--img-w)] bg-white border-2 shadow-lg overflow-clip",
+		"relative flex flex-1 justify-center items-center aspect-(--img-aspect) w-(--img-w) min-w-(--img-w) max-h-(--img-w) bg-white border-2 shadow-lg overflow-clip",
 		shape === "round" ? "rounded-full" : "rounded-(--outer-radius)",
 		className,
 	]}
@@ -68,7 +68,7 @@ function calcPath(input: string): string {
 >
 	<div
 		class:list={[
-			"absolute flex justify-center items-center rounded-[var(--inner-radius)] bg-black overflow-clip",
+			"absolute flex justify-center items-center rounded-(--inner-radius) bg-black overflow-clip",
 			shape === "round" ? "rounded-full" : "rounded-(--inner-radius)",
 			size === "sm" ? "inset-1" : "inset-2",
 			"max-sm:inset-0",

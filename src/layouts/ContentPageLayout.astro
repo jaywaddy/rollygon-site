@@ -1,13 +1,11 @@
 ---
 import ContentNavigation from "@/components/ContentNavigation.astro";
-import ImageWrapper from "@/components/ui/ImageWrapper.astro";
 import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
 import TagList from "@/components/TagList.astro";
 
-import { calcReadTime, formatDate } from "@/scripts/utilities";
+import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
-import VideoEmbed from "@/components/VideoEmbed.astro";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
 
@@ -42,9 +40,9 @@ function setButtonLabel(): string {
 			<div class="relative layout-md">
 				<ContentNavigation {content} {contentCollection} {index} />
 				{content.collection === "posts" && content.data.embed ? (
-					<VideoEmbed embed={content.data.embed} />
+					<AssetPoster title={title} videoEmbed={content.data.embed} />
 				) : (
-					<ImageWrapper src={`/${content.collection}/${content.slug}/header.png`} alt="" />
+					<AssetPoster title={title} src={setImageSrc(content)} />
 				)}
 			</div>
 		)

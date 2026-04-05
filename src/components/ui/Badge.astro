@@ -29,9 +29,9 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 <small
 	data-badge
 	style={setBackgroundColor(style)}>
-	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="6" />}
+	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
 	<strong>{label}</strong>
-	{icon && iconRight && <Icon name={icon} size="16" strokeWidth="6" />}
+	{icon && iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
 </small>
 
 <style>
@@ -51,7 +51,7 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 		border-radius: var(--radius-pill);
 		background: var(--badge-bg);
 
-		& strong {
+		strong {
 			font-size: var(--text-sm);
 			text-wrap: nowrap;
 		}

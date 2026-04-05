@@ -10,7 +10,6 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 import { ALL_POSTS } from "@/content/config";
 import { FEATURED_POSTS } from "@/scripts/constants";
 import type { Page } from "astro";
-import AssetPoster from "@/components/ui/AssetPoster.astro";
 
 interface Props {
 	page: Page<any>;
@@ -25,7 +24,7 @@ export async function getStaticPaths({ paginate }: any): Promise<any> {
 const { page } = Astro.props;
 ---
 
-<SiteLayout pageTitle="Posts" color="neutral" pattern="3">
+<SiteLayout pageTitle="Posts">
 	<div class="layout-sm">
 		<PageTitle heading="Posts" />
 		<SearchBar />
