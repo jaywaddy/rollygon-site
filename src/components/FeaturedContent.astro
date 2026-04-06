@@ -1,7 +1,7 @@
 ---
 import AssetPoster from "@/ui/AssetPoster.astro";
 import type { Collection } from "@/content/config";
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import { setImageSrc } from "@/scripts/utilities";
 
 interface Props {
@@ -23,5 +23,5 @@ const { title } = content.data;
 			<AssetPoster title={title} src={setImageSrc(content)}/>
 		)
 	}
-	<ContentCard {content} />
+	<ArticleCard {content} />
 </div>

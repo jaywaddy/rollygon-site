@@ -1,0 +1,45 @@
+---
+import { setImageSrc } from "@/scripts/utilities";
+import { type Collection } from "@/content/config";
+
+interface Props {
+	content: Collection;
+}
+
+const { content } = Astro.props;
+---
+
+<div style={`--content-image: url("${setImageSrc(content)}")`}>
+    <div class="content-card-image border">
+        <div aria-label={content.data.title} class="bg-image"></div>
+    </div>
+</div>
+
+<style>
+    .content-card-image {
+        overflow: clip;
+        position: absolute;
+        top: var(--poster-inset);
+        right: var(--poster-inset);
+
+        width: calc(100% - calc(var(--content-width) + var(--space-32)));
+        height: calc(100% - calc(var(--poster-inset) * 2));
+
+        border-radius: 0.5em;
+        border-top-right-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+
+        transition: var(--content-hover-speed) var(--content-hover-easing);
+    }
+
+    .bg-image {
+        height: 100%;
+        background-image: var(--content-image);
+        background-size: cover;
+        background-position: center;
+
+        opacity: 0.9;
+        transform: scale(1);
+        transition: var(--content-hover-speed) var(--content-hover-easing);
+    }
+</style>

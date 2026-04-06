@@ -1,8 +1,7 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import AssetCard from "@/components/AssetCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
-import ModelCard from "@/components/ModelCard.astro";
-import SearchBar from "@/components/SearchBar.astro";
 
 import { type Collection, ALL_POSTS, ALL_CONTENT, ALL_MODELS, ALL_TOOLS } from "@/content/config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
@@ -54,7 +53,6 @@ function checkIfTrue(list: Array<Collection>): boolean {
 	pattern="4"
 >
 	<PageTitle heading={"Tag: #" + tagName} />
-	<SearchBar />
 	{
 		checkIfTrue(ALL_MODELS) && (
 			<div class="layout-md">
@@ -63,7 +61,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 					{ALL_MODELS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ModelCard model={content} />
+								<AssetCard {content} />
 							)
 						);
 					})}
@@ -79,7 +77,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 					{ALL_TOOLS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ContentCard {content} />
+								<AssetCard {content} />
 							)
 						);
 					})}
@@ -95,7 +93,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 					{ALL_POSTS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
-								<ContentCard {content} />
+								<ArticleCard {content} />
 							)
 						);
 					})}

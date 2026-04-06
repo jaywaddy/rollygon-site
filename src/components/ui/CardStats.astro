@@ -1,0 +1,36 @@
+---
+import type { Collection } from '@/content/config';
+import { calcReadTime, formatDate } from '@/scripts/utilities';
+
+interface Props {
+	content: Collection;
+    color?: string;
+}
+
+const { content, color = "var(--text-muted)" } = Astro.props;
+const { postDate, lastUpdated } = content.data;
+const { collection } = content;
+
+function getPostDate() {
+    if (lastUpdated) {
+        return formatDate(lastUpdated);
+    }
+
+    return formatDate(postDate);
+}
+---
+
+<div class="row-sm" style={`--text-color: ${color};`}>
+    <small>{getPostDate()} &bullet;</small>
+    {collection === "posts" ? (
+        <small>{calcReadTime(content.body)} min. read</small>
+    ) : (
+        <small>{content.data.size}</small>
+    )}
+</div>
+
+<style>
+    small {
+        color: var(--text-color);
+    }
+</style>

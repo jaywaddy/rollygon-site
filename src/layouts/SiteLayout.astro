@@ -2,12 +2,9 @@
 import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
-import { setStyles, Color, Pattern } from "@/scripts/interface";
 import type { ColorName } from "@/scripts/interface";
 import type { PatternName } from "@/scripts/interface";
-import SiteBanner from "@/components/SiteBanner.astro";
 import ContactForm from "@/components/layout/ContactForm.astro";
-import Button from "@/components/ui/Button.astro";
 
 interface Props {
 	pageTitle: string;
@@ -16,7 +13,7 @@ interface Props {
 	pattern?: PatternName;
 }
 
-const { pageTitle, description = "Rollygon", color = "white", pattern = "none" } = Astro.props;
+const { pageTitle, description = "Rollygon"} = Astro.props;
 ---
 
 <!doctype html>
@@ -37,9 +34,8 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 	</head>
 	<body data-theme="light" class="flex flex-col min-h-full overflow-x-clip">
 		<Header />
-		<!-- <SiteBanner label="Site under construction; pardon the dust!" bgColor="yellow" /> -->
 		<main>
-			<section class="site-body wrapper layout-lg py-16">
+			<section class="site-body wrapper column-xl">
 				<slot />
 				<ContactForm />
 			</section>

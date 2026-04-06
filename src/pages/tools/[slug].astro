@@ -1,5 +1,5 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import { ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
@@ -41,13 +41,13 @@ function setToolIndex(): number {
 			<section class="layout-md">
 				<h2>Build updates</h2>
 				{toolUpdates.map((content) => (
-					<ContentCard {content} />
+					<ArticleCard {content} />
 				))}
 			</section>
 		)
 	}
 	<div class="layout-md">
 		<h2>Next tool</h2>
-		<ContentCard content={ALL_TOOLS[setToolIndex()]} />
+		<ArticleCard content={ALL_TOOLS[setToolIndex()]} />
 	</div>
 </SiteLayout>

@@ -3,13 +3,13 @@ import Badge from './Badge.astro';
 
 interface Props{
     heading: string;
-    headingSize: "h1" | "h2" | "h3";
+    headingSize?: "h1" | "h2" | "h3";
     subHeading?: string;
     badgeLabel?: string | null;
     badgeStyle?: "primary" | "alt" | "default";
 }
 
-const { heading, headingSize, subHeading, badgeLabel = null, badgeStyle = "default" } = Astro.props;
+const { heading, headingSize = "h2", subHeading, badgeLabel = null, badgeStyle = "default" } = Astro.props;
 ---
 <div class="section-title">
     {badgeLabel && <Badge label={badgeLabel} style={badgeStyle}/>}

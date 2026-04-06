@@ -17,7 +17,7 @@ const {
 
 function setBackgroundColor (badgeStyle: typeof style): string {
 	if (badgeStyle === "primary") {
-		return "--badge-bg: var(--brand)";
+		return "--badge-bg: var(--brand-bg); --outline: var(--brand-outline);";
 	} else if (badgeStyle === "alt") {
 		return "--badge-bg: var(--alt-bg-light); --text: var(--alt-text);";
 	}
@@ -26,33 +26,28 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 }
 ---
 
-<small
-	data-badge
-	style={setBackgroundColor(style)}>
+<strong
+	style={setBackgroundColor(style)}
+	class="badge row-xs center border"
+>
+
 	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
-	<strong>{label}</strong>
+	<small>{label}</small>
 	{icon && iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
-</small>
+</strong>
 
 <style>
-	[data-badge] {
-		--padding: var(--space-1);
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--space-1);
-
+	.badge {
 		max-width: fit-content;
-		padding-block: var(--padding);
-		padding-inline: calc(var(--padding) * 3);
+		padding-block: var(--space-1);
+		padding-inline: var(--space-3);
 
-		border: var(--border);
+		border-color: var(--outline);
 		border-radius: var(--radius-pill);
 		background: var(--badge-bg);
 
-		strong {
-			font-size: var(--text-sm);
+		small {
+			line-height: var(--space-3);
 			text-wrap: nowrap;
 		}
 	}

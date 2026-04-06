@@ -1,0 +1,109 @@
+---
+import type { Collection } from '@/content/config';
+import { setImageSrc, setSlug } from '@/scripts/utilities';
+import Button from './ui/Button.astro';
+import Badge from './ui/Badge.astro';
+import CardStats from './ui/CardStats.astro';
+
+interface Props {
+	content: Collection;
+    aspect?: "16/9" | "3/5";
+}
+
+const { content, aspect = "3/5" } = Astro.props;
+const { title, description } = content.data;
+---
+
+<article
+    style={`
+        --aspect-ratio: ${aspect};
+        --asset-card-bg: url(${setImageSrc(content)});
+    `}
+    class="asset-card card-hover border"
+>
+    <section class="asset-card-inner column-md border">
+        <div class="bg-image"></div>
+        {content.collection === "tools" && <Badge label={content.data.price} />}
+        <div class="column-xs">
+            <a href={setSlug(content)}><h3>{title}</h3></a>
+            <p>{description}</p>
+        </div>
+        <CardStats {content} color="var(--neutral-70)"/>
+    </section>
+</article>
+
+<style>
+    .asset-card {
+        position: relative;
+
+        width: 100%;
+        height: 480px;
+        border-radius: var(--radius-lg);
+        background: var(--bg-light);
+    }
+
+    .asset-card-inner {
+        position: absolute;
+        justify-content: end;
+        overflow: clip;
+        inset: 0;
+
+        margin: var(--poster-inset);
+        padding: var(--card-padding);
+
+        border-radius: var(--radius-md);
+        background: var(--neutral-30);
+        
+        p, a, strong, small {
+            z-index: 1;
+        }
+
+        p {
+            height: auto;
+            max-height: calc(1.5rem * 2);
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            color: var(--neutral-95);
+        }
+
+        h3 {
+            color: var(--neutral-95);
+        }
+
+        &::after {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0 0 0 /0), var(--neutral-10));
+            backdrop-filter: blur(64px);
+            mask: linear-gradient(rgba(0 0 0 / 0) 30%, rgba(0 0 0 / 0.5) 40%, rgba(0 0 0 / 1) 70%);
+
+            z-index: 0;
+            content: "";
+        }
+    }
+
+    .bg-image {
+        position: absolute;
+        inset: 0;
+        
+        background: var(--asset-card-bg);
+        background-position: center;
+        background-size: cover;
+        content: "";
+
+        opacity: 0.9;
+        transform: scale(1);
+        transition: var(--content-hover-speed) var(--content-hover-easing);
+
+        
+
+        &::before {
+            position: absolute;
+            content: "";
+            inset: 0;
+
+            /* background: linear-gradient(rgba(0 0 0 / 0) 20%, var(--neutral-20) 70%); */
+        }
+    }
+</style>

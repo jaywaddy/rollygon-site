@@ -2,7 +2,6 @@
 import ContentNavigation from "@/components/ContentNavigation.astro";
 import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
-import TagList from "@/components/TagList.astro";
 
 import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
@@ -51,7 +50,6 @@ function setButtonLabel(): string {
 		<div class="layout-lg">
 			<div class="layout-sm">
 				<h1>{title}</h1>
-				<TagList {tags} />
 				<p>{description}</p>
 				<div class="layout-sm">
 					{

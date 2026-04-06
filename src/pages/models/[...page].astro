@@ -1,15 +1,15 @@
 ---
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
-import ModelCard from "@/components/ModelCard.astro";
 import Pagination from "@/components/Pagination.astro";
-import SearchBar from "@/components/SearchBar.astro";
 
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 import { ALL_MODELS } from "@/content/config";
 import type { Page } from "astro";
 import { FEATURED_MODEL } from "@/scripts/constants";
+import AssetCard from "@/components/AssetCard.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
 
 interface Props {
 	page: Page<any>;
@@ -17,27 +17,38 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: any): Promise<any> {
 	return paginate(ALL_MODELS, {
-		pageSize: 3,
+		pageSize: 6,
 	});
 }
 
 const { page } = Astro.props;
+const isCurrentPage = page.url.current === "/models";
 ---
 
 <SiteLayout pageTitle="Models" color="green" pattern="3">
-	<div class="layout-sm">
-		<PageTitle heading="Models" />
-		<SearchBar />
-	</div>
-	<div class="layout-sm">
-		<h2>Featured model</h2>
-		<FeaturedContent content={FEATURED_MODEL} />
-	</div>
-	<div class="layout-sm">
-		<h2>All models</h2>
-		<div class="layout-md">
-			{page.data.map((model) => <ModelCard {model} />)}
+	<PageTitle heading="Models" />
+	{isCurrentPage && (
+		<section class="layout-sm">
+			<SectionTitle
+				heading="Live 3D Model"
+				subHeading="Click, drag, and scroll to interact"
+				badgeLabel="FEATURED"
+				badgeStyle="alt"
+			/>
+			<FeaturedContent content={FEATURED_MODEL} />
+		</section>
+	)}
+	<section class="layout-sm">
+		<SectionTitle
+			heading={
+				isCurrentPage
+					? "All Models"
+					: `Page ${page.url.current.split("/").pop()}`
+			}
+		/>
+		<div class="grid-md">
+			{page.data.map((model) => <AssetCard content={model} />)}
 		</div>
-	</div>
+	</section>
 	<Pagination {page} content={ALL_MODELS} />
 </SiteLayout>

@@ -1,10 +1,11 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
-import ModelCard from "@/components/ModelCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import AssetCard from "@/components/AssetCard.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { findContent, slugify } from "@/scripts/utilities";
+import { findContent } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
 	return ALL_POSTS.map((post, index) => ({
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 
 const { post, index } = Astro.props;
 const { Content } = await post.render();
-const model = ALL_MODELS.find((model) => model.slug === post.slug.split("-")[0]);
+const model = findContent(ALL_MODELS, getModeSlug());
 
 function setPostIndex(): number {
 	if (index >= ALL_POSTS.length) {
@@ -30,6 +31,10 @@ function setPostIndex(): number {
 
 	return index - 1;
 }
+
+function getModeSlug(): string  {
+	return post.slug.split("-").slice(0, -1).join("-");
+}
 ---
 
 <SiteLayout pageTitle={post.data.title} color="neutral" pattern="3">
@@ -37,20 +42,28 @@ function setPostIndex(): number {
 		<Content />
 	</ContentPageLayout>
 	{
-		model && (
+		model.slug === getModeSlug() && (
 			<div class="layout-md">
-				<h2>View model</h2>
-				<ModelCard {model} />
+				<SectionTitle
+					heading="View Model"
+					badgeLabel="RELATED"
+					badgeStyle="alt"
+				/>
+				<AssetCard content={findContent(ALL_MODELS, model.slug)} />
 			</div>
 		)
 	}
 	<div class="layout-md">
-		<h2>Next post</h2>
+		<SectionTitle
+			heading="Next Post"
+			badgeLabel="FEATURED"
+			badgeStyle="alt"
+		/>
 		{
 			post.data.next ? (
-				<ContentCard content={findContent(ALL_POSTS, post.data.next)} />
+				<ArticleCard content={findContent(ALL_POSTS, post.data.next)} />
 			) : (
-				<ContentCard content={ALL_POSTS[setPostIndex()]} />
+				<ArticleCard content={ALL_POSTS[setPostIndex()]} />
 			)
 		}
 	</div>

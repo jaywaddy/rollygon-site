@@ -1,0 +1,56 @@
+---
+import Badge from "@/ui/Badge.astro";
+import CardStats from "@/ui/CardStats.astro";
+import ArticleCardImage from "@/components/ArticleCardImage.astro";
+import { setSlug } from "@/scripts/utilities";
+import { type Collection } from "@/content/config";
+
+interface Props {
+	content: Collection;
+}
+
+const { content } = Astro.props;
+const { title, description } = content.data;
+const { collection } = content;
+---
+
+<article class="content-card card-hover row-md border">
+    <section class="column-md">
+        {collection === "models" && (
+            <span class="row-sm">
+                <Badge label={`${content.data.modelStats[0]} Vertices`} icon="circle" />
+                <Badge label={`${content.data.modelStats[1]} Triangles`} icon="triangle" />
+                <Badge label={`${content.data.modelStats[2]} Quads`} icon="square" />
+            </span>
+        )}
+        <div class="column-xs">
+            <a href={setSlug(content)}><h3>{title}</h3></a>
+            <p>{description}</p>
+        </div>
+        <CardStats {content} />
+    </section>
+    {collection === "posts" && content.data.image && (
+        <ArticleCardImage {content} />
+    )}
+    {collection === "models" && (
+        <ArticleCardImage {content} />
+    )}
+</article>
+
+<style>
+    .content-card {
+        position: relative;
+
+        padding: var(--card-padding);
+        border-radius: var(--radius-lg);
+        background: var(--bg-light);
+
+        h3, p {
+            overflow: hidden;
+
+            max-width: var(--content-width);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+</style>

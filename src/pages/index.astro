@@ -1,18 +1,17 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import Link from "@/ui/Link.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
+import AssetCard from "@/components/AssetCard.astro";
 
 ---
 
 <SiteLayout pageTitle="Home">
-	<section class="layout-sm">
-		<SectionTitle heading="Hello, world!" headingSize="h1" />
-	</section>
-	<section class="layout-lg">
+	<SectionTitle heading="Hello, world!" headingSize="h1" />
+	<section class="column-md">
 		<SectionTitle
 			heading="Live 3D Model"
 			headingSize="h2"
@@ -23,7 +22,7 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 		<FeaturedContent content={FEATURED_MODEL}/>
 		<Link label="View all models" href="/models" underline />
 	</section>
-	<section class="layout-lg">
+	<section class="column-md">
 		<SectionTitle
 			heading="Tools for Modeling"
 			headingSize="h2"
@@ -31,12 +30,12 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 			badgeLabel="LATEST"
 			badgeStyle="primary"
 		/>
-		<div class="layout-md mb-2">
-			{FEATURED_TOOLS.map((content) => <ContentCard {content} />)}
+		<div class="row-md">
+			{FEATURED_TOOLS.map((content) => <AssetCard {content} />)}
 		</div>
 		<Link data-shadow label="View all tools" href="/tools" underline />
 	</section>
-	<section class="layout-sm">
+	<section class="column-md">
 		<SectionTitle
 			heading="Posts and Guides"
 			headingSize="h2"
@@ -44,8 +43,8 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 			badgeLabel="FEATURED"
 			badgeStyle="alt"
 		/>
-		<div class="layout-md mb-2">
-			{FEATURED_POSTS.map((content) => <ContentCard {content} />)}
+		<div class="column-md">
+			{FEATURED_POSTS.map((content) => <ArticleCard {content} />)}
 		</div>
 		<Link data-shadow label="View all posts" href="/posts" underline />
 	</section>
