@@ -2,15 +2,11 @@
 import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
-import type { ColorName } from "@/scripts/interface";
-import type { PatternName } from "@/scripts/interface";
 import ContactForm from "@/components/layout/ContactForm.astro";
 
 interface Props {
 	pageTitle: string;
 	description?: string;
-	color?: ColorName;
-	pattern?: PatternName;
 }
 
 const { pageTitle, description = "Rollygon"} = Astro.props;
@@ -31,15 +27,44 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 			rel="stylesheet"
 		/>
 		<title>Rollygon | {pageTitle}</title>
+		<script type="module" defer>
+			const systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
+			const themeToggleButton = document.querySelector("#theme-toggle-button");
+			const body = document.body;
+			const lightMode = systemTheme === true;
+			const defaultTheme = "dark";
+			let selectedTheme = localStorage.getItem("theme");
+
+			if (!selectedTheme) {
+				localStorage.setItem("theme", lightMode ? "light" : "dark");
+			}
+
+			body.setAttribute("data-theme", selectedTheme || defaultTheme);
+			themeToggleButton.addEventListener("click", toggleTheme);
+
+			function toggleTheme() {
+				selectedTheme = localStorage.getItem("theme");
+
+				if (selectedTheme === "light") {
+					localStorage.setItem("theme", "dark");
+					body.setAttribute("data-theme", "dark");
+					return;
+				}
+
+				localStorage.setItem("theme", "light");
+				body.setAttribute("data-theme", "light");
+			}
+		</script>
 	</head>
-	<body data-theme="light" class="flex flex-col min-h-full overflow-x-clip">
+	<body data-theme>
 		<Header />
 		<main>
-			<section class="site-body wrapper column-xl">
+			<section id="site-body" class="wrapper column-lg">
 				<slot />
 				<ContactForm />
 			</section>
 		</main>
 		<Footer />
 	</body>
+	<!-- <script src="@/scripts/toggleTheme.ts"></script> -->
 </html>

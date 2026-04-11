@@ -23,18 +23,14 @@ function makePageList(array: Array<number>): Array<number> {
 
 	array.push(currentPage);
 
-	if (prevPage <= 0) {
-		array.push(followingPage);
-	} else {
-		array.push(prevPage);
-	}
+	prevPage <= 0
+		? array.push(followingPage)
+		: array.push(prevPage);
 
-	if (nextPage <= lastPage) {
-		array.push(nextPage);
-	} else {
-		array.push(leadingPage);
-	}
-
+	nextPage <= lastPage
+		? array.push(nextPage)
+		: array.push(leadingPage);
+	
 	if (lastPage < 3 && currentPage < lastPage) {
 		array.sort();
 		array.pop();
@@ -51,17 +47,21 @@ function makePageList(array: Array<number>): Array<number> {
 
 {
 	lastPage > 1 && (
-		<nav aria-label="Content pages" class="card-sm flex-row items-center justify-between">
+		<div
+			aria-label="Content pages"
+			class="pagination border"
+		>
 			<Button
 				label="Prev"
 				icon="arrow-left"
-				disabled={url.prev === undefined && true}
+				disabled={url.prev === undefined}
 				href={prev || "/"}
+				small
 			/>
 			<ul class:list={["flex gap-2 items-center", "max-sm:hidden"]}>
 				{!pageList.includes(1) && (
 					<li>
-						<Button label="1" icon="none" href={first} primary={currentPage === 1} />
+						<Button label="1" icon="none" href={first} primary={currentPage === 1} small />
 					</li>
 				)}
 				{!pageList.includes(1) && pageList[0] - 1 > 1 && <li class="px-2">...</li>}
@@ -72,6 +72,7 @@ function makePageList(array: Array<number>): Array<number> {
 							icon="none"
 							href={`/${content[0].collection}/${pageNumber === 1 ? "" : pageNumber}`}
 							primary={currentPage === pageNumber}
+							small
 						/>
 					</li>
 				))}
@@ -85,6 +86,7 @@ function makePageList(array: Array<number>): Array<number> {
 							icon="none"
 							href={last}
 							primary={currentPage === lastPage}
+							small
 						/>
 					)}
 				</li>
@@ -127,7 +129,14 @@ function makePageList(array: Array<number>): Array<number> {
 					/>
 				</li>
 			</ul>
-			<Button label="Next" disabled={url.next === undefined && true} href={next} />
-		</nav>
+			<Button
+				label="Next"
+				disabled={url.next === undefined}
+				href={next}
+				icon="arrow-right"
+				iconRight
+				small
+			/>
+		</div>
 	)
 }

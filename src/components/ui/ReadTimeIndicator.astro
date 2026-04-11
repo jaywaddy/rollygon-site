@@ -1,7 +1,7 @@
 ---
 import { calcReadTime } from "@/scripts/utilities";
 import type { CollectionEntry } from "astro:content";
-import { setStyles, Color, Pattern } from "@/scripts/interface";
+// import { setStyles, Color, Pattern } from "@/scripts/interface";
 
 interface Props {
 	content: CollectionEntry<"posts"> | CollectionEntry<"tools">;
@@ -13,12 +13,12 @@ const { content } = Astro.props;
 <div class="flex flex-col gap-2">
 	<span class="heading-xs">{calcReadTime(content.body)} min read</span>
 	<span
-		class="flex justify-start items-center w-full h-4 px-1 bg-black rounded-[var(--radius-sm)]"
-		style={setStyles("indicator", Color.lime, Pattern["6"]) + "--prog-w: 40px"}
+		class="indicator flex justify-start items-center w-full h-4 px-1 bg-black rounded-(--radius-sm)"
+		style={"--prog-w: 40px"}
 	>
 		<span
 			data-article-progress
-			class="bg-[var(--indicator-color)] rounded-[1px] min-w-2 max-w-full h-2"
+			class="bg-(--indicator-color) rounded-[1px] min-w-2 max-w-full h-2"
 			onscroll="showScrollProgress()"></span>
 	</span>
 </div>

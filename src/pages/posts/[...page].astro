@@ -28,26 +28,27 @@ const isCurrentPage = page.url.current === "/posts";
 <SiteLayout pageTitle="Posts">
 	<PageTitle heading="Posts" />
 	{page.url.current === "/posts" && (
-		<section class="layout-sm">
+		<section class="column-md">
 			<SectionTitle
-					heading="Latest Post"
-					badgeLabel="FEATURED"
-					badgeStyle="alt"
-				/>
+				heading="Latest Post"
+				badgeLabel="FEATURED"
+				badgeStyle="alt"
+			/>
 			<FeaturedContent content={FEATURED_POSTS[0]} />
 		</section>
 	)}
-	<section class="layout-sm">
+	<section class="column-md">
 		<SectionTitle
 			heading={
 				isCurrentPage
-					? "All Models"
+					? "All Posts"
 					: `Page ${page.currentPage} of ${page.lastPage}`
 			}
 		/>
-		<div class="layout-md w-full">
+		<div class="column-md">
+			<Pagination {page} content={ALL_POSTS} />
 			{page.data.map((content) => <ArticleCard {content} />)}
+			<Pagination {page} content={ALL_POSTS} />
 		</div>
 	</section>
-	<Pagination {page} content={ALL_POSTS} />
 </SiteLayout>

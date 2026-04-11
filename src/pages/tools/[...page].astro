@@ -25,10 +25,10 @@ const { page } = Astro.props;
 const isCurrentPage = page.url.current === "/tools";
 ---
 
-<SiteLayout pageTitle="Tools" color="yellow" pattern="3">
+<SiteLayout pageTitle="Tools">
 	<PageTitle heading="Tools" />
 	{page.url.current === "/tools" && (
-		<section class="layout-sm">
+		<section class="column-md">
 			<SectionTitle
 				heading="Most Downloaded Tool"
 				badgeLabel="FEATURED"
@@ -37,7 +37,7 @@ const isCurrentPage = page.url.current === "/tools";
 			<FeaturedContent content={findContent(ALL_TOOLS, "bm-track-generator")} />
 		</section>
 	)}
-	<section class="layout-sm">
+	<section class="column-md">
 		<SectionTitle
 			heading={
 				isCurrentPage
@@ -46,8 +46,9 @@ const isCurrentPage = page.url.current === "/tools";
 			}
 		/>
 		<div class="grid-md-3">
+			<Pagination {page} content={ALL_TOOLS} />
 			{page.data.map((content) => <AssetCard {content} />)}
+			<Pagination {page} content={ALL_TOOLS} />
 		</div>
 	</section>
-	<Pagination {page} content={ALL_TOOLS} />
 </SiteLayout>

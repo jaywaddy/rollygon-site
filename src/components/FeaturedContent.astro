@@ -13,7 +13,7 @@ const { content } = Astro.props;
 const { title } = content.data;
 ---
 
-<div class:list={["layout-sm", "max-sm:gap-4"]}>
+<div class:list={["column-md", "max-sm:gap-4"]}>
 	{
 		content.collection === "models" ? (
 			<AssetPoster title={title} modelID={content.data.id} />

@@ -1,5 +1,5 @@
 ---
-import ImageWrapper from "@/ui/ImageWrapper.astro";
+// import ImageWrapper from "@/ui/ImageWrapper.astro";
 import InfoBanner from "@/ui/InfoBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
@@ -18,7 +18,7 @@ const { photo, class: className } = Astro.props;
 			class:list={["relative flex flex-col w-[320px] h-[320px]", className]}
 			style={{ "--radius": "32px" }}
 		>
-			<ImageWrapper alt="About photo" size="md" shape="round" aspect="1/1" src="/about/about.png" />
+			{/* <ImageWrapper alt="About photo" size="md" shape="round" aspect="1/1" src="/about/about.png" /> */}
 			<div class="absolute top-2 -rotate-4">
 				<InfoBanner />
 			</div>
@@ -49,7 +49,7 @@ const { photo, class: className } = Astro.props;
 		</div>
 	) : (
 		<div
-			class:list={["relative layout-sm w-[320px] h-[320px]", className]}
+			class:list={["relative column-md w-[320px] h-[320px]", className]}
 			style={{ "--radius": "32px" }}
 		>
 			<InfoBanner />

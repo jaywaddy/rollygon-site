@@ -25,10 +25,10 @@ const { page } = Astro.props;
 const isCurrentPage = page.url.current === "/models";
 ---
 
-<SiteLayout pageTitle="Models" color="green" pattern="3">
+<SiteLayout pageTitle="Models">
 	<PageTitle heading="Models" />
 	{isCurrentPage && (
-		<section class="layout-sm">
+		<section class="column-md">
 			<SectionTitle
 				heading="Live 3D Model"
 				subHeading="Click, drag, and scroll to interact"
@@ -38,7 +38,7 @@ const isCurrentPage = page.url.current === "/models";
 			<FeaturedContent content={FEATURED_MODEL} />
 		</section>
 	)}
-	<section class="layout-sm">
+	<section class="column-md">
 		<SectionTitle
 			heading={
 				isCurrentPage

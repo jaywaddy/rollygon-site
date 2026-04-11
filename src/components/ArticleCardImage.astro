@@ -19,11 +19,11 @@ const { content } = Astro.props;
     .content-card-image {
         overflow: clip;
         position: absolute;
-        top: var(--poster-inset);
-        right: var(--poster-inset);
+        top: var(--padding-sm);
+        right: var(--padding-sm);
 
         width: calc(100% - calc(var(--content-width) + var(--space-32)));
-        height: calc(100% - calc(var(--poster-inset) * 2));
+        height: calc(100% - calc(var(--padding-sm) * 2));
 
         border-radius: 0.5em;
         border-top-right-radius: var(--radius-md);

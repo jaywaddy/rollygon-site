@@ -14,7 +14,7 @@ const { headings, compact, class: className } = Astro.props;
 <nav class:list={["sticky layout-md", className]}>
 	{!compact && <hr />}
 	{compact ? <span class="heading-xs">Table of Contents</span> : <h2>Table of Contents</h2>}
-	<ol class="layout-sm list-decimal">
+	<ol class="column-sm list-decimal">
 		{
 			headings.map((heading) =>
 				heading.depth > 2 ? (

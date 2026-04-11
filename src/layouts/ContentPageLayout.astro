@@ -28,15 +28,15 @@ function setButtonLabel(): string {
 }
 ---
 
-<div class="layout-lg">
+<div class="column-lg">
 	{
 		content.collection === "models" ? (
-			<div class="layout-md">
+			<div class="column-md">
 				<ContentNavigation {content} {contentCollection} {index} />
 				<AssetPoster {title} modelID={content.data.id} />
 			</div>
 		) : (
-			<div class="relative layout-md">
+			<div class="relative column-md">
 				<ContentNavigation {content} {contentCollection} {index} />
 				{content.collection === "posts" && content.data.embed ? (
 					<AssetPoster title={title} videoEmbed={content.data.embed} />
@@ -46,12 +46,12 @@ function setButtonLabel(): string {
 			</div>
 		)
 	}
-	<div class="flex gap-16">
-		<div class="layout-lg">
-			<div class="layout-sm">
+	<div class="row-lg">
+		<section class="column-lg">
+			<div class="column-md">
 				<h1>{title}</h1>
 				<p>{description}</p>
-				<div class="layout-sm">
+				<div class="column-md">
 					{
 						collection === "posts" && (
 							<small>
@@ -94,10 +94,10 @@ function setButtonLabel(): string {
 				</div>
 			</div>
 			{ headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> }
-			<article class="content layout-md">
+			<article class="content column-md">
 				<slot />
 			</article>
-		</div>
+		</section>
 		<SideBar class="max-sm:hidden" {headings} {content} />
 	</div>
 </div>

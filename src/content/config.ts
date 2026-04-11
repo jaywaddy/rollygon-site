@@ -31,6 +31,7 @@ const toolCollection = defineCollection({
         version: z.string(),
         next: z.optional(z.string()),
         lastUpdated: z.optional(z.date()),
+        backgroundColor: z.optional(z.string())
     })
 });
 
@@ -46,6 +47,7 @@ const modelCollection = defineCollection({
         modelStats: z.array(z.any()),
         tags: z.array(z.string()),
         lastUpdated: z.optional(z.date()),
+        backgroundColor: z.optional(z.string())
     })
 });
 

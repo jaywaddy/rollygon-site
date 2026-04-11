@@ -12,12 +12,20 @@ interface Props {
 
 const { content, aspect = "3/5" } = Astro.props;
 const { title, description } = content.data;
+
+function setBackgroundColor(color: string | undefined) {
+    return color
+        ? `--bg-color: ${color}`
+        : "--bg-color: black;"
+}
 ---
 
-<article
+{content.collection !== "posts" && (
+    <article
     style={`
         --aspect-ratio: ${aspect};
         --asset-card-bg: url(${setImageSrc(content)});
+        ${setBackgroundColor(content.data.backgroundColor)}
     `}
     class="asset-card card-hover border"
 >
@@ -28,9 +36,12 @@ const { title, description } = content.data;
             <a href={setSlug(content)}><h3>{title}</h3></a>
             <p>{description}</p>
         </div>
-        <CardStats {content} color="var(--neutral-70)"/>
+        <CardStats {content} color="var(--neutral-95)"/>
     </section>
 </article>
+)
+    
+}
 
 <style>
     .asset-card {
@@ -48,14 +59,18 @@ const { title, description } = content.data;
         overflow: clip;
         inset: 0;
 
-        margin: var(--poster-inset);
-        padding: var(--card-padding);
+        margin: var(--padding-sm);
+        padding: var(--padding-lg);
 
         border-radius: var(--radius-md);
         background: var(--neutral-30);
         
         p, a, strong, small {
-            z-index: 1;
+            z-index: 2;
+        }
+
+        small {
+            opacity: 0.7;
         }
 
         p {
@@ -71,14 +86,14 @@ const { title, description } = content.data;
             color: var(--neutral-95);
         }
 
-        &::after {
+        &::before {
             position: absolute;
             inset: 0;
-            background: linear-gradient(rgba(0 0 0 /0), var(--neutral-10));
             backdrop-filter: blur(64px);
+            background: linear-gradient(rgba(0 0 0 /0), color-mix(in srgb, var(--bg-color), transparent 50%));
             mask: linear-gradient(rgba(0 0 0 / 0) 30%, rgba(0 0 0 / 0.5) 40%, rgba(0 0 0 / 1) 70%);
 
-            z-index: 0;
+            z-index: 1;
             content: "";
         }
     }

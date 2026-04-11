@@ -43,12 +43,13 @@
     --space-24: calc(var(--spacing) * 24);
     --space-32: calc(var(--spacing) * 32);
 
-    --poster-inset: var(--space-2);
-    --card-padding: var(--space-8);
+    --padding-sm: var(--space-2);
+    --padding-lg: var(--space-8);
 
+    --radius-xs: 0.25rem;
     --radius-sm: 0.75rem;
-    --radius-md: calc(var(--radius-lg) - var(--poster-inset));
-    --radius-lg: calc(var(--radius-sm) + var(--card-padding));
+    --radius-md: calc(var(--radius-lg) - var(--padding-sm));
+    --radius-lg: calc(var(--radius-sm) + var(--padding-lg));
     --radius-pill: 100vw;
 
     --content-hover-speed: 300ms;
@@ -58,22 +59,20 @@
 [data-theme="dark"] {
     color-scheme: dark;
 
-    --brand: var(--green-40);
-    --alt-brand: var(--green-50);
-
     --text: var(--neutral-95);
     --text-muted: var(--neutral-70);
 
     --outline: var(--neutral-30);
+    --outline-hover: var(--neutral-70);
     --border: solid var(--outline) 1px;
 
-    --bg-light: var(--neutral-10);
-    --bg: var(--neutral-5);
-    --bg-dark: var(--neutral-0);
+    --bg-light: var(--neutral-20);
+    --bg: var(--neutral-15);
+    --bg-dark: var(--neutral-10);
 
-    --bg-hover: var(--neutral-20);
-    --bg-active: var(--neutral-30);
-    --bg-muted: var(--neutral-30);
+    --bg-hover: var(--neutral-30);
+    --bg-active: var(--neutral-40);
+    --bg-muted: var(--neutral-40);
 
     --brand-outline: var(--green-30);
     --brand-outline-hover: var(--green-50);
@@ -92,21 +91,17 @@
     --alt-bg-active: var(--neutral-90);
     --alt-bg-muted: var(--neutral-70);
 
-
-
     --external-link: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA5IDkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik03LjE2NjY3IDQuOTQ0NDRWNy42MTExMUM3LjE2NjY3IDcuODQ2ODYgNy4wNzMwMiA4LjA3Mjk1IDYuOTA2MzIgOC4yMzk2NUM2LjczOTYyIDguNDA2MzUgNi41MTM1MyA4LjUgNi4yNzc3OCA4LjVIMS4zODg4OUMxLjE1MzE0IDguNSAwLjkyNzA0OCA4LjQwNjM1IDAuNzYwMzQ5IDguMjM5NjVDMC41OTM2NSA4LjA3Mjk1IDAuNSA3Ljg0Njg2IDAuNSA3LjYxMTExVjIuNzIyMjJDMC41IDIuNDg2NDcgMC41OTM2NSAyLjI2MDM4IDAuNzYwMzQ5IDIuMDkzNjhDMC45MjcwNDggMS45MjY5OCAxLjE1MzE0IDEuODMzMzMgMS4zODg4OSAxLjgzMzMzSDQuMDU1NTZNNS44MzMzMyAwLjVIOC41TTguNSAwLjVWMy4xNjY2N004LjUgMC41TDMuNjExMTEgNS4zODg4OSIgc3Ryb2tlPSIjZjJmMmYyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==');
 }
 
 [data-theme="light"] {
     color-scheme: light;
 
-    --brand: var(--green-50);
-    --alt-brand: var(--green-40);
-
     --text: var(--neutral-5);
     --text-muted: var(--neutral-40);
 
     --outline: var(--neutral-70);
+    --outline-hover: var(--neutral-60);
     --border: solid var(--outline) 1px;
 
     --bg-light: var(--neutral-100);
@@ -118,7 +113,7 @@
     --bg-muted: var(--neutral-70);
 
     --brand-outline: var(--green-30);
-    --brand-outline-hover: var(--green-50);
+    --brand-outline-hover: var(--green-40);
     --brand-bg: var(--green-50);
     --brand-bg-hover: var(--green-60);
 
@@ -143,6 +138,11 @@ html {
 
 body {
     background: var(--bg-dark);
+    color: var(--text);
+}
+
+#site-body {
+    margin-block: var(--space-16);
 }
 
 .center {
@@ -163,6 +163,11 @@ body {
 .row-md {
     display: flex;
     gap: var(--space-4);
+}
+
+.row-lg {
+    display: flex;
+    gap: var(--space-16);
 }
 
 .column-xs {
@@ -216,6 +221,15 @@ body {
     color: var(--alt-text);
 }
 
+.pagination {
+    display: flex;
+    justify-content: space-between;
+
+    padding: var(--padding-sm);
+    border-radius: var(--radius-pill);
+    background: var(--bg-light);
+}
+
 .card-hover {
     transition: all var(--content-hover-speed) var(--content-hover-easing);
 
@@ -235,12 +249,17 @@ body {
         }
 
         .content-card-image {
-            width: calc(100% - calc(var(--content-width) + var(--space-16)));
+            width: calc(100% - calc(var(--content-width) + var(--space-24)));
         }
 
         .bg-image {
             opacity: 1.0;
             transform: scale(1.05);
+        }
+
+        & :focus-within {
+            border: none;
+            outline: none;
         }
     }
 }
@@ -251,7 +270,7 @@ body {
   src: url("/src/assets/fonts/Outfit.ttf");
 }
 
-h1, h2, h3, p, a, li, strong, em, span {
+h1, h2, h3, p, a, li, strong, em, span, button {
     font-family: "Outfit";
     color: var(--text);
 }
@@ -264,13 +283,13 @@ h1 {
 
 h2 {
     font-size: 2.5rem;
-    line-height: 2.5rem;
+    line-height: 3.5rem;
     font-weight: var(--font-semibold);
 }
 
 h3 {
     font-size: 1.75rem;
-    line-height: 1.75rem;
+    line-height: 2rem;
     font-weight: var(--font-semibold);
 }
 
@@ -291,8 +310,12 @@ h3 {
         }
     }
 
-    h2 {
+    h2, h3 {
         margin-top: 1em;
+    }
+
+    h3 {
+        font-size: 1.5rem;
     }
 
     p, a, li, strong, em {
@@ -317,7 +340,6 @@ h3 {
         padding-inline: calc(var(--padding) * 2);
         border-radius: 0.325em;
         font-size: 0.75em;
-        /* color: var(--alt-text); */
         background-color: var(--bg-muted);
     }
 
@@ -332,71 +354,16 @@ h3 {
     }
 }
 
-/* @utility list {
-    list-style-type: style;
-    & > li {
-        padding-left: 1rem;
-    }
-} */
-
 @utility heading-xs {
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-/* @utility heading-sub {
-    font-size: 1.5rem;
-} */
-
 @utility wrapper {
     margin-inline: auto;
     padding-inline: calc(var(--spacing) * 16);
     max-width: 72rem;
-}
-
-@utility layout-sm {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing) * 4);
-}
-
-@utility layout-md {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing) * 8);
-}
-
-@utility layout-lg {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--spacing) * 16);
-}
-
-@utility card-sm {
-    display: flex;
-    flex-direction: column;
-    gap:  calc(var(--spacing) * 4);
-
-    background-color: var(--bg-light);
-    border: var(--border);
-    border-radius: var(--radius-lg);
-
-    padding: calc(var(--spacing) * 4);
-    box-shadow: 4px 4px 0 var(--color-shadow);
-}
-
-@utility card-lg {
-    display: flex;
-    flex-direction: column;
-    gap:  calc(var(--spacing) * 8);
-
-    background-color: var(--color-white);
-    border: solid var(--color-black) 2px;
-    border-radius: var(--radius-lg);
-
-    padding: calc(var(--spacing) * 8);
-    box-shadow: 4px 4px 0 var(--color-shadow);
 }
 
 @media (width < 40rem) {
@@ -418,9 +385,5 @@ h3 {
 
     .wrapper {
         padding-inline: 0.75rem;
-    }
-
-    .card-lg {
-        padding: calc(var(--spacing) * 6);
     }
 }

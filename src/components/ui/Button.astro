@@ -14,6 +14,7 @@ interface Props extends HTML {
 	disabled?: boolean;
 	fullWidth?: boolean;
 	primary?: boolean;
+	small?: boolean;
 }
 
 const {
@@ -27,10 +28,11 @@ const {
 	disabled,
 	fullWidth = false,
 	primary,
+	small,
 	class: className,
 } = Astro.props;
 
-const buttonStyles = "button row-xs center border";
+const buttonStyles = "button row-xs center";
 
 function setBackgroundColor (isPrimary: boolean | undefined): string {
 	if (isPrimary) {
@@ -44,6 +46,23 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 	
 	return "--button-bg: var(--bg-light);";
 }
+
+function setButtonSize (isSmall: boolean | undefined): string {
+	if (isSmall) {
+		return (`
+			--button-radius: var(--radius-pill);
+			--padding-y: var(--space-2);
+		`);
+	}
+
+	return (`
+		--button-radius: var(--radius-sm);
+	`);
+}
+
+function setButtonStyles(): string {
+	return setBackgroundColor(primary) + setButtonSize(small);
+}
 ---
 
 {type === "submit" && (
@@ -55,7 +74,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 		{type}
 		title={label}
 		class:list={[buttonStyles, className]}
-		style={setBackgroundColor(primary)}
+		style={setButtonStyles()}
 	>
 		{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 		{label && label}
@@ -63,22 +82,19 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 	</button>
 )}
 {type === "toggle" && (
-	<form action="toggle" class:list={[className]}>
-		<label
-			{id}
-			data-disabled={disabled}
-			data-icon-only={iconOnly}
-			data-width={fullWidth}
-			title={label ? label : titleCase(icon)}						
-			class:list={[buttonStyles, className]}
-			style={setBackgroundColor(primary)}
-		>
-			<input type="checkbox" />
-			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
-			{label && !iconOnly && label}
-			{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
-		</label>
-	</form>
+	<button
+		{id}
+		data-disabled={disabled}
+		data-icon-only={iconOnly}
+		data-width={fullWidth}
+		title={label ? label : titleCase(icon)}						
+		class:list={[buttonStyles, className]}
+		style={setButtonStyles()}
+	>
+		{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
+		{label && !iconOnly && label}
+		{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
+	</button>
 )}
 {
 	type === "link" && (
@@ -90,7 +106,7 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 			data-width={fullWidth}
 			title={label ? label : titleCase(icon)}
 			class:list={[buttonStyles, className]}			
-			style={setBackgroundColor(primary)}
+			style={setButtonStyles()}
 		>
 			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 			{label && !iconOnly && label}
@@ -108,19 +124,21 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 		font-weight: var(--font-semibold);
 		text-wrap: nowrap;
 
-		min-height: 1.25rem;
-		border-radius: var(--radius-sm);
+		min-width: 2.5rem;
+		padding-block: var(--padding-y);
+		padding-inline: var(--padding-x);
+		border-radius: var(--button-radius);
+		border: var(--border);
 		border-color: var(--outline);
 		background-color: var(--bg-light);
 
-		padding-block: var(--padding-y);
-		padding-inline: var(--padding-x);
 		cursor: pointer;
 
 		transition: all 0.1s;
 
 		&:hover {
 			background: var(--bg-hover);
+			border-color: var(--outline-hover);
 		}
 
 		&:active {
