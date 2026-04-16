@@ -21,7 +21,7 @@ function getPostDate() {
 ---
 
 <div class="row-sm" style={`--text-color: ${color};`}>
-    <small>{getPostDate()} &bullet;</small>
+    <small>{getPostDate()}</small><span>&bullet;</span>
     {collection === "posts" ? (
         <small>{calcReadTime(content.body)} min. read</small>
     ) : (
@@ -30,7 +30,7 @@ function getPostDate() {
 </div>
 
 <style>
-    small {
+    small, span {
         color: var(--text-color);
     }
 </style>

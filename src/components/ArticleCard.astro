@@ -14,7 +14,7 @@ const { title, description } = content.data;
 const { collection } = content;
 ---
 
-<article class="content-card card-hover row-md border">
+<article class="card card-hover row-md">
     <section class="column-md">
         {collection === "models" && (
             <span class="row-sm">
@@ -38,12 +38,8 @@ const { collection } = content;
 </article>
 
 <style>
-    .content-card {
+    article {
         position: relative;
-
-        padding: var(--padding-lg);
-        border-radius: var(--radius-lg);
-        background: var(--bg-light);
 
         h3, p {
             overflow: hidden;

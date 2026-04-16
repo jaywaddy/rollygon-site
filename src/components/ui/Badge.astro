@@ -3,7 +3,7 @@ import Icon, { type ICON_NAME } from '@/ui/Icon.astro';
 
 interface Props {
 	label: string;
-	style?: "primary" | "alt" | "default"
+	style?: "primary" | "alt" | "error" | "default";
 	icon?: ICON_NAME;
 	iconRight?: boolean;
 }
@@ -12,7 +12,7 @@ const {
 	label,
 	style = "default",
 	icon = false,
-	iconRight = false
+	iconRight = false,
 } = Astro.props;
 
 function setBackgroundColor (badgeStyle: typeof style): string {
@@ -20,6 +20,8 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 		return "--badge-bg: var(--brand-bg); --outline: var(--brand-outline);";
 	} else if (badgeStyle === "alt") {
 		return "--badge-bg: var(--alt-bg-light); --text: var(--alt-text);";
+	} else if (badgeStyle === "error") {
+		return "--badge-bg: var(--error-bg); --outline: var(--error-outline);";
 	}
 
 	return "--badge-bg: var(--bg-light)";
@@ -30,7 +32,6 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 	style={setBackgroundColor(style)}
 	class="badge row-xs center border"
 >
-
 	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
 	<small>{label}</small>
 	{icon && iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
@@ -39,6 +40,7 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 <style>
 	.badge {
 		max-width: fit-content;
+		max-height: fit-content;
 		padding-block: var(--space-1);
 		padding-inline: var(--space-3);
 

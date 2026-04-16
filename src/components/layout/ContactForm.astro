@@ -5,38 +5,44 @@ import Textarea from "@/ui/Textarea.astro";
 import AboutSection from "@/layout/AboutSection.astro";
 ---
 
-<div class="marquee-content layout-md">
-	<h2 data-shadow>What should I build next?</h2>
-	<div class="flex gap-8">
-		<div class="column-md">
-			<p class="card-lg">
+<section class="row-md">
+	<div id="contact-form" class="column-md">
+		<div class="column-sm">
+			<h2 data-shadow>What should I build next?</h2>
+			<p>
 				If you have an idea that could improve my workflow, I'd love to hear it. Let's work
 				together and build better custom and high quality coaster models!
 			</p>
-			<form
-				action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e"
-				method="POST"
-				class="flex flex-col card-lg gap-2 w-full"
-			>
-				<input type="text" name="_honey" style="display:none" />
-				<input type="hidden" name="_subject" value="New submission!" />
-				<input type="hidden" name="_captcha" value="false" />
-				<Input label="Name (@handle:platform)" type="text" id="contact-name" required />
-				<Input label="Email" type="email" id="contact-email" required />
-				<Textarea label="Message" id="contact-meessage" required />
-				<div class="flex gap-2 mt-2">
-					<Button label="Start a conversation" icon="send" type="submit" primary />
-					<Button
-						class="max-sm:hidden"
-						label="Email message@rollygon.com"
-						href="mailto:message@rollygon.com"
-						icon="send"
-					/>
-				</div>
-			</form>
 		</div>
-		<aside class:list={["w-[360px]", "max-sm:hidden"]}>
-			<AboutSection />
-		</aside>
+		<form
+			action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e"
+			method="POST"
+			class="column-sm"
+		>
+			<input type="text" name="_honey" style="display:none" />
+			<input type="hidden" name="_subject" value="New submission!" />
+			<input type="hidden" name="_captcha" value="false" />
+			<Input label="Name (@handle:platform)" type="text" id="contact-name" required />
+			<Input label="Email" type="email" id="contact-email" required />
+			<Textarea label="Message" id="contact-meessage" required />
+			<div class="row-sm">
+				<Button label="Send message" icon="send" type="submit" primary />
+				<Button
+					label="Email message@rollygon.com"
+					href="mailto:message@rollygon.com"
+					icon="send"
+				/>
+			</div>
+		</form>
 	</div>
-</div>
+	<AboutSection />
+</section>
+
+<style>
+	#contact-form {
+		padding: var(--padding-lg);
+		background: var(--bg-light);
+		border: var(--border);
+		border-radius: var(--radius-lg);
+	}
+</style>

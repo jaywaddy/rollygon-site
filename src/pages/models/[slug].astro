@@ -35,13 +35,13 @@ function setModelIndex(): number {
 }
 ---
 
-<SiteLayout pageTitle={model.data.title} color="green" pattern="3">
+<SiteLayout pageTitle={model.data.title}>
 	<ContentPageLayout content={model} contentCollection={ALL_MODELS} {index}>
 		<Content />
 	</ContentPageLayout>
 	{
 		modelUpdates.length > 0 && (
-			<section class="layout-md">
+			<section class="column-md">
 				<SectionTitle heading="Build Updates" badgeLabel="DEV LOGS" badgeStyle="alt" />
 				{modelUpdates.map((content) => (
 					<ArticleCard {content} />
@@ -49,7 +49,7 @@ function setModelIndex(): number {
 			</section>
 		)
 	}
-	<section class="layout-md">
+	<section class="column-md">
 		<SectionTitle heading="Next Model" badgeLabel="FEATURED" badgeStyle="alt" />
 		<AssetCard content={ALL_MODELS[setModelIndex()]} />
 	</section>

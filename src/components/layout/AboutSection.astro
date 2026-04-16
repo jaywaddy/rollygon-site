@@ -48,19 +48,16 @@ const { photo, class: className } = Astro.props;
 			/>
 		</div>
 	) : (
-		<div
-			class:list={["relative column-md w-[320px] h-[320px]", className]}
-			style={{ "--radius": "32px" }}
-		>
-			<InfoBanner />
-			<p class="card-sm">I'm Jay, and I make roller coasters out of polygons!</p>
-			<div class="flex flex-row justify-between card-sm">
+		<aside class={`column-sm card ${className}`}>
+			{/* <p class="">My name is Jay, and I make roller coasters out of polygons!</p> */}
+			<InfoBanner style="error"/>
+			<div class="row-sm">
 				<Button icon={SOCIAL_LINK.gumroad.icon} href={SOCIAL_LINK.gumroad.href} iconOnly />
 				<Button icon={SOCIAL_LINK.sketchfab.icon} href={SOCIAL_LINK.sketchfab.href} iconOnly />
 				<Button icon={SOCIAL_LINK.youtube.icon} href={SOCIAL_LINK.youtube.href} iconOnly />
 				<Button icon={SOCIAL_LINK.bluesky.icon} href={SOCIAL_LINK.bluesky.href} iconOnly />
 				<Button icon={SOCIAL_LINK.email.icon} href={SOCIAL_LINK.email.href} iconOnly />
 			</div>
-		</div>
+		</aside>
 	)
 }

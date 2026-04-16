@@ -65,11 +65,11 @@ function setBackgroundColor(color: string | undefined) {
         border-radius: var(--radius-md);
         background: var(--neutral-30);
         
-        p, a, strong, small {
+        p, a, strong, small, span {
             z-index: 2;
         }
 
-        small {
+        small, span {
             opacity: 0.7;
         }
 
@@ -117,8 +117,6 @@ function setBackgroundColor(color: string | undefined) {
             position: absolute;
             content: "";
             inset: 0;
-
-            /* background: linear-gradient(rgba(0 0 0 / 0) 20%, var(--neutral-20) 70%); */
         }
     }
 </style>
