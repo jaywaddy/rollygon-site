@@ -60,7 +60,7 @@
     --font-semibold: 600;
     --font-bold: 800;
 
-    --content-width: 72ch;
+    --content-width: 64ch;
     --content-hover-speed: 300ms;
     --content-hover-easing: cubic-bezier(0, 0, 0, 1);
 }

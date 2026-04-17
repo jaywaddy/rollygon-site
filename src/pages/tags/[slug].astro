@@ -49,15 +49,13 @@ function checkIfTrue(list: Array<Collection>): boolean {
 <SiteLayout
 	pageTitle={"Tag: #" + tagName}
 	description={"Loading content tagged with #" + tagName}
-	color="neutral"
-	pattern="4"
 >
 	<PageTitle heading={"Tag: #" + tagName} />
 	{
 		checkIfTrue(ALL_MODELS) && (
-			<div class="layout-md">
+			<div class="column-md">
 				<h2 id="models">Models</h2>
-				<div class="layout-md">
+				<div class="column-md">
 					{ALL_MODELS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
@@ -71,9 +69,9 @@ function checkIfTrue(list: Array<Collection>): boolean {
 	}
 	{
 		checkIfTrue(ALL_TOOLS) && (
-			<div class="layout-md">
+			<div class="column-md">
 				<h2 id="tools">Tools</h2>
-				<div class="layout-md">
+				<div class="column-md">
 					{ALL_TOOLS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (
@@ -87,9 +85,9 @@ function checkIfTrue(list: Array<Collection>): boolean {
 	}
 	{
 		checkIfTrue(ALL_POSTS) && (
-			<div class="layout-md">
+			<div class="column-md">
 				<h2 id="articles">Articles</h2>
-				<div class="layout-md">
+				<div class="column-md">
 					{ALL_POSTS.map((content) => {
 						return (
 							content.data.tags.find((tag) => slugify(tag) === slug) && (

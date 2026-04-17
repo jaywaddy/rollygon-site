@@ -1,22 +1,12 @@
 ---
 import { ALL_MODELS, ALL_POSTS, ALL_TOOLS } from "@/content/config";
 import Link from "@/ui/Link.astro";
-import Button from "@/ui/Button.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
 ---
 
 <footer class="footer">
 	<div class="wrapper footer-header">
 		<SiteTitle />
-		<ul>
-			<li>
-				<Button icon="gumroad" href="https://rollygon.gumroad.com/" iconOnly />
-				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" iconOnly />
-				<Button icon="youtube" href="https://youtube.com/@Rollygon" iconOnly />
-				<Button icon="bluesky" href="https://bsky.app/profile/rollygon.com" iconOnly />
-				<Button icon="send" href="mailto:message@rollgy.com" iconOnly />
-			</li>
-		</ul>
 	</div>
 	<div class="footer-links wrapper">
 		<ul>
@@ -111,8 +101,7 @@ import SiteTitle from "@/components/SiteTitle.astro";
 
 	.footer-header {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		justify-content: start;
 
 		padding-block: var(--space-16);
 		border-bottom: var(--border);

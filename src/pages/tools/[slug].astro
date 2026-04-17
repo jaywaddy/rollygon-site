@@ -1,5 +1,6 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
@@ -32,13 +33,13 @@ function setToolIndex(): number {
 }
 ---
 
-<SiteLayout pageTitle={tool.data.title} color="yellow" pattern="3">
+<SiteLayout pageTitle={tool.data.title}>
 	<ContentPageLayout content={tool} contentCollection={ALL_TOOLS} {index}>
 		<Content />
 	</ContentPageLayout>
 	{
 		toolUpdates.length > 0 && (
-			<section class="layout-md">
+			<section class="column-md">
 				<h2>Build updates</h2>
 				{toolUpdates.map((content) => (
 					<ArticleCard {content} />
@@ -46,8 +47,12 @@ function setToolIndex(): number {
 			</section>
 		)
 	}
-	<div class="layout-md">
-		<h2>Next tool</h2>
+	<div class="column-md">
+		<SectionTitle
+			heading="Next Tool"
+			badgeLabel="FEATURED"
+			badgeStyle="alt"
+		/>
 		<ArticleCard content={ALL_TOOLS[setToolIndex()]} />
 	</div>
 </SiteLayout>

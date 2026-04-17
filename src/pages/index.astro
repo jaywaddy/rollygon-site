@@ -10,7 +10,7 @@ import AssetCard from "@/components/AssetCard.astro";
 ---
 
 <SiteLayout pageTitle="Home">
-	<SectionTitle heading="Hello, world!" headingSize="h1" />
+	<h1>Make roller coasters out of polygons</h1>
 	<section class="column-md">
 		<SectionTitle
 			heading="Live 3D Model"
@@ -49,3 +49,12 @@ import AssetCard from "@/components/AssetCard.astro";
 		<Link data-shadow label="View all posts" href="/posts" underline />
 	</section>
 </SiteLayout>
+
+<style>
+	h1 {
+		font-size: 6rem;
+		line-height: 5.5rem;
+
+		padding-block: var(--space-32);
+	}
+</style>

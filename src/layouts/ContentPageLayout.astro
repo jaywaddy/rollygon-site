@@ -93,11 +93,17 @@ function setButtonLabel(): string {
 					}
 				</div>
 			</div>
-			{ headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> }
+			<!-- { headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> } -->
 			<article class="content column-md">
 				<slot />
 			</article>
 		</section>
-		<SideBar class="max-sm:hidden" {headings} {content} />
+		<SideBar {headings} {content} />
 	</div>
 </div>
+
+<style>
+	section {
+		max-width: var(--content-width);
+	}
+</style>

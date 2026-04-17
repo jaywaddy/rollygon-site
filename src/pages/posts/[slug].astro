@@ -37,13 +37,13 @@ function getModeSlug(): string  {
 }
 ---
 
-<SiteLayout pageTitle={post.data.title} color="neutral" pattern="3">
+<SiteLayout pageTitle={post.data.title}>
 	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
 	{
 		model.slug === getModeSlug() && (
-			<div class="layout-md">
+			<div class="column-md">
 				<SectionTitle
 					heading="View Model"
 					badgeLabel="RELATED"
@@ -53,7 +53,7 @@ function getModeSlug(): string  {
 			</div>
 		)
 	}
-	<div class="layout-md">
+	<div class="column-md">
 		<SectionTitle
 			heading="Next Post"
 			badgeLabel="FEATURED"

@@ -29,5 +29,5 @@ export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href
     youtube: { title: "YouTube", icon: "youtube", href: "https://youtube.com/@Rollygon" },
     sketchfab: { title: "Sketchfab", icon: "sketchfab", href: "https://sketchfab.com/Rollygon" },
     bluesky: { title: "Bluesky", icon: "bluesky", href: "https://bsky.app/profile/rollygon.com" },
-    email: { title: "Message me", icon: "send", href: "mailto:message@rollygon.com" },
+    email: { title: "Email me", icon: "send", href: "mailto:message@rollygon.com" },
 }

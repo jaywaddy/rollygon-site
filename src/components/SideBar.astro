@@ -13,14 +13,13 @@ interface Props extends HTML {
 const { headings, content, class: className } = Astro.props;
 ---
 
-<aside class:list={["layout-md w-[360px]", className]}>
+<aside class={`column-md ${className}`}>
     {
         headings.length > 1 && (
-            <div data-toc class="sticky top-32 flex flex-col self-start gap-8 w-full">
-                <TableOfContents {headings} compact />
+            <div data-toc id="table-of-contents" class="column-md">
+                <TableOfContents {headings} />
                 {
                     content.collection === "posts" && (
-                        <hr />
                         <ReadTimeIndicator {content} />
                     )
                 }
@@ -28,3 +27,14 @@ const { headings, content, class: className } = Astro.props;
         )
     }
 </aside>
+
+<style>
+    aside {
+        width: 100%;
+    }
+    
+    #table-of-contents {
+        position: sticky;
+        top: var(--space-24);
+    }
+</style>

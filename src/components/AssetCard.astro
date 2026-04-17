@@ -1,9 +1,8 @@
 ---
 import type { Collection } from '@/content/config';
 import { setImageSrc, setSlug } from '@/scripts/utilities';
-import Button from './ui/Button.astro';
-import Badge from './ui/Badge.astro';
-import CardStats from './ui/CardStats.astro';
+import Badge from '@/ui/Badge.astro';
+import CardStats from '@/ui/CardStats.astro';
 
 interface Props {
 	content: Collection;
@@ -39,9 +38,7 @@ function setBackgroundColor(color: string | undefined) {
         <CardStats {content} color="var(--neutral-95)"/>
     </section>
 </article>
-)
-    
-}
+)}
 
 <style>
     .asset-card {
@@ -75,7 +72,7 @@ function setBackgroundColor(color: string | undefined) {
 
         p {
             height: auto;
-            max-height: calc(1.5rem * 2);
+            max-height: calc(1.25rem * 2);
             overflow: hidden;
             text-overflow: ellipsis;
 
@@ -110,8 +107,6 @@ function setBackgroundColor(color: string | undefined) {
         opacity: 0.9;
         transform: scale(1);
         transition: var(--content-hover-speed) var(--content-hover-easing);
-
-        
 
         &::before {
             position: absolute;

@@ -2,6 +2,7 @@
 import Button from "@/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
+import SiteBanner from "../SiteBanner.astro";
 
 const currentPath = new URL(Astro.request.url).pathname;
 
@@ -39,16 +40,22 @@ function toggleActiveLink(label: string): "page" | "false" {
 			</li>
 		</ul>
 	</nav>
+	<div id="site-banner" class="center">
+		<strong>This site is currently only available on the desktop version!</strong>
+	</div>
 </header>
 
 <style>
+	#site-banner {
+		padding-block: var(--space-2);
+		background: var(--error-bg);
+	}
+
 	#header {
 		position: sticky;
-		display: flex;
 		inset: 0;
 		z-index: 10;
 
-		padding-block: var(--space-2);
 		border-bottom: var(--border);
 		background: var(--bg-light);
 
@@ -63,6 +70,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 		align-items: center;
 
 		width: 100%;
+		padding-block: var(--space-2);
 
 		ul li {
 			list-style: none;
