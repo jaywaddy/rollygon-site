@@ -1,17 +1,17 @@
 ---
-import { setStyles, Color, Pattern } from "@/scripts/interface";
-
-interface props {
+interface Props {
 	label: string;
-	bgColor: string;
 }
 
-const { label, bgColor } = Astro.props;
+const { label } = Astro.props;
 ---
 
-<div
-	class="flex background-marquee justify-center py-4 bg-yellow border-bottom"
-	style={setStyles("marquee", Color[bgColor], Pattern[6])}
->
-	<strong>{label}</strong>
+<div id="site-banner" class="center">
+	<strong class="text-(--neutral-5)">{label}</strong>
 </div>
+
+<style>
+	#site-banner {
+		
+	}
+</style>

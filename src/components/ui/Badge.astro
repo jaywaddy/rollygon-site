@@ -1,18 +1,56 @@
 ---
-import { type ColorName, Color, setStyles } from "@/scripts/interface";
+import Icon, { type ICON_NAME } from '@/ui/Icon.astro';
 
 interface Props {
 	label: string;
-	color?: ColorName;
+	style?: "primary" | "alt" | "error" | "default";
+	icon?: ICON_NAME;
+	iconRight?: boolean;
 }
 
-const { label, color = "neutral" } = Astro.props;
+const {
+	label,
+	style = "default",
+	icon = false,
+	iconRight = false,
+} = Astro.props;
+
+function setBackgroundColor (badgeStyle: typeof style): string {
+	if (badgeStyle === "primary") {
+		return "--badge-bg: var(--brand-bg); --outline: var(--brand-outline);";
+	} else if (badgeStyle === "alt") {
+		return "--badge-bg: var(--alt-bg-light); --text: var(--alt-text);";
+	} else if (badgeStyle === "error") {
+		return "--badge-bg: var(--error-bg); --outline: var(--error-outline);";
+	}
+
+	return "--badge-bg: var(--bg-light)";
+}
 ---
 
-<small
-	data-badge
-	class="border-sm bg-[var(--badge-color)] rounded-sm py-[2px] px-2 w-fit"
-	style={setStyles("badge", Color[color])}
+<strong
+	style={setBackgroundColor(style)}
+	class="badge row-xs center border"
 >
-	<strong class="text-nowrap">{label}</strong>
-</small>
+	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
+	<small>{label}</small>
+	{icon && iconRight && <Icon name={icon} size="16" strokeWidth="4" />}
+</strong>
+
+<style>
+	.badge {
+		max-width: fit-content;
+		max-height: fit-content;
+		padding-block: var(--space-1);
+		padding-inline: var(--space-3);
+
+		border-color: var(--outline);
+		border-radius: var(--radius-pill);
+		background: var(--badge-bg);
+
+		small {
+			line-height: var(--space-3);
+			text-wrap: nowrap;
+		}
+	}
+</style>

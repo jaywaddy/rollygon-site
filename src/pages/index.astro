@@ -1,54 +1,60 @@
 ---
-import AboutSection from "@/components/layout/AboutSection.astro";
-import Button from "@/components/ui/Button.astro";
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import Link from "@/ui/Link.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import AssetCard from "@/components/AssetCard.astro";
+
 ---
 
-<SiteLayout pageTitle="Home" color="blue" pattern="1">
-	<section class="layout-sm">
-		<h1>Welcome!</h1>
-		<div class="flex gap-16">
-			<div class="card-lg gap-4 h-fit">
-				<p>
-					Hi, I'm Jay and I make roller coasters out of polygons.
-					I also build tools that make coaster manufacturer specific tracks, supports,
-					etc. that help me create realistic coaster models.
-				</p>
-				<div class="flex gap-2">
-					<Button label="Get to know me" href="/about" />
-					<Button
-						class="max-sm:hidden"
-						label="Send a message"
-						href="mailto:message@rollygon.com"
-						icon="send"
-					/>
-				</div>
-			</div>
-			<AboutSection class="max-sm:hidden" photo />
-		</div>
-	</section>
-
-	<section class="layout-sm">
-		<h2 data-shadow>Featured model</h2>
-		<FeaturedContent content={FEATURED_MODEL} />
+<SiteLayout pageTitle="Home">
+	<h1>Make roller coasters out of polygons</h1>
+	<section class="column-md">
+		<SectionTitle
+			heading="Live 3D Model"
+			headingSize="h2"
+			subHeading="Click, drag, and scroll to interact"
+			badgeLabel="LATEST"
+			badgeStyle="primary"
+		/>
+		<FeaturedContent content={FEATURED_MODEL}/>
 		<Link label="View all models" href="/models" underline />
 	</section>
-	<section class="layout-sm">
-		<h2 data-shadow class="heading-md">Featured tools</h2>
-		<div class="layout-md mb-2">
-			{FEATURED_TOOLS.map((content) => <ContentCard {content} />)}
+	<section class="column-md">
+		<SectionTitle
+			heading="Tools for Modeling"
+			headingSize="h2"
+			subHeading="All tools used to build the model above"
+			badgeLabel="LATEST"
+			badgeStyle="primary"
+		/>
+		<div class="row-md">
+			{FEATURED_TOOLS.map((content) => <AssetCard {content} />)}
 		</div>
 		<Link data-shadow label="View all tools" href="/tools" underline />
 	</section>
-	<section class="layout-sm">
-		<h2 data-shadow class="heading-md">Featured posts</h2>
-		<div class="layout-md mb-2">
-			{FEATURED_POSTS.map((content) => <ContentCard {content} />)}
+	<section class="column-md">
+		<SectionTitle
+			heading="Posts and Guides"
+			headingSize="h2"
+			subHeading="Guides for tools and process documentation"
+			badgeLabel="FEATURED"
+			badgeStyle="alt"
+		/>
+		<div class="column-md">
+			{FEATURED_POSTS.map((content) => <ArticleCard {content} />)}
 		</div>
 		<Link data-shadow label="View all posts" href="/posts" underline />
 	</section>
 </SiteLayout>
+
+<style>
+	h1 {
+		font-size: 6rem;
+		line-height: 5.5rem;
+
+		padding-block: var(--space-32);
+	}
+</style>

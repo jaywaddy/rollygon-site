@@ -1,15 +1,15 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
 import FeaturedContent from "@/components/FeaturedContent.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import Pagination from "@/components/Pagination.astro";
-import SearchBar from "@/components/SearchBar.astro";
 
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 import { ALL_POSTS } from "@/content/config";
 import { FEATURED_POSTS } from "@/scripts/constants";
 import type { Page } from "astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
 
 interface Props {
 	page: Page<any>;
@@ -22,22 +22,33 @@ export async function getStaticPaths({ paginate }: any): Promise<any> {
 }
 
 const { page } = Astro.props;
+const isCurrentPage = page.url.current === "/posts";
 ---
 
-<SiteLayout pageTitle="Posts" color="neutral" pattern="3">
-	<div class="layout-sm">
-		<PageTitle heading="Posts" />
-		<SearchBar />
-	</div>
-	<div class="layout-sm">
-		<h2>Featured post</h2>
-		<FeaturedContent content={FEATURED_POSTS[0]} />
-	</div>
-	<div class="layout-sm">
-		<h2>All posts</h2>
-		<div class="layout-md w-full">
-			{page.data.map((content) => <ContentCard {content} />)}
+<SiteLayout pageTitle="Posts">
+	<PageTitle heading="Posts" />
+	{page.url.current === "/posts" && (
+		<section class="column-md">
+			<SectionTitle
+				heading="Latest Post"
+				badgeLabel="FEATURED"
+				badgeStyle="alt"
+			/>
+			<FeaturedContent content={FEATURED_POSTS[0]} />
+		</section>
+	)}
+	<section class="column-md">
+		<SectionTitle
+			heading={
+				isCurrentPage
+					? "All Posts"
+					: `Page ${page.currentPage} of ${page.lastPage}`
+			}
+		/>
+		<div class="column-md">
+			<Pagination {page} content={ALL_POSTS} />
+			{page.data.map((content) => <ArticleCard {content} />)}
+			<Pagination {page} content={ALL_POSTS} />
 		</div>
-	</div>
-	<Pagination {page} content={ALL_POSTS} />
+	</section>
 </SiteLayout>

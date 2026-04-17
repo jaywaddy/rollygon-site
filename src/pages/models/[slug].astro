@@ -1,6 +1,7 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
-import ModelCard from "@/components/ModelCard.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import AssetCard from "@/components/AssetCard.astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
@@ -34,22 +35,22 @@ function setModelIndex(): number {
 }
 ---
 
-<SiteLayout pageTitle={model.data.title} color="green" pattern="3">
+<SiteLayout pageTitle={model.data.title}>
 	<ContentPageLayout content={model} contentCollection={ALL_MODELS} {index}>
 		<Content />
 	</ContentPageLayout>
 	{
 		modelUpdates.length > 0 && (
-			<section class="layout-md">
-				<h2>Build updates</h2>
+			<section class="column-md">
+				<SectionTitle heading="Build Updates" badgeLabel="DEV LOGS" badgeStyle="alt" />
 				{modelUpdates.map((content) => (
-					<ContentCard {content} />
+					<ArticleCard {content} />
 				))}
 			</section>
 		)
 	}
-	<section class="layout-md">
-		<h2>Next model</h2>
-		<ModelCard model={ALL_MODELS[setModelIndex()]} />
+	<section class="column-md">
+		<SectionTitle heading="Next Model" badgeLabel="FEATURED" badgeStyle="alt" />
+		<AssetCard content={ALL_MODELS[setModelIndex()]} />
 	</section>
 </SiteLayout>

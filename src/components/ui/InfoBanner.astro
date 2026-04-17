@@ -1,8 +1,36 @@
 ---
 import Badge from "@/ui/Badge.astro";
+
+interface Props {
+	style? : "primary" | "alt" | "error" | "default";
+}
+
+const { style = "primary" } = Astro.props; 
 ---
 
-<a href="/about" class="flex items-center justify-between gap-2 border-lg shadow-lg p-2 bg-white">
-	<strong class="text-nowrap">@Rollygon</strong>
-	<Badge label="Commissions closed!" color="red" />
+<a href="/about" class="info-banner">
+	<strong class="label">@Rollygon</strong>
+	<Badge label="Commissions closed!" {style} />
 </a>
+
+<style>
+	.info-banner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-2);
+
+		padding: var(--space-2);border: var(--border);
+		border-radius: var(--radius-pill);
+		background: var(--bg-light);
+
+		.label {
+			margin-left: var(--space-2);
+		}
+
+		&:hover {
+			background: var(--bg-hover);
+			border-color: var(--outline-hover);
+		}
+	}
+</style>

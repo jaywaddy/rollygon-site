@@ -1,0 +1,9 @@
+{
+  "syntax": {
+    "keyword": "#569cd6",
+    "string": "#ce9178",
+    "comment": "#6a9955",
+    "function": "#dcdcaa",
+    "variable": "#ff0000"
+  }
+}

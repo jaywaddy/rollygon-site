@@ -2,21 +2,14 @@
 import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
-import { setStyles, Color, Pattern } from "@/scripts/interface";
-import type { ColorName } from "@/scripts/interface";
-import type { PatternName } from "@/scripts/interface";
-import SiteBanner from "@/components/SiteBanner.astro";
 import ContactForm from "@/components/layout/ContactForm.astro";
-import Button from "@/components/ui/Button.astro";
 
 interface Props {
 	pageTitle: string;
 	description?: string;
-	color?: ColorName;
-	pattern?: PatternName;
 }
 
-const { pageTitle, description = "Rollygon", color = "white", pattern = "none" } = Astro.props;
+const { pageTitle, description = "Rollygon"} = Astro.props;
 ---
 
 <!doctype html>
@@ -34,15 +27,39 @@ const { pageTitle, description = "Rollygon", color = "white", pattern = "none" }
 			rel="stylesheet"
 		/>
 		<title>Rollygon | {pageTitle}</title>
+		<script type="module" defer>
+			const systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
+			const themeToggleButton = document.querySelector("#theme-toggle-button");
+			const body = document.body;
+			const lightMode = systemTheme === true;
+			const defaultTheme = "dark";
+			let selectedTheme = localStorage.getItem("theme");
+
+			if (!selectedTheme) {
+				localStorage.setItem("theme", lightMode ? "light" : "dark");
+			}
+
+			body.setAttribute("data-theme", selectedTheme || defaultTheme);
+			themeToggleButton.addEventListener("click", toggleTheme);
+
+			function toggleTheme() {
+				selectedTheme = localStorage.getItem("theme");
+
+				if (selectedTheme === "light") {
+					localStorage.setItem("theme", "dark");
+					body.setAttribute("data-theme", "dark");
+					return;
+				}
+
+				localStorage.setItem("theme", "light");
+				body.setAttribute("data-theme", "light");
+			}
+		</script>
 	</head>
-	<body class="flex flex-col min-h-full overflow-x-clip bg-white">
+	<body data-theme>
 		<Header />
-		<SiteBanner label="Site under construction; pardon the dust!" bgColor="yellow" />
-		<main
-			class="background-marquee z-1"
-			style={setStyles("marquee", Color[color], Pattern[pattern])}
-		>
-			<section class="site-body wrapper layout-lg py-16">
+		<main>
+			<section id="site-body" class="wrapper column-lg">
 				<slot />
 				<ContactForm />
 			</section>

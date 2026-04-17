@@ -1,24 +1,22 @@
 ---
 import type { HTML } from "@/scripts/constants";
-import Link from "./Link.astro";
+import Link from "@/ui/Link.astro";
 import type { MarkdownHeading } from "astro";
 
 interface Props extends HTML {
 	headings: Array<MarkdownHeading>;
-	compact?: boolean;
 }
 
-const { headings, compact, class: className } = Astro.props;
+const { headings, class: className } = Astro.props;
 ---
 
-<nav class:list={["sticky layout-md", className]}>
-	{!compact && <hr />}
-	{compact ? <span class="heading-xs">Table of Contents</span> : <h2>Table of Contents</h2>}
-	<ol class="layout-sm list-decimal">
+<section class={`column-md ${className}`}>
+	<span>Table of Contents</span>
+	<ol class="column-sm list-decimal">
 		{
 			headings.map((heading) =>
 				heading.depth > 2 ? (
-					<ol class="list-disc">
+					<ol>
 						<li class="ml-8">
 							<Link label={heading.text} href={"#" + heading.slug} />
 						</li>
@@ -31,5 +29,26 @@ const { headings, compact, class: className } = Astro.props;
 			)
 		}
 	</ol>
-	{!compact && <hr />}
-</nav>
+</section>
+
+<style>
+	section {
+		padding-bottom: var(--space-4);
+		border-bottom: var(--border);
+
+		span:first-child {
+			width: fit-content;
+			padding-bottom: var(--space-2);
+			border-bottom: var(--border);
+			text-transform: uppercase;
+		}
+	}
+
+	ol > ol {
+		list-style: disc;
+	}
+
+	li, ol {
+		margin-left: var(--space-3);
+	}
+</style>

@@ -2,7 +2,7 @@
 import type { Page } from "astro";
 import Button from "@/ui/Button.astro";
 import type { Collection } from "@/content/config";
-import Link from "./ui/Link.astro";
+import Link from "@/ui/Link.astro";
 
 interface Props {
 	page: Page;
@@ -23,18 +23,14 @@ function makePageList(array: Array<number>): Array<number> {
 
 	array.push(currentPage);
 
-	if (prevPage <= 0) {
-		array.push(followingPage);
-	} else {
-		array.push(prevPage);
-	}
+	prevPage <= 0
+		? array.push(followingPage)
+		: array.push(prevPage);
 
-	if (nextPage <= lastPage) {
-		array.push(nextPage);
-	} else {
-		array.push(leadingPage);
-	}
-
+	nextPage <= lastPage
+		? array.push(nextPage)
+		: array.push(leadingPage);
+	
 	if (lastPage < 3 && currentPage < lastPage) {
 		array.sort();
 		array.pop();
@@ -51,19 +47,21 @@ function makePageList(array: Array<number>): Array<number> {
 
 {
 	lastPage > 1 && (
-		<nav aria-label="Content pages" class="card-sm flex-row items-center justify-between">
+		<div
+			aria-label="Content pages"
+			class="pagination border"
+		>
 			<Button
 				label="Prev"
 				icon="arrow-left"
-				iconLeft
-				disabled={url.prev === undefined && true}
+				disabled={url.prev === undefined}
 				href={prev || "/"}
-				responsive
+				small
 			/>
 			<ul class:list={["flex gap-2 items-center", "max-sm:hidden"]}>
 				{!pageList.includes(1) && (
 					<li>
-						<Button label="1" icon="none" href={first} primary={currentPage === 1} />
+						<Button label="1" icon="none" href={first} primary={currentPage === 1} small />
 					</li>
 				)}
 				{!pageList.includes(1) && pageList[0] - 1 > 1 && <li class="px-2">...</li>}
@@ -74,6 +72,7 @@ function makePageList(array: Array<number>): Array<number> {
 							icon="none"
 							href={`/${content[0].collection}/${pageNumber === 1 ? "" : pageNumber}`}
 							primary={currentPage === pageNumber}
+							small
 						/>
 					</li>
 				))}
@@ -87,11 +86,12 @@ function makePageList(array: Array<number>): Array<number> {
 							icon="none"
 							href={last}
 							primary={currentPage === lastPage}
+							small
 						/>
 					)}
 				</li>
 			</ul>
-			<ul class:list={["hidden", "max-sm:flex max-sm:gap-4"]}>
+			{/* <ul class:list={["hidden", "max-sm:flex max-sm:gap-4"]}>
 				<li>
 					<Link label="1" href={`/${content[0].collection}`} underline />
 				</li>
@@ -128,8 +128,29 @@ function makePageList(array: Array<number>): Array<number> {
 						underline
 					/>
 				</li>
-			</ul>
-			<Button label="Next" disabled={url.next === undefined && true} href={next} responsive />
-		</nav>
+			</ul> */}
+			<Button
+				label="Next"
+				disabled={url.next === undefined}
+				href={next}
+				icon="arrow-right"
+				iconRight
+				small
+			/>
+		</div>
 	)
 }
+
+<style>
+	.pagination {
+		ul {
+			display: flex;
+			align-items: baseline;
+			gap: var(--space-2);
+		}
+
+		li {
+			list-style: none;
+		}
+	}
+</style>

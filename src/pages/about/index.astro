@@ -8,51 +8,51 @@ import { formatDate } from "@/scripts/utilities";
 import { SOCIAL_LINK } from "@/scripts/constants";
 
 const { title, date } = aboutContent.frontmatter;
-const { gumroad, sketchfab, youtube, bluesky } = SOCIAL_LINK;
+const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
 ---
 
-<SiteLayout pageTitle={title} color="purple" pattern="5">
+<SiteLayout pageTitle={title}>
 	<PageTitle heading={title} />
-	<div class="flex gap-16">
-		<div class="layout-md w-full">
-			<div class="card-lg max-w-[75ch]">
-				<p>
-					My name is Jay and I make roller coasters out of
-					polygons. I also build tools that make coaster manufacturer specific tracks,
-					supports, etc. that help me create realistic coaster models.
-				</p>
-				<span>Social links:</span>
-				<div class="flex gap-2">
-					<Button
-						label={gumroad.title}
-						icon={gumroad.icon}
-						href={gumroad.href}
-						responsive
-					/>
-					<Button
-						label={sketchfab.title}
-						icon={sketchfab.icon}
-						href={sketchfab.href}
-						responsive
-					/>
-					<Button
-						label={youtube.title}
-						icon={youtube.icon}
-						href={youtube.href}
-						responsive
-					/>
-					<Button
-						label={bluesky.title}
-						icon={bluesky.icon}
-						href={bluesky.href}
-						responsive
-					/>
-				</div>
+	<div class="column-md">
+		<div class="about-section card column-md">
+			<p>
+				My name is Jay and I make roller coasters out of
+				polygons. I also build tools that make coaster manufacturer specific tracks,
+				supports, etc. that help me create realistic coaster models.
+			</p>
+			<span>Social links:</span>
+			<div class="row-sm">
+				<Button
+					label={gumroad.title}
+					icon={gumroad.icon}
+					href={gumroad.href}
+				/>
+				<Button
+					label={sketchfab.title}
+					icon={sketchfab.icon}
+					href={sketchfab.href}
+				/>
+				<Button
+					label={youtube.title}
+					icon={youtube.icon}
+					href={youtube.href}
+				/>
+				<Button
+					label={email.title}
+					icon={email.icon}
+					href={email.href}
+				/>
 			</div>
-			<small>Last update: {formatDate(date)}</small>
-			<article class="content layout-md">
-				<Content />
-			</article>
 		</div>
+		<small>Last update: {formatDate(date)}</small>
+		<article class="content column-md">
+			<Content />
+		</article>
 	</div>
 </SiteLayout>
+
+<style>
+	.about-section {
+		width: var(--content-width);
+	}
+</style>

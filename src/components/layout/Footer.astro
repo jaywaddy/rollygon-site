@@ -1,35 +1,16 @@
 ---
-import { ALL_MODELS, ALL_POSTS } from "@/content/config";
-import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
+import { ALL_MODELS, ALL_POSTS, ALL_TOOLS } from "@/content/config";
 import Link from "@/ui/Link.astro";
-import Badge from "@/ui/Badge.astro";
-import Button from "../ui/Button.astro";
-import SiteTitle from "../SiteTitle.astro";
-
-const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATURED_MODEL.slug);
+import SiteTitle from "@/components/SiteTitle.astro";
 ---
 
-<footer class="border-t-2">
-	<section
-		data-footer-banner
-		class:list={["wrapper flex justify-between py-16 border-b", "max-sm:flex-col max-sm:gap-8"]}
-	>
-		<SiteTitle class="max-sm:hidden" />
-		<Link class="hidden max-sm:block" label="@Rollygon" href="/" />
-		<ul class="w-[320px]">
-			<li><small class="uppercase">Socials</small></li>
-			<li class="flex flex-wrap gap-2">
-				<Button icon="gumroad" href="https://rollygon.gumroad.com/" />
-				<Button icon="sketchfab" href="https://sketchfab.com/Rollygon" />
-				<Button icon="youtube" href="https://youtube.com/@Rollygon" />
-				<Button icon="bluesky" href="https://bsky.app/profile/rollygon.com" />
-				<Button icon="send" href="mailto:message@rollgy.com" />
-			</li>
-		</ul>
-	</section>
-	<nav class="wrapper flex flex-wrap gap-16 py-16">
+<footer class="footer">
+	<div class="wrapper footer-header">
+		<SiteTitle />
+	</div>
+	<div class="footer-links wrapper">
 		<ul>
-			<li><small class="uppercase">Navigation</small></li>
+			<li><small>Navigation</small></li>
 			<li><Link label="Home" href="/" underline /></li>
 			<li><Link label="Models" href="/models" underline /></li>
 			<li><Link label="Tools" href="/tools" underline /></li>
@@ -37,50 +18,46 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 			<li><Link label="About" href="/about" underline /></li>
 		</ul>
 		<ul>
-			<li><small class="uppercase">Models</small></li>
-			<li>
-				<Link
-					label={FEATURED_MODEL.data.title}
-					href={`/models/${FEATURED_MODEL.slug}`}
-					underline
-				/>
-				{ALL_MODELS[0] === FEATURED_MODEL && <Badge label="NEW!" color="lime" />}
-			</li>
-			<li class="flex gap-2">
-				<Link
-					label={featuredModelList[0].data.title}
-					href={`/models/${featuredModelList[0].slug}`}
-					underline
-				/>
-				{ALL_MODELS[0] === featuredModelList[0] && <Badge label="NEW!" color="lime" />}
-			</li>
-			<li>
-				<Link
-					label={featuredModelList[1].data.title}
-					href={`/models/${featuredModelList[1].slug}`}
-					underline
-				/>
-				{ALL_MODELS[0] === featuredModelList[1] && <Badge label="NEW!" color="lime" />}
-			</li>
+			<li><small>Models</small></li>
+			{ALL_MODELS.map(model => (
+				<li>
+					<Link
+						label={model.data.title}
+						href={`/models/${model.slug}`}
+						underline
+					/>
+					{model === ALL_MODELS[0] && <span class="new">&#x1F7CC;</span>}
+				</li>
+			))}
 		</ul>
 		<ul>
-			<li><small class="uppercase">Tools</small></li>
-			{
-				FEATURED_TOOLS.map((tool) => (
-					<Link label={tool.data.title} href={`/tools/${tool.slug}`} underline />
-				))
-			}
+			<li><small>Tools</small></li>
+			{ALL_TOOLS.map(tool => (
+				<li>
+					<Link
+						label={tool.data.title}
+						href={`/tools/${tool.slug}`}
+						underline
+					/>
+					{tool === ALL_TOOLS[0] && <span class="new">&#x1F7CC;</span>}
+				</li>
+			))}
 		</ul>
 		<ul>
-			<li><small class="uppercase">Posts</small></li>
-			{
-				FEATURED_POSTS.map((post) => (
-					<Link label={post.data.title} href={`/posts/${post.slug}`} underline />
-				))
-			}
+			<li><small>Posts</small></li>
+			{ALL_POSTS.slice(0,10).map(post => (
+				<li>
+					<Link
+						label={post.data.title}
+						href={`/posts/${post.slug}`}
+						underline
+					/>
+					{post === ALL_POSTS[0] && <span class="new">&#x1F7CC;</span>}
+				</li>
+			))}
 		</ul>
-	</nav>
-	<div class="flex justify-center items-center py-4 bg-neutral-900 text-neutral-50">
+	</div>
+	<div class="copyright center">
 		<small>Copyright &copy;<span id="footer-date"></span> Rollygon, All rights reserved.</small>
 	</div>
 </footer>
@@ -88,22 +65,66 @@ const featuredModelList = [...ALL_MODELS].filter((model) => model.slug !== FEATU
 <script>
 	const footerDate = document.querySelector("#footer-date");
 
-	if (footerDate !== null) {
+	if (footerDate) {
 		footerDate.innerHTML = new Date().getFullYear().toString();
 	}
 </script>
 
 <style>
-	ul {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+	.footer { 
+		border-top: var(--border);
+		background: var(--bg-light);
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-2);
+
+			li {
+				display: flex;
+				gap: var(--space-2);
+
+				max-width: 32ch;
+				text-overflow: ellipsis;
+			}
+
+			& > li > small {
+				width: fit-content;
+				padding-block: var(--space-2);
+				margin-bottom: var(--space-2);
+				border-bottom: var(--border);
+
+				text-transform: uppercase;
+			}
+		}
 	}
 
-	[data-footer-banner]::after {
-		position: absolute;
-		overflow: hidden;
-		content: "";
-		inset: 0;
+	.footer-header {
+		display: flex;
+		justify-content: start;
+
+		padding-block: var(--space-16);
+		border-bottom: var(--border);
+	}
+
+	.footer-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-8);
+
+		padding-block: var(--space-16);
+	}
+
+	.new {
+		color: var(--green-50);
+	}
+
+	.copyright {
+		padding-block: var(--space-8);
+		background: var(--neutral-10);
+
+		small, span {
+			color: var(--neutral-90);
+		}
 	}
 </style>

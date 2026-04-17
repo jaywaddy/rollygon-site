@@ -10,13 +10,14 @@ interface Props {
 const { label, id, placeholder, value, required = false } = Astro.props;
 ---
 
-<label for={id} class="grid gap-2">
-	<small>{label}*</small>
+<label for={id} class="column-sm">
+	<small>{label}{required && "*"}</small>
 	<textarea
 		name="Message"
 		{id}
 		{placeholder}
 		{value}
-		class="border-sm bg-white px-3 py-2"
-		{required}></textarea>
+		{required}
+		class="input"
+	></textarea>
 </label>

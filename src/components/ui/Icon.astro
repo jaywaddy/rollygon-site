@@ -1,58 +1,65 @@
 ---
-// General Icons
-import ArrowLeftIcon from "@/icons/ArrowLeftIcon.astro";
-import ArrowRightIcon from "@/icons/ArrowRightIcon.astro";
-import DownloadIcon from "@/icons/DownloadIcon.astro";
-import DropDownIcon from "@/icons/DropDownIcon.astro";
-import ExternalLinkIcon from "@/icons/ExternalLinkIcon.astro";
-import ImageIcon from "@/icons/ImageIcon.astro";
-import LogoIcon from "@/icons/LogoIcon.astro";
-import Ngons from "@/icons/Ngons.astro";
-import Quads from "@/icons/Quads.astro";
-import SearchIcon from "@/icons/SearchIcon.astro";
-import SendIcon from "@/icons/SendIcon.astro";
-import Triangles from "@/icons/Triangles.astro";
-import UserIcon from "@/icons/UserIcon.astro";
-import Vertex from "@/icons/Vertex.astro";
+import { titleCase } from "@/scripts/utilities";
+
+// UI Icons
+import ArrowLeft from "@/icons/ui/ArrowLeft.astro";
+import ArrowRight from "@/icons/ui/ArrowRight.astro";
+import ArrowUpLeft from "@/icons/ui/ArrowUpLeft.astro";
+import Circle from "@/icons/ui/Circle.astro";
+import Download from "@/icons/ui/Download.astro";
+import DropDown from "@/icons/ui/DropDown.astro";
+import ExternalLink from "@/icons/ui/ExternalLink.astro";
+import Logo from "@/icons/ui/Logo.astro";
+import Search from "@/icons/ui/Search.astro";
+import Send from "@/icons/ui/Send.astro";
+import Square from "@/icons/ui/Square.astro";
+import ThemeToggle from "@/icons/ui/ThemeToggle.astro";
+import Triangle from "@/icons/ui/Triangle.astro";
 
 // Social Icons
-import GumroadIcon from "@/icons/GumroadIcon.astro";
-import YouTubeIcon from "@/icons/YouTubeIcon.astro";
-import Sketchfab from "@/icons/SketchfabIcon.astro";
-import BlueskyIcon from "@/icons/BlueskyIcon.astro";
+import Bluesky from "@/icons/ui/Bluesky.astro";
+import Gumroad from "@/icons/ui/Gumroad.astro";
+import Sketchfab from "@/icons/ui/Sketchfab.astro";
+import YouTube from "@/icons/ui/YouTube.astro";
 
 // Tool Icons
-import Array from "@/icons/Array.astro";
-import CurveDeform from "@/icons/CurveDeform.astro";
-import FixedCurveRadius from "@/icons/FixedCurveRadius.astro";
-import FloatSwitch from "@/icons/FloatSwitch.astro";
-import GeometrySwitch from "@/icons/GeometrySwitch.astro";
-import IntegerSwitch from "@/icons/IntegerSwitch.astro";
-import MoveToUnit from "@/icons/MoveToUnit.astro";
-import ObjectSwitch from "@/icons/ObjectSwitch.astro";
-import RotationSwitch from "@/icons/RotationSwitch.astro";
-import SelectEdgeLoops from "@/icons/SelectEdgeLoops.astro";
-import SupportGenerator from "@/icons/SupportGenerator.astro";
-import TrackGenerator from "@/icons/TrackGenerator.astro";
-import UtilityNodes from "@/icons/UtilityNodes.astro";
-import VectorSwitch from "@/icons/VectorSwitch.astro";
+import Array from "@/icons/assets/Array.astro";
+import CurveDeform from "@/icons/assets/CurveDeform.astro";
+import FixedCurveRadius from "@/icons/assets/FixedCurveRadius.astro";
+import FloatSwitch from "@/icons/assets/FloatSwitch.astro";
+import GeometrySwitch from "@/icons/assets/GeometrySwitch.astro";
+import IntegerSwitch from "@/icons/assets/IntegerSwitch.astro";
+import MoveToUnit from "@/icons/assets/MoveToUnit.astro";
+import ObjectSwitch from "@/icons/assets/ObjectSwitch.astro";
+import RotationSwitch from "@/icons/assets/RotationSwitch.astro";
+import SelectEdgeLoops from "@/icons/assets/SelectEdgeLoops.astro";
+import SupportGenerator from "@/icons/assets/SupportGenerator.astro";
+import TrackGenerator from "@/icons/assets/TrackGenerator.astro";
+import UtilityNodes from "@/icons/assets/UtilityNodes.astro";
+import VectorSwitch from "@/icons/assets/VectorSwitch.astro";
 
 export type ICON_NAME = (
 	| "none"
 	| "arrow-left"
 	| "arrow-right"
+	| "arrow-up-left"
 	| "download"
 	| "drop-down"
 	| "external-link"
-	| "image"
 	| "logo"
-	| "ngon"
-	| "quad"
+	| "logo-full"
+	| "square"
 	| "search"
 	| "send"
 	| "triangle"
-	| "user"
-	| "vertex"
+	| "theme-toggle"
+	| "circle"
+
+	| "bluesky"
+	| "gumroad"
+	| "sketchfab"
+	| "youtube"
+
 	| "array"
 	| "curve-deform"
 	| "fixed-curve-radius"
@@ -67,62 +74,73 @@ export type ICON_NAME = (
 	| "track-generator"
 	| "utility-nodes"
 	| "vector-switch"
-	| "bluesky"
-	| "gumroad"
-	| "sketchfab"
-	| "youtube"
 );
 
 interface Props {
 	name: ICON_NAME;
 	size?: string;
 	color?: string;
+	disabled?: boolean;
+	strokeWidth?: string;
 }
 
-export function matchIconNameType(iconName: any): ICON_NAME {
+export function matchNameType(iconName: any): ICON_NAME {
 	return iconName;
 }
 
-const { name, size = "16", color = "var(--color-black)" } = Astro.props;
+const {
+	name,
+	size = "20",
+	color = "var(--text)",
+	disabled = false,
+	strokeWidth = "3.5"
+} = Astro.props;
+
+function setColor(isDisabled: boolean): string {
+	if (isDisabled) {
+		return "var(--text-muted)";
+	}
+
+	return color;
+}
 ---
 
 <svg class="w-fit" width={size} height={size} viewBox="0 0 32 32" fill="none">
-	<title>{name}</title>
+	<title>{titleCase(name)}</title>
 
 	{name === "none" && undefined}
 
-	{name === "arrow-left" && <ArrowLeftIcon {color} />}
-	{name === "arrow-right" && <ArrowRightIcon {color} />}
-	{name === "download" && <DownloadIcon {color} />}
-	{name === "drop-down" && <DropDownIcon {color} />}
-	{name === "external-link" && <ExternalLinkIcon {color} />}
-	{name === "image" && <ImageIcon {color} />}
-	{name === "logo" && <LogoIcon {color} />}
-	{name === "ngon" && <Ngons {color} />}
-	{name === "quad" && <Quads {color} />}
-	{name === "search" && <SearchIcon {color} />}
-	{name === "send" && <SendIcon {color} />}
-	{name === "triangle" && <Triangles {color} />}
-	{name === "user" && <UserIcon {color} />}
-	{name === "vertex" && <Vertex {color} />}
+	{name === "arrow-left" && <ArrowLeft color={setColor(disabled)} {strokeWidth} />}
+	{name === "arrow-right" && <ArrowRight color={setColor(disabled)} {strokeWidth} />}
+	{name === "arrow-up-left" && <ArrowUpLeft color={setColor(disabled)} {strokeWidth} />}
+	{name === "download" && <Download color={setColor(disabled)} {strokeWidth} />}
+	{name === "drop-down" && <DropDown color={setColor(disabled)} {strokeWidth} />}
+	{name === "external-link" && <ExternalLink color={setColor(disabled)} {strokeWidth} />}
+	{name === "logo" && <Logo color={setColor(disabled)} />}
+	{name === "square" && <Square color={setColor(disabled)} {strokeWidth} />}
+	{name === "search" && <Search color={setColor(disabled)} />}
+	{name === "send" && <Send color={setColor(disabled)} {strokeWidth} />}
+	{name === "theme-toggle" && <ThemeToggle color={setColor(disabled)} {strokeWidth} />}
+	{name === "triangle" && <Triangle color={setColor(disabled)} {strokeWidth} />}
+	{name === "circle" && <Circle color={setColor(disabled)} {strokeWidth} />}
 
-	{name === "bluesky" && <BlueskyIcon {color} />}
-	{name === "gumroad" && <GumroadIcon {color} />}
-	{name === "sketchfab" && <Sketchfab {color} />}
-	{name === "youtube" && <YouTubeIcon {color} />}
+	{name === "bluesky" && <Bluesky color={setColor(disabled)} />}
+	{name === "gumroad" && <Gumroad color={setColor(disabled)} />}
+	{name === "sketchfab" && <Sketchfab color={setColor(disabled)} />}
+	{name === "youtube" && <YouTube color={setColor(disabled)} />}
 
-	{name === "array" && <Array {color} />}
-	{name === "curve-deform" && <CurveDeform {color} />}
-	{name === "fixed-curve-radius" && <FixedCurveRadius {color} />}
-	{name === "float-switch" && <FloatSwitch {color} />}
-	{name === "geometry-switch" && <GeometrySwitch {color} />}
-	{name === "integer-switch" && <IntegerSwitch {color} />}
-	{name === "move-to-unit" && <MoveToUnit {color} />}
-	{name === "object-switch" && <ObjectSwitch {color} />}
-	{name === "rotation-switch" && <RotationSwitch {color} />}
-	{name === "select-edge-loops" && <SelectEdgeLoops {color} />}
-	{name === "support-generator" && <SupportGenerator {color} />}
-	{name === "track-generator" && <TrackGenerator {color} />}
-	{name === "utility-nodes" && <UtilityNodes {color} />}
-	{name === "vector-switch" && <VectorSwitch {color} />}
+	{name === "array" && <Array color={setColor(disabled)} />}
+	{name === "curve-deform" && <CurveDeform color={setColor(disabled)} />}
+	{name === "fixed-curve-radius" && <FixedCurveRadius color={setColor(disabled)} />}
+	{name === "float-switch" && <FloatSwitch color={setColor(disabled)} />}
+	{name === "geometry-switch" && <GeometrySwitch color={setColor(disabled)} />}
+	{name === "integer-switch" && <IntegerSwitch color={setColor(disabled)} />}
+	{name === "move-to-unit" && <MoveToUnit color={setColor(disabled)} />}
+	{name === "object-switch" && <ObjectSwitch color={setColor(disabled)} />}
+	{name === "rotation-switch" && <RotationSwitch color={setColor(disabled)} />}
+	{name === "select-edge-loops" && <SelectEdgeLoops color={setColor(disabled)} />}
+	{name === "support-generator" && <SupportGenerator color={setColor(disabled)} />}
+	{name === "track-generator" && <TrackGenerator color={setColor(disabled)} />}
+	{name === "utility-nodes" && <UtilityNodes color={setColor(disabled)} />}
+	{name === "vector-switch" && <VectorSwitch color={setColor(disabled)} />}
 </svg>

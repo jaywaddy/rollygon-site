@@ -2,6 +2,7 @@
 import Button from "@/ui/Button.astro";
 import Link from "@/ui/Link.astro";
 import SiteTitle from "@/components/SiteTitle.astro";
+import SiteBanner from "../SiteBanner.astro";
 
 const currentPath = new URL(Astro.request.url).pathname;
 
@@ -14,16 +15,10 @@ function toggleActiveLink(label: string): "page" | "false" {
 }
 ---
 
-<header id="header" class:list={["bg-white border-bottom sticky top-0 z-10 py-6", "max-sm:py-4"]}>
-	<nav class="relative wrapper flex items-center justify-between">
+<header id="header">
+	<nav class="wrapper">
 		<SiteTitle />
-		<ul
-			id="site-navigation"
-			class:list={[
-				"flex items-center gap-8",
-				"max-sm:hidden max-sm:absolute max-sm:items-start max-sm:top-18 max-sm:right-3 max-sm:card-lg",
-			]}
-		>
+		<ul id="site-navigation">
 			<li>
 				<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
 			</li>
@@ -39,16 +34,52 @@ function toggleActiveLink(label: string): "page" | "false" {
 			<li>
 				<Link label="About" isActive={toggleActiveLink("/about")} />
 			</li>
-			<li class="max-sm:hidden">
-				<Button label="Get free tools" href="/tools" icon="download" primary />
+			<li class="row-sm">
+				<Button label="Get Tools" href="/tools" icon="download" primary />
+				<Button id="theme-toggle-button" label="Toggle Theme" icon="theme-toggle" type="toggle" iconOnly />
 			</li>
 		</ul>
-		<Button class:list={["hidden", "max-sm:flex"]} label="Menu" icon="none" type="toggle" />
 	</nav>
+	<div id="site-banner" class="center">
+		<strong>This site is currently only available on the desktop version!</strong>
+	</div>
 </header>
 
 <style>
-	#header:has(nav form label input:checked) #site-navigation {
+	#site-banner {
+		padding-block: var(--space-2);
+		background: var(--error-bg);
+	}
+
+	#header {
+		position: sticky;
+		inset: 0;
+		z-index: 10;
+
+		border-bottom: var(--border);
+		background: var(--bg-light);
+
+		/* &:has(#menu-toggle-button label input:checked) #site-navigation {
+			display: flex;
+		} */
+	}
+
+	nav {
 		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		width: 100%;
+		padding-block: var(--space-2);
+
+		ul li {
+			list-style: none;
+		}
+	}
+
+	#site-navigation {
+		display: flex;
+		align-items: center;
+		gap: var(--space-8);
 	}
 </style>

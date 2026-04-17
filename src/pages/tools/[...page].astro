@@ -1,13 +1,15 @@
 ---
-import ContentCard from "@/components/ContentCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import Pagination from "@/components/Pagination.astro";
-import SearchBar from "@/components/SearchBar.astro";
 
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 import { ALL_TOOLS } from "@/content/config";
 import type { Page } from "astro";
+import SectionTitle from "@/components/ui/SectionTitle.astro";
+import FeaturedContent from "@/components/FeaturedContent.astro";
+import AssetCard from "@/components/AssetCard.astro";
+import { findContent } from "@/scripts/utilities";
 
 interface Props {
 	page: Page<any>;
@@ -15,23 +17,38 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: any): Promise<any> {
 	return paginate(ALL_TOOLS, {
-		pageSize: 10,
+		pageSize: 9,
 	});
 }
 
 const { page } = Astro.props;
+const isCurrentPage = page.url.current === "/tools";
 ---
 
-<SiteLayout pageTitle="Tools" color="yellow" pattern="3">
-	<div class="layout-sm">
-		<PageTitle heading="Tools" />
-		<SearchBar />
-	</div>
-	<div class="layout-sm">
-		<h2>All tools</h2>
-		<div class="layout-md">
-			{page.data.map((content) => <ContentCard {content} />)}
+<SiteLayout pageTitle="Tools">
+	<PageTitle heading="Tools" />
+	{page.url.current === "/tools" && (
+		<section class="column-md">
+			<SectionTitle
+				heading="Most Downloaded Tool"
+				badgeLabel="FEATURED"
+				badgeStyle="alt"
+			/>
+			<FeaturedContent content={findContent(ALL_TOOLS, "bm-track-generator")} />
+		</section>
+	)}
+	<section class="column-md">
+		<SectionTitle
+			heading={
+				isCurrentPage
+					? "All Tools"
+					: `Page ${page.currentPage} of ${page.lastPage}`
+			}
+		/>
+		<div class="grid-md-3">
+			<Pagination {page} content={ALL_TOOLS} />
+			{page.data.map((content) => <AssetCard {content} />)}
+			<Pagination {page} content={ALL_TOOLS} />
 		</div>
-	</div>
-	<Pagination {page} content={ALL_TOOLS} />
+	</section>
 </SiteLayout>

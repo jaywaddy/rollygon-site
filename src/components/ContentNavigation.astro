@@ -8,56 +8,70 @@ interface Props {
 	index: number;
 }
 
-function setNextHref(): string {
-	if (index - 1 < 0) {
-		return contentCollection[0].slug;
-	}
 
-	return contentCollection[index - 1].slug;
+
+const { content, contentCollection, index } = Astro.props;
+const { pathname } = Astro.url;
+const { collection } = content;
+
+function setNextHref(): string {
+	return index - 1 < 0
+		? contentCollection[0].slug
+		: contentCollection[index - 1].slug;
 }
 
 function setPrevHref(): string {
 	const max = contentCollection.length - 1;
 
-	if (index + 1 >= max) {
-		return contentCollection[max].slug;
-	}
-
-	return contentCollection[index + 1].slug;
+	return index + 1 >= max
+		? contentCollection[max].slug
+		: contentCollection[index + 1].slug;
 }
 
 function setDisabled(type: "next" | "prev"): boolean {
-	if (Astro.url.pathname === `/${content.collection}/${setPrevHref()}` && type === "prev") {
+	if (pathname === `/${collection}/${setPrevHref()}` && type === "prev") {
 		return true;
 	}
 
-	if (Astro.url.pathname === `/${content.collection}/${setNextHref()}` && type === "next") {
+	if (pathname === `/${collection}/${setNextHref()}` && type === "next") {
 		return true;
 	}
 
 	return false;
 }
-
-const { content, contentCollection, index } = Astro.props;
 ---
 
-<nav class="card-sm flex-row justify-between">
+<div class="pagination border">
 	<Button
-		label={`All ${content.collection}`}
-		icon="arrow-left"
-		iconLeft
-		href={`/${content.collection}`}
+		label={`All ${collection}`}
+		href={`/${collection}`}
+		small
 	/>
-	<ul class="flex gap-2">
+	<ul class="row-md">
 		<li>
 			<Button
 				label="Prev"
 				icon="arrow-left"
-				iconLeft
-				href=`/${content.collection}/${setPrevHref()}`
+				href=`/${collection}/${setPrevHref()}`
 				disabled={setDisabled("prev")}
+				small
 			/>
 		</li>
-		<li><Button label="Next" href={setNextHref()} disabled={setDisabled("next")} /></li>
+		<li>
+			 <Button
+				label="Next"
+				icon="arrow-right"
+				href=`/${collection}/${setNextHref()}`
+				disabled={setDisabled("next")}
+				iconRight
+				small
+			/>
+		</li>
 	</ul>
-</nav>
+</div>
+
+<style>
+	li {
+		list-style: none;
+	}
+</style>
