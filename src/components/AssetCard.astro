@@ -9,7 +9,7 @@ interface Props {
     aspect?: "16/9" | "3/5";
 }
 
-const { content, aspect = "3/5" } = Astro.props;
+const { content, aspect = "16/9" } = Astro.props;
 const { title, description } = content.data;
 
 function setBackgroundColor(color: string | undefined) {
@@ -35,7 +35,7 @@ function setBackgroundColor(color: string | undefined) {
             <a href={setSlug(content)}><h3>{title}</h3></a>
             <p>{description}</p>
         </div>
-        <CardStats {content} color="var(--neutral-95)"/>
+        <CardStats class="card-stats" {content} color="var(--neutral-95)"/>
     </section>
 </article>
 )}
@@ -66,8 +66,8 @@ function setBackgroundColor(color: string | undefined) {
             z-index: 2;
         }
 
-        small, span {
-            opacity: 0.7;
+        .card-stats * {
+            opacity: 0.6;
         }
 
         p {
@@ -87,8 +87,8 @@ function setBackgroundColor(color: string | undefined) {
             position: absolute;
             inset: 0;
             backdrop-filter: blur(64px);
-            background: linear-gradient(rgba(0 0 0 /0), color-mix(in srgb, var(--bg-color), transparent 50%));
-            mask: linear-gradient(rgba(0 0 0 / 0) 30%, rgba(0 0 0 / 0.5) 40%, rgba(0 0 0 / 1) 70%);
+            background: linear-gradient(rgba(0 0 0 /0), color-mix(in srgb, var(--bg-color), transparent 40%));
+            mask: linear-gradient(rgba(0 0 0 / 0) 30%, rgba(0 0 0 / 0.3) 40%, rgba(0 0 0 / 0.6) 50%, rgba(0 0 0 / 1) 70%);
 
             z-index: 1;
             content: "";
@@ -107,11 +107,5 @@ function setBackgroundColor(color: string | undefined) {
         opacity: 0.9;
         transform: scale(1);
         transition: var(--content-hover-speed) var(--content-hover-easing);
-
-        &::before {
-            position: absolute;
-            content: "";
-            inset: 0;
-        }
     }
 </style>

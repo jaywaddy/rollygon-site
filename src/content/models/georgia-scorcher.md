@@ -11,8 +11,12 @@ modelStats:
   - 155.5k
   - 840
 tags:
-    - Coaster
-    - B&M
+  - Coaster
+  - B&M
+tools:
+  - bm-support-generator
+  - bm-track-generator
+  - utility-nodes
 ---
 
 📺 Watch the full [YouTube playlist](https://youtube.com/playlist?list=PLXwho03cbrPL2NzMZqlDJWXCOa5Y0iUqM&si=cmfwcLrkPK26A2iD) of me building this model live.

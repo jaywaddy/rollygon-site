@@ -47,7 +47,8 @@ const modelCollection = defineCollection({
         modelStats: z.array(z.any()),
         tags: z.array(z.string()),
         lastUpdated: z.optional(z.date()),
-        backgroundColor: z.optional(z.string())
+        backgroundColor: z.optional(z.string()),
+        tools: z.optional(z.array(z.string()))
     })
 });
 
@@ -85,6 +86,3 @@ export const ALL_CONTENT = [
 ];
 
 export const ALL_TAGS: Array<string> = [...new Set(ALL_CONTENT.map(content => content.data.tags).flat().sort())];
-
-
-// UI Refresh init test
