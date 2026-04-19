@@ -10,6 +10,7 @@ import type { Page } from "astro";
 import { FEATURED_MODEL } from "@/scripts/constants";
 import AssetCard from "@/components/AssetCard.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
+import { findContent } from "@/scripts/utilities";
 
 interface Props {
 	page: Page<any>;
@@ -30,12 +31,11 @@ const isCurrentPage = page.url.current === "/models";
 	{isCurrentPage && (
 		<section class="column-md">
 			<SectionTitle
-				heading="Live 3D Model"
-				subHeading="Click, drag, and scroll to interact"
+				heading="Artist's Pick"
 				badgeLabel="FEATURED"
 				badgeStyle="alt"
 			/>
-			<FeaturedContent content={FEATURED_MODEL} />
+			<AssetCard content={findContent(ALL_MODELS, "poltergeist")} />
 		</section>
 	)}
 	<section class="column-md">

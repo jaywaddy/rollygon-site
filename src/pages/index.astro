@@ -6,11 +6,10 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 import { FEATURED_MODEL, FEATURED_POSTS, FEATURED_TOOLS } from "@/scripts/constants";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import AssetCard from "@/components/AssetCard.astro";
-
 ---
 
 <SiteLayout pageTitle="Home">
-	<h1>Make roller coasters out of polygons</h1>
+	<h1>Make roller coasters out of polygons.</h1>
 	<section class="column-md">
 		<SectionTitle
 			heading="Live 3D Model"
@@ -27,8 +26,8 @@ import AssetCard from "@/components/AssetCard.astro";
 			heading="Tools for Modeling"
 			headingSize="h2"
 			subHeading="All tools used to build the model above"
-			badgeLabel="LATEST"
-			badgeStyle="primary"
+			badgeLabel="FEATURED"
+			badgeStyle="alt"
 		/>
 		<div class="row-md">
 			{FEATURED_TOOLS.map((content) => <AssetCard {content} />)}
@@ -40,8 +39,8 @@ import AssetCard from "@/components/AssetCard.astro";
 			heading="Posts and Guides"
 			headingSize="h2"
 			subHeading="Guides for tools and process documentation"
-			badgeLabel="FEATURED"
-			badgeStyle="alt"
+			badgeLabel="LATEST"
+			badgeStyle="primary"
 		/>
 		<div class="column-md">
 			{FEATURED_POSTS.map((content) => <ArticleCard {content} />)}

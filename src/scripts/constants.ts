@@ -12,17 +12,9 @@ export interface HTML {
 
 export const FEATURED_MODEL = findContent(ALL_MODELS, "the-dark-knight");
 
-export const FEATURED_TOOLS: Array<Collection> = [
-    ALL_TOOLS[0],
-    ALL_TOOLS[1],
-    ALL_TOOLS[2],
-];
+export const FEATURED_TOOLS: Array<Collection> = getFeaturedTools(FEATURED_MODEL) || ALL_TOOLS.slice(0, 3).reverse();
 
-export const FEATURED_POSTS: Array<Collection> = [
-    ALL_POSTS[0],
-    ALL_POSTS[1],
-    ALL_POSTS[2],
-];
+export const FEATURED_POSTS: Array<Collection> = ALL_POSTS.slice(0, 5);
 
 export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href: string}} = {
     gumroad: { title: "Gumroad", icon: "gumroad", href: "https://rollygon.gumroad.com/" },
@@ -31,3 +23,13 @@ export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href
     bluesky: { title: "Bluesky", icon: "bluesky", href: "https://bsky.app/profile/rollygon.com" },
     email: { title: "Email me", icon: "send", href: "mailto:message@rollygon.com" },
 }
+
+export function getFeaturedTools(model: Collection): Array<Collection> | null {
+    if (model.data.tools) {
+        return model.data.tools.map((tool: string) => findContent(ALL_TOOLS, tool));
+    }
+    
+    return null;
+}
+
+console.log(FEATURED_MODEL.data)

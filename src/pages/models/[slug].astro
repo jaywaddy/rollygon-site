@@ -5,6 +5,7 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { getFeaturedTools } from "@/scripts/constants";
 import { titleCase } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
@@ -39,16 +40,24 @@ function setModelIndex(): number {
 	<ContentPageLayout content={model} contentCollection={ALL_MODELS} {index}>
 		<Content />
 	</ContentPageLayout>
-	{
-		modelUpdates.length > 0 && (
-			<section class="column-md">
-				<SectionTitle heading="Build Updates" badgeLabel="DEV LOGS" badgeStyle="alt" />
-				{modelUpdates.map((content) => (
-					<ArticleCard {content} />
+	{model.data.tools && (
+		<section class="column-md">
+			<SectionTitle heading="Tools Used" badgeLabel="FEATURED" badgeStyle="alt" />
+			<div class="grid-md-3">
+				{getFeaturedTools(model)?.map((content) => (
+					<AssetCard {content} />
 				))}
-			</section>
-		)
-	}
+			</div>
+		</section>
+	)}
+	{modelUpdates.length > 0 && (
+		<section class="column-md">
+			<SectionTitle heading="Build Updates" badgeLabel="DEV LOGS" badgeStyle="alt" />
+			{modelUpdates.map((content) => (
+				<ArticleCard {content} />
+			))}
+		</section>
+	)}
 	<section class="column-md">
 		<SectionTitle heading="Next Model" badgeLabel="FEATURED" badgeStyle="alt" />
 		<AssetCard content={ALL_MODELS[setModelIndex()]} />

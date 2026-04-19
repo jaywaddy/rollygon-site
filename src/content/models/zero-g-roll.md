@@ -13,6 +13,10 @@ modelStats:
 tags:
   - Element
   - B&M
+tools:
+  - bm-support-generator
+  - bm-track-generator
+  - utility-nodes
 ---
 
 # **Hydra - Dorney Park**

@@ -14,6 +14,10 @@ tags:
   - Coaster
   - B&M
   - Batman
+tools:
+  - bm-support-generator
+  - bm-track-generator
+  - utility-nodes
 ---
 
 📺 Watch the full [YouTube playlist](https://www.youtube.com/playlist?list=PLXwho03cbrPIpFDewX2aVeYMJsTCfnsac) of me building this model live.

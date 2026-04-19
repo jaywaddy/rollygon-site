@@ -27,7 +27,7 @@ h1, h2, h3, p, a, li, strong, em, small, span, button, input, textarea {
 
 h1 {
     font-size: 3rem;
-    font-weight: var(--font-semibold);
+    font-weight: var(--font-bold);
     line-height: 3rem;
 }
 

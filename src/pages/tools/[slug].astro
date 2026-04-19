@@ -1,5 +1,6 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
+import AssetCard from "@/components/AssetCard.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
@@ -53,6 +54,6 @@ function setToolIndex(): number {
 			badgeLabel="FEATURED"
 			badgeStyle="alt"
 		/>
-		<ArticleCard content={ALL_TOOLS[setToolIndex()]} />
+		<AssetCard content={ALL_TOOLS[setToolIndex()]} />
 	</div>
 </SiteLayout>

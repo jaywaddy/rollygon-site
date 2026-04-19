@@ -41,7 +41,8 @@ const { title, modelID, videoEmbed, src } = Astro.props;
 			></iframe>
 		)}
 		{src && (
-			<Image {src} alt={title} width={1080} height={720} />
+			// <Image {src} alt={title} width={1600} height={900} />
+			<div class="bg-image" style={`--bg-image: url(${src});`}></div>
 		)}
 	</div>
 </div>
@@ -54,6 +55,7 @@ const { title, modelID, videoEmbed, src } = Astro.props;
 		justify-content: center;
 
 		aspect-ratio: 16/9;
+
 		padding: var(--space-4);
 		border: var(--border);
 		border-radius: var(--radius-lg);
@@ -77,5 +79,15 @@ const { title, modelID, videoEmbed, src } = Astro.props;
 			width: 100%;
 			height: 100%;
 		}
+	}
+
+	.bg-image {
+		width: 100%;
+		height: 100%;
+		
+		background: var(--bg-image);
+		background-size: cover;
+		background-position: center;
+		content: "";
 	}
 </style>

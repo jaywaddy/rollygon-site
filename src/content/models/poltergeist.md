@@ -11,8 +11,12 @@ modelStats:
   - 10.8k
   - 0
 tags:
-    - Coaster
-    - Premier
+  - Coaster
+  - Premier
+tools:
+  - premier-rides-support-generator
+  - premier-rides-track-generator
+  - utility-nodes
 ---
 
 📺 Watch the full [YouTube playlist](https://www.youtube.com/playlist?list=PLXwho03cbrPLFaitl5I0p5S0-5ZQ2pzWx) of me building this model live.
