@@ -49,8 +49,7 @@ a {
 
 .wrapper {
     margin-inline: auto;
-    padding-inline: var(--space-16);
-    max-width: 72rem;
+    width: clamp(280px, 95vw, 1080px);
 }
 
 .content-wrapper {

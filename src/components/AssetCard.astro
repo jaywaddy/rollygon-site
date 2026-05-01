@@ -6,10 +6,9 @@ import CardStats from '@/ui/CardStats.astro';
 
 interface Props {
 	content: Collection;
-    aspect?: "16/9" | "3/5";
 }
 
-const { content, aspect = "16/9" } = Astro.props;
+const { content } = Astro.props;
 const { title, description } = content.data;
 
 function setBackgroundColor(color: string | undefined) {
@@ -22,7 +21,6 @@ function setBackgroundColor(color: string | undefined) {
 {content.collection !== "posts" && (
     <article
     style={`
-        --aspect-ratio: ${aspect};
         --asset-card-bg: url(${setImageSrc(content)});
         ${setBackgroundColor(content.data.backgroundColor)}
     `}
@@ -30,7 +28,7 @@ function setBackgroundColor(color: string | undefined) {
 >
     <section class="asset-card-inner column-md border">
         <div class="bg-image"></div>
-        {content.collection === "tools" && <Badge label={content.data.price} />}
+        {content.collection === "tools" && <Badge label={content.data.price} style="primary" />}
         <div class="column-xs">
             <a href={setSlug(content)}><h3>{title}</h3></a>
             <p>{description}</p>

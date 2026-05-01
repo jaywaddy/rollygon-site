@@ -32,4 +32,4 @@ export function getFeaturedTools(model: Collection): Array<Collection> | null {
     return null;
 }
 
-console.log(FEATURED_MODEL.data)
+console.log(FEATURED_MODEL.data);
