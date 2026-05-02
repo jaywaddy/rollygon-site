@@ -7,7 +7,6 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 import { ALL_TOOLS } from "@/content/config";
 import type { Page } from "astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
-import FeaturedContent from "@/components/FeaturedContent.astro";
 import AssetCard from "@/components/AssetCard.astro";
 import { findContent } from "@/scripts/utilities";
 
@@ -34,7 +33,6 @@ const isCurrentPage = page.url.current === "/tools";
 				badgeLabel="FEATURED"
 				badgeStyle="alt"
 			/>
-			{/* <FeaturedContent content={findContent(ALL_TOOLS, "bm-track-generator")} /> */}
 			<AssetCard content={findContent(ALL_TOOLS, "bm-track-generator")} />
 		</section>
 	)}

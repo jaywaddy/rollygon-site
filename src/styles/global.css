@@ -47,6 +47,10 @@ a {
     text-decoration: none;
 }
 
+button {
+    line-height: 1.75rem;
+}
+
 .wrapper {
     margin-inline: auto;
     width: clamp(280px, 95vw, 1080px);

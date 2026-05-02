@@ -1,0 +1,10 @@
+---
+interface Props {
+	color: string;
+	strokeWidth: string;
+}
+
+const { color, strokeWidth } = Astro.props;
+---
+
+<path d="M6 16H26M6 8H26M6 24H26" stroke={color} stroke-width={strokeWidth} stroke-linecap="round" stroke-linejoin="round"/>

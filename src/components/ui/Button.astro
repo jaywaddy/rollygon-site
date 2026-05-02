@@ -60,18 +60,20 @@ function setButtonSize (isSmall: boolean | undefined): string {
 	`);
 }
 
-function setAspectRatio() {
-	if (label && label.length <= 1) {
+function setAspectRatio(hasLabel: string | undefined): string {
+	if (hasLabel && hasLabel.length <= 1) {
 		return "width: var(--padding-y);"
 	}
+
+	return "";
 }
 
 function setButtonStyles(): string {
-	return (
-		setBackgroundColor(primary)
-		+ setButtonSize(small)
-		+ setAspectRatio()
-	);
+	return (`
+		${setBackgroundColor(primary)}
+		${setButtonSize(small)}
+		${setAspectRatio(label)}
+	`);
 }
 ---
 
@@ -97,6 +99,7 @@ function setButtonStyles(): string {
 		data-disabled={disabled}
 		data-icon-only={iconOnly}
 		data-width={fullWidth}
+		data-is-checked="false"
 		title={label ? label : titleCase(icon)}						
 		class:list={[buttonStyles, className]}
 		style={setButtonStyles()}
@@ -166,7 +169,6 @@ function setButtonStyles(): string {
 	[data-icon-only="true"] {
 		padding-inline: var(--padding-icon);
 		aspect-ratio: 1/1;
-		width: calc(2rem + calc(var(--padding-y) * 2));
 	}
 
 	[data-width="true"] {

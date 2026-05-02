@@ -10,6 +10,7 @@ import Download from "@/icons/ui/Download.astro";
 import DropDown from "@/icons/ui/DropDown.astro";
 import ExternalLink from "@/icons/ui/ExternalLink.astro";
 import Logo from "@/icons/ui/Logo.astro";
+import Menu from "@/icons/ui/Menu.astro";
 import Search from "@/icons/ui/Search.astro";
 import Send from "@/icons/ui/Send.astro";
 import Square from "@/icons/ui/Square.astro";
@@ -47,6 +48,7 @@ export type ICON_NAME = (
 	| "drop-down"
 	| "external-link"
 	| "logo"
+	| "menu"
 	| "logo-full"
 	| "square"
 	| "search"
@@ -116,7 +118,8 @@ function setColor(isDisabled: boolean): string {
 	{name === "download" && <Download color={setColor(disabled)} {strokeWidth} />}
 	{name === "drop-down" && <DropDown color={setColor(disabled)} {strokeWidth} />}
 	{name === "external-link" && <ExternalLink color={setColor(disabled)} {strokeWidth} />}
-	{name === "logo" && <Logo color={setColor(disabled)} />}
+	{name === "menu" && <Menu color={setColor(disabled)} {strokeWidth} />}
+	{name === "menu" && <Menu color={setColor(disabled)} {strokeWidth} />}
 	{name === "square" && <Square color={setColor(disabled)} {strokeWidth} />}
 	{name === "search" && <Search color={setColor(disabled)} />}
 	{name === "send" && <Send color={setColor(disabled)} {strokeWidth} />}

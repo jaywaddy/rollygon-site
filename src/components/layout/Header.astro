@@ -13,69 +13,101 @@ function toggleActiveLink(label: string): "page" | "false" {
 ---
 
 <header id="header">
-	<nav class="wrapper">
+	<div id="site-navigation" class="wrapper">
 		<SiteTitle />
-		<ul id="site-navigation">
-			<li>
-				<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
-			</li>
-			<li>
-				<Link label="Models" isActive={toggleActiveLink("/models")} />
-			</li>
-			<li>
-				<Link label="Tools" isActive={toggleActiveLink("/tools")} />
-			</li>
-			<li>
-				<Link label="Posts" isActive={toggleActiveLink("/posts")} />
-			</li>
-			<li>
-				<Link label="About" isActive={toggleActiveLink("/about")} />
-			</li>
-			<li class="row-sm">
-				<Button label="Get Tools" href="/tools" icon="download" primary />
-				<Button id="theme-toggle-button" label="Toggle Theme" icon="theme-toggle" type="toggle" iconOnly />
-			</li>
-		</ul>
-	</nav>
-	<div id="site-banner" class="center">
-		<strong>This site is currently only available on the desktop version!</strong>
+		<nav>
+			<ul id="navigation-links">
+				<li>
+					<Link label="Home" href="/" isActive={toggleActiveLink("/")} />
+				</li>
+				<li>
+					<Link label="Models" isActive={toggleActiveLink("/models")} />
+				</li>
+				<li>
+					<Link label="Tools" isActive={toggleActiveLink("/tools")} />
+				</li>
+				<li>
+					<Link label="Posts" isActive={toggleActiveLink("/posts")} />
+				</li>
+				<li>
+					<Link label="About" isActive={toggleActiveLink("/about")} />
+				</li>
+				<li class="row-sm">
+					<Button label="Get Tools" href="/tools" icon="download" primary />
+					<Button id="theme-toggle-button" label="Toggle Theme" icon="theme-toggle" type="toggle" iconOnly />
+				</li>
+			</ul>
+			<ul id="display-menu-toggle">
+				<Button label="Menu" id="menu-toggle-button" type="toggle" icon="menu" />
+			</ul>
+		</nav>
 	</div>
 </header>
 
 <style>
-	#site-banner {
-		padding-block: var(--space-2);
-		background: var(--error-bg);
+	#navigation-links {
+		display: flex;
+		align-items: center;
+		gap: var(--space-8);
+
+		list-style: none;
+		width: fit-content;
 	}
 
 	#header {
 		position: sticky;
+		
 		inset: 0;
 		z-index: 10;
 
+		width: 100%;
+		padding-block: var(--space-2);
 		border-bottom: var(--border);
 		background: var(--bg-light);
 
-		/* &:has(#menu-toggle-button label input:checked) #site-navigation {
-			display: flex;
-		} */
+		container: header / inline-size;
 	}
 
-	nav {
+	#header:has([data-is-checked="true"]) #navigation-links {
+		position: absolute;
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+		inset: 0;
 
-		padding-block: var(--space-2);
+		width: 100%;
+		height: 100dvh;
+		background: var(--bg-light);
+		z-index: -1;
 
-		ul li {
-			list-style: none;
+		& li:last-child {
+			flex-direction: column;
+			align-items: center;
+			gap: var(--space-8);
 		}
+	}
+
+	body:has([data-is-checked="true"]) {
+		overflow: hidden;
 	}
 
 	#site-navigation {
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: var(--space-8);
+	}
+
+	#display-menu-toggle {
+		display: none;
+	}
+
+	@container header (max-width: 760px) {
+		#navigation-links {
+			display: none;
+		}
+
+		#display-menu-toggle {
+			display: block;
+		}
 	}
 </style>
