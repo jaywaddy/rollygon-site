@@ -93,7 +93,11 @@ function setButtonLabel(): string {
 					}
 				</div>
 			</div>
-			<!-- { headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> } -->
+			{ headings.length > 0 && (
+				<div data-layout="mobile">
+					<TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} />
+				</div>
+			) }
 			<article class="content column-md">
 				<slot />
 			</article>

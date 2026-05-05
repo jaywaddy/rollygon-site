@@ -6,9 +6,7 @@ import SiteTitle from "@/components/SiteTitle.astro";
 const currentPath = new URL(Astro.request.url).pathname;
 
 function toggleActiveLink(label: string): "page" | "false" {
-	if (currentPath === label) return "page";
-
-	return "false";
+	return currentPath === label ? "page" : "false";
 }
 ---
 
@@ -38,7 +36,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 				</li>
 			</ul>
 			<ul id="display-menu-toggle">
-				<Button label="Menu" id="menu-toggle-button" type="toggle" icon="menu" />
+				<Button label="Menu" id="menu-toggle-button" type="toggle" icon="menu" small iconOnly/>
 			</ul>
 		</nav>
 	</div>
@@ -56,7 +54,6 @@ function toggleActiveLink(label: string): "page" | "false" {
 
 	#header {
 		position: sticky;
-		
 		inset: 0;
 		z-index: 10;
 
@@ -69,13 +66,13 @@ function toggleActiveLink(label: string): "page" | "false" {
 	}
 
 	#header:has([data-is-checked="true"]) #navigation-links {
-		position: absolute;
+		position: fixed;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		inset: 0;
 
-		width: 100%;
+		width: 100dvw;
 		height: 100dvh;
 		background: var(--bg-light);
 		z-index: -1;
@@ -87,7 +84,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 		}
 	}
 
-	body:has([data-is-checked="true"]) {
+	html:has([data-is-checked="true"]) {
 		overflow: hidden;
 	}
 
@@ -101,7 +98,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 		display: none;
 	}
 
-	@container header (max-width: 760px) {
+	@container header (max-width: 860px) {
 		#navigation-links {
 			display: none;
 		}

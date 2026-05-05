@@ -1,16 +1,10 @@
 ---
 import Badge from "@/ui/Badge.astro";
-
-interface Props {
-	style? : "primary" | "alt" | "error" | "default";
-}
-
-const { style = "primary" } = Astro.props; 
 ---
 
 <a href="/about" class="info-banner">
 	<strong class="label">@Rollygon</strong>
-	<Badge label="Commissions closed!" {style} />
+	<Badge label="Commissions open!" style="primary" />
 </a>
 
 <style>

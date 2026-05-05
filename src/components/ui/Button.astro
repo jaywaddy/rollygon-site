@@ -48,24 +48,19 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 }
 
 function setButtonSize (isSmall: boolean | undefined): string {
-	if (isSmall) {
-		return (`
-			--button-radius: var(--radius-pill);
-			--padding-y: var(--space-2);
-		`);
-	}
+	const smallStyles = `
+		--button-radius: var(--radius-pill);
+		--padding-y: var(--space-2);
+	`;
+	const defaultStyles = `--button-radius: var(--radius-sm);`
 
-	return (`
-		--button-radius: var(--radius-sm);
-	`);
+	return isSmall ? smallStyles : defaultStyles;
 }
 
 function setAspectRatio(hasLabel: string | undefined): string {
-	if (hasLabel && hasLabel.length <= 1) {
-		return "width: var(--padding-y);"
-	}
-
-	return "";
+	const fixedWidth = "min-width: var(--padding-y);"
+	
+	return hasLabel && hasLabel.length <= 1 ? fixedWidth : "";
 }
 
 function setButtonStyles(): string {
@@ -177,11 +172,5 @@ function setButtonStyles(): string {
 
 	[data-width="false"] {
 		max-width: fit-content;
-	}
-
-	label:has(input[type="checkbox"]) {
-		input[type="checkbox"] {
-			display: none;
-		}
 	}
 </style>

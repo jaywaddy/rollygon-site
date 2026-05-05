@@ -1,6 +1,6 @@
 ---
 // import ImageWrapper from "@/ui/ImageWrapper.astro";
-import InfoBanner from "@/ui/InfoBanner.astro";
+import CommissionBanner from "@/ui/CommissionBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
 import { SOCIAL_LINK, type HTML } from "@/scripts/constants";
@@ -20,7 +20,7 @@ const { photo, class: className } = Astro.props;
 		>
 			{/* <ImageWrapper alt="About photo" size="md" shape="round" aspect="1/1" src="/about/about.png" /> */}
 			<div class="absolute top-2 -rotate-4">
-				<InfoBanner />
+				<CommissionBanner />
 			</div>
 			<p class="absolute card-sm bottom-2 rotate-2">
 				I'm Jay, and I make roller coasters out of polygons!
@@ -49,7 +49,7 @@ const { photo, class: className } = Astro.props;
 		</div>
 	) : (
 		<aside class={`column-md card ${className}`}>
-			<InfoBanner style="error"/>
+			<CommissionBanner />
 			<p class="">My name is Jay, and I make roller coasters out of polygons!</p>
 			<div class="row-sm">
 				<Button icon={SOCIAL_LINK.gumroad.icon} href={SOCIAL_LINK.gumroad.href} iconOnly />
