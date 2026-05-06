@@ -63,7 +63,7 @@ button {
 
 .wrapper {
     margin-inline: auto;
-    width: clamp(280px, 95vw, 1080px);
+    width: clamp(280px, 92vw, 1080px);
 }
 
 .content-wrapper {
@@ -224,8 +224,8 @@ button {
         }
 
         &::before {
-            content: var(--external-link);
             display: inline-block;
+            content: var(--external-link);
             margin-right: var(--space-1);
 
             transform: scale(0.8);
@@ -242,17 +242,17 @@ button {
 
     p, a, li, strong, em {
         font-family: "Libre Baskerville";
-        font-size: 1.125em;
+        font-size: 1.125rem;
         line-height: 2rem;
         color: var(--text);
     }
 
     ol, ul {
-        margin-top: -1em;
+        margin-top: -1rem;
     }
 
     li, ol {
-        margin-left: var(--space-3);
+        margin-left: var(--space-6);
     }
 
     li {
@@ -260,13 +260,13 @@ button {
     }
 
     code {
-        --padding-y: 0.25em;
+        --padding-y: 0.25rem;
         --padding-x: calc(var(--padding-y) * 2);
 
         padding-block: var(--padding-y);
         padding-inline: var(--padding-x);
-        border-radius: 0.325em;
-        font-size: 0.75em;
+        border-radius: 0.325rem;
+        font-size: 0.75rem;
         background-color: var(--bg-muted);
     }
 

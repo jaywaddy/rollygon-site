@@ -1,6 +1,7 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
 import AssetCard from "@/components/AssetCard.astro";
+import ContentNavigation from "@/components/ContentNavigation.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
@@ -38,16 +39,14 @@ function setToolIndex(): number {
 	<ContentPageLayout content={tool} contentCollection={ALL_TOOLS} {index}>
 		<Content />
 	</ContentPageLayout>
-	{
-		toolUpdates.length > 0 && (
-			<section class="column-md">
-				<h2>Build updates</h2>
-				{toolUpdates.map((content) => (
-					<ArticleCard {content} />
-				))}
-			</section>
-		)
-	}
+	{toolUpdates.length > 0 && (
+		<section class="column-md">
+			<h2>Build updates</h2>
+			{toolUpdates.map((content) => (
+				<ArticleCard {content} />
+			))}
+		</section>
+	)}
 	<div class="column-md">
 		<SectionTitle
 			heading="Next Tool"
@@ -55,5 +54,6 @@ function setToolIndex(): number {
 			badgeStyle="alt"
 		/>
 		<AssetCard content={ALL_TOOLS[setToolIndex()]} />
+		<ContentNavigation content={tool} contentCollection={ALL_TOOLS} {index} />
 	</div>
 </SiteLayout>

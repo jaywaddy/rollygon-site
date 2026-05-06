@@ -1,6 +1,7 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
 import AssetCard from "@/components/AssetCard.astro";
+import ContentNavigation from "@/components/ContentNavigation.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS, type Collection } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
@@ -61,5 +62,6 @@ function setModelIndex(): number {
 	<section class="column-md">
 		<SectionTitle heading="Next Model" badgeLabel="FEATURED" badgeStyle="alt" />
 		<AssetCard content={ALL_MODELS[setModelIndex()]} />
+		<ContentNavigation content={model} contentCollection={ALL_MODELS} {index} />
 	</section>
 </SiteLayout>

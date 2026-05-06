@@ -36,11 +36,28 @@ function toggleActiveLink(label: string): "page" | "false" {
 				</li>
 			</ul>
 			<ul id="display-menu-toggle">
-				<Button label="Menu" id="menu-toggle-button" type="toggle" icon="menu" small iconOnly/>
+				<Button label="Menu" id="menu-toggle-button" type="toggle" icon="menu" iconOnly/>
 			</ul>
 		</nav>
 	</div>
 </header>
+
+<script>
+	const header = document.querySelector("#header") as HTMLElement;
+	let prevScrollPos = window.pageYOffset;
+
+	window.addEventListener("scroll", toggleHeader);
+
+	function toggleHeader() {
+		let currentScrollPos = window.pageYOffset;
+
+		prevScrollPos > currentScrollPos
+			? header.style.top = "0"
+			: header.style.top = "-100px"
+		
+			prevScrollPos = currentScrollPos
+	}
+</script>
 
 <style>
 	#navigation-links {
@@ -63,6 +80,7 @@ function toggleActiveLink(label: string): "page" | "false" {
 		background: var(--bg-light);
 
 		container: header / inline-size;
+		transition: top 0.3s;
 	}
 
 	#header:has([data-is-checked="true"]) #navigation-links {
