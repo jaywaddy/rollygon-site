@@ -1,6 +1,7 @@
 ---
 import ArticleCard from "@/components/ArticleCard.astro";
 import AssetCard from "@/components/AssetCard.astro";
+import ContentNavigation from "@/components/ContentNavigation.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS } from "@/content/config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
@@ -41,30 +42,27 @@ function getModeSlug(): string  {
 	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
-	{
-		model.slug === getModeSlug() && (
-			<div class="column-md">
-				<SectionTitle
-					heading="View Model"
-					badgeLabel="RELATED"
-					badgeStyle="alt"
-				/>
-				<AssetCard content={findContent(ALL_MODELS, model.slug)} />
-			</div>
-		)
-	}
+	{model.slug === getModeSlug() && (
+		<div class="column-md">
+			<SectionTitle
+				heading="View Model"
+				badgeLabel="RELATED"
+				badgeStyle="alt"
+			/>
+			<AssetCard content={findContent(ALL_MODELS, model.slug)} />
+		</div>
+	)}
 	<div class="column-md">
 		<SectionTitle
 			heading="Next Post"
 			badgeLabel="FEATURED"
 			badgeStyle="alt"
 		/>
-		{
-			post.data.next ? (
-				<ArticleCard content={findContent(ALL_POSTS, post.data.next)} />
-			) : (
-				<ArticleCard content={ALL_POSTS[setPostIndex()]} />
-			)
-		}
+		{post.data.next ? (
+			<ArticleCard content={findContent(ALL_POSTS, post.data.next)} />
+		) : (
+			<ArticleCard content={ALL_POSTS[setPostIndex()]} />
+		)}
+		<ContentNavigation content={post} contentCollection={ALL_POSTS} {index} />
 	</div>
 </SiteLayout>

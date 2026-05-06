@@ -13,6 +13,12 @@ body {
 
 #site-body {
     margin-block: var(--space-16);
+
+    @media (max-width: 840px) {
+        .grid-md {
+            grid-template-columns: none;
+        }
+    }
 }
 
 @font-face {
@@ -47,13 +53,21 @@ a {
     text-decoration: none;
 }
 
+button {
+    line-height: 1.75rem;
+}
+
+[data-layout="mobile"] {
+    display: none !important;
+}
+
 .wrapper {
     margin-inline: auto;
-    width: clamp(280px, 95vw, 1080px);
+    width: clamp(280px, 92vw, 1080px);
 }
 
 .content-wrapper {
-    width: var(--content-width);
+    max-width: var(--content-width);
 }
 
 .center {
@@ -74,6 +88,12 @@ a {
 
 .row-md {
     display: flex;
+    gap: var(--space-4);
+}
+
+.asset-row-md {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--space-4);
 }
 
@@ -113,8 +133,8 @@ a {
 }
 
 .grid-md-3 {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--space-4);
 }
 
@@ -122,6 +142,8 @@ a {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
+
+    container: grid / inline-size;
 }
 
 .border {
@@ -153,33 +175,36 @@ a {
 .card-hover {
     transition: all var(--content-hover-speed) var(--content-hover-easing);
 
+    a:first-of-type::after {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        content: "";
+    }
+
     &:hover,
+    &:active,
     &:focus-visible,
     &:focus-within {
         outline: none;
         box-shadow: 0 0 0 var(--space-1) var(--green-50);
 
-        transform: scale(1.0125);
+        @media (width > 840px) {
+            transform: scale(1.0125);
+        
+            .bg-image {
+                opacity: 1.0;
+                transform: scale(1.05);
+            }
 
-        a:first-of-type::after {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            content: "";
-        }
+            &:focus-within {
+                border: none;
+                outline: none;
+            }
 
-        .content-card-image {
-            width: calc(100% - calc(var(--content-width) + var(--space-24)));
-        }
-
-        .bg-image {
-            opacity: 1.0;
-            transform: scale(1.05);
-        }
-
-        & :focus-within {
-            border: none;
-            outline: none;
+            .content-card-image {
+                min-width: 260px;
+            }
         }
     }
 }
@@ -189,7 +214,7 @@ a {
     flex-direction: column;
     gap: var(--space-8);
 
-    width: var(--content-width);
+    max-width: var(--content-width);
 
     a {
         text-decoration: underline;
@@ -199,8 +224,8 @@ a {
         }
 
         &::before {
-            content: var(--external-link);
             display: inline-block;
+            content: var(--external-link);
             margin-right: var(--space-1);
 
             transform: scale(0.8);
@@ -217,17 +242,17 @@ a {
 
     p, a, li, strong, em {
         font-family: "Libre Baskerville";
-        font-size: 1.125em;
+        font-size: 1.125rem;
         line-height: 2rem;
         color: var(--text);
     }
 
     ol, ul {
-        margin-top: -1em;
+        margin-top: -1rem;
     }
 
     li, ol {
-        margin-left: var(--space-3);
+        margin-left: var(--space-6);
     }
 
     li {
@@ -235,13 +260,13 @@ a {
     }
 
     code {
-        --padding-y: 0.25em;
+        --padding-y: 0.25rem;
         --padding-x: calc(var(--padding-y) * 2);
 
         padding-block: var(--padding-y);
         padding-inline: var(--padding-x);
-        border-radius: 0.325em;
-        font-size: 0.75em;
+        border-radius: 0.325rem;
+        font-size: 0.75rem;
         background-color: var(--bg-muted);
     }
 
@@ -254,7 +279,8 @@ a {
 
     .image-row p {
         display: flex;
-        gap: calc(var(--spacing) * 2)
+        flex-wrap: wrap;
+        gap: var(--space-2);
     }
 }
 
@@ -266,4 +292,14 @@ a {
     border: var(--border);
     border-radius: var(--radius-sm);
     background: var(--bg-light);
+}
+
+@media only screen and (max-width: 860px) {
+    [data-layout="desktop"] {
+        display: none !important;
+    }
+
+    [data-layout="mobile"] {
+        display: inherit !important;
+    }
 }

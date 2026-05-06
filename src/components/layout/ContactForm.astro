@@ -26,9 +26,14 @@ import AboutSection from "@/layout/AboutSection.astro";
 			<Input label="Email" type="email" id="contact-email" required />
 			<Textarea label="Message" id="contact-meessage" required />
 			<div class="row-sm">
-				<Button label="Send message" icon="send" type="submit" primary />
 				<Button
-					label="Email message@rollygon.com"
+					label="Send Message"
+					icon="send"
+					type="submit"
+					primary
+				/>
+				<Button
+					label="Send Email"
 					href="mailto:message@rollygon.com"
 					icon="send"
 				/>
@@ -41,8 +46,26 @@ import AboutSection from "@/layout/AboutSection.astro";
 <style>
 	#contact-form {
 		padding: var(--padding-lg);
-		background: var(--bg-light);
 		border: var(--border);
 		border-radius: var(--radius-lg);
+		background: var(--bg-light);
+	}
+
+	.row-sm {
+		flex-wrap: wrap;
+	}
+
+	@media only screen and (max-width: 860px) {
+		section {
+			flex-direction: column-reverse;
+			min-width: var(--mobile-card-width);
+		}
+	}
+
+	@media only screen and (max-width: 860px) {
+		section {
+			flex-direction: column-reverse;
+			min-width: var(--mobile-card-width);
+		}
 	}
 </style>

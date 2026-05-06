@@ -17,10 +17,15 @@ const { collection } = content;
 <article class="card card-hover row-md">
     <section class="column-md">
         {collection === "models" && (
-            <span class="row-sm">
+            <span class="row-sm" data-info="desktop">
                 <Badge label={`${content.data.modelStats[0]} Vertices`} icon="circle" />
                 <Badge label={`${content.data.modelStats[1]} Triangles`} icon="triangle" />
                 <Badge label={`${content.data.modelStats[2]} Quads`} icon="square" />
+            </span>
+            <span class="row-sm" data-info="mobile">
+                <Badge label={content.data.modelStats[0]} icon="circle" />
+                <Badge label={content.data.modelStats[1]} icon="triangle" />
+                <Badge label={content.data.modelStats[2]} icon="square" />
             </span>
         )}
         <div class="column-xs">
@@ -32,13 +37,10 @@ const { collection } = content;
     {collection === "posts" && content.data.image && (
         <ArticleCardImage {content} />
     )}
-    {collection === "models" && (
-        <ArticleCardImage {content} />
-    )}
 </article>
 
 <style>
-    article {
+    .card {
         position: relative;
 
         h3 {
@@ -47,10 +49,25 @@ const { collection } = content;
 
         h3, p {
             overflow: hidden;
-
-            max-width: var(--content-width);
-            white-space: nowrap;
             text-overflow: ellipsis;
+        }
+    }
+
+    section {
+        max-width: 420px;
+    }
+
+    [data-info="mobile"] {
+        display: none !important;
+    }
+
+    @media only screen and (max-width: 520px) {
+        [data-info="desktop"] {
+            display: none !important;
+        }
+
+        [data-info="mobile"] {
+            display: inherit !important;
         }
     }
 </style>

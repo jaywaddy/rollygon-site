@@ -42,6 +42,7 @@
     --space-2: calc(var(--spacing) * 2);
     --space-3: calc(var(--spacing) * 3);
     --space-4: calc(var(--spacing) * 4);
+    --space-6: calc(var(--spacing) * 6);
     --space-8: calc(var(--spacing) * 8);
     --space-16: calc(var(--spacing) * 16);
     --space-24: calc(var(--spacing) * 24);
@@ -60,9 +61,18 @@
     --font-semibold: 600;
     --font-bold: 800;
 
+    --mobile-site-width: 670px;
+    --mobile-card-width: 328px;
+
+    --asside-width: 28ch;
     --content-width: 64ch;
     --content-hover-speed: 300ms;
     --content-hover-easing: cubic-bezier(0, 0, 0, 1);
+
+    @media only screen and (max-width: 860px) {
+        --padding-sm: var(--space-1);
+        --padding-lg: var(--space-6);
+    }
 }
 
 [data-theme="dark"] {

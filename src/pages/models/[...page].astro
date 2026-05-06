@@ -43,7 +43,7 @@ const isCurrentPage = page.url.current === "/models";
 			heading={
 				isCurrentPage
 					? "All Models"
-					: `Page ${page.url.current.split("/").pop()}`
+					: `Page ${page.url.current.split("/").pop()} of ${page.lastPage}`
 			}
 		/>
 		<div class="grid-md">

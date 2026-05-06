@@ -26,21 +26,25 @@ const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
 					label={gumroad.title}
 					icon={gumroad.icon}
 					href={gumroad.href}
+					iconOnly
 				/>
 				<Button
 					label={sketchfab.title}
 					icon={sketchfab.icon}
 					href={sketchfab.href}
+					iconOnly
 				/>
 				<Button
 					label={youtube.title}
 					icon={youtube.icon}
 					href={youtube.href}
+					iconOnly
 				/>
 				<Button
 					label={email.title}
 					icon={email.icon}
 					href={email.href}
+					iconOnly
 				/>
 			</div>
 		</div>
@@ -53,6 +57,10 @@ const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
 
 <style>
 	.about-section {
-		width: var(--content-width);
+		max-width: var(--content-width);
+	}
+
+	.row-sm {
+		flex-wrap: wrap;
 	}
 </style>

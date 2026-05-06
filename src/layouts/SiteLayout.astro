@@ -30,6 +30,7 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 		<script type="module" defer>
 			const systemTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
 			const themeToggleButton = document.querySelector("#theme-toggle-button");
+			const menuToggleButton = document.querySelector("#menu-toggle-button");
 			const body = document.body;
 			const lightMode = systemTheme === true;
 			const defaultTheme = "dark";
@@ -41,6 +42,7 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 
 			body.setAttribute("data-theme", selectedTheme || defaultTheme);
 			themeToggleButton.addEventListener("click", toggleTheme);
+			menuToggleButton.addEventListener("click", toggleMenu);
 
 			function toggleTheme() {
 				selectedTheme = localStorage.getItem("theme");
@@ -53,6 +55,15 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 
 				localStorage.setItem("theme", "light");
 				body.setAttribute("data-theme", "light");
+			}
+
+			function toggleMenu() {
+				if (menuToggleButton.dataset.isChecked === "true") {
+					menuToggleButton.setAttribute("data-is-checked", "false");
+					return;
+				}
+
+				menuToggleButton.setAttribute("data-is-checked", "true");
 			}
 		</script>
 	</head>

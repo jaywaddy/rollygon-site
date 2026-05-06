@@ -15,6 +15,7 @@ interface Props extends HTML {
 	fullWidth?: boolean;
 	primary?: boolean;
 	small?: boolean;
+	dataLayout?: "desktop" | "mobile";
 }
 
 const {
@@ -29,10 +30,12 @@ const {
 	fullWidth = false,
 	primary,
 	small,
+	dataLayout,
 	class: className,
 } = Astro.props;
 
 const buttonStyles = "button row-xs center";
+const isSingular = label?.length === 1 || false;
 
 function setBackgroundColor (isPrimary: boolean | undefined): string {
 	if (isPrimary) {
@@ -47,31 +50,17 @@ function setBackgroundColor (isPrimary: boolean | undefined): string {
 	return "--button-bg: var(--bg-light);";
 }
 
-function setButtonSize (isSmall: boolean | undefined): string {
-	if (isSmall) {
-		return (`
-			--button-radius: var(--radius-pill);
-			--padding-y: var(--space-2);
-		`);
-	}
-
-	return (`
-		--button-radius: var(--radius-sm);
-	`);
-}
-
-function setAspectRatio() {
-	if (label && label.length <= 1) {
-		return "width: var(--padding-y);"
-	}
+function setAspectRatio(hasLabel: string | undefined): string {
+	const fixedWidth = "min-width: var(--padding-y);"
+	
+	return hasLabel && hasLabel.length <= 1 ? fixedWidth : "";
 }
 
 function setButtonStyles(): string {
-	return (
-		setBackgroundColor(primary)
-		+ setButtonSize(small)
-		+ setAspectRatio()
-	);
+	return (`
+		${setBackgroundColor(primary)}
+		${setAspectRatio(label)}
+	`);
 }
 ---
 
@@ -81,6 +70,9 @@ function setButtonStyles(): string {
 		data-disabled={disabled}
 		data-icon-only={iconOnly}
 		data-width={fullWidth}
+		data-layout={dataLayout}
+		data-is-small={small || false}
+		data-is-singular={isSingular}
 		{type}
 		title={label}
 		class:list={[buttonStyles, className]}
@@ -97,6 +89,10 @@ function setButtonStyles(): string {
 		data-disabled={disabled}
 		data-icon-only={iconOnly}
 		data-width={fullWidth}
+		data-is-checked="false"
+		data-layout={dataLayout}
+		data-is-small={small || false}
+		data-is-singular={isSingular}
 		title={label ? label : titleCase(icon)}						
 		class:list={[buttonStyles, className]}
 		style={setButtonStyles()}
@@ -114,12 +110,15 @@ function setButtonStyles(): string {
 			data-disabled={disabled}
 			data-icon-only={iconOnly}
 			data-width={fullWidth}
+			data-layout={dataLayout}
+			data-is-small={small || false}
+			data-is-singular={isSingular}
 			title={label ? label : titleCase(icon)}
 			class:list={[buttonStyles, className]}			
 			style={setButtonStyles()}
 		>
 			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
-			{label && !iconOnly && label}
+			{label && !iconOnly && <span>{label}</span>}
 			{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 		</a>
 	)
@@ -127,14 +126,19 @@ function setButtonStyles(): string {
 
 <style>
 	.button {
+		--button-radius: var(--radius-sm);
 		--padding-y: var(--space-3);
 		--padding-x: calc(var(--padding-y) * 2);
 		--padding-icon: calc(var(--padding-y) + var(--space-1));
 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		font-weight: var(--font-semibold);
 		text-wrap: nowrap;
 
-		min-width: 2.5rem;
+		min-width: fit-content;
 		padding: var(--padding-y) var(--padding-x);
 		border-radius: var(--button-radius);
 		border: var(--border);
@@ -166,20 +170,38 @@ function setButtonStyles(): string {
 	[data-icon-only="true"] {
 		padding-inline: var(--padding-icon);
 		aspect-ratio: 1/1;
-		width: calc(2rem + calc(var(--padding-y) * 2));
 	}
 
 	[data-width="true"] {
-		width: 100%;
+		min-width: 100%;
+
+		svg {
+			max-width: fit-content;
+		}
 	}
 
 	[data-width="false"] {
 		max-width: fit-content;
 	}
 
-	label:has(input[type="checkbox"]) {
-		input[type="checkbox"] {
-			display: none;
-		}
+	[data-is-small="false"] {
+		height: 54px;
+	}
+
+	[data-is-small="true"] {
+		height: 42px;
+		padding: var(--space-2);
+		border-radius: var(--radius-pill);
+	}
+
+	[data-is-small="true"]:has(span) {
+		padding-inline: var(--space-4);
+	}
+
+	[data-is-singular="true"] {
+		padding: 0;
+		border-radius: var(--radius-pill);
+		height: 42px;
+		aspect-ratio: 1/1;
 	}
 </style>

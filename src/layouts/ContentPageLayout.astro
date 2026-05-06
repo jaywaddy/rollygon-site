@@ -48,7 +48,7 @@ function setButtonLabel(): string {
 	}
 	<div class="row-lg">
 		<section class="column-lg">
-			<div class="column-md">
+			<div class="column-md content-wrapper">
 				<h1>{title}</h1>
 				<p>{description}</p>
 				<div class="column-md">
@@ -93,17 +93,15 @@ function setButtonLabel(): string {
 					}
 				</div>
 			</div>
-			<!-- { headings.length > 0 && <TableOfContents class:list={["hidden", "max-sm:flex"]} {headings} /> } -->
-			<article class="content column-md">
+			{headings.length > 0 && (
+				<div data-layout="mobile">
+					<TableOfContents {headings} />
+				</div>
+			)}
+			<article class="content">
 				<slot />
 			</article>
 		</section>
-		<SideBar {headings} {content} />
+		{headings && <SideBar {headings} {content} />}
 	</div>
 </div>
-
-<style>
-	section {
-		max-width: var(--content-width);
-	}
-</style>

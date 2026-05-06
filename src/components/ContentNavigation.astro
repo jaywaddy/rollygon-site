@@ -47,24 +47,45 @@ function setDisabled(type: "next" | "prev"): boolean {
 		href={`/${collection}`}
 		small
 	/>
-	<ul class="row-md">
+	<ul class="row-sm">
 		<li>
 			<Button
 				label="Prev"
 				icon="arrow-left"
 				href=`/${collection}/${setPrevHref()}`
 				disabled={setDisabled("prev")}
+				dataLayout="desktop"
 				small
+			/>
+			<Button
+				label="Prev"
+				icon="arrow-left"
+				href=`/${collection}/${setPrevHref()}`
+				disabled={setDisabled("prev")}
+				dataLayout="mobile"
+				small
+				iconOnly
 			/>
 		</li>
 		<li>
-			 <Button
+			<Button
 				label="Next"
 				icon="arrow-right"
 				href=`/${collection}/${setNextHref()}`
 				disabled={setDisabled("next")}
+				dataLayout="desktop"
 				iconRight
 				small
+			/>
+			<Button
+				label="Next"
+				icon="arrow-right"
+				href=`/${collection}/${setNextHref()}`
+				disabled={setDisabled("next")}
+				dataLayout="mobile"
+				iconRight
+				small
+				iconOnly
 			/>
 		</li>
 	</ul>
@@ -72,6 +93,7 @@ function setDisabled(type: "next" | "prev"): boolean {
 
 <style>
 	li {
+		display: flex;
 		list-style: none;
 	}
 </style>
