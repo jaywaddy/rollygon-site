@@ -57,9 +57,12 @@
     --radius-lg: calc(var(--radius-sm) + var(--padding-lg));
     --radius-pill: 100vw;
 
+    --font-primary: "Outfit";
+    --font-secondary: "Libre Baskerville";
     --font-regular: 400;
     --font-semibold: 600;
     --font-bold: 800;
+
 
     --mobile-site-width: 670px;
     --mobile-card-width: 328px;
@@ -80,6 +83,7 @@
 
     --text: var(--neutral-95);
     --text-muted: var(--neutral-60);
+    --text-emphasis: var(--green-70);
 
     --outline: var(--neutral-30);
     --outline-hover: var(--neutral-50);
@@ -121,6 +125,7 @@
 
     --text: var(--neutral-5);
     --text-muted: var(--neutral-40);
+    --text-emphasis: var(--green-30);
 
     --outline: var(--neutral-70);
     --outline-hover: var(--neutral-60);

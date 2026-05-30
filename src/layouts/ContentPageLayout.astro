@@ -3,7 +3,7 @@ import ContentNavigation from "@/components/ContentNavigation.astro";
 import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
 
-import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
+import { calcReadTime, formatDate, setImageSrc, setBannerImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
@@ -19,12 +19,12 @@ const { title, description, postDate, tags, lastUpdated } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
 
-function setButtonLabel(): string {
+function setButtonLabel(price: string): string {
 	if (collection === "tools" && content.data.price === "$0+") {
-		return "Download"
+		return "Download tool"
 	}
 
-	return "Buy";
+	return `Buy tool`
 }
 ---
 
@@ -41,7 +41,7 @@ function setButtonLabel(): string {
 				{content.collection === "posts" && content.data.embed ? (
 					<AssetPoster title={title} videoEmbed={content.data.embed} />
 				) : (
-					<AssetPoster title={title} src={setImageSrc(content)} />
+					<AssetPoster title={title} src={setBannerImageSrc(content)} banner />
 				)}
 			</div>
 		)
@@ -76,7 +76,12 @@ function setButtonLabel(): string {
 								<span>&bullet;</span>
 								<strong>{content.data.version}</strong>
 							</small>
-							<Button label={`${setButtonLabel()} tool`} icon="download" href={content.data.href} primary />
+							<Button
+								label={`${setButtonLabel(content.data.price)}`}
+								price={content.data.price}
+								icon="download"
+								href={content.data.href}
+								primary />
 						)
 					}
 					{

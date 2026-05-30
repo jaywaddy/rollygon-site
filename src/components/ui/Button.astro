@@ -16,6 +16,7 @@ interface Props extends HTML {
 	primary?: boolean;
 	small?: boolean;
 	dataLayout?: "desktop" | "mobile";
+	price?: string;
 }
 
 const {
@@ -32,6 +33,7 @@ const {
 	small,
 	dataLayout,
 	class: className,
+	price = null
 } = Astro.props;
 
 const buttonStyles = "button row-xs center";
@@ -119,6 +121,7 @@ function setButtonStyles(): string {
 		>
 			{!iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 			{label && !iconOnly && <span>{label}</span>}
+			{price && <span class="price">{price}</span>}
 			{iconRight && icon !== "none" && <Icon name={icon} {disabled} />}
 		</a>
 	)
@@ -149,8 +152,19 @@ function setButtonStyles(): string {
 
 		transition: all 0.1s;
 
+		.price {
+			margin-left: var(--space-2);
+			padding-left: var(--space-2);
+			border-left: var(--border);
+			border-color: var(--outline);
+		}
+
 		&:hover {
 			background: var(--bg-hover);
+			border-color: var(--outline-hover);
+		}
+
+		&:hover .price {
 			border-color: var(--outline-hover);
 		}
 

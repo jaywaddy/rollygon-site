@@ -6,12 +6,16 @@ interface Props {
 	modelID?: string;
 	videoEmbed?: string;
 	src?: string;
+	banner?: boolean;
 }
 
-const { title, modelID, videoEmbed, src } = Astro.props;
+const { title, modelID, videoEmbed, src, banner = false } = Astro.props;
 ---
 
-<div class="showcase-outer max-sm:aspect-10/15">
+<div
+	style=`--aspect-ratio: ${banner ? "16/5" : "16/9"};`
+	class="showcase-outer max-sm:aspect-10/15"
+>
 	<span>Loading...</span>
 	<div class="showcase-inner max-sm:inset-0">
 		{ modelID && (
@@ -54,7 +58,7 @@ const { title, modelID, videoEmbed, src } = Astro.props;
 		align-items: center;
 		justify-content: center;
 
-		aspect-ratio: 16/9;
+		aspect-ratio: var(--aspect-ratio);
 
 		padding: var(--space-4);
 		border: var(--border);

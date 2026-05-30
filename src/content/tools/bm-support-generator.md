@@ -1,59 +1,102 @@
 ---
 title: B&M Support Generator
-version: v1.1
+version: v33
 postDate: 2025-08-25
-lastUpdated: 2025-11-03
+lastUpdated: 2026-05-29
 icon: support-generator
-description: Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
+description: A Blender 5.1 geometry node group that builds B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/bm_support_generator
-price: $0+
-size: 137.0 MB
+price: $0-$20
+size: 70.6 MB
 tags:
   - Blender
   - B&M
   - Support Gen
 ---
-Blender 4.5.2 geometry node group that build B&M styled supports. This node group is asset ready, and can be linked directly into any `.blend` file. For best results, make sure supports are generated from bézier curves with poly handles.
 
-## New for Update 1.1
+![Model Demo](/images/tools/bm-support-generator/model-demo.png)
 
-- Gizmos
-- Improved flanges
-- Improved footers
-- Improved mounting plates
+**Included in download:**
+- Demo model _(Full Version)_
+- _RG-B&M_Support_Generator_v33.blend_ file
+- _RG-Utility_Nodes_v09.blend_ file
+- Support Textures _(Full Version)_
+- Support UV Map _(Full Version)_
 
-## Gizmos
+| Features                                      | Prototype Version | Full Version |
+| --------------------------------------------- | ----------------- | ------------ |
+| Choose Track Connector Styles                 | ✅                | ✅           |
+| Choose Footer Styles                          | ✅                | ✅           |
+| Edit Support Properties using _Gizmos_        | ❌                | ✅           |
+| Edit Multiple Support Beams as One (1) Frame  | ❌                | ✅           |
+| Add Textures to Supports                      | ❌                | ✅           |
 
-With this update, gizmos allow you to more dymanically created supports and adjust them freely! In previous versions, supports were modeled and intended to never be changed. Now, it's possible to both create and adjust suports easily as you build your coaster models.
+## Pick Support Beam Size
+Adjust the resolution and radius of each support beam. This will dynamically re-size track connectors, flanges, and footers.
 
-### Flanges
+>**Full Version:**
+>![Radius Demo](/images/tools/bm-support-generator/radius-demo.gif)
+> Edit the radius of multiple support beams at once. Toggle between "Individual" and "All" Radius Types. "Individual" allows changing the radius of multiple support beams within one (1) support object. "All" sets every support beam radius to the same value.
+> 
+>Slide the yellow box gizmo to re-size a support radius.
 
-Up to 5 flanges can now be positioned on supports by sliding the red arrow gizmo on each flange to the desired placement.
+## Position Flanges
+Up to 5 flanges can be positioned on each support beam. Each support beam is able to be re-positioned while maintaining the flange position.
 
-![Figure 1](/images/tools/bm-support-generator/figure-01.png)
+>**Full Version:**
+>![Flange Demo](/images/tools/bm-support-generator/flange-demo.gif)
+>Position flanges by sliding the yellow arrow gizmo along the support beam's Z-axis.
 
-This makes it so supports be re-positioned without having to also re-position flanges as well.
+## Toggle Footers
+Footers are positioned on the last point of the support beam. There are options to manually position, rotate, and scale footers if needed.
 
-![Figure 2](/images/tools/bm-support-generator/figure-02.gif)
+>**Full Version:**
+>![Footer Demo](/images/tools/bm-support-generator/footer-demo.gif)
+>Position, rotate, and scale footers by utilizing the appropriate gizmos.
 
-### Footers
+## Choose Track Connector Styles
+Track connectors are placed on the first point of the support beam. There are multiple connector styles that can be toggled through.
 
-Each footer is now positioned directly on the last point of the suppoort curve. This greately reduces the need for adjusting the footer's X and Y-positions.
+>**Full Version:**
+>![Track Connector Demo](/images/tools/bm-support-generator/track-connector-demo.gif)
+>Rotate track connectors with the blue rotation gizmo along the support beam's Z-axis.
 
-![Figure 3](/images/tools/bm-support-generator/figure-03.gif)
-
-You still *can* manually position the footers, but won't be required to nearly as frequently. To do this, slide the green and red arrow gizmos on the footer. There is also footer rotation&mdash;which is more commonly used&mdash;by rotating the blue circle gizmo on the footer.
-
-### Mounting Plates
-
-In this update, mounting plates are now positioned on the first point of the support curve. This makes placement much more precise and less of a guessing game.
-
-![Figure 4](/images/tools/bm-support-generator/figure-04.png)
+## Style Support Beams (Beta)
+>**Full Version:**
+>![Support Style Demo](/images/tools/bm-support-generator/support-style-demo.png)
+>Add a texture to a support frame. There are support textures provided to try, or feel free to use the included UV map to create your own.
 
 ## Get Creative
-
 Not able to create the exact support you need? Try combining them together to create something a bit more unique.
 
-![Figure 5](/images/tools/bm-support-generator/figure-05.png)
+![Get Creative](/images/tools/bm-support-generator/get-creative.png)
 
-In this example, this support is made up of eight (8) different support curves with their own set of properties.
+## Support Generator Properties
+These are all of the editable properties included with this tool.
+
+**General**
+- Radius Type _(Full Version)_
+- Beam Count _(Full Version)_
+- Resolution _*Gizmo_
+- Support Texture _(Full Version)_
+- Support Color _(Prototype Version)_
+
+**Individual Column**
+- Radius _*Gizmo_
+- Cap
+- Flange Count
+- Flange # Position _*Gizmo_
+- Track Connector Type
+- Track Connector Rotation _*Gizmo_
+- Footer Type
+- Toggle Footer Foundation
+- Footer Length _*Gizmo_
+- Footer Rotation _*Gizmo_
+- Footer X-Offset _*Gizmo_
+- Footer Y-Offset _*Gizmo_
+
+## Let Me Know What You Think!
+If you come across any bugs or issues, message me on [http://rollygon.com](http://rollygon.com) or email me at [message@rollygon.com](https://mailto:message@rollygon.com/). I would love to hear your feed back to improve these tools.
+
+Please, do not distribute or re-sell this product. Thank you!
+

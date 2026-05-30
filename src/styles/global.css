@@ -27,7 +27,7 @@ body {
 }
 
 h1, h2, h3, p, a, li, strong, em, small, span, button, input, textarea {
-    font-family: "Outfit";
+    font-family: var(--font-primary);
     color: var(--text);
 }
 
@@ -209,6 +209,64 @@ button {
     }
 }
 
+table {
+    position: relative;
+    border-radius: var(--radius-sm);
+    border-collapse: collapse;
+    background: var(--bg-light);
+
+    font-family: var(--font-primary);
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+
+        border: var(--border);
+        border-radius: var(--radius-sm);
+
+        content: "";
+    }
+}
+
+thead {
+    text-align: left;
+
+    & > tr > th:nth-child(2) {
+        border-left: var(--border);
+        border-right: var(--border);
+    }
+}
+
+tbody {
+    & > tr {
+        & > td:nth-child(2),
+        & > td:nth-child(3) {
+            text-align: center;
+        }
+
+        td {
+            border: var(--border);
+        }
+    }
+
+    & > tr:last-child {
+        & td {
+            border: none;
+        }
+
+        & td:nth-child(2) {
+            border-left: var(--border);
+            border-right: var(--border);
+        }
+    }
+}
+
+th, td {
+    border-collapse: collapse;
+    padding: var(--padding-sm);
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -241,10 +299,14 @@ button {
     }
 
     p, a, li, strong, em {
-        font-family: "Libre Baskerville";
+        font-family: var(--font-secondary);
         font-size: 1.125rem;
         line-height: 2rem;
         color: var(--text);
+    }
+
+    em {
+        color: var(--text-emphasis);
     }
 
     ol, ul {
@@ -268,6 +330,36 @@ button {
         border-radius: 0.325rem;
         font-size: 0.75rem;
         background-color: var(--bg-muted);
+    }
+
+    blockquote {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-8);
+
+        margin-left: var(--space-8);
+
+        p, strong {
+            color: var(--text-emphasis);
+        }
+
+        img {
+            margin-block: var(--space-4);
+        }
+
+        &::after {
+            position: absolute;
+            inset: 0;
+            left: -2em;
+            width: 0.25em;
+            height: 100%;
+
+            border-radius: var(--radius-pill);
+            background: var(--text-emphasis);
+
+            content: "";
+        }
     }
 
     img {

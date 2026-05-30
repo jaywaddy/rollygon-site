@@ -52,3 +52,7 @@ export function setImageSrc(content: Collection): string {
     return `/images/${setSlug(content)}/header.png`;
 }
 
+export function setBannerImageSrc(content: Collection): string {
+    return `/images/${setSlug(content)}/banner.png`;
+}
+
