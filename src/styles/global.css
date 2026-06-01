@@ -317,8 +317,8 @@ th, td {
         margin-left: var(--space-6);
     }
 
-    li {
-        list-style: decimal;
+    li > ul {
+        margin-top: var(--space-2);
     }
 
     code {

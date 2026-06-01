@@ -34,37 +34,37 @@ tags:
 ## Pick Support Beam Size
 Adjust the resolution and radius of each support beam. This will dynamically re-size track connectors, flanges, and footers.
 
->**Full Version:**
->![Radius Demo](/images/tools/bm-support-generator/radius-demo.gif)
+> **Full Version:**
+> ![Radius Demo](/images/tools/bm-support-generator/radius-demo.gif)
 > Edit the radius of multiple support beams at once. Toggle between "Individual" and "All" Radius Types. "Individual" allows changing the radius of multiple support beams within one (1) support object. "All" sets every support beam radius to the same value.
 > 
->Slide the yellow box gizmo to re-size a support radius.
+> Slide the yellow box gizmo to re-size a support radius.
 
 ## Position Flanges
 Up to 5 flanges can be positioned on each support beam. Each support beam is able to be re-positioned while maintaining the flange position.
 
->**Full Version:**
->![Flange Demo](/images/tools/bm-support-generator/flange-demo.gif)
->Position flanges by sliding the yellow arrow gizmo along the support beam's Z-axis.
+> **Full Version:**
+> ![Flange Demo](/images/tools/bm-support-generator/flange-demo.gif)
+> Position flanges by sliding the yellow arrow gizmo along the support beam's Z-axis.
 
 ## Toggle Footers
 Footers are positioned on the last point of the support beam. There are options to manually position, rotate, and scale footers if needed.
 
->**Full Version:**
->![Footer Demo](/images/tools/bm-support-generator/footer-demo.gif)
->Position, rotate, and scale footers by utilizing the appropriate gizmos.
+> **Full Version:**
+> ![Footer Demo](/images/tools/bm-support-generator/footer-demo.gif)
+> Position, rotate, and scale footers by utilizing the appropriate gizmos.
 
 ## Choose Track Connector Styles
 Track connectors are placed on the first point of the support beam. There are multiple connector styles that can be toggled through.
 
->**Full Version:**
->![Track Connector Demo](/images/tools/bm-support-generator/track-connector-demo.gif)
->Rotate track connectors with the blue rotation gizmo along the support beam's Z-axis.
+> **Full Version:**
+> ![Track Connector Demo](/images/tools/bm-support-generator/track-connector-demo.gif)
+> Rotate track connectors with the blue rotation gizmo along the support beam's Z-axis.
 
 ## Style Support Beams (Beta)
->**Full Version:**
->![Support Style Demo](/images/tools/bm-support-generator/support-style-demo.png)
->Add a texture to a support frame. There are support textures provided to try, or feel free to use the included UV map to create your own.
+> **Full Version:**
+> ![Support Style Demo](/images/tools/bm-support-generator/support-style-demo.png)
+> Add a texture to a support frame. There are support textures provided to try, or feel free to use the included UV map to create your own.
 
 ## Get Creative
 Not able to create the exact support you need? Try combining them together to create something a bit more unique.
@@ -96,7 +96,7 @@ These are all of the editable properties included with this tool.
 - Footer Y-Offset _*Gizmo_
 
 ## Let Me Know What You Think!
-If you come across any bugs or issues, message me on [http://rollygon.com](http://rollygon.com) or email me at [message@rollygon.com](https://mailto:message@rollygon.com/). I would love to hear your feed back to improve these tools.
+If you come across any bugs or issues, send a message below in the contact form or email me at [message@rollygon.com](mailto:message@rollygon.com). I would love to hear your feed back to improve these tools.
 
 Please, do not distribute or re-sell this product. Thank you!
 
