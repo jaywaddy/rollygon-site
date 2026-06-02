@@ -16,12 +16,14 @@ function setBackgroundColor(color: string | undefined) {
         ? `--bg-color: ${color}`
         : "--bg-color: black;"
 }
+
+console.log(setSlug(content))
 ---
 
 {content.collection !== "posts" && (
     <article
     style={`
-        --asset-card-bg: url(${setImageSrc(content)});
+        --asset-card-bg: url(${setImageSrc(content, "poster")});
         ${setBackgroundColor(content.data.backgroundColor)}
     `}
     class="asset-card card-hover border"

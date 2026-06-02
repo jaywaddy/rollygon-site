@@ -9,7 +9,7 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<div class="content-card-image border" style={`--content-image: url("${setImageSrc(content)}")`}>
+<div class="content-card-image border" style={`--content-image: url("${setImageSrc(content, "poster")}")`}>
     <div aria-label={content.data.title} class="bg-image"></div>
 </div>
 

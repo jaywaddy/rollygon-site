@@ -20,7 +20,7 @@ const { title } = content.data;
 		) : content.collection === "posts" && content.data.embed ? (
 			<AssetPoster title={title} videoEmbed={content.data.embed}/>
 		) : (
-			<AssetPoster title={title} src={setImageSrc(content)}/>
+			<AssetPoster title={title} src={setImageSrc(content, "poster")}/>
 		)
 	}
 	<ArticleCard {content} />

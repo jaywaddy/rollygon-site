@@ -48,11 +48,13 @@ export function setSlug(content: Collection): string {
     return `/${content.collection}/${content.slug}`;
 }
 
-export function setImageSrc(content: Collection): string {
-    return `/images/${setSlug(content)}/header.png`;
-}
+export function setImageSrc(content: Collection, imageType: "poster" | "banner"): string {
+    const directory = `/images${setSlug(content)}/`;
 
-export function setBannerImageSrc(content: Collection): string {
-    return `/images/${setSlug(content)}/banner.png`;
+    if (imageType == "banner") {
+        return directory + "banner.png";
+    }
+
+    return directory + "header.png";
 }
 

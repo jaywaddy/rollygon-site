@@ -3,7 +3,7 @@ import ContentNavigation from "@/components/ContentNavigation.astro";
 import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
 
-import { calcReadTime, formatDate, setImageSrc, setBannerImageSrc } from "@/scripts/utilities";
+import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
@@ -41,7 +41,7 @@ function setButtonLabel(price: string): string {
 				{content.collection === "posts" && content.data.embed ? (
 					<AssetPoster title={title} videoEmbed={content.data.embed} />
 				) : (
-					<AssetPoster title={title} src={setBannerImageSrc(content)} banner />
+					<AssetPoster title={title} src={setImageSrc(content, "poster")} />
 				)}
 			</div>
 		)

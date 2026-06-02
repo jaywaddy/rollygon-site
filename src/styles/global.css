@@ -32,9 +32,13 @@ h1, h2, h3, p, a, li, strong, em, small, span, button, input, textarea {
 }
 
 h1 {
-    font-size: clamp(3rem, calc(1rem + 6.8vw), 6rem);
+    font-size: clamp(2.4rem, calc(1rem + 3vw), 3.2rem);
     line-height: 1em;
     font-weight: var(--font-bold);
+}
+
+#landing-h1 {
+    font-size: clamp(3rem, calc(1rem + 6.8vw), 6rem);
 }
 
 h2 {
