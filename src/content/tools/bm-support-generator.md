@@ -6,7 +6,7 @@ lastUpdated: 2026-05-29
 icon: support-generator
 description: A Blender 5.1 geometry node group that builds B&M styled supports. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/bm_support_generator
-price: $0-$20
+price: Free
 size: 70.6 MB
 tags:
   - Blender

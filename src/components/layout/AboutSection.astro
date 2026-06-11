@@ -4,6 +4,7 @@ import CommissionBanner from "@/ui/CommissionBanner.astro";
 import SocialLink from "@/components/SocialLink.astro";
 import Button from "../ui/Button.astro";
 import { SOCIAL_LINK, type HTML } from "@/scripts/constants";
+import DonateButton from "../ui/DonateButton.astro";
 
 interface Props extends HTML {
 	photo?: boolean;
@@ -51,6 +52,7 @@ const { photo, class: className } = Astro.props;
 		<aside class={`column-md card ${className}`}>
 			<CommissionBanner />
 			<p class="">My name is Jay, and I make roller coasters out of polygons!</p>
+			<DonateButton size="100%"/>
 			<div class="row-sm">
 				<Button icon={SOCIAL_LINK.gumroad.icon} href={SOCIAL_LINK.gumroad.href} iconOnly />
 				<Button icon={SOCIAL_LINK.sketchfab.icon} href={SOCIAL_LINK.sketchfab.href} iconOnly />

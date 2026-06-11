@@ -1,0 +1,23 @@
+---
+import DonateButton from "@/ui/DonateButton.astro";
+---
+<div class="kofi-card">
+    <DonateButton size="100%"/>
+    <a href="htps://ko-fi.com/rollygon">
+        <img src="/images/about/kofi-qr.png" alt="Ko-fi donation QR code">
+    </a>
+</div>
+
+<style>
+    .kofi-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+
+        & a img {
+            width: 300px;
+            border: var(--border);
+            border-radius: var(--radius-sm);
+        }
+    }
+</style>

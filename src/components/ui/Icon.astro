@@ -22,6 +22,7 @@ import Bluesky from "@/icons/ui/Bluesky.astro";
 import Gumroad from "@/icons/ui/Gumroad.astro";
 import Sketchfab from "@/icons/ui/Sketchfab.astro";
 import YouTube from "@/icons/ui/YouTube.astro";
+import Kofi from "@/icons/ui/Kofi.astro";
 
 // Tool Icons
 import Array from "@/icons/assets/Array.astro";
@@ -61,6 +62,7 @@ export type ICON_NAME = (
 	| "gumroad"
 	| "sketchfab"
 	| "youtube"
+	| "kofi"
 
 	| "array"
 	| "curve-deform"
@@ -131,6 +133,7 @@ function setColor(isDisabled: boolean): string {
 	{name === "gumroad" && <Gumroad color={setColor(disabled)} />}
 	{name === "sketchfab" && <Sketchfab color={setColor(disabled)} />}
 	{name === "youtube" && <YouTube color={setColor(disabled)} />}
+	{name === "kofi" && <Kofi color={setColor(disabled)} />}
 
 	{name === "array" && <Array color={setColor(disabled)} />}
 	{name === "curve-deform" && <CurveDeform color={setColor(disabled)} />}

@@ -4,6 +4,7 @@ import TableOfContents from "@/ui/TableOfContents.astro";
 import ReadTimeIndicator from "@/ui/ReadTimeIndicator.astro";
 import type { Collection } from "@/content/config";
 import type { HTML } from "@/scripts/constants";
+import KofiCard from "./KofiCard.astro";
 
 interface Props extends HTML {
     headings: Array<MarkdownHeading>;
@@ -14,7 +15,7 @@ const { headings, content, class: className } = Astro.props;
 ---
 
 <aside data-layout="desktop" class={`column-md ${className}`}>
-    {headings.length > 1 && (
+    {headings.length > 1 ? (
         <div data-toc id="table-of-contents" class="column-md">
             <TableOfContents {headings} />
             {
@@ -22,6 +23,11 @@ const { headings, content, class: className } = Astro.props;
                     <ReadTimeIndicator {content} />
                 )
             }
+            <KofiCard />
+        </div>
+    ) : (
+        <div data-toc id="table-of-contents" class="column-md">
+            <KofiCard />
         </div>
     )}
 </aside>
@@ -31,10 +37,11 @@ const { headings, content, class: className } = Astro.props;
 <style>
     aside {
         min-width: var(--asside-width);
+        margin-right:
     }
     
     #table-of-contents {
         position: sticky;
-        top: var(--space-32);
+        top: var(--space-24);
     }
 </style>

@@ -6,7 +6,7 @@ lastUpdated: 2026-06-01
 icon: track-generator
 description: A Blender 5.1 geometry node group that builds B&M styled track. This node group is asset ready, and can be linked directly into any .blend file.
 href: https://rollygon.gumroad.com/l/track_generator_bm
-price: $0-$20
+price: Free
 size: 70.5 MB
 tags:
   - Blender

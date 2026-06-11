@@ -1,0 +1,44 @@
+---
+interface Props {
+    size?: "fit-content" | "100%";
+}
+
+const { size = "fit-content" } = Astro.props;
+---
+
+<a class="donate-button" href="https://ko-fi.com/P4X0213OXG" style={`--width: ${size};`}>
+    <img src="/images/about/kofi-mug.png" alt="Support me on Ko-fi">
+    Support me on Ko–fi
+</a>
+
+<style>
+    .donate-button {
+        --padding-y: var(--space-3);
+		--padding-x: calc(var(--padding-y) * 2);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-2);
+
+        padding: var(--padding-y) var(--padding-x);
+        width: var(--width);
+
+        border: var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--bg-light);
+
+        img {
+            width: 32px;
+        }
+
+        &:hover {
+			background: var(--bg-hover);
+			border-color: var(--outline-hover);
+        }
+
+		&:active {
+			background: var(--bg-active);
+		}
+    }
+</style>

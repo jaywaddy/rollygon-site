@@ -26,7 +26,7 @@ body {
   src: url("/src/assets/fonts/Outfit.ttf");
 }
 
-h1, h2, h3, p, a, li, strong, em, small, span, button, input, textarea {
+h1, h2, h3, p, a, li, strong, em, small, span, button, input, textarea, img {
     font-family: var(--font-primary);
     color: var(--text);
 }

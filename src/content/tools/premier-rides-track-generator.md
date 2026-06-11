@@ -5,7 +5,7 @@ postDate: 2025-10-24
 icon: track-generator
 description: Blender 4.2+ geometry node group that build Premier Rides styled track.
 href: https://rollygon.gumroad.com/l/premier_rides_track_gen
-price: $0+
+price: Free
 size: 224.5 MB
 tags:
   - Blender

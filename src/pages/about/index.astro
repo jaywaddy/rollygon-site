@@ -6,9 +6,10 @@ import { Content } from "./about.md";
 import Button from "@/components/ui/Button.astro";
 import { formatDate } from "@/scripts/utilities";
 import { SOCIAL_LINK } from "@/scripts/constants";
+import DonateButton from "@/components/ui/DonateButton.astro";
 
 const { title, date } = aboutContent.frontmatter;
-const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
+const { gumroad, sketchfab, youtube, email, kofi } = SOCIAL_LINK;
 ---
 
 <SiteLayout pageTitle={title}>
@@ -20,7 +21,8 @@ const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
 				polygons. I also build tools that make coaster manufacturer specific tracks,
 				supports, etc. that help me create realistic coaster models.
 			</p>
-			<span>Social links:</span>
+			<DonateButton />
+			<p>Social links:</p>
 			<div class="row-sm">
 				<Button
 					label={gumroad.title}
@@ -62,5 +64,9 @@ const { gumroad, sketchfab, youtube, email } = SOCIAL_LINK;
 
 	.row-sm {
 		flex-wrap: wrap;
+	}
+
+	.kofi-button .kofitext {
+		color: red !important;
 	}
 </style>

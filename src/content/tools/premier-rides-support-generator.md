@@ -5,7 +5,7 @@ postDate: 2025-10-24
 icon: support-generator
 description: Blender 4.2+ geometry node group that build Premier Rides styled supports.
 href: https://rollygon.gumroad.com/l/premier_rides_support_gen
-price: $0+
+price: Free
 size: 287.2 MB
 tags:
   - Blender
