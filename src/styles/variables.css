@@ -82,6 +82,7 @@
     color-scheme: dark;
 
     --text: var(--neutral-95);
+    --text-hover: var(--neutral-100);
     --text-muted: var(--neutral-60);
     --text-emphasis: var(--green-70);
 
@@ -124,6 +125,7 @@
     color-scheme: light;
 
     --text: var(--neutral-5);
+    --text-hover: var(--neutral-20);
     --text-muted: var(--neutral-40);
     --text-emphasis: var(--green-30);
 
@@ -131,11 +133,11 @@
     --outline-hover: var(--neutral-60);
     --border: solid var(--outline) 1px;
 
-    --bg-light: var(--neutral-100);
-    --bg: var(--neutral-95);
-    --bg-dark: var(--neutral-90);
+    --bg-light: var(--neutral-95);
+    --bg: var(--neutral-90);
+    --bg-dark: var(--neutral-85);
 
-    --bg-hover: var(--neutral-95);
+    --bg-hover: var(--neutral-100);
     --bg-active: var(--neutral-90);
     --bg-muted: var(--neutral-80);
 

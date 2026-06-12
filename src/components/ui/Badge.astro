@@ -3,7 +3,7 @@ import Icon, { type ICON_NAME } from '@/ui/Icon.astro';
 
 interface Props {
 	label: string;
-	style?: "primary" | "alt" | "error" | "default";
+	style?: "primary" | "alt" | "error" | "default" | "asset";
 	icon?: ICON_NAME;
 	iconRight?: boolean;
 }
@@ -15,13 +15,15 @@ const {
 	iconRight = false,
 } = Astro.props;
 
-function setBackgroundColor (badgeStyle: typeof style): string {
+function setBadgeColors (badgeStyle: typeof style): string {
 	if (badgeStyle === "primary") {
 		return "--badge-bg: var(--brand-bg); --outline: var(--brand-outline);";
 	} else if (badgeStyle === "alt") {
 		return "--badge-bg: var(--alt-bg-light); --text: var(--alt-text);";
 	} else if (badgeStyle === "error") {
 		return "--badge-bg: var(--error-bg); --outline: var(--error-outline);";
+	} else if (badgeStyle === "asset") {
+		return "--badge-bg: var(--green-30); --outline: var(--green-50); --text: var(--neutral-95);";
 	}
 
 	return "--badge-bg: var(--bg-light)";
@@ -29,7 +31,7 @@ function setBackgroundColor (badgeStyle: typeof style): string {
 ---
 
 <strong
-	style={setBackgroundColor(style)}
+	style={setBadgeColors(style)}
 	class="badge row-xs center border"
 >
 	{icon && !iconRight && <Icon name={icon} size="16" strokeWidth="4" />}

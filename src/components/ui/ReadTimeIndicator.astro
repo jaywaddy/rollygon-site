@@ -10,7 +10,7 @@ const { content } = Astro.props;
 ---
 
 <div class="column-sm">
-	<span class="heading-xs">{calcReadTime(content.body)} min. read</span>
+	<span>{calcReadTime(content.body)} min. read</span>
 	<span class="indicator">
 		<span data-article-progress></span>
 	</span>
@@ -27,6 +27,11 @@ const { content } = Astro.props;
 	};
 </script>
 <style>
+	.column-sm {
+		padding-bottom: var(--space-4);
+		border-bottom: var(--border);
+	}
+
 	.indicator {
 		position: relative;
 		display: flex;

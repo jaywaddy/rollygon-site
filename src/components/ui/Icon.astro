@@ -48,7 +48,6 @@ export type ICON_NAME = (
 	| "download"
 	| "drop-down"
 	| "external-link"
-	| "logo"
 	| "menu"
 	| "logo-full"
 	| "square"
@@ -63,6 +62,8 @@ export type ICON_NAME = (
 	| "sketchfab"
 	| "youtube"
 	| "kofi"
+
+	| "logo"
 
 	| "array"
 	| "curve-deform"
@@ -95,7 +96,7 @@ export function matchNameType(iconName: any): ICON_NAME {
 const {
 	name,
 	size = "20",
-	color = "var(--text)",
+	color = "currentColor",
 	disabled = false,
 	strokeWidth = "3.5"
 } = Astro.props;
@@ -109,7 +110,7 @@ function setColor(isDisabled: boolean): string {
 }
 ---
 
-<svg class="w-fit" width={size} height={size} viewBox="0 0 32 32" fill="none">
+<svg width={size} height={size} viewBox="0 0 32 32" fill="none">
 	<title>{titleCase(name)}</title>
 
 	{name === "none" && undefined}
@@ -120,7 +121,6 @@ function setColor(isDisabled: boolean): string {
 	{name === "download" && <Download color={setColor(disabled)} {strokeWidth} />}
 	{name === "drop-down" && <DropDown color={setColor(disabled)} {strokeWidth} />}
 	{name === "external-link" && <ExternalLink color={setColor(disabled)} {strokeWidth} />}
-	{name === "menu" && <Menu color={setColor(disabled)} {strokeWidth} />}
 	{name === "menu" && <Menu color={setColor(disabled)} {strokeWidth} />}
 	{name === "square" && <Square color={setColor(disabled)} {strokeWidth} />}
 	{name === "search" && <Search color={setColor(disabled)} />}
@@ -134,6 +134,8 @@ function setColor(isDisabled: boolean): string {
 	{name === "sketchfab" && <Sketchfab color={setColor(disabled)} />}
 	{name === "youtube" && <YouTube color={setColor(disabled)} />}
 	{name === "kofi" && <Kofi color={setColor(disabled)} />}
+
+	{name === "logo" && <Logo color={setColor(disabled)} />}
 
 	{name === "array" && <Array color={setColor(disabled)} />}
 	{name === "curve-deform" && <CurveDeform color={setColor(disabled)} />}
@@ -150,3 +152,9 @@ function setColor(isDisabled: boolean): string {
 	{name === "utility-nodes" && <UtilityNodes color={setColor(disabled)} />}
 	{name === "vector-switch" && <VectorSwitch color={setColor(disabled)} />}
 </svg>
+
+<style>
+	svg {
+		width: fit-content;
+	}
+</style>

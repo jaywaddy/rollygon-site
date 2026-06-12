@@ -11,6 +11,7 @@ interface Props extends HTML {
 }
 
 const { photo, class: className } = Astro.props;
+const { gumroad, sketchfab, youtube, bluesky, kofi, email } = SOCIAL_LINK;
 ---
 
 {
@@ -27,37 +28,37 @@ const { photo, class: className } = Astro.props;
 				I'm Jay, and I make roller coasters out of polygons!
 			</p>
 			<SocialLink
-				icon={SOCIAL_LINK.gumroad.icon}
-				href={SOCIAL_LINK.gumroad.href}
+				icon={gumroad.icon}
+				href={gumroad.href}
 				rotation="105"
 			/>
 			<SocialLink
-				icon={SOCIAL_LINK.sketchfab.icon}
-				href={SOCIAL_LINK.sketchfab.href}
+				icon={sketchfab.icon}
+				href={sketchfab.href}
 				rotation="125"
 			/>
 			<SocialLink
-				title={SOCIAL_LINK.youtube.title}
-				icon={SOCIAL_LINK.youtube.icon}
-				href={SOCIAL_LINK.youtube.href}
+				title={youtube.title}
+				icon={youtube.icon}
+				href={youtube.href}
 				rotation="145"
 			/>
 			<SocialLink
-				icon={SOCIAL_LINK.bluesky.icon}
-				href={SOCIAL_LINK.bluesky.href}
+				icon={bluesky.icon}
+				href={bluesky.href}
 				rotation="165"
 			/>
 		</div>
 	) : (
 		<aside class={`column-md card ${className}`}>
 			<CommissionBanner />
-			<p class="">My name is Jay, and I make roller coasters out of polygons!</p>
+			<p>My name is Jay, and I'm a solo dev who makes roller coasters out of polygons!</p>
 			<DonateButton size="100%"/>
 			<div class="row-sm">
-				<Button icon={SOCIAL_LINK.gumroad.icon} href={SOCIAL_LINK.gumroad.href} iconOnly />
-				<Button icon={SOCIAL_LINK.sketchfab.icon} href={SOCIAL_LINK.sketchfab.href} iconOnly />
-				<Button icon={SOCIAL_LINK.youtube.icon} href={SOCIAL_LINK.youtube.href} iconOnly />
-				<Button icon={SOCIAL_LINK.email.icon} href={SOCIAL_LINK.email.href} iconOnly />
+				<Button icon={gumroad.icon} href={gumroad.href} iconOnly />
+				<Button icon={sketchfab.icon} href={sketchfab.href} iconOnly />
+				<Button icon={youtube.icon} href={youtube.href} iconOnly />
+				<Button icon={email.icon} href={email.href} iconOnly />
 			</div>
 		</aside>
 	)

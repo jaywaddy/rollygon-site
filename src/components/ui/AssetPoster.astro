@@ -47,6 +47,9 @@ const { title, modelID, videoEmbed, src, banner = false } = Astro.props;
 		{src && (
 			// <Image {src} alt={title} width={1600} height={900} />
 			<div class="bg-image" style={`--bg-image: url(${src});`}></div>
+			<div class="program-banner">
+				<img class="program" src="/images/blender.png" alt="Usable in Blender">
+			</div>
 		)}
 	</div>
 </div>
@@ -94,4 +97,13 @@ const { title, modelID, videoEmbed, src, banner = false } = Astro.props;
 		background-position: center;
 		content: "";
 	}
+
+	.program-banner {
+        position: absolute;
+        inset: var(--space-8);
+    }
+
+    .program {
+        width: 96px;
+    }
 </style>

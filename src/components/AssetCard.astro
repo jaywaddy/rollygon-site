@@ -37,6 +37,11 @@ console.log(setSlug(content))
         </div>
         <CardStats class="card-stats" {content} color="var(--neutral-95)"/>
     </section>
+    {content.collection == "tools" && (
+        <div class="program-banner">
+            <img class="program" src="/images/blender.png" alt="Usable in Blender">
+        </div>
+    )}
 </article>
 )}
 
@@ -50,7 +55,16 @@ console.log(setSlug(content))
         min-height: 480px;
         border-radius: var(--radius-lg);
         background: var(--bg-light);
-   }
+    }
+
+    .program-banner {
+        position: absolute;
+        inset: var(--space-8);
+    }
+
+    .program {
+        width: 48px;
+    }
 
     @media only screen and (max-width: 860px) {
         .asset-card {

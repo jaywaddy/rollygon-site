@@ -7,7 +7,6 @@ import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content/config";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
-import KofiCard from "@/components/KofiCard.astro";
 
 interface Props {
 	content: Collection;
@@ -47,7 +46,7 @@ function setButtonLabel(price: string): string {
 			</div>
 		)
 	}
-	<div class="row-lg">
+	<div class="main-body row-lg">
 		<section class="column-lg">
 			<div class="column-md content-wrapper">
 				<h1>{title}</h1>
@@ -108,7 +107,13 @@ function setButtonLabel(price: string): string {
 				<slot />
 			</article>
 		</section>
-		<!-- {headings && <SideBar {headings} {content} />} -->
 		<SideBar {headings} {content} />
 	</div>
 </div>
+
+<style>
+	.main-body {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>

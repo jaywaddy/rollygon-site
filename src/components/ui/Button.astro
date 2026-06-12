@@ -39,7 +39,7 @@ const {
 const buttonStyles = "button row-xs center";
 const isSingular = label?.length === 1 || false;
 
-function setBackgroundColor (isPrimary: boolean | undefined): string {
+function setButtonColor (isPrimary: boolean | undefined): string {
 	if (isPrimary) {
 		return (`
 			--bg-light: var(--brand-bg);
@@ -60,7 +60,7 @@ function setAspectRatio(hasLabel: string | undefined): string {
 
 function setButtonStyles(): string {
 	return (`
-		${setBackgroundColor(primary)}
+		${setButtonColor(primary)}
 		${setAspectRatio(label)}
 	`);
 }
@@ -147,6 +147,7 @@ function setButtonStyles(): string {
 		border: var(--border);
 		border-color: var(--outline);
 		background-color: var(--bg-light);
+		color: var(--text);
 
 		cursor: pointer;
 
@@ -159,9 +160,14 @@ function setButtonStyles(): string {
 			border-color: var(--outline);
 		}
 
+		span {
+			color: currentColor;
+		}
+
 		&:hover {
 			background: var(--bg-hover);
 			border-color: var(--outline-hover);
+			color: var(--text-hover);
 		}
 
 		&:hover .price {
@@ -179,6 +185,10 @@ function setButtonStyles(): string {
 		border-color: none;
 		pointer-events: none;
 		cursor: not-allowed;
+
+		span {
+			color: var(--text-muted);
+		}
 	}
 
 	[data-icon-only="true"] {
