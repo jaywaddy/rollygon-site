@@ -30,7 +30,7 @@ console.log(setSlug(content))
 >
     <section class="asset-card-inner column-md border">
         <div class="bg-image"></div>
-        {content.collection === "tools" && <Badge label={content.data.price.toUpperCase()} style="primary" />}
+        {content.collection === "tools" && <Badge label={content.data.price.toUpperCase()} style="asset" />}
         <div class="column-xs">
             <a href={setSlug(content)}><h3>{title}</h3></a>
             <p>{description}</p>
@@ -68,7 +68,7 @@ console.log(setSlug(content))
 
     @media only screen and (max-width: 860px) {
         .asset-card {
-            min-height: 298px;
+            min-height: 364px;
         }
     }
 
