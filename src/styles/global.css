@@ -65,6 +65,10 @@ button {
     display: none !important;
 }
 
+.debug {
+    border: solid red 1px;
+}
+
 .wrapper {
     margin-inline: auto;
     width: clamp(280px, 92vw, 1080px);

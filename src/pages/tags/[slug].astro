@@ -3,13 +3,13 @@ import ArticleCard from "@/components/ArticleCard.astro";
 import AssetCard from "@/components/AssetCard.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 
-import { type Collection, ALL_POSTS, ALL_CONTENT, ALL_MODELS, ALL_TOOLS } from "@/content/config";
+import { type Collection, ALL_POSTS, ALL_CONTENT, ALL_MODELS, ALL_TOOLS } from "@/content.config";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { slugify, titleCase } from "@/scripts/utilities";
 
 export async function getStaticPaths() {
 	const parameters = ALL_CONTENT.map((content) =>
-		content.data.tags.map((tag) => ({
+		content.data.tags.map((tag: string) => ({
 			params: {
 				tag: 4,
 				slug: slugify(tag),
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const dataList = ALL_CONTENT.filter((content) => content.data.tags.includes(getFileSlug(slug)));
 const tagName = dataList.map((content) =>
-	content.data.tags.find((tag) => tag === getFileSlug(slug)),
+	content.data.tags.find((tag: string) => tag === getFileSlug(slug)),
 )[0];
 
 function getFileSlug(input: string): string {
@@ -40,7 +40,7 @@ function getFileSlug(input: string): string {
 
 function checkIfTrue(list: Array<Collection>): boolean {
 	return list
-		.map((content) => content.data.tags.map((tag) => slugify(tag).includes(slug)))
+		.map((content) => content.data.tags.map((tag: string) => slugify(tag).includes(slug)))
 		.flat()
 		.includes(true);
 }
@@ -58,7 +58,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 				<div class="column-md">
 					{ALL_MODELS.map((content) => {
 						return (
-							content.data.tags.find((tag) => slugify(tag) === slug) && (
+							content.data.tags.find((tag: string) => slugify(tag) === slug) && (
 								<AssetCard {content} />
 							)
 						);
@@ -74,7 +74,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 				<div class="column-md">
 					{ALL_TOOLS.map((content) => {
 						return (
-							content.data.tags.find((tag) => slugify(tag) === slug) && (
+							content.data.tags.find((tag: string) => slugify(tag) === slug) && (
 								<AssetCard {content} />
 							)
 						);
@@ -90,7 +90,7 @@ function checkIfTrue(list: Array<Collection>): boolean {
 				<div class="column-md">
 					{ALL_POSTS.map((content) => {
 						return (
-							content.data.tags.find((tag) => slugify(tag) === slug) && (
+							content.data.tags.find((tag: string) => slugify(tag) === slug) && (
 								<ArticleCard {content} />
 							)
 						);

@@ -1,8 +1,7 @@
 ---
-import type { MarkdownHeading } from "astro";
+import { type MarkdownHeading } from "astro";
 import TableOfContents from "@/ui/TableOfContents.astro";
-import ReadTimeIndicator from "@/ui/ReadTimeIndicator.astro";
-import type { Collection } from "@/content/config";
+import type { Collection } from "@/content.config";
 import type { HTML } from "@/scripts/constants";
 import KofiCard from "./KofiCard.astro";
 
@@ -11,35 +10,30 @@ interface Props extends HTML {
     content: Collection;
 }
 
-const { headings, content, class: className } = Astro.props;
+const { headings, class: className } = Astro.props;
+
 ---
 
 <aside data-layout="desktop" class={`column-md ${className}`}>
-    {headings.length > 1 ? (
-        <div data-toc id="table-of-contents" class="column-md">
+    <div data-toc id="side-bar" class="column-md">
+        {headings.length > 1 ? (
             <TableOfContents {headings} />
-            {
-                content.collection === "posts" && (
-                    <ReadTimeIndicator {content} />
-                )
-            }
             <KofiCard />
-        </div>
-    ) : (
-        <div data-toc id="table-of-contents" class="column-md">
+        ) : (
             <KofiCard />
-        </div>
-    )}
+        )}
+    </div>
 </aside>
 
 <style>
     aside {
         min-width: var(--asside-width);
-        margin-right:
     }
     
-    #table-of-contents {
+    #side-bar {
         position: sticky;
+        display: flex;
+        flex-direction: column;
         top: var(--space-24);
     }
 </style>

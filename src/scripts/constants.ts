@@ -1,9 +1,10 @@
 import { type ICON_NAME } from "@/ui/Icon.astro";
-import { ALL_MODELS, ALL_POSTS, ALL_TOOLS, type Collection } from "@/content/config";
+import { ALL_MODELS, ALL_POSTS, ALL_TOOLS, type Collection } from "@/content.config";
 import { findContent } from "@/scripts/utilities";
 
 export interface HTML {
     class?: string;
+    id?: string;
 }
 
 // const SITE_LOGS: Array<Collection> = ALL_POSTS.filter((content) =>
@@ -26,7 +27,7 @@ export const SOCIAL_LINK: {[key: string]: { title: string, icon: ICON_NAME, href
 }
 
 export function getFeaturedTools(model: Collection): Array<Collection> | null {
-    if (model.data.tools) {
+    if (model.collection === "models" && model.data.tools) {
         return model.data.tools.map((tool: string) => findContent(ALL_TOOLS, tool));
     }
     

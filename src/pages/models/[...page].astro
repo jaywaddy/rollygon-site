@@ -1,13 +1,11 @@
 ---
-import FeaturedContent from "@/components/FeaturedContent.astro";
 import PageTitle from "@/components/layout/PageTitle.astro";
 import Pagination from "@/components/Pagination.astro";
 
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
-import { ALL_MODELS } from "@/content/config";
+import { ALL_MODELS, Collection } from "@/content.config";
 import type { Page } from "astro";
-import { FEATURED_MODEL } from "@/scripts/constants";
 import AssetCard from "@/components/AssetCard.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { findContent } from "@/scripts/utilities";
@@ -47,7 +45,7 @@ const isCurrentPage = page.url.current === "/models";
 			}
 		/>
 		<div class="grid-md">
-			{page.data.map((model) => <AssetCard content={model} />)}
+			{page.data.map((model: Collection) => <AssetCard content={model} />)}
 		</div>
 	</section>
 	<Pagination {page} content={ALL_MODELS} />

@@ -4,7 +4,7 @@ import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SideBar from "@/components/SideBar.astro";
 
 import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
-import type { Collection } from "@/content/config";
+import type { Collection } from "@/content.config";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { content, contentCollection, index } = Astro.props;
-const { title, description, postDate, tags, lastUpdated } = content.data;
+const { title, description, postDate, modifiedDate } = content.data;
 const { collection, body } = content;
 const { headings } = await content.render();
 
@@ -29,73 +29,53 @@ function setButtonLabel(price: string): string {
 ---
 
 <div class="column-lg">
-	{
-		content.collection === "models" ? (
-			<div class="column-md">
-				<ContentNavigation {content} {contentCollection} {index} />
-				<AssetPoster {title} modelID={content.data.id} />
-			</div>
-		) : (
-			<div class="relative column-md">
-				<ContentNavigation {content} {contentCollection} {index} />
-				{content.collection === "posts" && content.data.embed ? (
-					<AssetPoster title={title} videoEmbed={content.data.embed} />
-				) : (
-					<AssetPoster title={title} src={setImageSrc(content, "poster")} />
-				)}
-			</div>
-		)
-	}
+	<div class="asset-poster column-md">
+		<ContentNavigation {content} {contentCollection} {index} />
+		<AssetPoster {content} />
+	</div>
 	<div class="main-body row-lg">
-		<section class="column-lg">
+		<section id="main-content" class="column-lg">
 			<div class="column-md content-wrapper">
 				<h1>{title}</h1>
 				<p>{description}</p>
 				<div class="column-md">
-					{
-						collection === "posts" && (
-							<small>
-								<strong>{formatDate(postDate)}</strong>
-								<span>&bullet;</span>
-								<strong>{calcReadTime(body)} min read</strong>
-							</small>
-						)
-					}
-					{
-						collection === "posts" && content.data.postUpdate && (
-							<small>
-								<em>Updated:</em>
-								<em>{formatDate(content.data.postUpdate)}</em>
-							</small>
-						)
-					}
-					{
-						collection === "tools" && (
-							<small>
-								<strong>{formatDate(postDate)}</strong>
-								<span>&bullet;</span>
-								<strong>{content.data.version}</strong>
-							</small>
-							<Button
-								label={`Get tool`}
-								price={content.data.price}
-								icon="download"
-								href={content.data.href}
-								primary />
-						)
-					}
-					{
-						collection === "models" && (
-							<small>
-								<strong>{formatDate(postDate)}</strong>
-								<span>&bullet;</span>
-								<strong>{content.data.size}</strong>
-							</small>
-						)
-					}
-					{
-						lastUpdated && <small>Last updated: {formatDate(lastUpdated)}</small>
-					}
+					{collection === "posts" && (
+						<small>
+							<strong>{formatDate(postDate)}</strong>
+							<span>&bullet;</span>
+							<strong>{calcReadTime(body)} min read</strong>
+						</small>
+					)}
+
+					{ modifiedDate && (
+						<small>
+							<em>Last updated:</em>
+							<em>{formatDate(modifiedDate)}</em>
+						</small>
+					)}
+
+					{collection === "tools" && (
+						<small>
+							<strong>{formatDate(postDate)}</strong>
+							<span>&bullet;</span>
+							<strong>{content.data.version}</strong>
+						</small>
+						<Button
+							label={`Get tool`}
+							price={content.data.price}
+							icon="download"
+							href={content.data.href}
+							primary
+						/>
+					)}
+
+					{collection === "models" && (
+						<small>
+							<strong>{formatDate(postDate)}</strong>
+							<span>&bullet;</span>
+							<strong>{content.data.size}</strong>
+						</small>
+					)}
 				</div>
 			</div>
 			{headings.length > 0 && (
@@ -115,5 +95,26 @@ function setButtonLabel(price: string): string {
 	.main-body {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	#main-content {
+		padding: var(--padding-lg);
+
+		border-radius: var(--radius-sm);
+		border: var(--border);
+		background: var(--bg-light);
+	}
+
+	.asset-poster {
+		position:  relative;
+	}
+
+	.programs {
+		position: absolute;
+		inset: 0;
+	}
+
+	.logo {
+		width: 64px;
 	}
 </style>

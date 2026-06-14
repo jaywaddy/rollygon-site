@@ -7,13 +7,12 @@ const postCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         postDate: z.date(),
-        postUpdate: z.optional(z.date()),
+        modifiedDate: z.optional(z.date()),
         description: z.string(),
         tags: z.array(z.string()),
         image: z.optional(z.boolean()),
         embed: z.optional(z.string()),
         next: z.optional(z.string()),
-        lastUpdated: z.optional(z.date()),
     })
 });
 
@@ -30,7 +29,7 @@ const toolCollection = defineCollection({
         tags: z.array(z.string()),
         version: z.string(),
         next: z.optional(z.string()),
-        lastUpdated: z.optional(z.date()),
+        modifiedDate: z.optional(z.date()),
         backgroundColor: z.optional(z.string())
     })
 });
@@ -46,7 +45,7 @@ const modelCollection = defineCollection({
         size: z.string(),
         modelStats: z.array(z.any()),
         tags: z.array(z.string()),
-        lastUpdated: z.optional(z.date()),
+        modifiedDate: z.optional(z.date()),
         backgroundColor: z.optional(z.string()),
         tools: z.optional(z.array(z.string()))
     })

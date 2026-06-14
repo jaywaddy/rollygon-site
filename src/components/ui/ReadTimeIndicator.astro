@@ -1,6 +1,7 @@
 ---
 import { calcReadTime } from "@/scripts/utilities";
 import type { CollectionEntry } from "astro:content";
+import Badge from "./Badge.astro";
 
 interface Props {
 	content: CollectionEntry<"posts"> | CollectionEntry<"tools">;
@@ -10,7 +11,7 @@ const { content } = Astro.props;
 ---
 
 <div class="column-sm">
-	<span>{calcReadTime(content.body)} min. read</span>
+	 <Badge label={`${calcReadTime(content.body)} min. read`} />
 	<span class="indicator">
 		<span data-article-progress></span>
 	</span>
@@ -27,18 +28,13 @@ const { content } = Astro.props;
 	};
 </script>
 <style>
-	.column-sm {
-		padding-bottom: var(--space-4);
-		border-bottom: var(--border);
-	}
-
 	.indicator {
 		position: relative;
 		display: flex;
 
 		padding: var(--space-1);
 		background: var(--bg-light);
-		border: vaR(--border);
+		border: var(--border);
 		border-radius: var(--radius-pill);
 	}
 

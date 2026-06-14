@@ -3,12 +3,11 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist", "src/content/drafts/*", "src/.obsidian/*"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/ui/*": ["src/components/ui/*"],
-      "@/layout/*": ["src/components/layout/*"],
-      "@/icons/*": ["src/components/icons/*"]
+      "@/*": ["./src/*"],
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/layout/*": ["./src/components/layout/*"],
+      "@/icons/*": ["./src/components/icons/*"]
     }
   }
 }

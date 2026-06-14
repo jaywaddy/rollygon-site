@@ -1,5 +1,5 @@
 ---
-import type { Collection } from '@/content/config';
+import type { Collection } from '@/content.config';
 import { calcReadTime, formatDate } from '@/scripts/utilities';
 
 interface Props {
@@ -9,12 +9,12 @@ interface Props {
 }
 
 const { content, color = "var(--text-muted)", class: className } = Astro.props;
-const { postDate, lastUpdated } = content.data;
+const { postDate, modifiedDate } = content.data;
 const { collection } = content;
 
 function getPostDate() {
-    if (lastUpdated) {
-        return formatDate(lastUpdated);
+    if (modifiedDate) {
+        return formatDate(modifiedDate);
     }
 
     return formatDate(postDate);

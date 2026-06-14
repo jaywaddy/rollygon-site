@@ -1,4 +1,4 @@
-import type { Collection } from "@/content/config";
+import type { Collection } from "@/content.config";
 
 export function slugify (input: string): string {
     return input

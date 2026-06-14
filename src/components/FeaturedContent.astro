@@ -1,27 +1,16 @@
 ---
 import AssetPoster from "@/ui/AssetPoster.astro";
-import type { Collection } from "@/content/config";
+import type { Collection } from "@/content.config";
 import ArticleCard from "@/components/ArticleCard.astro";
-import { setImageSrc } from "@/scripts/utilities";
 
 interface Props {
 	content: Collection;
-	heading?: boolean;
 }
 
 const { content } = Astro.props;
-const { title } = content.data;
 ---
 
-<div class:list={["column-md", "max-sm:gap-4"]}>
-	{
-		content.collection === "models" ? (
-			<AssetPoster title={title} modelID={content.data.id} />
-		) : content.collection === "posts" && content.data.embed ? (
-			<AssetPoster title={title} videoEmbed={content.data.embed}/>
-		) : (
-			<AssetPoster title={title} src={setImageSrc(content, "poster")}/>
-		)
-	}
+<div class="column-md">
+	<AssetPoster {content} />
 	<ArticleCard {content} />
 </div>
