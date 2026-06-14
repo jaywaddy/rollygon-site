@@ -1,5 +1,5 @@
 ---
-import type { Collection } from '@/content.config';
+import type { Collection } from '@/content.config.ts';
 import { setImageSrc, setSlug } from '@/scripts/utilities';
 import Badge from '@/ui/Badge.astro';
 import CardStats from '@/ui/CardStats.astro';
@@ -17,32 +17,31 @@ function setBackgroundColor(color: string | undefined) {
         : "--bg-color: black;"
 }
 
-console.log(setSlug(content))
 ---
 
 {content.collection !== "posts" && (
     <article
-    style={`
-        --asset-card-bg: url(${setImageSrc(content, "poster")});
-        ${setBackgroundColor(content.data.backgroundColor)}
-    `}
-    class="asset-card card-hover border"
->
-    <section class="asset-card-inner column-md border">
-        <div class="bg-image"></div>
-        {content.collection === "tools" && <Badge label={content.data.price.toUpperCase()} style="asset" />}
-        <div class="column-xs">
-            <a href={setSlug(content)}><h3>{title}</h3></a>
-            <p>{description}</p>
-        </div>
-        <CardStats class="card-stats" {content} color="var(--neutral-95)"/>
-    </section>
-    {content.collection == "tools" && (
-        <div class="program-banner">
-            <img class="program" src="/images/blender.png" alt="Usable in Blender">
-        </div>
-    )}
-</article>
+        style={`
+            --asset-card-bg: url(${setImageSrc(content, "poster")});
+            ${setBackgroundColor(content.data.backgroundColor)}
+        `}
+        class="asset-card card-hover border"
+    >
+        <section class="asset-card-inner column-md border">
+            <div class="bg-image"></div>
+            {content.collection === "tools" && <Badge label={content.data.price.toUpperCase()} style="asset" />}
+            <div class="column-xs">
+                <a href={setSlug(content)}><h3>{title}</h3></a>
+                <p>{description}</p>
+            </div>
+            <CardStats class="card-stats" {content} color="var(--neutral-95)"/>
+        </section>
+        {content.collection == "tools" && (
+            <div class="program-banner">
+                <img class="program" src="/images/blender.png" alt="Usable in Blender" />
+            </div>
+        )}
+    </article>
 )}
 
 <style>

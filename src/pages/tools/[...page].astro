@@ -4,8 +4,8 @@ import Pagination from "@/components/Pagination.astro";
 
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
-import { ALL_TOOLS } from "@/content.config";
-import type { Page } from "astro";
+import { ALL_TOOLS, Collection } from "@/content.config";
+import type { Page } from "astro/dist/types/public";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import AssetCard from "@/components/AssetCard.astro";
 import { findContent } from "@/scripts/utilities";
@@ -46,7 +46,7 @@ const isCurrentPage = page.url.current === "/tools";
 		/>
 		<div class="grid-md-3">
 			<Pagination {page} content={ALL_TOOLS} />
-			{page.data.map((content) => <AssetCard {content} />)}
+			{page.data.map((content: Collection) => <AssetCard {content} />)}
 			<Pagination {page} content={ALL_TOOLS} />
 		</div>
 	</section>

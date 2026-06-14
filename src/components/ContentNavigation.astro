@@ -8,36 +8,25 @@ interface Props {
 	index: number;
 }
 
-
-
 const { content, contentCollection, index } = Astro.props;
-const { pathname } = Astro.url;
 const { collection } = content;
 
+const max = contentCollection.length - 1;
+const prevIsDisabled = index === max;
+const nextIsDisabled = index === 0;
+
+console.log(index, contentCollection.length)
+
 function setNextHref(): string {
-	return index - 1 < 0
+	return nextIsDisabled
 		? contentCollection[0].slug
 		: contentCollection[index - 1].slug;
 }
 
 function setPrevHref(): string {
-	const max = contentCollection.length - 1;
-
-	return index + 1 >= max
+	return prevIsDisabled
 		? contentCollection[max].slug
 		: contentCollection[index + 1].slug;
-}
-
-function setDisabled(type: "next" | "prev"): boolean {
-	if (pathname === `/${collection}/${setPrevHref()}` && type === "prev") {
-		return true;
-	}
-
-	if (pathname === `/${collection}/${setNextHref()}` && type === "next") {
-		return true;
-	}
-
-	return false;
 }
 ---
 
@@ -53,7 +42,7 @@ function setDisabled(type: "next" | "prev"): boolean {
 				label="Prev"
 				icon="arrow-left"
 				href=`/${collection}/${setPrevHref()}`
-				disabled={setDisabled("prev")}
+				disabled={prevIsDisabled}
 				dataLayout="desktop"
 				small
 			/>
@@ -61,7 +50,7 @@ function setDisabled(type: "next" | "prev"): boolean {
 				label="Prev"
 				icon="arrow-left"
 				href=`/${collection}/${setPrevHref()}`
-				disabled={setDisabled("prev")}
+				disabled={prevIsDisabled}
 				dataLayout="mobile"
 				small
 				iconOnly
@@ -72,7 +61,7 @@ function setDisabled(type: "next" | "prev"): boolean {
 				label="Next"
 				icon="arrow-right"
 				href=`/${collection}/${setNextHref()}`
-				disabled={setDisabled("next")}
+				disabled={nextIsDisabled}
 				dataLayout="desktop"
 				iconRight
 				small
@@ -81,7 +70,7 @@ function setDisabled(type: "next" | "prev"): boolean {
 				label="Next"
 				icon="arrow-right"
 				href=`/${collection}/${setNextHref()}`
-				disabled={setDisabled("next")}
+				disabled={nextIsDisabled}
 				dataLayout="mobile"
 				iconRight
 				small
