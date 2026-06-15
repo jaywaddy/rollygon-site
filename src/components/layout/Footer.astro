@@ -23,7 +23,7 @@ import SiteTitle from "@/components/SiteTitle.astro";
 				<li>
 					<Link
 						label={model.data.title}
-						href={`/models/${model.slug}`}
+						href={`/models/${model.id}`}
 						underline
 					/>
 					{model === ALL_MODELS[0] && <span class="new">&#x1F7CC;</span>}
@@ -36,7 +36,7 @@ import SiteTitle from "@/components/SiteTitle.astro";
 				<li>
 					<Link
 						label={tool.data.title}
-						href={`/tools/${tool.slug}`}
+						href={`/tools/${tool.id}`}
 						underline
 					/>
 					{tool === ALL_TOOLS[0] && <span class="new">&#x1F7CC;</span>}
@@ -49,7 +49,7 @@ import SiteTitle from "@/components/SiteTitle.astro";
 				<li>
 					<Link
 						label={post.data.title}
-						href={`/posts/${post.slug}`}
+						href={`/posts/${post.id}`}
 						underline
 					/>
 					{post === ALL_POSTS[0] && <span class="new">&#x1F7CC;</span>}

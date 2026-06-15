@@ -6,19 +6,20 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS } from "@/content.config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
-import { findContent } from "@/scripts/utilities";
+import { findContent, slugifyTitle } from "@/scripts/utilities";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
 	return ALL_POSTS.map((post, index) => ({
 		params: {
-			slug: post.slug,
+			slug: slugifyTitle(post),
 		},
 		props: { post, index },
 	}));
 }
 
 const { post, index } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 const model = findContent(ALL_MODELS, getModeSlug());
 
 function setPostIndex(): number {
@@ -34,7 +35,7 @@ function setPostIndex(): number {
 }
 
 function getModeSlug(): string  {
-	return post.slug.split("-").slice(0, -1).join("-");
+	return post.id.split("-").slice(0, -1).join("-");
 }
 ---
 
@@ -42,14 +43,14 @@ function getModeSlug(): string  {
 	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
-	{model.slug === getModeSlug() && (
+	{model.id === getModeSlug() && (
 		<div class="column-md">
 			<SectionTitle
 				heading="View Model"
 				badgeLabel="RELATED"
 				badgeStyle="alt"
 			/>
-			<AssetCard content={findContent(ALL_MODELS, model.slug)} />
+			<AssetCard content={findContent(ALL_MODELS, model.id)} />
 		</div>
 	)}
 	<div class="column-md">

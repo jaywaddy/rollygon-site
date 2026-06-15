@@ -1,6 +1,6 @@
 ---
 import type { Collection } from '@/content.config.ts';
-import { setImageSrc, setSlug } from '@/scripts/utilities';
+import { setImageSrc, setHref } from '@/scripts/utilities';
 import Badge from '@/ui/Badge.astro';
 import CardStats from '@/ui/CardStats.astro';
 
@@ -31,7 +31,7 @@ function setBackgroundColor(color: string | undefined) {
             <div class="bg-image"></div>
             {content.collection === "tools" && <Badge label={content.data.price.toUpperCase()} style="asset" />}
             <div class="column-xs">
-                <a href={setSlug(content)}><h3>{title}</h3></a>
+                <a href={setHref(content)}><h3>{title}</h3></a>
                 <p>{description}</p>
             </div>
             <CardStats class="card-stats" {content} color="var(--neutral-95)"/>

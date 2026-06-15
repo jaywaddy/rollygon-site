@@ -2,27 +2,27 @@
 import ArticleCard from "@/components/ArticleCard.astro";
 import AssetCard from "@/components/AssetCard.astro";
 import ContentNavigation from "@/components/ContentNavigation.astro";
-import AssetPoster from "@/components/ui/AssetPoster.astro";
 import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_MODELS, ALL_POSTS, type Collection } from "@/content.config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 import { getFeaturedTools } from "@/scripts/constants";
-import { titleCase } from "@/scripts/utilities";
+import { slugifyTitle, titleCase } from "@/scripts/utilities";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
 	return ALL_MODELS.map((model, index) => ({
 		params: {
-			slug: model.slug,
+			slug: slugifyTitle(model), 
 		},
 		props: { model, index },
 	}));
 }
 
 const { model, index } = Astro.props;
-const { Content } = await model.render();
+const { Content } = await render(model);
 const modelUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
-	content.data.tags.includes(titleCase(model.slug)),
+	content.data.tags.includes(titleCase(model.id)),
 );
 
 function setModelIndex(): number {

@@ -7,6 +7,7 @@ import { calcReadTime, formatDate, setImageSrc } from "@/scripts/utilities";
 import type { Collection } from "@/content.config";
 import Button from "@/components/ui/Button.astro";
 import TableOfContents from "@/components/ui/TableOfContents.astro";
+import { render } from "astro:content";
 
 interface Props {
 	content: Collection;
@@ -17,7 +18,7 @@ interface Props {
 const { content, contentCollection, index } = Astro.props;
 const { title, description, postDate, modifiedDate } = content.data;
 const { collection, body } = content;
-const { headings } = await content.render();
+const { headings } = await render(content);
 
 function setButtonLabel(price: string): string {
 	if (collection === "tools" && content.data.price === "$0+") {

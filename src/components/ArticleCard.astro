@@ -2,7 +2,7 @@
 import Badge from "@/ui/Badge.astro";
 import CardStats from "@/ui/CardStats.astro";
 import ArticleCardImage from "@/components/ArticleCardImage.astro";
-import { setSlug } from "@/scripts/utilities";
+import { setHref } from "@/scripts/utilities";
 import { type Collection } from "@/content.config";
 
 interface Props {
@@ -29,7 +29,7 @@ const { collection } = content;
             </span>
         )}
         <div class="column-xs">
-            <a href={setSlug(content)}><h3>{title}</h3></a>
+            <a href={setHref(content)}><h3>{title}</h3></a>
             <p>{description}</p>
         </div>
         <CardStats {content} />

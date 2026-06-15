@@ -1,6 +1,7 @@
 ---
 import Button from "@/ui/Button.astro";
 import type { Collection } from "@/content.config";
+import { slugify } from "@/scripts/utilities";
 
 interface Props {
 	content: Collection;
@@ -11,20 +12,20 @@ interface Props {
 const { content, contentCollection, index } = Astro.props;
 const { collection } = content;
 
-const max = contentCollection.length - 1;
-const prevIsDisabled = index === max;
+const contentCount = contentCollection.length - 1;
+const prevIsDisabled = index === contentCount;
 const nextIsDisabled = index === 0;
 
 function setNextHref(): string {
 	return nextIsDisabled
-		? contentCollection[0].slug
-		: contentCollection[index - 1].slug;
+		? slugify(contentCollection[0].data.title) 
+		: slugify(contentCollection[index - 1].data.title);
 }
 
 function setPrevHref(): string {
 	return prevIsDisabled
-		? contentCollection[max].slug
-		: contentCollection[index + 1].slug;
+		? slugify(contentCollection[contentCount].data.title)
+		: slugify(contentCollection[index + 1].data.title);
 }
 ---
 

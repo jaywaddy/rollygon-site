@@ -6,20 +6,22 @@ import SectionTitle from "@/components/ui/SectionTitle.astro";
 import { ALL_POSTS, ALL_TOOLS, type Collection } from "@/content.config";
 import ContentPageLayout from "@/layouts/ContentPageLayout.astro";
 import SiteLayout from "@/layouts/SiteLayout.astro";
+import { slugifyTitle } from "@/scripts/utilities";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
 	return ALL_TOOLS.map((tool, index) => ({
 		params: {
-			slug: tool.slug,
+			slug: slugifyTitle(tool),
 		},
 		props: { tool, index },
 	}));
 }
 
 const { tool, index } = Astro.props;
-const { Content } = await tool.render();
+const { Content } = await render(tool);
 const toolUpdates: Array<Collection> = ALL_POSTS.filter((content) =>
-	content.data.tags.includes(tool.slug),
+	content.data.tags.includes(tool.id),
 );
 
 function setToolIndex(): number {

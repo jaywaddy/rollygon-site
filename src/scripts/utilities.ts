@@ -41,15 +41,19 @@ export function titleCase(input: string):string {
 }
 
 export function findContent (contentArray: Array<Collection>, slug: string): Collection {
-    return contentArray.find(content => content.slug === slug) || contentArray[0];
+    return contentArray.find(content => slugify(content.data.title) === slug) || contentArray[0];
 }
 
-export function setSlug(content: Collection): string {
-    return `/${content.collection}/${content.slug}`;
+export function slugifyTitle(content: Collection): string {
+    return slugify(content.data.title);
+}
+
+export function setHref(content: Collection): string {
+    return `/${content.collection}/${slugifyTitle(content)}`;
 }
 
 export function setImageSrc(content: Collection, imageType: "poster" | "banner"): string {
-    const directory = `/images${setSlug(content)}/`;
+    const directory = `/images${setHref(content)}/`;
 
     if (imageType == "banner") {
         return directory + "banner.png";

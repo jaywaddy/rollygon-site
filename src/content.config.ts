@@ -1,9 +1,15 @@
-import { z, defineCollection, type CollectionEntry, getCollection } from "astro:content";
+import { defineCollection, type CollectionEntry, getCollection } from "astro:content";
+import { z } from "astro/zod";
+import { glob } from "astro/loaders";
 
 export type Collection = CollectionEntry<"posts" | "tools" | "models">;
 
 const postCollection = defineCollection({
-    type: "content",
+    type: "content_layer",
+    loader: glob({
+        pattern: "**/*.md",
+        base: "./src/content/posts"
+    }),
     schema: z.object({
         title: z.string(),
         postDate: z.date(),
@@ -17,7 +23,11 @@ const postCollection = defineCollection({
 });
 
 const toolCollection = defineCollection({
-    type: "content",
+    type: "content_layer",
+    loader: glob({
+        pattern: "**/*.md",
+        base: "./src/content/tools"
+    }),
     schema: z.object({
         title: z.string(),
         postDate: z.date(),
@@ -35,7 +45,11 @@ const toolCollection = defineCollection({
 });
 
 const modelCollection = defineCollection({
-    type: "content",
+    type: "content_layer",
+    loader: glob({
+        pattern: "**/*.md",
+        base: "./src/content/models"
+    }),
     schema: z.object({
         title: z.string(),
         subTitle: z.string(),
