@@ -15,8 +15,6 @@ const max = contentCollection.length - 1;
 const prevIsDisabled = index === max;
 const nextIsDisabled = index === 0;
 
-console.log(index, contentCollection.length)
-
 function setNextHref(): string {
 	return nextIsDisabled
 		? contentCollection[0].slug
