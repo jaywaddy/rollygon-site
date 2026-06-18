@@ -28,9 +28,9 @@ const populate = {
   footer: { 
     populate: { 
       logo: link,
-      group: {
+      groups: {
         populate:{
-          footerLink: link
+          footerLinks: link
         }
       }
     } 

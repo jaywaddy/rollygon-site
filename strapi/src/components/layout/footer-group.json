@@ -9,7 +9,7 @@
     "title": {
       "type": "string"
     },
-    "footerLink": {
+    "footerLinks": {
       "type": "component",
       "component": "shared.link",
       "repeatable": true

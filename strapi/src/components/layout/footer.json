@@ -11,7 +11,7 @@
       "component": "shared.link",
       "repeatable": false
     },
-    "group": {
+    "groups": {
       "type": "component",
       "component": "layout.footer-group",
       "repeatable": true

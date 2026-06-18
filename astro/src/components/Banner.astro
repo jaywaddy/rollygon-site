@@ -1,0 +1,15 @@
+---
+import type { TBanner } from '../types';
+
+interface Props {
+    data: TBanner | undefined;
+}
+
+const { data: banner } = Astro.props;
+
+if (!banner) {
+    return;
+}
+---
+
+{ banner.isVisible && <h1>{banner.description}</h1> }

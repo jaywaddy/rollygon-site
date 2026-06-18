@@ -21,7 +21,7 @@ export interface LayoutFooter extends Struct.ComponentSchema {
   };
   attributes: {
     copyrightText: Schema.Attribute.Text;
-    group: Schema.Attribute.Component<'layout.footer-group', true>;
+    groups: Schema.Attribute.Component<'layout.footer-group', true>;
     logo: Schema.Attribute.Component<'shared.link', false>;
   };
 }
@@ -33,7 +33,7 @@ export interface LayoutFooterGroup extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    footerLink: Schema.Attribute.Component<'shared.link', true>;
+    footerLinks: Schema.Attribute.Component<'shared.link', true>;
     title: Schema.Attribute.String;
   };
 }
