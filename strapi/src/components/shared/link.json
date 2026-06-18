@@ -1,0 +1,90 @@
+{
+  "collectionName": "components_shared_links",
+  "info": {
+    "displayName": "Link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "href": {
+      "type": "string",
+      "default": "/",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "showLabel": {
+      "type": "boolean",
+      "default": true
+    },
+    "showIcon": {
+      "type": "boolean",
+      "default": false
+    },
+    "iconPosition": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showIcon"
+            },
+            true
+          ]
+        }
+      },
+      "default": "LEFT",
+      "enum": [
+        "LEFT",
+        "RIGHT"
+      ]
+    },
+    "icon": {
+      "type": "media",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showIcon"
+            },
+            true
+          ]
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false
+    },
+    "isButtonLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "style": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "isButtonLink"
+            },
+            true
+          ]
+        }
+      },
+      "required": false,
+      "default": "PRIMARY",
+      "enum": [
+        "PRIMARY",
+        "SECONDARY"
+      ]
+    }
+  },
+  "config": {}
+}

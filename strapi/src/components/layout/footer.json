@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    },
+    "group": {
+      "type": "component",
+      "component": "layout.footer-group",
+      "repeatable": true
+    },
+    "copyrightText": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

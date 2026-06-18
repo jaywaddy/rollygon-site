@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_layout_footer_groups",
+  "info": {
+    "displayName": "FooterGroup",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "footerLink": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
