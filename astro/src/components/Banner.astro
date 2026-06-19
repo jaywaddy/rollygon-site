@@ -1,14 +1,14 @@
 ---
-import type { TBanner } from '../types';
+import type { TBanner } from "../types";
 
 interface Props {
-    data: TBanner | undefined;
+	data: TBanner | undefined;
 }
 
 const { data: banner } = Astro.props;
 
 if (!banner) {
-    return;
+	return null;
 }
 ---
 
