@@ -84,6 +84,20 @@
         "PRIMARY",
         "SECONDARY"
       ]
+    },
+    "isUnderlined": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "showLabel"
+            },
+            true
+          ]
+        }
+      },
+      "default": true
     }
   },
   "config": {}

@@ -2,14 +2,34 @@
 import type { TBanner } from "../types";
 
 interface Props {
-	data: TBanner | undefined;
+    data: TBanner | undefined;
 }
 
 const { data: banner } = Astro.props;
 
-if (!banner) {
-	return null;
-}
+if (!banner?.isVisible) return null;
 ---
 
-{ banner.isVisible && <h1>{banner.description}</h1> }
+<div id="banner" class="relative flex w-full items-center justify-center py-2">
+    <p>
+        <a href={banner.link.href} class="flex gap-2">
+            <strong>{banner.description}</strong>
+            &mdash;
+            {banner.link.label}
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+    </p>
+    <button id="dismiss-button" class="absolute right-4 border-none">
+        close
+    </button>
+</div>
+<script>
+    const banner = document.getElementById("banner");
+    const dismissButton = document.getElementById("dismiss-button");
+
+    if (banner && dismissButton) {
+        dismissButton.addEventListener("click", () => {
+            banner.style.display = "none";
+        });
+    }
+</script>

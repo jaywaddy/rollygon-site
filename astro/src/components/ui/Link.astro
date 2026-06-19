@@ -1,0 +1,47 @@
+---
+import type { TLink } from "../../types";
+
+interface Props {
+    data: TLink;
+    isActive?: "page" | "false";
+}
+
+const { data: link, isActive = "false" } = Astro.props;
+
+if (!link) {
+    return null;
+}
+
+const iconPosition =
+    link.iconPosition === "RIGHT" ? "flex-row-reverse" : "flex-row";
+const isUnderlined = link.isUnderlined ? "underline" : "";
+---
+
+<style define:vars={{ iconPosition, isUnderlined }}>
+    :root {
+        --gap-2: 4px;
+    }
+    .link {
+        display: flex;
+        flex-direction: var(--iconPosition);
+        gap: var(--gap-2);
+
+        text-decoration: var(--isUnderlined);
+    }
+
+    [aria-current="active"] {
+    }
+</style>
+<a
+    href={link.href}
+    class=`flex ${iconPosition} ${isUnderlined}`
+    aria-current={isActive}
+    data-underline={link.isUnderlined}
+>
+    {
+        link.showIcon && (
+            <img src={link.icon?.url} alt={link.icon?.alternativeText} />
+        )
+    }
+    {link.showLabel && link.label}
+</a>
