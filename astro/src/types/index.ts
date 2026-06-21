@@ -4,19 +4,19 @@ export type TImage = {
     documentId: string;
     id: number;
     url: string;
+    width: number;
+    height: number;
 };
 
 // Shared components
 export type TLink = {
     href: string;
-    icon?: TImage;
-    iconPosition?: "LEFT" | "RIGHT";
+    image?: TImage;
+    imageOnRight?: boolean;
     isButtonLink: boolean;
     isExternal: boolean;
     isUnderlined: boolean;
-    label: string;
-    showIcon: boolean;
-    showLabel: boolean;
+    label?: string;
     style?: "PRIMARY" | "SECONDARY";
 };
 

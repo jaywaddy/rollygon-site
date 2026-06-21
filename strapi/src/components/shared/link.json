@@ -15,44 +15,8 @@
       "type": "string",
       "required": false
     },
-    "showLabel": {
-      "type": "boolean",
-      "default": true
-    },
-    "showIcon": {
-      "type": "boolean",
-      "default": false
-    },
-    "iconPosition": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "showIcon"
-            },
-            true
-          ]
-        }
-      },
-      "default": "LEFT",
-      "enum": [
-        "LEFT",
-        "RIGHT"
-      ]
-    },
-    "icon": {
+    "image": {
       "type": "media",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "showIcon"
-            },
-            true
-          ]
-        }
-      },
       "multiple": false,
       "allowedTypes": [
         "images"
@@ -87,17 +51,11 @@
     },
     "isUnderlined": {
       "type": "boolean",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "showLabel"
-            },
-            true
-          ]
-        }
-      },
       "default": true
+    },
+    "imageOnRight": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

@@ -61,15 +61,12 @@ export interface SharedLink extends Struct.ComponentSchema {
     href: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'/'>;
-    icon: Schema.Attribute.Media<'images'>;
-    iconPosition: Schema.Attribute.Enumeration<['LEFT', 'RIGHT']> &
-      Schema.Attribute.DefaultTo<'LEFT'>;
+    image: Schema.Attribute.Media<'images'>;
+    imageOnRight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isButtonLink: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isUnderlined: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
-    showIcon: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    showLabel: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     style: Schema.Attribute.Enumeration<['PRIMARY', 'SECONDARY']> &
       Schema.Attribute.DefaultTo<'PRIMARY'>;
   };

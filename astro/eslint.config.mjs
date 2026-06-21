@@ -9,6 +9,9 @@ export default [
             // override/add rules settings here, such as:
             // "astro/no-set-html-directive": "error"
             quotes: ["warn", "double"],
+            "no-undef": "warn",
+            "quote-props": ["warn", "consistent-as-needed"],
         },
+        extends: ["plugin:pretier/recommended"],
     },
 ];

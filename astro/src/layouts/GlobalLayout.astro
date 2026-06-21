@@ -1,25 +1,14 @@
 ---
 import Banner from "../components/Banner.astro";
+import Header from "../components/Header.astro";
 import "../styles/global.css";
 import type { TBanner, TFooter, THeader } from "../types/index";
 
 type TStrapiResponse<T = null> = {
     success: boolean;
     data?: T;
-    error?: {
-        status: number;
-        name: string;
-        message: string;
-        details?: Record<string, string[]>;
-    };
-    meta?: {
-        pagination: {
-            page: number;
-            pageSize: number;
-            pageCount: number;
-            total: number;
-        };
-    };
+    error?: { status: number; name: string; message: string; details?: Record<string, string[]> };
+    meta?: { pagination: { page: number; pageSize: number; pageCount: number; total: number } };
 };
 
 type TGlobalData = {
@@ -35,8 +24,7 @@ type TGlobalData = {
 };
 
 async function getStrapiGlobalData(): Promise<TStrapiResponse<TGlobalData>> {
-    const BASE_API_URL =
-        import.meta.env.VITE_STRAPI_BASE_URL ?? "http://localhost:1337";
+    const BASE_API_URL = import.meta.env.VITE_STRAPI_BASE_URL ?? "http://localhost:1337";
     const path = "/api/global";
     const url = new URL(path, BASE_API_URL);
     const response = await fetch(url.href);
@@ -47,11 +35,12 @@ async function getStrapiGlobalData(): Promise<TStrapiResponse<TGlobalData>> {
 
 const globalData = await getStrapiGlobalData();
 
-if (!globalData) {
-    return null;
+if (globalData.error) {
+    console.error("Failed to fetch global data:", globalData.error?.message);
+    throw new Error(globalData.error?.message);
 }
 
-const banner = globalData.data?.banner;
+const { banner, header, footer } = globalData.data ?? {};
 ---
 
 <!doctype html>
@@ -59,10 +48,53 @@ const banner = globalData.data?.banner;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Rollygon</title>
+        <script type="module" defer>
+            const systemTheme =
+                window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
+            // const themeToggleButton = document.getElementById("theme-toggle-button");
+            // const menuToggleButton = document.getElementById("menu-toggle-button");
+            const body = document.body;
+            const lightMode = systemTheme === true;
+            const defaultTheme = "dark";
+            let selectedTheme = localStorage.getItem("theme");
+
+            if (!selectedTheme) {
+                localStorage.setItem("theme", lightMode ? "light" : "dark");
+            }
+
+            if (body) {
+                body.setAttribute("data-theme", selectedTheme ?? defaultTheme);
+            }
+            // themeToggleButton.addEventListener("click", toggleTheme);
+            // menuToggleButton.addEventListener("click", toggleMenu);
+
+            // function toggleTheme() {
+            //     selectedTheme = localStorage.getItem("theme");
+
+            //     if (selectedTheme === "light") {
+            //         localStorage.setItem("theme", "dark");
+            //         body.setAttribute("data-theme", "dark");
+            //         return;
+            //     }
+
+            //     localStorage.setItem("theme", "light");
+            //     body.setAttribute("data-theme", "light");
+            // }
+
+            // function toggleMenu() {
+            //     if (menuToggleButton.dataset.isChecked === "true") {
+            //         menuToggleButton.setAttribute("data-is-checked", "false");
+            //         return;
+            //     }
+
+            //     menuToggleButton.setAttribute("data-is-checked", "true");
+            // }
+        </script>
     </head>
     <body>
         <Banner data={banner} />
+        <Header data={header} />
         <slot />
     </body>
 </html>

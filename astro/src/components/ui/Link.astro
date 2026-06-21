@@ -1,5 +1,7 @@
 ---
 import type { TLink } from "../../types";
+import StrapiImage from "../StrapiImage.astro";
+import { componentStyles as style } from "../_componentStyles";
 
 interface Props {
     data: TLink;
@@ -8,40 +10,31 @@ interface Props {
 
 const { data: link, isActive = "false" } = Astro.props;
 
-if (!link) {
-    return null;
-}
+if (!link) return null;
 
-const iconPosition =
-    link.iconPosition === "RIGHT" ? "flex-row-reverse" : "flex-row";
-const isUnderlined = link.isUnderlined ? "underline" : "";
+const imagePositionStyles = link.imageOnRight ? "flex-row-reverse" : "flex-row";
+const isUnderlinedStyles = link.isUnderlined ? "underline" : "";
 ---
 
-<style define:vars={{ iconPosition, isUnderlined }}>
-    :root {
-        --gap-2: 4px;
-    }
-    .link {
-        display: flex;
-        flex-direction: var(--iconPosition);
-        gap: var(--gap-2);
-
-        text-decoration: var(--isUnderlined);
-    }
-
-    [aria-current="active"] {
-    }
-</style>
 <a
     href={link.href}
-    class=`flex ${iconPosition} ${isUnderlined}`
+    class:list={[
+        style.link,
+        imagePositionStyles,
+        isUnderlinedStyles,
+        link.isButtonLink && style.button,
+    ]}
     aria-current={isActive}
-    data-underline={link.isUnderlined}
 >
     {
-        link.showIcon && (
-            <img src={link.icon?.url} alt={link.icon?.alternativeText} />
+        link.image && (
+            <StrapiImage
+                src={link.image?.url}
+                alt={link.image?.alternativeText}
+                width={link.image?.width}
+                height={link.image?.height}
+            />
         )
     }
-    {link.showLabel && link.label}
+    {link.label}
 </a>
