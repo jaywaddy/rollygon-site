@@ -11,13 +11,16 @@ const { data: banner } = Astro.props;
 if (!banner || !banner?.isVisible) return null;
 ---
 
-<div id="banner" class="bg-brand-500 relative flex items-center justify-center py-2">
+<div
+    id="banner"
+    class="bg-primary border-cta-primary-content relative flex items-center justify-center border-b py-2"
+>
     <small class="flex items-center gap-2">
         <span>{banner.description}</span>
         <span>&mdash;</span>
         <Link data={banner.link} />
     </small>
-    <button id="dismiss-button" class="absolute right-4 cursor-pointer border-none">
+    <button id="dismiss-button" class="cta-hover absolute right-4 cursor-pointer border-none">
         &#x2715;
     </button>
 </div>

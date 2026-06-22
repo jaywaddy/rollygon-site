@@ -1,30 +1,51 @@
 ---
 import type { TLink } from "../../types";
 import StrapiImage from "../StrapiImage.astro";
-import { componentStyles as style } from "../_componentStyles";
 
 interface Props {
     data: TLink;
-    isActive?: "page" | "false";
+    class?: string;
+    arriaCurrent?: "page" | undefined;
 }
 
-const { data: link, isActive = "false" } = Astro.props;
+const { data: link, class: classAttribute, arriaCurrent } = Astro.props;
 
-if (!link) return null;
+if (!link) {
+    console.warn("Link: data property is invalid.");
+    return null;
+}
 
-const imagePositionStyles = link.imageOnRight ? "flex-row-reverse" : "flex-row";
-const isUnderlinedStyles = link.isUnderlined ? "underline" : "";
+const setButtonSize = function (): string {
+    const buttonSizes = new Map<string, string>([
+        ["SMALL", "button-sm"],
+        ["MEDIUM", "button-md"],
+        ["LARGE", "button-lg"],
+    ]);
+
+    return buttonSizes.get(link.buttonSize) || "";
+};
+
+const setButtonStyle = function (): string {
+    const buttonSizes = new Map<string, string>([
+        ["PRIMARY", "button-primary"],
+        ["SECONDARY", "button-secondary"],
+    ]);
+
+    return buttonSizes.get(link.buttonStyle) || "";
+};
 ---
 
 <a
     href={link.href}
     class:list={[
-        style.link,
-        imagePositionStyles,
-        isUnderlinedStyles,
-        link.isButtonLink && style.button,
+        "flex items-center gap-1",
+        link.imageOnRight ? "flex-row-reverse" : "flex-row",
+        link.isUnderlined ? "underline" : "",
+        link.isButtonLink && `button ${setButtonSize()} ${setButtonStyle()}`,
+        !link.isButtonLink && !arriaCurrent && "cta-hover",
+        classAttribute,
     ]}
-    aria-current={isActive}
+    aria-current={arriaCurrent}
 >
     {
         link.image && (

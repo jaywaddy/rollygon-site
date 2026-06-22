@@ -1,15 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
+:root {
+    --color-zinc-50: oklch(98.5% 0 0);
+    --color-zinc-100: oklch(96.7% 0.001 286.375);
+    --color-zinc-200: oklch(92% 0.004 286.32);
+    --color-zinc-300: oklch(87.1% 0.006 286.286);
+    --color-zinc-400: oklch(70.5% 0.015 286.067);
+    --color-zinc-500: oklch(55.2% 0.016 285.938);
+    --color-zinc-600: oklch(44.2% 0.017 285.786);
+    --color-zinc-700: oklch(37% 0.013 285.805);
+    --color-zinc-800: oklch(27.4% 0.006 286.033);
+    --color-zinc-900: oklch(21% 0.006 285.885);
+    --color-zinc-950: oklch(14.1% 0.005 285.823);
+
+    --color-brand-50: oklch(97.5% 0.031 135.3);
+    --color-brand-100: oklch(94.9% 0.067 135.5);
+    --color-brand-200: oklch(91.5% 0.127 135.7);
+    --color-brand-300: oklch(87.4% 0.196 135.9);
+    --color-brand-400: oklch(82.9% 0.238 136.1);
+    --color-brand-500: oklch(78.8% 0.233 136.3);
+    --color-brand-600: oklch(63.7% 0.232 136.5);
+    --color-brand-700: oklch(50.3% 0.232 136.7);
+    --color-brand-800: oklch(36.9% 0.232 136.9);
+    --color-brand-900: oklch(26.8% 0.232 137.1);
+    --color-brand-950: oklch(20.1% 0.232 137.3);
+}
+
 @theme {
-    --color-brand-50: oklch(0.975 0.031 135.3);
-    --color-brand-100: oklch(0.949 0.067 135.5);
-    --color-brand-200: oklch(0.915 0.127 135.7);
-    --color-brand-300: oklch(0.874 0.196 135.9);
-    --color-brand-400: oklch(0.829 0.238 136.1);
-    --color-brand-500: oklch(0.788 0.233 136.3);
-    --color-brand-600: oklch(0.637 0.232 136.5);
-    --color-brand-700: oklch(0.503 0.232 136.7);
-    --color-brand-800: oklch(0.369 0.232 136.9);
-    --color-brand-900: oklch(0.268 0.232 137.1);
-    --color-brand-950: oklch(0.201 0.232 137.3);
+    --color-*: initial;
+
+    --color-primary: var(--color-brand-500);
+
+    --default-font-family: "Outfit";
+
+    --color-type: var(--color-zinc-950);
+    --color-type-hover: color-mix(in oklch, var(--color-type) 50%, transparent);
+    --color-type-blur: color-mix(in oklch, var(--color-type) 70%, transparent);
+
+    --color-ui-primary: var(--color-zinc-50);
+    --color-ui-secondary: var(--color-zinc-100);
+    --color-ui-tertiary: var(--color-zinc-200);
+    --color-outline: var(--color-zinc-400);
+
+    --color-cta-primary: var(--color-primary);
+    --color-cta-primary-hover: var(--color-brand-400);
+    --color-cta-primary-content: var(--color-brand-800);
+    --color-cta-secondary: var(--color-zinc-100);
+    --color-cta-secondary-hover: var(--color-white);
+    --color-cta-secondary-content: var(--color-zinc-800);
+
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.75rem;
+    --radius-md: calc(var(--radius-lg) - var(--padding-sm));
+    --radius-lg: calc(var(--radius-sm) + var(--padding-lg));
+    --radius-pill: 100vw;
+
+    --outline: solid 1px var(--color-outline);
+}
+
+@layer base {
+    p,
+    a,
+    span,
+    h1,
+    h2,
+    h3 {
+        color: var(--color-type);
+    }
+}
+
+@layer components {
+    .button {
+        @apply radius-sm border font-semibold;
+    }
+}
+
+/* TYPOGRAPHY */
+@utility cta-hover {
+    &:hover {
+        color: var(--color-type-hover);
+    }
+}
+
+@utility cta-inactive {
+    color: var(--color-type-blur);
+}
+
+/* BUTTONS */
+@utility button-sm {
+    @apply radius-pill px-2 pb-0.5 text-sm;
+}
+
+@utility button-md {
+    @apply radius-pill px-4 py-2;
+}
+
+@utility button-lg {
+    @apply px-6 py-3;
+}
+
+@utility button-primary {
+    @apply bg-cta-primary text-cta-primary-content;
+
+    &:hover,
+    &:focus {
+        @apply bg-cta-primary-hover cta-hover;
+    }
+}
+
+@utility button-secondary {
+    @apply bg-cta-secondary text-cta-secondary-content;
+
+    &:hover,
+    &:focus {
+        @apply bg-cta-secondary-hover cta-hover;
+    }
+}
+
+/* RADII */
+@utility radius-xs {
+    border-radius: var(--radius-xs);
+}
+
+@utility radius-sm {
+    border-radius: var(--radius-sm);
+}
+
+@utility radius-pill {
+    border-radius: var(--radius-pill);
 }

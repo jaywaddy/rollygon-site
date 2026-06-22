@@ -1,5 +1,5 @@
 ---
-import type { THeader } from "../types";
+import type { THeader, TLink } from "../types";
 import StrapiImage from "./StrapiImage.astro";
 import Link from "./ui/Link.astro";
 
@@ -13,10 +13,15 @@ const { data: header } = Astro.props;
 if (!header) return null;
 
 const currentPath = Astro.url.pathname;
+const activeLink = header.navLinks.find((link) => link.href === currentPath);
+const checkIsActive = (link: TLink) => link.href === activeLink?.href;
 ---
 
-<header class="flex justify-between bg-neutral-500">
-    <div class="w-42">
+<header
+    id="header"
+    class="bg-ui-secondary border-outline flex justify-between border-b p-4 transition-[top] duration-300"
+>
+    <div class="flex w-42 items-center">
         <a href={header.logo.href}>
             <StrapiImage
                 src={header.logo.image?.url}
@@ -26,13 +31,17 @@ const currentPath = Astro.url.pathname;
             />
         </a>
     </div>
-    <div class="flex items-center gap-8">
+    <div class="flex items-center gap-12">
         <nav class="flex items-center">
-            <ul class="flex items-center gap-4">
+            <ul class="flex items-center gap-6">
                 {
                     header.navLinks.map((link) => (
-                        <li>
-                            <Link data={link} />
+                        <li class={`relative leading-8 ${checkIsActive(link) && "border-b-2"}`}>
+                            <Link
+                                data={link}
+                                class={checkIsActive(link) ? "" : "cta-inactive"}
+                                arriaCurrent={checkIsActive(link) ? "page" : undefined}
+                            />
                         </li>
                     ))
                 }
@@ -41,3 +50,20 @@ const currentPath = Astro.url.pathname;
         <Link data={header.cta} />
     </div>
 </header>
+<script>
+    const header = document.querySelector("#header") as HTMLElement;
+    let prevScrollPos = window.pageYOffset;
+
+    if (header) {
+        window.addEventListener("scroll", toggleHeader);
+    }
+
+    function toggleHeader() {
+        let currentScrollPos = window.pageYOffset;
+
+        prevScrollPos > currentScrollPos
+            ? (header.style.top = "0")
+            : (header.style.top = `-${header.scrollHeight}px`);
+        prevScrollPos = currentScrollPos;
+    }
+</script>

@@ -58,6 +58,9 @@ export interface SharedLink extends Struct.ComponentSchema {
     icon: 'link';
   };
   attributes: {
+    buttonSize: Schema.Attribute.Enumeration<['SMALL', 'MEDIUM', 'LARGE']>;
+    buttonStyle: Schema.Attribute.Enumeration<['PRIMARY', 'SECONDARY']> &
+      Schema.Attribute.DefaultTo<'PRIMARY'>;
     href: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'/'>;
@@ -67,8 +70,6 @@ export interface SharedLink extends Struct.ComponentSchema {
     isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isUnderlined: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String;
-    style: Schema.Attribute.Enumeration<['PRIMARY', 'SECONDARY']> &
-      Schema.Attribute.DefaultTo<'PRIMARY'>;
   };
 }
 

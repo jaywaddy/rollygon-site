@@ -10,6 +10,8 @@ export type TImage = {
 
 // Shared components
 export type TLink = {
+    buttonSize: "SMALL" | "MEDIUM" | "LARGE";
+    buttonStyle: "PRIMARY" | "SECONDARY";
     href: string;
     image?: TImage;
     imageOnRight?: boolean;
@@ -17,7 +19,6 @@ export type TLink = {
     isExternal: boolean;
     isUnderlined: boolean;
     label?: string;
-    style?: "PRIMARY" | "SECONDARY";
 };
 
 // Layout components

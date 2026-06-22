@@ -30,7 +30,7 @@
       "type": "boolean",
       "default": false
     },
-    "style": {
+    "buttonStyle": {
       "type": "enumeration",
       "conditions": {
         "visible": {
@@ -47,6 +47,24 @@
       "enum": [
         "PRIMARY",
         "SECONDARY"
+      ]
+    },
+    "buttonSize": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "isButtonLink"
+            },
+            true
+          ]
+        }
+      },
+      "enum": [
+        "SMALL",
+        "MEDIUM",
+        "LARGE"
       ]
     },
     "isUnderlined": {
