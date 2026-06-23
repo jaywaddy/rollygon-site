@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tools",
+  "info": {
+    "singularName": "tool",
+    "pluralName": "tools",
+    "displayName": "Tool"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "datePosted": {
+      "type": "date",
+      "required": true
+    },
+    "dateUpdated": {
+      "type": "date"
+    },
+    "version": {
+      "type": "decimal"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "externalLink": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "featuredModels": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::model.model"
+    },
+    "featuredImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

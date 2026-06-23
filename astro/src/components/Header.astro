@@ -22,14 +22,7 @@ const checkIsActive = (link: TLink) => link.href === activeLink?.href;
     class="bg-ui-secondary border-outline flex justify-between border-b p-4 transition-[top] duration-300"
 >
     <div class="flex w-42 items-center">
-        <a href={header.logo.href}>
-            <StrapiImage
-                src={header.logo.image?.url}
-                alt={header.logo.image?.alternativeText}
-                width={100}
-                height={32}
-            />
-        </a>
+        <Link data={header.logo} />
     </div>
     <div class="flex items-center gap-12">
         <nav class="flex items-center">

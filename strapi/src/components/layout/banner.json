@@ -13,7 +13,7 @@
     "description": {
       "type": "text"
     },
-    "link": {
+    "cta": {
       "type": "component",
       "component": "shared.link",
       "repeatable": false

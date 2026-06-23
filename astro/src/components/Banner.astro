@@ -8,7 +8,10 @@ interface Props {
 
 const { data: banner } = Astro.props;
 
-if (!banner || !banner?.isVisible) return null;
+if (!banner || !banner?.isVisible) {
+    console.warn("Banner: data is either invalid or not visible.");
+    return null;
+};
 ---
 
 <div
@@ -18,7 +21,7 @@ if (!banner || !banner?.isVisible) return null;
     <small class="flex items-center gap-2">
         <span>{banner.description}</span>
         <span>&mdash;</span>
-        <Link data={banner.link} />
+        <Link data={banner.cta} />
     </small>
     <button id="dismiss-button" class="cta-hover absolute right-4 cursor-pointer border-none">
         &#x2715;

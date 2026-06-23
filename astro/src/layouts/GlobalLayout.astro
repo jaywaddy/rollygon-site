@@ -1,27 +1,9 @@
 ---
-import Banner from "../components/Banner.astro";
-import Header from "../components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Banner from "@components/Banner.astro";
+import Header from "@components/Header.astro";
 import "../styles/global.css";
-import type { TBanner, TFooter, THeader } from "../types/index";
-
-type TStrapiResponse<T = null> = {
-    success: boolean;
-    data?: T;
-    error?: { status: number; name: string; message: string; details?: Record<string, string[]> };
-    meta?: { pagination: { page: number; pageSize: number; pageCount: number; total: number } };
-};
-
-type TGlobalData = {
-    id: number;
-    documentId: string;
-    title: string;
-    description: string;
-    createdAt: string;
-    publishedAt: string;
-    banner: TBanner;
-    header: THeader;
-    footer: TFooter;
-};
+import type { TGlobalData, TStrapiResponse } from "../types/index";
 
 async function getStrapiGlobalData(): Promise<TStrapiResponse<TGlobalData>> {
     const BASE_API_URL = import.meta.env.VITE_STRAPI_BASE_URL ?? "http://localhost:1337";
@@ -47,7 +29,10 @@ const { banner, header, footer } = globalData.data ?? {};
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
+        <meta name="generator" content={Astro.generator} />
         <title>Rollygon</title>
         <script type="module" defer>
             const systemTheme =
@@ -92,9 +77,12 @@ const { banner, header, footer } = globalData.data ?? {};
             // }
         </script>
     </head>
-    <body class="dark bg-ui-tertiary">
+    <body class="bg-ui-tertiary">
         <Banner data={banner} />
         <Header data={header} />
-        <slot />
+        <main>
+            <slot />
+        </main>
+        <Footer data={footer} />
     </body>
 </html>

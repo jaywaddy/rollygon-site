@@ -27,6 +27,11 @@
       "component": "layout.header",
       "repeatable": false
     },
+    "contactForm": {
+      "type": "component",
+      "component": "layout.contact-form",
+      "repeatable": false
+    },
     "footer": {
       "type": "component",
       "component": "layout.footer",

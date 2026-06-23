@@ -1,15 +1,15 @@
 /**
- * `global-populate` middleware
+ * `tool-populate` middleware
  */
 
 import type { Core } from "@strapi/strapi";
-import { RGlobal } from "../../../components";
+import { RTools } from "../../../components";
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {
     // Add your own logic here.
     return async (ctx, next) => {
-        ctx.query = RGlobal;
-        strapi.log.info("In global-populate middleware.");
+        ctx.query = RTools;
+        strapi.log.info("In tool-populate middleware.");
 
         await next();
     };

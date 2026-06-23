@@ -38,7 +38,7 @@ const setButtonStyle = function (): string {
 <a
     href={link.href}
     class:list={[
-        "flex items-center gap-1",
+        "flex w-fit items-center gap-1",
         link.imageOnRight ? "flex-row-reverse" : "flex-row",
         link.isUnderlined ? "underline" : "",
         link.isButtonLink && `button ${setButtonSize()} ${setButtonStyle()}`,

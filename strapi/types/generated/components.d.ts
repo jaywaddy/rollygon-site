@@ -7,9 +7,21 @@ export interface LayoutBanner extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
+    cta: Schema.Attribute.Component<'shared.link', false>;
     description: Schema.Attribute.Text;
     isVisible: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    link: Schema.Attribute.Component<'shared.link', false>;
+  };
+}
+
+export interface LayoutContactForm extends Struct.ComponentSchema {
+  collectionName: 'components_layout_contact_forms';
+  info: {
+    displayName: 'Contact Form';
+    icon: 'envelop';
+  };
+  attributes: {
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
@@ -29,7 +41,7 @@ export interface LayoutFooter extends Struct.ComponentSchema {
 export interface LayoutFooterGroup extends Struct.ComponentSchema {
   collectionName: 'components_layout_footer_groups';
   info: {
-    displayName: 'FooterGroup';
+    displayName: 'Footer Group';
     icon: 'code';
   };
   attributes: {
@@ -77,6 +89,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'layout.banner': LayoutBanner;
+      'layout.contact-form': LayoutContactForm;
       'layout.footer': LayoutFooter;
       'layout.footer-group': LayoutFooterGroup;
       'layout.header': LayoutHeader;

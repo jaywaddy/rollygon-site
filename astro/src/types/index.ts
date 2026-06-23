@@ -1,3 +1,35 @@
+// API
+export type TStrapiResponse<T = null> = {
+    success: boolean;
+    data?: T;
+    error?: {
+        status: number;
+        name: string;
+        message: string;
+        details?: Record<string, string[]>;
+    };
+    meta?: {
+        pagination: {
+            page: number;
+            pageSize: number;
+            pageCount: number;
+            total: number;
+        };
+    };
+};
+
+export type TGlobalData = {
+    id: number;
+    documentId: string;
+    title: string;
+    description: string;
+    createdAt: string;
+    publishedAt: string;
+    banner: TBanner;
+    header: THeader;
+    footer: TFooter;
+};
+
 // Strapi native
 export type TImage = {
     alternativeText: string;
@@ -25,7 +57,7 @@ export type TLink = {
 export type TBanner = {
     description: string;
     isVisible: boolean;
-    link: TLink;
+    cta: TLink;
 };
 
 export type TFooter = {

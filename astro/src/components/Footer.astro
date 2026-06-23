@@ -1,0 +1,29 @@
+---
+import type { TFooter } from "../types";
+import Link from "./ui/Link.astro";
+
+interface Props {
+    data: TFooter | undefined;
+    class?: string;
+}
+
+const { data: footer } = Astro.props;
+
+if (!footer) return null;
+---
+
+<footer>
+    <Link data={footer.logo} />
+    <div class="flex gap-16">
+        {
+            footer.groups.map((group) => (
+                <ul>
+                    <li>{group.title}</li>
+                    {group.footerLinks.map((link) => (
+                        <li>{<Link data={link} />}</li>
+                    ))}
+                </ul>
+            ))
+        }
+    </div>
+</footer>
