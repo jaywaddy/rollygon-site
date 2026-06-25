@@ -1,21 +1,20 @@
 /**
- * `landing-page-populate` middleware
+ * `tools-page-populate` middleware
  */
 
 import type { Core } from "@strapi/strapi";
-import { CLink } from "../../../components";
+import { CFeaturedAsset, CToolCard } from "../../../components";
 
 const populate = {
-    ctas: CLink,
-    featuredModel: true,
-    featuredArticles: true,
+    featured: CFeaturedAsset("tool"),
+    allTools: true,
 };
 
 export default (config, { strapi }: { strapi: Core.Strapi }) => {
     // Add your own logic here.
     return async (ctx, next) => {
         ctx.query.populate = populate;
-        strapi.log.info("In landing-page-populate middleware.");
+        strapi.log.info("In tools-page-populate middleware.");
 
         await next();
     };

@@ -745,7 +745,7 @@ export interface ApiToolsPageToolsPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    allToolsHeading: Schema.Attribute.Component<'shared.heading', false>;
+    allTools: Schema.Attribute.Component<'shared.heading', false>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

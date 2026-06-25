@@ -13,7 +13,7 @@ export const CFile = {
     fields: ["name", "size"],
 };
 
-export const CModel = {
+export const CModelCard = {
     populate: {
         featuredImage: CImage,
         file: {
@@ -22,23 +22,33 @@ export const CModel = {
     },
 };
 
-export const CTool = {
+export const CToolCard = {
     populate: {
         featuredImage: CImage,
         file: {
             fields: ["size"],
         },
     },
+};
+
+export const CArticleCard = {
+    populate: {
+        featuredImage: CImage,
+    },
+};
+
+export const CFeaturedAsset = (type: "tool" | "model" | "article") => {
+    return {
+        populate: {
+            heading: true,
+            tool: () => type === "tool" && CToolCard,
+            model: () => type === "model" && CModelCard,
+            article: () => type === "article" && CArticleCard,
+        },
+    };
 };
 
 // (R)outes
-export const RArticles = {
-    populate: {
-        featuredImage: CImage,
-        featuredModels: CModel,
-        featuredTools: CTool,
-    },
-};
 
 export const RGlobal = {
     populate: {
@@ -68,27 +78,10 @@ export const RGlobal = {
     },
 };
 
-export const RLandingPage = {
-    populate: {
-        ctas: CLink,
-        featuredModel: true,
-        featuredArticles: true,
-    },
-};
-
 export const RModels = {
     populate: {
         featuredImage: CImage,
-        featuredTools: CTool,
-        file: CFile,
-    },
-};
-
-export const RTools = {
-    populate: {
-        externalLink: CLink,
-        featuredImage: CImage,
-        featuredModels: CModel,
+        featuredTools: CToolCard,
         file: CFile,
     },
 };

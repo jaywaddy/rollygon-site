@@ -2,6 +2,12 @@
  * articles-page router
  */
 
-import { factories } from '@strapi/strapi';
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreRouter('api::articles-page.articles-page');
+export default factories.createCoreRouter("api::articles-page.articles-page", {
+    config: {
+        find: {
+            middlewares: ["api::articles-page.articles-page-populate"],
+        },
+    },
+});

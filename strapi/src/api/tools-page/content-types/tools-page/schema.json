@@ -22,7 +22,7 @@
       "component": "layout.page-information",
       "repeatable": false
     },
-    "allToolsHeading": {
+    "allTools": {
       "type": "component",
       "component": "shared.heading",
       "repeatable": false
