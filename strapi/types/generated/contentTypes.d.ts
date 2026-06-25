@@ -440,10 +440,40 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
+  collectionName: 'about_pages';
+  info: {
+    displayName: 'About Page';
+    pluralName: 'about-pages';
+    singularName: 'about-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-page.about-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
-    displayName: 'Article';
+    displayName: 'Articles';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -476,6 +506,37 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     videoEmbedID: Schema.Attribute.String;
+  };
+}
+
+export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
+  collectionName: 'articles_pages';
+  info: {
+    displayName: 'Articles Page';
+    pluralName: 'articles-pages';
+    singularName: 'articles-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    allArticles: Schema.Attribute.Component<'shared.heading', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    featured: Schema.Attribute.Component<'layout.page-information', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::articles-page.articles-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -552,7 +613,7 @@ export interface ApiLandingPageLandingPage extends Struct.SingleTypeSchema {
 export interface ApiModelModel extends Struct.CollectionTypeSchema {
   collectionName: 'models';
   info: {
-    displayName: 'Model';
+    displayName: 'Models';
     pluralName: 'models';
     singularName: 'model';
   };
@@ -588,10 +649,41 @@ export interface ApiModelModel extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiModelsPageModelsPage extends Struct.SingleTypeSchema {
+  collectionName: 'models_pages';
+  info: {
+    displayName: 'Models Page';
+    pluralName: 'models-pages';
+    singularName: 'models-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    allModels: Schema.Attribute.Component<'shared.heading', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    featured: Schema.Attribute.Component<'layout.page-information', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::models-page.models-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiToolTool extends Struct.CollectionTypeSchema {
   collectionName: 'tools';
   info: {
-    displayName: 'Tool';
+    displayName: 'Tools';
     pluralName: 'tools';
     singularName: 'tool';
   };
@@ -603,9 +695,8 @@ export interface ApiToolTool extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    datePosted: Schema.Attribute.Date & Schema.Attribute.Required;
-    dateUpdated: Schema.Attribute.Date;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
+    editDate: Schema.Attribute.Date;
     externalLink: Schema.Attribute.Component<'shared.link', false>;
     featuredImage: Schema.Attribute.Media<'images'>;
     featuredModels: Schema.Attribute.Relation<'oneToMany', 'api::model.model'>;
@@ -614,13 +705,63 @@ export interface ApiToolTool extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'> &
       Schema.Attribute.Private;
     price: Schema.Attribute.Decimal;
+    programs: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['blender']
+      > &
+      Schema.Attribute.DefaultTo<'["blender"]'>;
+    publishDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::auto-slug.slug',
+        {
+          autoGenerateIfEmpty: true;
+          autoGenerateOnCreate: true;
+          preserveOnEdit: true;
+          sourceField: 'title';
+          stopOnManualEdit: false;
+          unique: true;
+        }
+      >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     version: Schema.Attribute.Decimal;
+  };
+}
+
+export interface ApiToolsPageToolsPage extends Struct.SingleTypeSchema {
+  collectionName: 'tools_pages';
+  info: {
+    displayName: 'Tools Page';
+    pluralName: 'tools-pages';
+    singularName: 'tools-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    allToolsHeading: Schema.Attribute.Component<'shared.heading', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    featured: Schema.Attribute.Component<'layout.page-information', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tools-page.tools-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1135,11 +1276,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about-page.about-page': ApiAboutPageAboutPage;
       'api::article.article': ApiArticleArticle;
+      'api::articles-page.articles-page': ApiArticlesPageArticlesPage;
       'api::global.global': ApiGlobalGlobal;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::model.model': ApiModelModel;
+      'api::models-page.models-page': ApiModelsPageModelsPage;
       'api::tool.tool': ApiToolTool;
+      'api::tools-page.tools-page': ApiToolsPageToolsPage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

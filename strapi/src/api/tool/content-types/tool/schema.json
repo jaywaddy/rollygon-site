@@ -4,7 +4,7 @@
   "info": {
     "singularName": "tool",
     "pluralName": "tools",
-    "displayName": "Tool"
+    "displayName": "Tools"
   },
   "options": {
     "draftAndPublish": true
@@ -15,15 +15,28 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "customField",
+      "customField": "plugin::auto-slug.slug",
+      "options": {
+        "unique": true,
+        "autoGenerateOnCreate": true,
+        "stopOnManualEdit": false,
+        "preserveOnEdit": true,
+        "autoGenerateIfEmpty": true,
+        "sourceField": "title"
+      },
+      "required": true
+    },
     "description": {
       "type": "text",
       "required": true
     },
-    "datePosted": {
+    "publishDate": {
       "type": "date",
       "required": true
     },
-    "dateUpdated": {
+    "editDate": {
       "type": "date"
     },
     "version": {
@@ -31,10 +44,6 @@
     },
     "price": {
       "type": "decimal"
-    },
-    "slug": {
-      "type": "string",
-      "required": true
     },
     "externalLink": {
       "type": "component",
@@ -61,6 +70,14 @@
       "multiple": false,
       "allowedTypes": [
         "images"
+      ]
+    },
+    "programs": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[\"blender\"]",
+      "options": [
+        "blender"
       ]
     }
   }

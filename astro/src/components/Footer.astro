@@ -2,10 +2,7 @@
 import type { TFooter } from "../types";
 import Link from "./ui/Link.astro";
 
-interface Props {
-    data: TFooter | undefined;
-    class?: string;
-}
+type Props = { data: TFooter | undefined };
 
 const { data: footer } = Astro.props;
 

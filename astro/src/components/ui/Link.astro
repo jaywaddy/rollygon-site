@@ -2,11 +2,7 @@
 import type { TLink } from "../../types";
 import StrapiImage from "../StrapiImage.astro";
 
-interface Props {
-    data: TLink;
-    class?: string;
-    arriaCurrent?: "page" | undefined;
-}
+type Props = { data: TLink; class?: string; arriaCurrent?: "page" | undefined };
 
 const { data: link, class: classAttribute, arriaCurrent } = Astro.props;
 

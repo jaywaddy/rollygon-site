@@ -2,11 +2,11 @@
 import { Image as AstroImage } from "astro:assets";
 import { parse } from "node-html-parser";
 
-interface Props {
+type Props = {
     src: string | undefined;
     alt?: string | null;
-    height: number;
-    width: number;
+    height?: number;
+    width?: number;
     class?: string;
     loading?: "lazy" | "eager";
     quality?: number;
@@ -14,13 +14,13 @@ interface Props {
     aspectRatio?: "square" | "16:9" | "4:3" | "auto";
     fallback?: string;
     sizes?: string;
-}
+};
 
 const {
     src,
     alt,
-    height,
-    width,
+    height = 24,
+    width = 24,
     class: className,
     loading = "lazy",
     quality = 80,
@@ -107,17 +107,17 @@ const SVGImages = import.meta.glob<string>("../../../strapi/public/uploads/*.svg
 const getSVG = async (src: string) => {
     const filePath = `../../../strapi/public${src}`;
 
-    if (!(filePath in SVGImages)) {
-        throw new Error(`${filePath} not found`);
+    if (filePath in SVGImages) {
+        const { default: file } = (await SVGImages[filePath]()) as unknown as { default: string };
+        const root = parse(file);
+
+        const svg = root.querySelector("svg") as unknown as SVGElement;
+        const { attributes, innerHTML } = svg;
+
+        return { attributes, innerHTML };
     }
 
-    const { default: file } = (await SVGImages[filePath]()) as unknown as { default: string };
-    const root = parse(file);
-
-    const svg = root.querySelector("svg") as unknown as SVGElement;
-    const { attributes, innerHTML } = svg;
-
-    return { attributes, innerHTML };
+    return SVGImages;
 };
 
 const { attributes: baseAttributes, innerHTML } = await getSVG(src);

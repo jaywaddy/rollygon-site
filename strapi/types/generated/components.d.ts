@@ -63,6 +63,36 @@ export interface LayoutHeader extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutPageInformation extends Struct.ComponentSchema {
+  collectionName: 'components_layout_page_informations';
+  info: {
+    displayName: 'Featured Asset';
+    icon: 'code';
+  };
+  attributes: {
+    article: Schema.Attribute.Relation<'oneToOne', 'api::article.article'>;
+    heading: Schema.Attribute.Component<'shared.heading', false>;
+    model: Schema.Attribute.Relation<'oneToOne', 'api::model.model'>;
+    tool: Schema.Attribute.Relation<'oneToOne', 'api::tool.tool'>;
+  };
+}
+
+export interface SharedHeading extends Struct.ComponentSchema {
+  collectionName: 'components_shared_headings';
+  info: {
+    displayName: 'Heading';
+    icon: 'hashtag';
+  };
+  attributes: {
+    badgeText: Schema.Attribute.String;
+    badgeType: Schema.Attribute.Enumeration<['PRIMARY', 'SECONDARY']> &
+      Schema.Attribute.DefaultTo<'PRIMARY'>;
+    hasBadge: Schema.Attribute.Boolean;
+    heading: Schema.Attribute.String & Schema.Attribute.Required;
+    subheading: Schema.Attribute.Text;
+  };
+}
+
 export interface SharedLink extends Struct.ComponentSchema {
   collectionName: 'components_shared_links';
   info: {
@@ -93,6 +123,8 @@ declare module '@strapi/strapi' {
       'layout.footer': LayoutFooter;
       'layout.footer-group': LayoutFooterGroup;
       'layout.header': LayoutHeader;
+      'layout.page-information': LayoutPageInformation;
+      'shared.heading': SharedHeading;
       'shared.link': SharedLink;
     }
   }

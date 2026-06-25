@@ -2,16 +2,14 @@
 import type { TBanner } from "../types";
 import Link from "./ui/Link.astro";
 
-interface Props {
-    data: TBanner | undefined;
-}
+type Props = { data: TBanner | undefined };
 
 const { data: banner } = Astro.props;
 
 if (!banner || !banner?.isVisible) {
     console.warn("Banner: data is either invalid or not visible.");
     return null;
-};
+}
 ---
 
 <div

@@ -3,10 +3,7 @@ import type { THeader, TLink } from "../types";
 import StrapiImage from "./StrapiImage.astro";
 import Link from "./ui/Link.astro";
 
-interface Props {
-    data: THeader | undefined;
-    class?: string;
-}
+type Props = { data: THeader | undefined; class?: string };
 
 const { data: header } = Astro.props;
 

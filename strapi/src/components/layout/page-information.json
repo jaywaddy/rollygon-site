@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_layout_page_informations",
+  "info": {
+    "displayName": "Featured Asset",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "shared.heading",
+      "repeatable": false
+    },
+    "tool": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tool.tool"
+    },
+    "model": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::model.model"
+    },
+    "article": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::article.article"
+    }
+  },
+  "config": {}
+}

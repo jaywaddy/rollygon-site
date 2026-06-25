@@ -47,6 +47,7 @@ export const RGlobal = {
                 cta: CLink,
             },
         },
+        contactForm: true,
         header: {
             populate: {
                 logo: CLink,

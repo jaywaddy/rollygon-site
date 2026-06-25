@@ -1,0 +1,128 @@
+---
+import type { TModelCard, TToolCard } from "../types";
+import StrapiImage from "./StrapiImage.astro";
+
+type Props = { data: TToolCard | TModelCard };
+
+const { data } = Astro.props;
+
+if (!data) {
+    console.warn("Asset Card: data prop is either missing or invalid.");
+    return null;
+}
+
+const { title, description } = data;
+const isModel = "verticies" in data && "triangles" in data && "quads" in data;
+---
+
+<article class="asset-card card-hover border">
+    <section class="asset-card-inner column-md border">
+        <StrapiImage class="" src={data.featuredImage.url} />
+        {
+            "price" in data && (
+                <span class="button button-sm button-primary">{data.price === 0 && "FREE"}</span>
+            )
+        }
+        <div class="column-xs">
+            <a href="">
+                <h3>{title}</h3>
+            </a>
+            <p>{description}</p>
+        </div>
+        {
+            isModel && (
+                <div class="opacity-60">
+                    <span>{data.verticies}</span>
+                    <span>{data.triangles}</span>
+                    <span>{data.quads}</span>
+                </div>
+            )
+        }
+    </section>
+    {
+        "programs" in data && (
+            <div class="absolute inset-8">
+                <StrapiImage class="w-8" src="/uploads/blender_47b642ac94.png" />
+            </div>
+        )
+    }
+</article>
+<style>
+    .asset-card {
+        position: relative;
+        flex: 1 0 auto;
+
+        min-width: var(--mobile-card-width);
+        max-width: 100%;
+        min-height: 480px;
+        border-radius: var(--radius-lg);
+        background: var(--bg-light);
+    }
+
+    .program {
+        width: 48px;
+    }
+
+    @media only screen and (max-width: 860px) {
+        .asset-card {
+            min-height: 364px;
+        }
+    }
+
+    .asset-card-inner {
+        position: absolute;
+        justify-content: end;
+        overflow: clip;
+        inset: 0;
+
+        margin: var(--padding-sm);
+        padding: var(--padding-lg);
+
+        border-radius: var(--radius-md);
+        background: var(--neutral-30);
+
+        p,
+        a,
+        strong,
+        small,
+        span {
+            z-index: 2;
+        }
+
+        .card-stats * {
+            opacity: 0.6;
+        }
+
+        p {
+            height: auto;
+            max-height: calc(1.25rem * 2);
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            color: var(--neutral-95);
+        }
+
+        h3 {
+            color: var(--neutral-95);
+        }
+
+        &::before {
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(64px);
+            background: linear-gradient(
+                rgba(0 0 0 /0),
+                color-mix(in srgb, var(--bg-color), transparent 40%)
+            );
+            mask: linear-gradient(
+                rgba(0 0 0 / 0) 30%,
+                rgba(0 0 0 / 0.3) 40%,
+                rgba(0 0 0 / 0.6) 50%,
+                rgba(0 0 0 / 1) 70%
+            );
+
+            z-index: 1;
+            content: "";
+        }
+    }
+</style>

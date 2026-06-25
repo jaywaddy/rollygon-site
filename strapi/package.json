@@ -22,6 +22,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "strapi-auto-slug": "^1.0.11",
+    "strapi-plugin-multi-select": "^2.1.1",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {

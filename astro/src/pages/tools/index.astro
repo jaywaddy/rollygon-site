@@ -1,0 +1,26 @@
+---
+import GlobalLayout from "../../layouts/GlobalLayout.astro";
+import { getStrapiData } from "../../api";
+import type { TToolData } from "../../types";
+import AssetCard from "@components/AssetCard.astro";
+
+const allToolData = await getStrapiData<TToolData[]>("/api/tools");
+
+if (allToolData.error) {
+    console.error("Failed to fetch global data:", allToolData.error?.message);
+    throw new Error(allToolData.error?.message);
+}
+
+if (!allToolData.data) {
+    console.warn("Tool Data: data is either missing or invalid.");
+    return null;
+}
+
+const tools = allToolData.data;
+// const featuredTool = tools.find(({ isFeatured }) => isFeatured === true);
+---
+
+<GlobalLayout pageTitle="Tools">
+    <h1>Tools</h1>
+    {tools.map((tool) => <AssetCard data={tool} />)}
+</GlobalLayout>

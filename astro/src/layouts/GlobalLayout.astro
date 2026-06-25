@@ -1,28 +1,23 @@
 ---
-import Footer from "@components/Footer.astro";
 import Banner from "@components/Banner.astro";
+import ContactForm from "@components/ContactForm.astro";
+import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import "../styles/global.css";
-import type { TGlobalData, TStrapiResponse } from "../types/index";
+import { getStrapiData } from "../api";
+import type { TGlobalData } from "../types";
 
-async function getStrapiGlobalData(): Promise<TStrapiResponse<TGlobalData>> {
-    const BASE_API_URL = import.meta.env.VITE_STRAPI_BASE_URL ?? "http://localhost:1337";
-    const path = "/api/global";
-    const url = new URL(path, BASE_API_URL);
-    const response = await fetch(url.href);
-    const data = await response.json();
+type Props = { pageTitle: string };
 
-    return data;
-}
-
-const globalData = await getStrapiGlobalData();
+const globalData = await getStrapiData<TGlobalData>("/api/global");
 
 if (globalData.error) {
     console.error("Failed to fetch global data:", globalData.error?.message);
     throw new Error(globalData.error?.message);
 }
 
-const { banner, header, footer } = globalData.data ?? {};
+const { pageTitle: title } = Astro.props;
+const { banner, contactForm, header, footer } = globalData.data ?? {};
 ---
 
 <!doctype html>
@@ -33,7 +28,7 @@ const { banner, header, footer } = globalData.data ?? {};
         <meta name="description" content="" />
         <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
         <meta name="generator" content={Astro.generator} />
-        <title>Rollygon</title>
+        <title>Rollygon | {title}</title>
         <script type="module" defer>
             const systemTheme =
                 window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
@@ -83,6 +78,9 @@ const { banner, header, footer } = globalData.data ?? {};
         <main>
             <slot />
         </main>
-        <Footer data={footer} />
+        <div class="absolute bottom-0">
+            <ContactForm data={contactForm} />
+            <Footer data={footer} />
+        </div>
     </body>
 </html>
