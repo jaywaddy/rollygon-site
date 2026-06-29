@@ -11,6 +11,8 @@ if (!link) {
     return null;
 }
 
+const targetAttribute = link.isExternal ? "_blank" : undefined;
+
 const setButtonSize = function (): string {
     const buttonSizes = new Map<string, string>([
         ["SMALL", "button-sm"],
@@ -33,6 +35,7 @@ const setButtonStyle = function (): string {
 
 <a
     href={link.href}
+    target={targetAttribute}
     class:list={[
         "flex w-fit items-center gap-1",
         link.imageOnRight ? "flex-row-reverse" : "flex-row",

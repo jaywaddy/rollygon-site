@@ -32,15 +32,11 @@
       "type": "text",
       "required": true
     },
-    "publishDate": {
-      "type": "date",
-      "required": true
-    },
-    "editDate": {
+    "legacyPublishDate": {
       "type": "date"
     },
     "version": {
-      "type": "decimal"
+      "type": "float"
     },
     "price": {
       "type": "decimal"
@@ -57,14 +53,6 @@
         "files"
       ]
     },
-    "body": {
-      "type": "richtext"
-    },
-    "featuredModels": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::model.model"
-    },
     "featuredImage": {
       "type": "media",
       "multiple": false,
@@ -79,6 +67,14 @@
       "options": [
         "blender"
       ]
+    },
+    "featuredModels": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::model.model"
+    },
+    "body": {
+      "type": "blocks"
     }
   }
 }

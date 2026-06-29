@@ -26,11 +26,7 @@
     "videoEmbedID": {
       "type": "string"
     },
-    "datePosted": {
-      "type": "date",
-      "required": true
-    },
-    "dateUpdated": {
+    "legacyPublishDate": {
       "type": "date"
     },
     "body": {

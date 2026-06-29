@@ -7,7 +7,7 @@ import "../styles/global.css";
 import { getStrapiData } from "../api";
 import type { TGlobalData } from "../types";
 
-type Props = { pageTitle: string };
+type Props = { title: string; description?: string; class?: string };
 
 const globalData = await getStrapiData<TGlobalData>("/api/global");
 
@@ -16,7 +16,7 @@ if (globalData.error) {
     throw new Error(globalData.error?.message);
 }
 
-const { pageTitle: title } = Astro.props;
+const { title, description, class: className = "" } = Astro.props;
 const { banner, contactForm, header, footer } = globalData.data ?? {};
 ---
 
@@ -25,9 +25,9 @@ const { banner, contactForm, header, footer } = globalData.data ?? {};
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="" />
-        <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
+        <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
+        <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
         <title>Rollygon | {title}</title>
         <script type="module" defer>
             const systemTheme =
@@ -72,13 +72,13 @@ const { banner, contactForm, header, footer } = globalData.data ?? {};
             // }
         </script>
     </head>
-    <body class="bg-ui-tertiary">
+    <body class="bg-ui-tertiary relative flex min-h-screen flex-col">
         <Banner data={banner} />
         <Header data={header} />
-        <main>
+        <main class:list={["prose prose-zinc", className]}>
             <slot />
         </main>
-        <div class="absolute bottom-0">
+        <div class="mt-auto">
             <ContactForm data={contactForm} />
             <Footer data={footer} />
         </div>

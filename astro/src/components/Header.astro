@@ -29,7 +29,6 @@ const checkIsActive = (link: TLink) => link.href === activeLink?.href;
                         <li class={`relative leading-8 ${checkIsActive(link) && "border-b-2"}`}>
                             <Link
                                 data={link}
-                                class={checkIsActive(link) ? "" : "cta-inactive"}
                                 arriaCurrent={checkIsActive(link) ? "page" : undefined}
                             />
                         </li>

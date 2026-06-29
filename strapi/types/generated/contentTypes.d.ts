@@ -443,7 +443,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiAboutPageAboutPage extends Struct.SingleTypeSchema {
   collectionName: 'about_pages';
   info: {
-    displayName: 'About Page';
+    displayName: '5  - About Page';
     pluralName: 'about-pages';
     singularName: 'about-page';
   };
@@ -485,14 +485,13 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    datePosted: Schema.Attribute.Date & Schema.Attribute.Required;
-    dateUpdated: Schema.Attribute.Date;
     description: Schema.Attribute.String & Schema.Attribute.Required;
     featuredImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     featuredModels: Schema.Attribute.Relation<'oneToMany', 'api::model.model'>;
     featuredTools: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'>;
+    legacyPublishDate: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -512,7 +511,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
   collectionName: 'articles_pages';
   info: {
-    displayName: 'Articles Page';
+    displayName: '4 - Articles Page';
     pluralName: 'articles-pages';
     singularName: 'articles-page';
   };
@@ -543,7 +542,7 @@ export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
-    displayName: 'Global';
+    displayName: '0 - Global';
     pluralName: 'globals';
     singularName: 'global';
   };
@@ -576,7 +575,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiLandingPageLandingPage extends Struct.SingleTypeSchema {
   collectionName: 'landing_pages';
   info: {
-    displayName: 'Landing Page';
+    displayName: '1 - Landing Page';
     pluralName: 'landing-pages';
     singularName: 'landing-page';
   };
@@ -625,21 +624,31 @@ export interface ApiModelModel extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    datePosted: Schema.Attribute.Date;
-    dateUpdated: Schema.Attribute.Date;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     featuredImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     featuredTools: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'>;
     file: Schema.Attribute.Media<'files'>;
+    leagacyPublishDate: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::model.model'> &
       Schema.Attribute.Private;
     modelEmbedID: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     quads: Schema.Attribute.Decimal;
-    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.CustomField<
+        'plugin::auto-slug.slug',
+        {
+          autoGenerateIfEmpty: true;
+          autoGenerateOnCreate: true;
+          preserveOnEdit: true;
+          sourceField: 'title';
+          stopOnManualEdit: true;
+          unique: true;
+        }
+      >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     trianlges: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
@@ -652,7 +661,7 @@ export interface ApiModelModel extends Struct.CollectionTypeSchema {
 export interface ApiModelsPageModelsPage extends Struct.SingleTypeSchema {
   collectionName: 'models_pages';
   info: {
-    displayName: 'Models Page';
+    displayName: '3 - Models Page';
     pluralName: 'models-pages';
     singularName: 'models-page';
   };
@@ -691,16 +700,16 @@ export interface ApiToolTool extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    body: Schema.Attribute.RichText;
+    body: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
-    editDate: Schema.Attribute.Date;
     externalLink: Schema.Attribute.Component<'shared.link', false>;
     featuredImage: Schema.Attribute.Media<'images'>;
     featuredModels: Schema.Attribute.Relation<'oneToMany', 'api::model.model'>;
     file: Schema.Attribute.Media<'files'>;
+    legacyPublishDate: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::tool.tool'> &
       Schema.Attribute.Private;
@@ -711,7 +720,6 @@ export interface ApiToolTool extends Struct.CollectionTypeSchema {
         ['blender']
       > &
       Schema.Attribute.DefaultTo<'["blender"]'>;
-    publishDate: Schema.Attribute.Date & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -730,14 +738,14 @@ export interface ApiToolTool extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    version: Schema.Attribute.Decimal;
+    version: Schema.Attribute.Float;
   };
 }
 
 export interface ApiToolsPageToolsPage extends Struct.SingleTypeSchema {
   collectionName: 'tools_pages';
   info: {
-    displayName: 'Tools Page';
+    displayName: '2 - Tools Page';
     pluralName: 'tools-pages';
     singularName: 'tools-page';
   };

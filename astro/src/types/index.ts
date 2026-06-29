@@ -1,3 +1,5 @@
+import type { StrapiBlock } from "./strapiBlocks";
+
 // API
 export type TStrapiResponse<T = null> = {
     success: boolean;
@@ -44,7 +46,7 @@ export type TToolData = {
     featuredModels: TModelCard;
     featuredImage: TImage;
     file: TFile;
-    body: string;
+    body: StrapiBlock[];
 };
 
 export type TModelData = {
@@ -60,7 +62,7 @@ export type TModelData = {
     trianlges: number;
     quads: number;
     file: TFile;
-    body: string;
+    body: StrapiBlock[];
 };
 
 export type TArticleData = {
@@ -72,7 +74,7 @@ export type TArticleData = {
     featuredTools: TToolCard;
     featuredModels: TModelCard;
     featuredImage: TImage;
-    body: string;
+    body: StrapiBlock[];
 };
 
 // Strapi native

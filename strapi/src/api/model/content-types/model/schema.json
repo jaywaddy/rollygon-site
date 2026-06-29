@@ -15,22 +15,27 @@
       "type": "string",
       "required": true
     },
+    "slug": {
+      "type": "customField",
+      "customField": "plugin::auto-slug.slug",
+      "options": {
+        "unique": true,
+        "autoGenerateOnCreate": true,
+        "stopOnManualEdit": true,
+        "preserveOnEdit": true,
+        "autoGenerateIfEmpty": true,
+        "sourceField": "title"
+      }
+    },
     "description": {
       "type": "text",
-      "required": true
-    },
-    "slug": {
-      "type": "string",
       "required": true
     },
     "modelEmbedID": {
       "type": "string",
       "required": false
     },
-    "datePosted": {
-      "type": "date"
-    },
-    "dateUpdated": {
+    "leagacyPublishDate": {
       "type": "date"
     },
     "file": {
