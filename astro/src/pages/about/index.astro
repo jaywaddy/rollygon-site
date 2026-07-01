@@ -1,5 +1,10 @@
 ---
+import ContentWrapper from "@components/layout/ContentWrapper.astro";
 import GlobalLayout from "../../layouts/GlobalLayout.astro";
 ---
 
-<GlobalLayout pageTitle="About">about</GlobalLayout>
+<GlobalLayout title="About">
+    <ContentWrapper>
+        <div class="grid-span-content">about</div>
+    </ContentWrapper>
+</GlobalLayout>

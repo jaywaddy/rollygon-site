@@ -1,5 +1,15 @@
 ---
+import ContentWrapper from "@components/layout/ContentWrapper.astro";
 import GlobalLayout from "../layouts/GlobalLayout.astro";
 ---
 
-<GlobalLayout pageTitle="Home">landing page</GlobalLayout>
+<GlobalLayout title="Home">
+    <div class="site-grid">
+        <div class="grid-span-content">
+            <h1>hero</h1>
+        </div>
+    </div>
+    <ContentWrapper>
+        <div class="grid-span-content">landing page</div>
+    </ContentWrapper>
+</GlobalLayout>

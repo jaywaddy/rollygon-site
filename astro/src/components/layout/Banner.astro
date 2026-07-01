@@ -1,0 +1,36 @@
+---
+import type { TBanner } from "../../types";
+import Link from "../ui/Link.astro";
+
+type Props = { data: TBanner | undefined };
+
+const { data: banner } = Astro.props;
+
+if (!banner || !banner?.isVisible) {
+    console.warn("Banner: data is either invalid or not visible.");
+    return null;
+}
+---
+
+<div id="banner" class="bg-primary site-grid relative py-2">
+    <div class="grid-span-body flex items-center justify-between">
+        <small class="mx-auto flex gap-2">
+            <span>{banner.description}</span>
+            <span>&mdash;</span>
+            <Link data={banner.cta} />
+        </small>
+        <button id="dismiss-button" class="cta-hover cursor-pointer justify-end border-none">
+            &#x2715;
+        </button>
+    </div>
+</div>
+<script>
+    const banner = document.getElementById("banner");
+    const dismissButton = document.getElementById("dismiss-button");
+
+    if (banner && dismissButton) {
+        dismissButton.addEventListener("click", () => {
+            banner.style.display = "none";
+        });
+    }
+</script>

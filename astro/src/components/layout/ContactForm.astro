@@ -1,0 +1,20 @@
+---
+import type { TContactForm } from "../../types";
+
+type Props = { data: TContactForm | undefined; class?: string };
+
+const { data: contactForm } = Astro.props;
+
+if (!contactForm) {
+    console.warn("Contact Form: data is either missing or invalid.");
+    return null;
+}
+---
+
+<div class="site-grid bg-ui-se">
+    <section class="grid-span-content">
+        <h2>{contactForm.heading}</h2>
+        <p>{contactForm.subheading}</p>
+        <form action="submit"></form>
+    </section>
+</div>

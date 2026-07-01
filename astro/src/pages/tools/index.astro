@@ -3,6 +3,7 @@ import GlobalLayout from "../../layouts/GlobalLayout.astro";
 import { getStrapiData } from "../../api";
 import type { TToolData } from "../../types";
 import AssetCard from "@components/AssetCard.astro";
+import ContentWrapper from "@components/layout/ContentWrapper.astro";
 
 const allToolData = await getStrapiData<TToolData[]>("/api/tools");
 
@@ -21,6 +22,8 @@ const tools = allToolData.data;
 ---
 
 <GlobalLayout title="" description="">
-    <h1>Tools</h1>
-    {tools.map((tool) => <AssetCard data={tool} />)}
+    <ContentWrapper>
+        <div class="grid-span-content">tools</div>
+        <div class="grid-span-content">{tools.map((tool) => <AssetCard data={tool} />)}</div>
+    </ContentWrapper>
 </GlobalLayout>

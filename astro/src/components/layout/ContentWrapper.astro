@@ -1,0 +1,13 @@
+---
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["site-grid", className]}>
+    <div class="grid-span-left-gutter gutter-bg"></div>
+    <main class="grid-span-content flex flex-col gap-12 px-8 py-12">
+        <slot />
+    </main>
+    <div class="grid-span-right-gutter gutter-bg"></div>
+</div>

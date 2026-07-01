@@ -20,6 +20,15 @@
       "type": "component",
       "component": "shared.link",
       "repeatable": false
+    },
+    "navPosition": {
+      "type": "enumeration",
+      "default": "LEFT",
+      "enum": [
+        "LEFT",
+        "RIGHT",
+        "CENTER"
+      ]
     }
   },
   "config": {}

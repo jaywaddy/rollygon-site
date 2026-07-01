@@ -60,6 +60,8 @@ export interface LayoutHeader extends Struct.ComponentSchema {
     cta: Schema.Attribute.Component<'shared.link', false>;
     logo: Schema.Attribute.Component<'shared.link', false>;
     navLinks: Schema.Attribute.Component<'shared.link', true>;
+    navPosition: Schema.Attribute.Enumeration<['LEFT', 'RIGHT', 'CENTER']> &
+      Schema.Attribute.DefaultTo<'LEFT'>;
   };
 }
 

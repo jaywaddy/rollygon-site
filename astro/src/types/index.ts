@@ -142,6 +142,7 @@ export type TContactForm = {
 export type TFooter = {
     groups: TFooterGroup[];
     logo: TLink;
+    copyrightText: string;
 };
 
 export type TFooterGroup = {
@@ -153,4 +154,5 @@ export type THeader = {
     logo: TLink;
     navLinks: TLink[];
     cta: TLink;
+    navPosition: "LEFT" | "RIGHT" | "CENTER";
 };

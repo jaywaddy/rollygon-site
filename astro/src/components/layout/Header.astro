@@ -1,7 +1,7 @@
 ---
-import type { THeader, TLink } from "../types";
-import StrapiImage from "./StrapiImage.astro";
-import Link from "./ui/Link.astro";
+import type { THeader, TLink } from "../../types";
+import StrapiImage from "../StrapiImage.astro";
+import Link from "../ui/Link.astro";
 
 type Props = { data: THeader | undefined; class?: string };
 
@@ -12,17 +12,22 @@ if (!header) return null;
 const currentPath = Astro.url.pathname;
 const activeLink = header.navLinks.find((link) => link.href === currentPath);
 const checkIsActive = (link: TLink) => link.href === activeLink?.href;
+const navPosition = () => {
+    switch (header.navPosition) {
+        case "CENTER":
+            return "justify-center";
+        case "RIGHT":
+            return "justify-end";
+        default:
+            return undefined;
+    }
+};
 ---
 
-<header
-    id="header"
-    class="bg-ui-secondary border-outline flex justify-between border-b p-4 transition-[top] duration-300"
->
-    <div class="flex w-42 items-center">
+<header id="header" class="site-grid bg-ui-secondary grid py-4 transition-[top] duration-300">
+    <div class="grid-span-body grid grid-cols-[auto_1fr_auto] gap-12">
         <Link data={header.logo} />
-    </div>
-    <div class="flex items-center gap-12">
-        <nav class="flex items-center">
+        <nav class:list={["flex items-center gap-12", navPosition()]}>
             <ul class="flex items-center gap-6">
                 {
                     header.navLinks.map((link) => (
@@ -34,9 +39,12 @@ const checkIsActive = (link: TLink) => link.href === activeLink?.href;
                         </li>
                     ))
                 }
+                <li><StrapiImage src="/uploads/sun_74d971071d.svg" /></li>
             </ul>
         </nav>
-        <Link data={header.cta} />
+        <div class="flex justify-end gap-6">
+            <Link data={header.cta} />
+        </div>
     </div>
 </header>
 <script>
