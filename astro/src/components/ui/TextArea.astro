@@ -1,0 +1,67 @@
+---
+import StrapiImage from "@components/StrapiImage.astro";
+
+type Props = {
+    id: string;
+    name?: string;
+    label?: string;
+    class?: string;
+    placeholder?: string;
+    required?: boolean;
+    rows?: number;
+    maxLength?: number;
+    wrap?: "hard" | "soft";
+    buttonLabel?: string;
+};
+
+const {
+    id,
+    name,
+    label,
+    class: className,
+    placeholder,
+    required,
+    rows,
+    maxLength,
+    wrap,
+    buttonLabel = "Submit",
+} = Astro.props;
+---
+
+{
+    label && (
+        <label class="flex flex-col gap-2" for={id}>
+            <small>
+                {label}
+                {required && <span class="text-[red]">*</span>}
+            </small>
+        </label>
+    )
+}
+
+<div
+    class="bg-ui-primary ring-outline group outline-cta-primary-hover flex flex-col rounded-sm ring focus-within:outline-2"
+>
+    <textarea
+        {id}
+        class:list={["w-full resize-none p-4 outline-none", className]}
+        {name}
+        {placeholder}
+        {required}
+        {rows}
+        {wrap}
+        maxlength={maxLength}
+        aria-label="text-area"
+    >
+    </textarea>
+    <div class="flex items-center justify-between p-2">
+        <span class="ml-2"><small>0 / 999</small></span>
+        <div class="flex items-center gap-4">
+            <button class="button button-primary cursor-pointer rounded-[0.325rem] px-4 py-2"
+                ><StrapiImage src="" />{buttonLabel}</button
+            >
+        </div>
+    </div>
+</div>
+
+<script></script>

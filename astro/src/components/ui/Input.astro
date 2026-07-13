@@ -1,0 +1,54 @@
+---
+type Props = {
+    id: string;
+    name?: string;
+    label?: string;
+    class?: string;
+    type?:
+        | "button"
+        | "checkbox"
+        | "color"
+        | "date"
+        | "datetime-local"
+        | "email"
+        | "file"
+        | "hidden"
+        | "image"
+        | "month"
+        | "number"
+        | "password"
+        | "radio"
+        | "range"
+        | "reset"
+        | "search"
+        | "submit"
+        | "tel"
+        | "text"
+        | "time"
+        | "url"
+        | "week";
+    placeholder?: string;
+    required?: boolean;
+};
+
+const { id, name, label, class: className, placeholder, required } = Astro.props;
+---
+
+{
+    label && (
+        <label class="flex flex-col gap-2" for={id}>
+            <small>
+                {label}
+                {required && <span class="text-[red]">*</span>}
+            </small>
+        </label>
+    )
+}
+<input
+    {id}
+    class:list={["bg-ui-primary rounded-sm px-4 py-2", className]}
+    type="text"
+    {name}
+    {placeholder}
+    {required}
+/>

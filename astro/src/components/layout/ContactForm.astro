@@ -1,5 +1,7 @@
 ---
+import Input from "@components/ui/Input.astro";
 import type { TContactForm } from "../../types";
+import TextArea from "@components/ui/TextArea.astro";
 
 type Props = { data: TContactForm | undefined; class?: string };
 
@@ -12,9 +14,43 @@ if (!contactForm) {
 ---
 
 <div class="site-grid bg-ui-se">
-    <section class="grid-span-content">
+    <section class="grid-span-article card flex flex-col">
         <h2>{contactForm.heading}</h2>
         <p>{contactForm.subheading}</p>
-        <form action="submit"></form>
+        <form
+            class="flex flex-col gap-2"
+            action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e"
+            method="POST"
+        >
+            <input type="text" name="_honey" style="display:none" />
+            <input type="hidden" name="_subject" value="New submission!" />
+            <input type="hidden" name="_captcha" value="false" />
+            <Input
+                id="contact-name"
+                type="text"
+                label="Name or @handle:platform"
+                name="name"
+                placeholder="@rollygon:YT"
+                required
+            />
+            <Input
+                id="contact-email"
+                type="text"
+                label="Email"
+                name="name"
+                placeholder="contact@rollygon.com"
+                required
+            />
+            <TextArea
+                id="contact-message"
+                label="Message"
+                name="message"
+                placeholder="Add your message..."
+                rows={6}
+                maxLength={1000}
+                required
+            />
+        </form>
     </section>
+    <aside class="grid-span-sidebar card">sidebar</aside>
 </div>

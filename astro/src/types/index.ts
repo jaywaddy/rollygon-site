@@ -33,6 +33,18 @@ export type TGlobalData = {
     footer: TFooter;
 };
 
+export type TLandingPageData = {
+    id: number;
+    documentId: string;
+    title: string;
+    description: string;
+    headingText: string;
+    subheadingText: string;
+    featuredModel: TModelCard;
+    featuredArticles: TArticleData;
+    ctas: TLink[];
+};
+
 export type TToolData = {
     slug: string;
     title: string;

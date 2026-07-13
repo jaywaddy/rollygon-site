@@ -58,6 +58,13 @@
     --radius-pill: 100vw;
 
     --outline: solid 1px var(--color-outline);
+
+    --padding-2xs: --spacing(1);
+    --padding-xs: --spacing(2);
+    --padding-sm: --spacing(4);
+    --padding-md: --spacing(8);
+    --padding-lg: --spacing(10);
+    --padding-xl: --spacing(12);
 }
 
 @layer base {
@@ -79,13 +86,15 @@
 
 /* SITE WRAPPERS */
 @utility site-grid {
-    --col-width: 10rem;
+    --col-width: 9rem;
     --gutter-width: 6rem;
+    --gap: 3rem;
+
     display: grid;
     grid-template-columns:
         auto var(--gutter-width) repeat(6, var(--col-width))
         var(--gutter-width) auto;
-    gap: 1rem;
+    gap: var(--gap);
 }
 
 @utility grid-span-screen {
@@ -145,7 +154,22 @@
     -webkit-mask-repeat: no-repeat;
 }
 
+/* CONTENT WRAPPERS */
+@utility card {
+    gap: --spacing(8);
+    padding: var(--padding-lg);
+    background-color: var(--color-ui-secondary);
+}
+
 /* TYPOGRAPHY */
+@utility prose-hero {
+    @apply prose;
+
+    a {
+        text-decoration: none;
+    }
+}
+
 @utility cta-hover {
     &:hover {
         color: var(--color-type-hover);

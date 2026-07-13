@@ -1,15 +1,26 @@
 ---
 import ContentWrapper from "@components/layout/ContentWrapper.astro";
 import GlobalLayout from "../layouts/GlobalLayout.astro";
+import { getStrapiData } from "../api";
+import { type TLandingPageData } from "../types";
+import Link from "@components/ui/Link.astro";
+
+const landingPage = await getStrapiData<TLandingPageData>("/api/landing-page");
+
+const { headingText: title, subheadingText: subtitle, ctas } = landingPage.data ?? {};
 ---
 
 <GlobalLayout title="Home">
     <div class="site-grid">
-        <div class="grid-span-content">
-            <h1>hero</h1>
+        <div class="grid-span-content prose-hero">
+            <h1 class="text-6xl">{title}</h1>
+            <p class="lead">{subtitle}</p>
+            <div class="flex gap-2">
+                {ctas?.map((cta) => <Link data={cta} />)}
+            </div>
         </div>
     </div>
     <ContentWrapper>
-        <div class="grid-span-content">landing page</div>
+        <div class="grid-span-content">content</div>
     </ContentWrapper>
 </GlobalLayout>

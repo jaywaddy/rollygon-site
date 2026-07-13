@@ -15,34 +15,38 @@ const checkIsActive = (link: TLink) => link.href === activeLink?.href;
 const navPosition = () => {
     switch (header.navPosition) {
         case "CENTER":
-            return "justify-center";
+            return "mx-auto";
         case "RIGHT":
-            return "justify-end";
+            return "ml-auto";
         default:
-            return undefined;
+            return "mr-auto";
     }
 };
 ---
 
 <header id="header" class="site-grid bg-ui-secondary grid py-4 transition-[top] duration-300">
-    <div class="grid-span-body grid grid-cols-[auto_1fr_auto] gap-12">
+    <div class="grid-span-body flex gap-12">
         <Link data={header.logo} />
         <nav class:list={["flex items-center gap-12", navPosition()]}>
-            <ul class="flex items-center gap-6">
+            <ul class="flex items-center gap-2">
                 {
                     header.navLinks.map((link) => (
-                        <li class={`relative leading-8 ${checkIsActive(link) && "border-b-2"}`}>
+                        <li class={``}>
                             <Link
+                                class:list={[
+                                    "hover:bg-ui-primary ring-outline relative rounded-[0.325rem] px-4 leading-8 hover:ring",
+                                    checkIsActive(link) && "bg-ui-primary ring",
+                                ]}
                                 data={link}
-                                arriaCurrent={checkIsActive(link) ? "page" : undefined}
                             />
                         </li>
                     ))
                 }
-                <li><StrapiImage src="/uploads/sun_74d971071d.svg" /></li>
             </ul>
         </nav>
-        <div class="flex justify-end gap-6">
+        <div class="flex items-center justify-end gap-6">
+            <li class="flex gap-1"><StrapiImage src="/uploads/sun_74d971071d.svg" />Light</li>
+
             <Link data={header.cta} />
         </div>
     </div>
