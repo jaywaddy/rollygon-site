@@ -1,35 +1,50 @@
 ---
-import type { TLink } from "../../types";
-import StrapiImage from "../StrapiImage.astro";
+import type { TCta } from "../../lib/schema";
 
-type Props = { data: TLink; class?: string; arriaCurrent?: "page" | undefined };
+type Props = {
+    arriaCurrent?: "page" | undefined;
+    button?: { size: "sm" | "md" | "lg"; style: "primary" | "secondary" };
+    class?: string;
+    data: TCta;
+    iconRight?: boolean;
+    isExternal?: boolean;
+    isUnderlined?: boolean;
+};
 
-const { data: link, class: classAttribute, arriaCurrent } = Astro.props;
+const {
+    arriaCurrent,
+    button,
+    class: classAttribute,
+    data: link,
+    iconRight,
+    isExternal,
+    isUnderlined,
+} = Astro.props;
 
-if (!link) {
+if (!link || link === undefined) {
     console.warn("Link: data property is invalid.");
     return null;
 }
 
-const targetAttribute = link.isExternal ? "_blank" : undefined;
+const targetAttribute = isExternal ? "_blank" : undefined;
 
 const setButtonSize = function (): string {
     const buttonSizes = new Map<string, string>([
-        ["SMALL", "button-sm"],
-        ["MEDIUM", "button-md"],
-        ["LARGE", "button-lg"],
+        ["sm", "button-sm"],
+        ["md", "button-md"],
+        ["lg", "button-lg"],
     ]);
 
-    return buttonSizes.get(link.buttonSize) || "";
+    return buttonSizes.get(button?.size || "") || "";
 };
 
 const setButtonStyle = function (): string {
     const buttonSizes = new Map<string, string>([
-        ["PRIMARY", "button-primary"],
-        ["SECONDARY", "button-secondary"],
+        ["primary", "button-primary"],
+        ["secondary", "button-secondary"],
     ]);
 
-    return buttonSizes.get(link.buttonStyle) || "";
+    return buttonSizes.get(button?.style || "") || "";
 };
 ---
 
@@ -37,24 +52,14 @@ const setButtonStyle = function (): string {
     href={link.href}
     target={targetAttribute}
     class:list={[
-        "flex w-fit items-center gap-1",
-        link.imageOnRight ? "flex-row-reverse" : "flex-row",
-        link.isUnderlined ? "underline" : "",
-        link.isButtonLink && `button ${setButtonSize()} ${setButtonStyle()}`,
-        !link.isButtonLink && !arriaCurrent && "cta-hover",
+        "flex w-fit items-center gap-1 [&_svg]:h-4",
+        iconRight ? "flex-row-reverse" : "flex-row",
+        isUnderlined ? "underline" : "",
+        typeof button === "object" && `button ${setButtonSize()} ${setButtonStyle()}`,
+        typeof button !== "object" && !arriaCurrent && "cta-hover",
         classAttribute,
     ]}
     aria-current={arriaCurrent}
 >
-    {
-        link.image && (
-            <StrapiImage
-                src={link.image?.url}
-                alt={link.image?.alternativeText}
-                width={link.image?.width}
-                height={link.image?.height}
-            />
-        )
-    }
     {link.label}
 </a>

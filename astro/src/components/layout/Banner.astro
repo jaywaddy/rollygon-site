@@ -1,13 +1,13 @@
 ---
-import type { TBanner } from "../../types";
-import Link from "../ui/Link.astro";
+import Link from "@components/ui/Link.astro";
+import type { TCta, TDisplay } from "../../lib/schema";
+import { ArrowRight, Download } from "@lucide/astro";
 
-type Props = { data: TBanner | undefined };
+type Props = { data: { description?: string; cta: TCta; display: TDisplay } };
 
 const { data: banner } = Astro.props;
 
-if (!banner || !banner?.isVisible) {
-    console.warn("Banner: data is either invalid or not visible.");
+if (banner.display === "hidden") {
     return null;
 }
 ---

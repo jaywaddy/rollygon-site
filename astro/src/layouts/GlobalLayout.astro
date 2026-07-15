@@ -4,21 +4,29 @@ import ContactForm from "@components/layout/ContactForm.astro";
 import Footer from "@components/layout/Footer.astro";
 import Header from "@components/layout/Header.astro";
 import "../styles/global.css";
-import { getStrapiData } from "../api";
-import type { TGlobalData } from "../types";
-import ContentWrapper from "@components/layout/ContentWrapper.astro";
+
+import type { TBanner, TGlobalData } from "../types";
+import { getGlobalData } from "../lib/schema/globalData";
 
 type Props = { title: string; description?: string; class?: string };
 
-const globalData = await getStrapiData<TGlobalData>("/api/global");
+const GLOBAL_DATA = await getGlobalData();
 
-if (globalData.error) {
-    console.error("Failed to fetch global data:", globalData.error?.message);
-    throw new Error(globalData.error?.message);
-}
+// if (!GLOBAL_DATA) {
+//     console.error("Failed to fetch global data:", GLOBAL_DATA.error?.message);
+//     throw new Error(GLOBAL_DATA.error?.message);
+// }
 
 const { title, description, class: className = "" } = Astro.props;
-const { banner, contactForm, header, footer } = globalData.data ?? {};
+// const { contactForm, header, footer } = GLOBAL_DATA ?? {};
+
+const banner = {
+    description: GLOBAL_DATA.banner_description,
+    cta: GLOBAL_DATA.banner_cta[0],
+    display: GLOBAL_DATA.banner_display,
+};
+
+const header = {};
 ---
 
 <!doctype html>
@@ -76,12 +84,12 @@ const { banner, contactForm, header, footer } = globalData.data ?? {};
     <body class="bg-ui-tertiary relative flex min-h-screen flex-col gap-12">
         <div>
             <Banner data={banner} />
-            <Header data={header} />
+            <!-- <Header data={header} /> -->
         </div>
         <slot />
         <div class="mt-auto flex flex-col gap-12">
-            <ContactForm data={contactForm} />
-            <Footer data={footer} />
+            <!-- <ContactForm data={contactForm} /> -->
+            <!-- <Footer data={footer} /> -->
         </div>
     </body>
 </html>
