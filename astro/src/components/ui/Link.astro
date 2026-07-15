@@ -1,22 +1,27 @@
 ---
 import type { TCta } from "../../lib/schema";
+import Icon, { type TIconName } from "./Icon.astro";
+
+type TButtonSize = "sm" | "md" | "lg" | "none";
+type TButtonStyle = "primary" | "secondary";
+type TIconPosition = "left" | "right";
 
 type Props = {
     arriaCurrent?: "page" | undefined;
-    button?: { size: "sm" | "md" | "lg"; style: "primary" | "secondary" };
+    button?: [TButtonSize, TButtonStyle?];
     class?: string;
     data: TCta;
-    iconRight?: boolean;
+    icon?: [TIconName, TIconPosition?];
     isExternal?: boolean;
     isUnderlined?: boolean;
 };
 
 const {
     arriaCurrent,
-    button,
+    button = ["none", "primary"],
     class: classAttribute,
     data: link,
-    iconRight,
+    icon = ["none", "left"],
     isExternal,
     isUnderlined,
 } = Astro.props;
@@ -26,6 +31,10 @@ if (!link || link === undefined) {
     return null;
 }
 
+const buttonSize = button[0];
+const buttonStyle = button[1];
+const iconName = icon[0];
+const iconPosition = icon[1];
 const targetAttribute = isExternal ? "_blank" : undefined;
 
 const setButtonSize = function (): string {
@@ -35,16 +44,26 @@ const setButtonSize = function (): string {
         ["lg", "button-lg"],
     ]);
 
-    return buttonSizes.get(button?.size || "") || "";
+    return buttonSizes.get(buttonSize) || "";
 };
 
 const setButtonStyle = function (): string {
-    const buttonSizes = new Map<string, string>([
+    const buttonStyles = new Map<string, string>([
         ["primary", "button-primary"],
         ["secondary", "button-secondary"],
     ]);
 
-    return buttonSizes.get(button?.style || "") || "";
+    return buttonStyles.get(buttonStyle || "primary") || "";
+};
+
+const setIconStroke = function (): string {
+    const iconStrokes = new Map<string, string>([
+        ["sm", "[&_path]:stroke-[2.5px]"],
+        ["md", "[&_path]:stroke-[2.675px]"],
+        ["lg", "[&_path]:stroke-[2.75px]"],
+    ]);
+
+    return iconStrokes.get(buttonSize) || "";
 };
 ---
 
@@ -53,13 +72,16 @@ const setButtonStyle = function (): string {
     target={targetAttribute}
     class:list={[
         "flex w-fit items-center gap-1 [&_svg]:h-4",
-        iconRight ? "flex-row-reverse" : "flex-row",
-        isUnderlined ? "underline" : "",
-        typeof button === "object" && `button ${setButtonSize()} ${setButtonStyle()}`,
-        typeof button !== "object" && !arriaCurrent && "cta-hover",
         classAttribute,
+        isUnderlined && "underline",
+        iconPosition === "right" ? "flex-row-reverse" : "flex-row",
+        buttonSize !== "none" && `button ${setButtonSize()} ${setButtonStyle()}`,
+        buttonSize === "none" && arriaCurrent !== "page" && "cta-hover",
     ]}
     aria-current={arriaCurrent}
 >
-    {link.label}
+    <span class:list={[`text-current ${setIconStroke()}`, buttonSize === "sm" && "[&_svg]:w-3"]}>
+        {iconName !== "none" && <Icon name={iconName} />}
+    </span>
+    {buttonSize === "sm" ? <small>{link.label}</small> : link.label}
 </a>

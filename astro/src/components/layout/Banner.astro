@@ -1,7 +1,6 @@
 ---
 import Link from "@components/ui/Link.astro";
 import type { TCta, TDisplay } from "../../lib/schema";
-import { ArrowRight, Download } from "@lucide/astro";
 
 type Props = { data: { description?: string; cta: TCta; display: TDisplay } };
 
@@ -14,11 +13,13 @@ if (banner.display === "hidden") {
 
 <div id="banner" class="bg-primary site-grid relative py-2">
     <div class="grid-span-body flex items-center justify-between">
-        <small class="mx-auto flex gap-2">
-            <span>{banner.description}</span>
-            <span>&mdash;</span>
-            <Link data={banner.cta} />
-        </small>
+        <div class="mx-auto flex items-center gap-2">
+            <small class="flex gap-2">
+                <span>{banner.description}</span>
+                <span>&mdash;</span>
+            </small>
+            <Link data={banner.cta} button={["sm", "primary"]} icon={["tool"]} />
+        </div>
         <button id="dismiss-button" class="cta-hover cursor-pointer justify-end border-none">
             &#x2715;
         </button>

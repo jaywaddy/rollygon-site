@@ -80,7 +80,7 @@
 
 @layer components {
     .button {
-        @apply radius-sm border font-semibold;
+        @apply radius-sm items-center border font-semibold;
     }
 }
 

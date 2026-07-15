@@ -1,0 +1,79 @@
+---
+import {
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    ArrowUp,
+    Box,
+    ChevronDown,
+    ChevronLeft,
+    ChevronRight,
+    ChevronUp,
+    CircleDot,
+    Download,
+    ExternalLink,
+    Forward,
+    Hammer,
+    Menu,
+    Moon,
+    Pyramid,
+    Search,
+    Sun,
+    SunMoon,
+} from "@lucide/astro";
+
+export type TIconName =
+    | "arrowDown"
+    | "arrowLeft"
+    | "arrowRight"
+    | "arrowUp"
+    | "bluesky" // TODO
+    | "chevron-down"
+    | "chevron-left"
+    | "chevron-right"
+    | "chevron-up"
+    | "download"
+    | "external-link"
+    | "gumroad" // TODO
+    | "ko-fi" // TODO
+    | "menu"
+    | "moon"
+    | "none"
+    | "search"
+    | "send"
+    | "sun"
+    | "sketchfab" // TODO
+    | "theme-toggle"
+    | "tool"
+    | "tris"
+    | "quads"
+    | "verts"
+    | "youtube"; // TODO
+
+type Props = { name: TIconName };
+
+const { name } = Astro.props;
+
+if (name === "none") return;
+---
+
+{name === "arrowDown" && <ArrowDown />}
+{name === "arrowLeft" && <ArrowLeft />}
+{name === "arrowRight" && <ArrowRight />}
+{name === "arrowUp" && <ArrowUp />}
+{name === "chevron-down" && <ChevronDown />}
+{name === "chevron-left" && <ChevronLeft />}
+{name === "chevron-right" && <ChevronRight />}
+{name === "chevron-up" && <ChevronUp />}
+{name === "download" && <Download />}
+{name === "external-link" && <ExternalLink />}
+{name === "menu" && <Menu />}
+{name === "moon" && <Moon />}
+{name === "search" && <Search />}
+{name === "send" && <Forward />}
+{name === "sun" && <Sun />}
+{name === "theme-toggle" && <SunMoon />}
+{name === "tool" && <Hammer />}
+{name === "tris" && <Pyramid />}
+{name === "quads" && <Box />}
+{name === "verts" && <CircleDot />}
