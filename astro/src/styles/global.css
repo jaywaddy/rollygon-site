@@ -3,6 +3,8 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+    --color-*: initial;
+
     --color-zinc-50: oklch(98.5% 0 0);
     --color-zinc-100: oklch(95.7% 0.001 286.375);
     --color-zinc-200: oklch(92% 0.004 286.32);
@@ -29,8 +31,6 @@
 }
 
 @theme {
-    --color-*: initial;
-
     --color-brand: var(--color-brand-500);
     --color-brand-hover: var(--color-brand-400);
 
@@ -50,12 +50,12 @@
     --default-font-family: "Outfit";
 
     --color-cta-primary-text: var(--color-brand-800);
-    --color-cta-secondary-text: var(--color-zinc-800);
 
     --color-text: var(--color-zinc-950);
     --color-text-hover: color-mix(in oklch, currentColor 50%, transparent);
 
     /* General */
+    --color-outline: var(--color-zinc-300);
     --radius-cta: 0.425rem;
     --radius-pill: 100vw;
 
@@ -67,14 +67,27 @@
     --padding-xl: --spacing(12);
 }
 
+[data-theme="dark"] {
+    /* Background colors */
+    --color-base: var(--color-zinc-900);
+    --color-primary: var(--color-zinc-800);
+    --color-secondary: var(--color-zinc-700);
+
+    --color-cta-secondary: var(--color-zinc-700);
+    --color-cta-secondary-hover: var(--color-zinc-600);
+
+    --color-link-hover: var(--color-zinc-700);
+
+    /* Typography */
+    --color-text: var(--color-zinc-50);
+
+    /* General */
+    --color-outline: var(--color-zinc-700);
+}
+
 @layer base {
-    p,
-    a,
-    span,
-    h1,
-    h2,
-    h3 {
-        color: var(--color-type);
+    body {
+        color: var(--color-text);
     }
 }
 

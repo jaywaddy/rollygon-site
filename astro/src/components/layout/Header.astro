@@ -3,6 +3,7 @@ import Image from "@components/Image.astro";
 import type { TCta } from "../../lib/schema";
 import type { TGlobalData } from "../../lib/schema/globalData";
 import Link from "../ui/Link.astro";
+import Icon from "@components/ui/Icon.astro";
 
 type Props = { data: TGlobalData };
 type THeader = { position: string; links: TCta[]; cta: TCta[]; logo: string };
@@ -49,20 +50,32 @@ const navPosition = () => {
                 }
             </ul>
         </nav>
-        <div class="flex items-center justify-end gap-6">
-            <Link data={header.cta[0]} icon={["download"]} button={["lg"]} />
+        <div
+            class="flex items-center justify-end gap-4 **:data-[theme='light']:[&_#dark-icon]:hidden **:data-[theme='dark']:[&_#light-icon]:hidden"
+        >
+            <button
+                data-theme="light"
+                id="theme-toggle-button"
+                class="hover:bg-link-hover rounded-cta relative cursor-pointer p-[4.5px] [&_svg]:h-4"
+            >
+                <div id="light-icon" class="flex h-6 items-center"><Icon name="sun" /></div>
+                <div id="dark-icon" class="flex h-6 items-center"><Icon name="moon" /></div>
+                <span class="sr-only">Toggle theme</span>
+            </button>
+            <span class="bg-outline h-4 w-0.25 content-['']"></span>
+            <Link data={header.cta[0]} icon={["download"]} button={["md"]} />
         </div>
     </div>
 </header>
 <script>
-    const header = document.querySelector("#header") as HTMLElement;
+    const header = document.getElementById("header") as HTMLElement;
     let prevScrollPos = window.pageYOffset;
 
     if (header) {
         window.addEventListener("scroll", toggleHeader);
     }
 
-    function toggleHeader() {
+    function toggleHeader(): void {
         let currentScrollPos = window.pageYOffset;
 
         prevScrollPos > currentScrollPos

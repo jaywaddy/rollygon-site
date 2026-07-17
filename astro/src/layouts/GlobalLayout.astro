@@ -6,7 +6,6 @@ import Header from "@components/layout/Header.astro";
 import "../styles/global.css";
 
 import { getGlobalData } from "../lib/schema/globalData";
-import type { TCta, TDisplay } from "../lib/schema";
 
 type Props = { title: string; description?: string; class?: string };
 
@@ -28,11 +27,11 @@ const { title, description, class: className = "" } = Astro.props;
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
-        <title>Rollygon | {title}</title>
+        <title>{title} &ndash; Rollygon</title>
         <script type="module" defer>
             const systemTheme =
                 window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
-            // const themeToggleButton = document.getElementById("theme-toggle-button");
+            const themeToggleButton = document.getElementById("theme-toggle-button");
             // const menuToggleButton = document.getElementById("menu-toggle-button");
             const body = document.body;
             const lightMode = systemTheme === true;
@@ -45,22 +44,25 @@ const { title, description, class: className = "" } = Astro.props;
 
             if (body) {
                 body.setAttribute("data-theme", selectedTheme ?? defaultTheme);
+                themeToggleButton.setAttribute("data-theme", selectedTheme ?? defaultTheme);
+                themeToggleButton.addEventListener("click", toggleTheme);
+                // menuToggleButton.addEventListener("click", toggleMenu);
             }
-            // themeToggleButton.addEventListener("click", toggleTheme);
-            // menuToggleButton.addEventListener("click", toggleMenu);
 
-            // function toggleTheme() {
-            //     selectedTheme = localStorage.getItem("theme");
+            function toggleTheme() {
+                selectedTheme = localStorage.getItem("theme");
 
-            //     if (selectedTheme === "light") {
-            //         localStorage.setItem("theme", "dark");
-            //         body.setAttribute("data-theme", "dark");
-            //         return;
-            //     }
+                if (selectedTheme === "light") {
+                    localStorage.setItem("theme", "dark");
+                    body.setAttribute("data-theme", "dark");
+                    themeToggleButton.setAttribute("data-theme", "dark");
+                    return;
+                }
 
-            //     localStorage.setItem("theme", "light");
-            //     body.setAttribute("data-theme", "light");
-            // }
+                localStorage.setItem("theme", "light");
+                body.setAttribute("data-theme", "light");
+                themeToggleButton.setAttribute("data-theme", "light");
+            }
 
             // function toggleMenu() {
             //     if (menuToggleButton.dataset.isChecked === "true") {
@@ -72,7 +74,7 @@ const { title, description, class: className = "" } = Astro.props;
             // }
         </script>
     </head>
-    <body class="bg-base relative flex min-h-screen flex-col gap-12">
+    <body data-theme="light" class="bg-base relative flex min-h-screen flex-col gap-12">
         <div>
             <Banner data={GLOBAL_DATA} />
             <Header data={GLOBAL_DATA} />
