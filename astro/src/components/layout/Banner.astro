@@ -1,26 +1,44 @@
 ---
 import Link from "@components/ui/Link.astro";
+import type { TGlobalData } from "../../lib/schema/globalData";
 import type { TCta, TDisplay } from "../../lib/schema";
 
-type Props = { data: { description?: string; cta: TCta; display: TDisplay } };
+type Props = { data: TGlobalData };
+type TBanner = { description: string; cta: TCta; display: TDisplay };
 
-const { data: banner } = Astro.props;
+const { data } = Astro.props;
+
+if (!data) {
+    console.error("Failed to fetch global data.");
+    return null;
+}
+
+const { banner_description, banner_cta, banner_display } = data ?? {};
+
+const banner: TBanner = {
+    description: banner_description,
+    cta: banner_cta[0],
+    display: banner_display,
+};
 
 if (banner.display === "hidden") {
     return null;
 }
 ---
 
-<div id="banner" class="bg-primary site-grid relative py-2">
+<div id="banner" class="bg-brand text-cta-primary-text site-grid relative py-2">
     <div class="grid-span-body flex items-center justify-between">
         <div class="mx-auto flex items-center gap-2">
             <small class="flex gap-2">
                 <span>{banner.description}</span>
                 <span>&mdash;</span>
             </small>
-            <Link data={banner.cta} button={["sm", "primary"]} icon={["tool"]} />
+            <Link data={banner.cta} button={["sm", "primary", "outline"]} icon={["new"]} />
         </div>
-        <button id="dismiss-button" class="cta-hover cursor-pointer justify-end border-none">
+        <button
+            id="dismiss-button"
+            class="rounded-cta hover:bg-cta-primary-hover focus:bg-cta-primary-hover cursor-pointer justify-end border-none px-2"
+        >
             &#x2715;
         </button>
     </div>

@@ -1,43 +1,51 @@
 ---
 import { Image as AstroImage } from "astro:assets";
 import { parse } from "node-html-parser";
+import { BASE_API_URL } from "../lib/directus";
 
 type Props = {
-    src: string | undefined;
     alt?: string | null;
-    height?: number;
-    width?: number;
+    aspectRatio?: "square" | "16:9" | "4:3" | "auto";
     class?: string;
+    fallback?: string;
+    height?: number;
+    isSvg?: boolean;
     loading?: "lazy" | "eager";
     quality?: number;
     responsive?: boolean;
-    aspectRatio?: "square" | "16:9" | "4:3" | "auto";
-    fallback?: string;
     sizes?: string;
+    src: string | undefined;
+    width?: number;
 };
 
 const {
-    src,
     alt,
-    height = 24,
-    width = 24,
+    aspectRatio = "auto",
     class: className,
+    fallback = "/images/placeholder.svg",
+    height = 24,
     loading = "lazy",
     quality = 80,
     responsive = true,
-    aspectRatio = "auto",
-    fallback = "/images/placeholder.svg",
     sizes,
+    src,
+    isSvg,
+    width = 24,
 } = Astro.props;
 
 // Early returns for validation
 if (!src) {
-    console.warn("StrapiImage: src prop is required");
+    console.warn("Image: src prop is required");
+    return null;
+}
+
+if (!src) {
+    console.warn("Image: src prop is required");
     return null;
 }
 
 if (height <= 0 || width <= 0) {
-    console.warn("StrapiImage: height and width must be positive numbers");
+    console.warn("Image: height and width must be positive numbers");
     return null;
 }
 
@@ -66,7 +74,7 @@ const getAspectRatioClass = () => {
 };
 
 // Enhanced media URL processing with error handling
-function getStrapiMedia(url: string): string | null {
+function getDirectusMedia(url: string): string | null {
     try {
         if (!url) return null;
 
@@ -77,16 +85,15 @@ function getStrapiMedia(url: string): string | null {
         if (url.startsWith("http") || url.startsWith("//")) return url;
 
         // Prepend BASE_URL for relative URLs
-        const BASE_URL = import.meta.env.VITE_STRAPI_BASE_URL ?? "http://localhost:1337";
-        return `${BASE_URL}${url}`;
+        return `${BASE_API_URL}/assets/${url}`;
     } catch (error) {
-        console.error("StrapiImage: Error processing image URL:", error);
+        console.error("Image: Error processing image URL:", error);
         return fallback;
     }
 }
 
 // Process image URL and prepare safe alt text
-const imageUrl = getStrapiMedia(src);
+const imageUrl = getDirectusMedia(src);
 
 // Early return if no valid image URL
 if (!imageUrl) return null;
@@ -99,13 +106,10 @@ const responsiveSizes =
     sizes || (responsive ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" : undefined);
 
 // SVG implementation
-const imageExtension = src.split(".").pop() || "";
-const SVGImages = import.meta.glob<string>("../../../strapi/public/uploads/*.svg", {
-    query: "?raw",
-});
+const SVGImages = import.meta.glob<string>("../../../directus/uploads/*.svg", { query: "?raw" });
 
-const getSVG = async (src: string) => {
-    const filePath = `../../../strapi/public${src}`;
+const getSVG = async (id: string) => {
+    const filePath = `../../../directus/uploads/${id}`;
 
     if (filePath in SVGImages) {
         const { default: file } = (await SVGImages[filePath]()) as unknown as { default: string };
@@ -125,8 +129,8 @@ const svgAttributes = { ...baseAttributes };
 ---
 
 {
-    imageExtension.toLowerCase() === "svg" ? (
-        <div class:list={[styles.container, className]}>
+    isSvg ? (
+        <div class:list={[styles.container, className, "[&_svg]:h-full"]}>
             <svg class="[&_path]:fill-current" {...svgAttributes} set:html={innerHTML} />
         </div>
     ) : (

@@ -2,7 +2,7 @@ import type { TCta, TDisplay, TImage, TInputField, TSeo, TSocialLink } from ".";
 import { directus } from "../directus";
 import { readItems } from "@directus/sdk";
 
-type TGlobalData = {
+export type TGlobalData = {
     id: number;
     logo: TImage;
     favicon_svg: string;
@@ -14,7 +14,7 @@ type TGlobalData = {
     banner_cta: TCta[];
     nav_position: string;
     nav_links: TCta[];
-    nav_cta: TCta;
+    nav_cta: TCta[];
     bio?: string;
     social_links?: TSocialLink[];
     contact_form_title: string;
@@ -29,7 +29,7 @@ export async function getGlobalData() {
         readItems("global_data", {
             fields: [
                 "id",
-                "logo.id",
+                "logo.filename_disk",
                 "logo.description",
                 "favicon_svg",
                 "favicon_fallback",

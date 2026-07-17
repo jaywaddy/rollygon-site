@@ -1,19 +1,30 @@
 ---
-import type { THeader, TLink } from "../../types";
-import StrapiImage from "../StrapiImage.astro";
+import Image from "@components/Image.astro";
+import type { TCta } from "../../lib/schema";
+import type { TGlobalData } from "../../lib/schema/globalData";
 import Link from "../ui/Link.astro";
 
-type Props = { data: THeader | undefined; class?: string };
+type Props = { data: TGlobalData };
+type THeader = { position: string; links: TCta[]; cta: TCta[]; logo: string };
 
-const { data: header } = Astro.props;
+const { data } = Astro.props;
 
-if (!header) return null;
+if (!data) {
+    console.error("Failed to fetch global data.");
+    return null;
+}
 
-const currentPath = Astro.url.pathname;
-const activeLink = header.navLinks.find((link) => link.href === currentPath);
-const checkIsActive = (link: TLink) => link.href === activeLink?.href;
+const { nav_position, nav_links, nav_cta, logo } = data ?? {};
+
+const header: THeader = {
+    position: nav_position,
+    links: nav_links,
+    cta: nav_cta,
+    logo: logo.filename_disk,
+};
+
 const navPosition = () => {
-    switch (header.navPosition) {
+    switch (header.position) {
         case "CENTER":
             return "mx-auto";
         case "RIGHT":
@@ -24,30 +35,22 @@ const navPosition = () => {
 };
 ---
 
-<header id="header" class="site-grid bg-ui-secondary grid py-4 transition-[top] duration-300">
-    <div class="grid-span-body flex gap-12">
-        <Link data={header.logo} />
+<header id="header" class="site-grid bg-primary grid py-4 transition-[top] duration-300">
+    <div class="grid-span-body flex items-center gap-12">
+        <a href="/"><Image class="[&_svg]:text-current" src={logo.filename_disk} isSvg /></a>
         <nav class:list={["flex items-center gap-12", navPosition()]}>
             <ul class="flex items-center gap-2">
                 {
-                    header.navLinks.map((link) => (
-                        <li class={``}>
-                            <Link
-                                class:list={[
-                                    "hover:bg-ui-primary ring-outline relative rounded-[0.325rem] px-4 leading-8 hover:ring",
-                                    checkIsActive(link) && "bg-ui-primary ring",
-                                ]}
-                                data={link}
-                            />
+                    header.links.map((link) => (
+                        <li>
+                            <Link data={link} />
                         </li>
                     ))
                 }
             </ul>
         </nav>
         <div class="flex items-center justify-end gap-6">
-            <li class="flex gap-1"><StrapiImage src="/uploads/sun_74d971071d.svg" />Light</li>
-
-            <Link data={header.cta} />
+            <Link data={header.cta[0]} icon={["download"]} button={["lg"]} />
         </div>
     </div>
 </header>

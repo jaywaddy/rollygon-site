@@ -18,6 +18,7 @@ import {
     Moon,
     Pyramid,
     Search,
+    Sparkles,
     Sun,
     SunMoon,
 } from "@lucide/astro";
@@ -38,6 +39,7 @@ export type TIconName =
     | "ko-fi" // TODO
     | "menu"
     | "moon"
+    | "new"
     | "none"
     | "search"
     | "send"
@@ -69,6 +71,7 @@ if (name === "none") return;
 {name === "external-link" && <ExternalLink />}
 {name === "menu" && <Menu />}
 {name === "moon" && <Moon />}
+{name === "new" && <Sparkles />}
 {name === "search" && <Search />}
 {name === "send" && <Forward />}
 {name === "sun" && <Sun />}
