@@ -3,20 +3,6 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-    --color-*: initial;
-
-    --color-zinc-50: oklch(98.5% 0 0);
-    --color-zinc-100: oklch(95.7% 0.001 286.375);
-    --color-zinc-200: oklch(92% 0.004 286.32);
-    --color-zinc-300: oklch(87.1% 0.006 286.286);
-    --color-zinc-400: oklch(70.5% 0.015 286.067);
-    --color-zinc-500: oklch(55.2% 0.016 285.938);
-    --color-zinc-600: oklch(44.2% 0.017 285.786);
-    --color-zinc-700: oklch(37% 0.013 285.805);
-    --color-zinc-800: oklch(27.4% 0.006 286.033);
-    --color-zinc-900: oklch(21% 0.006 285.885);
-    --color-zinc-950: oklch(14.1% 0.005 285.823);
-
     --color-brand-50: oklch(97.5% 0.031 135.3);
     --color-brand-100: oklch(94.9% 0.067 135.5);
     --color-brand-200: oklch(91.5% 0.127 135.7);
@@ -31,9 +17,6 @@
 }
 
 @theme {
-    --color-brand: var(--color-brand-500);
-    --color-brand-hover: var(--color-brand-400);
-
     /* Background colors */
     --color-base: var(--color-zinc-200);
     --color-primary: var(--color-zinc-50);
@@ -41,8 +24,8 @@
 
     --color-cta-primary: var(--color-brand);
     --color-cta-primary-hover: var(--color-brand-hover);
-    --color-cta-secondary: var(--color-zinc-300);
-    --color-cta-secondary-hover: var(--color-zinc-200);
+    --color-cta-secondary: var(--color-zinc-200);
+    --color-cta-secondary-hover: var(--color-zinc-100);
 
     --color-link-hover: var(--color-zinc-100);
 
@@ -52,19 +35,21 @@
     --color-cta-primary-text: var(--color-brand-800);
 
     --color-text: var(--color-zinc-950);
-    --color-text-hover: color-mix(in oklch, currentColor 50%, transparent);
 
     /* General */
-    --color-outline: var(--color-zinc-300);
+    --color-brand: var(--color-brand-500);
+    --color-brand-hover: var(--color-brand-400);
+
+    --color-error: var(--color-red-600);
+
+    --color-cta-outline: color-mix(in oklch, currentColor 50%, transparent);
+    --color-seperator: color-mix(in oklch, currentColor 20%, transparent);
+
     --radius-cta: 0.425rem;
+    --radius-element: 1.425rem;
     --radius-pill: 100vw;
 
-    --padding-2xs: --spacing(1);
-    --padding-xs: --spacing(2);
-    --padding-sm: --spacing(4);
-    --padding-md: --spacing(8);
-    --padding-lg: --spacing(10);
-    --padding-xl: --spacing(12);
+    --site-gap: --spacing(8);
 }
 
 [data-theme="dark"] {
@@ -73,8 +58,8 @@
     --color-primary: var(--color-zinc-800);
     --color-secondary: var(--color-zinc-700);
 
-    --color-cta-secondary: var(--color-zinc-700);
-    --color-cta-secondary-hover: var(--color-zinc-600);
+    --color-cta-secondary: var(--color-zinc-600);
+    --color-cta-secondary-hover: var(--color-zinc-500);
 
     --color-link-hover: var(--color-zinc-700);
 
@@ -82,26 +67,34 @@
     --color-text: var(--color-zinc-50);
 
     /* General */
+    --color-error: var(--color-red-400);
     --color-outline: var(--color-zinc-700);
 }
 
 @layer base {
     body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--site-gap);
+
+        min-height: screen;
+
         color: var(--color-text);
+        background-color: var(--color-base);
     }
 }
 
 /* SITE WRAPPERS */
 @utility site-grid {
-    --col-width: 9rem;
+    --col-width: min(--spacing(48), 10%);
     --gutter-width: 6rem;
-    --gap: 3rem;
 
     display: grid;
     grid-template-columns:
         auto var(--gutter-width) repeat(6, var(--col-width))
         var(--gutter-width) auto;
-    gap: var(--gap);
+    gap: var(--site-gap);
 }
 
 @utility grid-span-screen {
@@ -169,8 +162,14 @@
 }
 
 /* TYPOGRAPHY */
+@utility prose {
+    color: red;
+}
+
 @utility prose-hero {
     @apply prose;
+
+    color: red;
 
     a {
         text-decoration: none;

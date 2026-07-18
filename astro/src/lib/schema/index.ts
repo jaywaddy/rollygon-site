@@ -1,5 +1,5 @@
 export type TCta = {
-    href: string;
+    href?: string;
     label: string;
 };
 
@@ -17,8 +17,33 @@ export type TInputField = {
     name: string;
     placeholder: string;
     required: boolean;
-    type: string;
+    type: TInputFieldType;
 };
+
+export type TInputFieldType =
+    | "button"
+    | "checkbox"
+    | "color"
+    | "date"
+    | "datetime-local"
+    | "email"
+    | "file"
+    | "hidden"
+    | "image"
+    | "month"
+    | "number"
+    | "password"
+    | "radio"
+    | "range"
+    | "reset"
+    | "search"
+    | "submit"
+    | "tel"
+    | "text"
+    | "textarea"
+    | "time"
+    | "url"
+    | "week";
 
 export type TSeo = {
     canonical_url: string;

@@ -1,56 +1,76 @@
 ---
 import Input from "@components/ui/Input.astro";
-import type { TContactForm } from "../../types";
-import TextArea from "@components/ui/TextArea.astro";
+import type { TGlobalData } from "../../lib/schema/globalData";
+import type { TInputField } from "../../lib/schema";
+import GlobalGrid from "../../layouts/GlobalGrid.astro";
+import Container from "../../layouts/Container.astro";
+import Icon from "@components/ui/Icon.astro";
+import Element from "@components/Element.astro";
 
-type Props = { data: TContactForm | undefined; class?: string };
+type Props = { data: TGlobalData | undefined };
+type TContactForm = {
+    title: string;
+    body: string;
+    inputFields: TInputField[];
+    email: string;
+    city: string;
+};
 
-const { data: contactForm } = Astro.props;
+const { data } = Astro.props;
 
-if (!contactForm) {
+if (!data) {
     console.warn("Contact Form: data is either missing or invalid.");
     return null;
 }
+
+const {
+    contact_city,
+    contact_email,
+    contact_form_body,
+    contact_form_input_fields,
+    contact_form_title,
+} = data ?? {};
+
+const contactForm: TContactForm = {
+    title: contact_form_title,
+    body: contact_form_body,
+    inputFields: contact_form_input_fields,
+    email: contact_email,
+    city: contact_city,
+};
 ---
 
-<div class="site-grid bg-ui-se">
-    <section class="grid-span-article card flex flex-col">
-        <h2>{contactForm.heading}</h2>
-        <p>{contactForm.subheading}</p>
-        <form
-            class="flex flex-col gap-2"
-            action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e"
-            method="POST"
-        >
-            <input type="text" name="_honey" style="display:none" />
-            <input type="hidden" name="_subject" value="New submission!" />
-            <input type="hidden" name="_captcha" value="false" />
-            <Input
-                id="contact-name"
-                type="text"
-                label="Name or @handle:platform"
-                name="name"
-                placeholder="@rollygon:YT"
-                required
-            />
-            <Input
-                id="contact-email"
-                type="text"
-                label="Email"
-                name="name"
-                placeholder="contact@rollygon.com"
-                required
-            />
-            <TextArea
-                id="contact-message"
-                label="Message"
-                name="message"
-                placeholder="Add your message..."
-                rows={6}
-                maxLength={1000}
-                required
-            />
-        </form>
-    </section>
-    <aside class="grid-span-sidebar card">sidebar</aside>
-</div>
+<GlobalGrid id="contact-form">
+    <Container layout="article">
+        <Element tag="section">
+            <h2>{contactForm.title}</h2>
+            <div set:html={contactForm.body} class="pb-4" />
+            <form action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e" method="POST">
+                <input type="text" name="_honey" style="display:none" />
+                <input type="hidden" name="_subject" value="New submission!" />
+                <input type="hidden" name="_captcha" value="false" />
+                <ul class="flex flex-col gap-4">
+                    {
+                        contactForm.inputFields.map(
+                            ({ name, type, label, placeholder, required }) => (
+                                <li>
+                                    <Input
+                                        id={name}
+                                        {type}
+                                        {label}
+                                        {name}
+                                        {placeholder}
+                                        {required}
+                                    />
+                                </li>
+                            ),
+                        )
+                    }
+                </ul>
+            </form>
+        </Element>
+    </Container>
+    <Container layout="sidebar" class="card">
+        <Element tag="aside">sidebar...</Element>
+    </Container>
+</GlobalGrid>

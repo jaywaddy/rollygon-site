@@ -1,0 +1,122 @@
+---
+import type { TCta } from "../../lib/schema";
+import Icon, { type TIconName } from "./Icon.astro";
+
+type TCtaSize = "sm" | "md" | "lg";
+type TCtaVarient = "primary" | "secondary" | "ghost" | "outline" | "link";
+type TIconPosition = "left" | "right";
+
+type Props = {
+    arriaCurrent?: "page" | undefined;
+    style?: [TCtaSize, TCtaVarient?];
+    class?: string;
+    data: TCta;
+    icon?: [TIconName, TIconPosition?];
+    icons?: [TIconName, TIconPosition?][];
+    iconOnly?: boolean;
+    id?: string;
+    isExternal?: boolean;
+    isUnderlined?: boolean;
+};
+
+const {
+    arriaCurrent,
+    style = ["md", "primary"],
+    class: classAttribute,
+    data,
+    icon = ["none", "left"],
+    icons,
+    iconOnly = false,
+    id,
+    isExternal,
+    isUnderlined,
+} = Astro.props;
+
+if (!data || data === undefined) {
+    console.warn("Cta: data property is invalid.");
+    return null;
+}
+
+const { href, label } = data ?? {};
+
+const size = style[0];
+const varient = style[1] || "primary";
+const iconName = icon[0];
+const iconPosition = icon[1] || "left";
+const target = isExternal ? "_blank" : undefined;
+
+const ctaSizes: { [size in TCtaSize]: string } = {
+    sm: `${iconOnly ? "px-1 pb-0.25" : "px-2 pb-0.25 text-sm"}`,
+    md: `${iconOnly ? "aspect-1/1 p-[calc(--spacing(1)+0.5px)]" : "px-3 py-1.5 text-[0.875rem]"}`,
+    lg: `${iconOnly ? "aspect-1/1 p-2" : "font-[500] px-4 py-2"}`,
+};
+
+const ctaVarients: { [style in TCtaVarient]: string } = {
+    primary: "bg-cta-primary text-cta-primary-text hover:bg-cta-primary-hover outline-0.5",
+    secondary: "bg-cta-secondary text-cta-secondary-text hover:bg-cta-secondary-hover",
+    ghost: "hover:bg-link-hover text-[0.875rem] ",
+    outline: "outline-cta-outline outline hover:bg-cta-primary-hover",
+    link: "relative hover:after:absolute hover:after:-bottom-1 hover:after:left-0 hover:after:h-0.25 hover:after:w-full hover:after:bg-current hover:after:content-['']",
+};
+
+const iconPositions: { [width in TIconPosition]: string } = {
+    left: "flex-row",
+    right: "flex-row-reverse",
+};
+
+const iconStrokeWidths: { [width in TCtaSize]: string } = {
+    sm: "[&_path]:stroke-[2px]",
+    md: "[&_path]:stroke-[2.5px]",
+    lg: "[&_path]:stroke-[2.8px]",
+};
+
+const CtaTag = href ? "a" : "button";
+const LabelTag = size === "sm" ? "small" : "span";
+---
+
+<CtaTag
+    {id}
+    {href}
+    {target}
+    class:list={[
+        "rounded-cta flex cursor-pointer items-center justify-center gap-1 text-nowrap [&_svg]:h-4",
+        classAttribute,
+        ctaSizes[size],
+        isUnderlined && "underline",
+        iconPositions[iconPosition],
+        varient !== "link" && `font-[450] ${ctaVarients[varient]}`,
+    ]}
+    aria-current={arriaCurrent}
+>
+    {
+        iconName !== "none" && !icons && (
+            <span
+                class:list={[
+                    `text-current ${iconStrokeWidths[size]}`,
+                    size === "sm" && "[&_svg]:w-3",
+                ]}
+            >
+                <Icon name={iconName} />
+            </span>
+        )
+    }
+    {
+        icons &&
+            icons.map((icon) => (
+                <span
+                    id={`${icon[0]}-icon`}
+                    class:list={[
+                        `text-current ${iconStrokeWidths[size]}`,
+                        size === "sm" && "[&_svg]:w-3",
+                    ]}
+                >
+                    <Icon name={icon[0]} />
+                </span>
+            ))
+    }
+    {
+        iconOnly === false && (
+            <LabelTag class:list={[varient === "link" && ctaVarients[varient]]}>{label}</LabelTag>
+        )
+    }
+</CtaTag>

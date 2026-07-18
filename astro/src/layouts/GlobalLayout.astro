@@ -74,15 +74,15 @@ const { title, description, class: className = "" } = Astro.props;
             // }
         </script>
     </head>
-    <body data-theme="light" class="bg-base relative flex min-h-screen flex-col gap-12">
-        <div>
+    <body data-theme="light">
+        <div class="sticky top-0">
             <Banner data={GLOBAL_DATA} />
             <Header data={GLOBAL_DATA} />
         </div>
         <slot />
         <div class="mt-auto flex flex-col gap-12">
-            <!-- <ContactForm data={contactForm} /> -->
-            <!-- <Footer data={footer} /> -->
+            <ContactForm data={GLOBAL_DATA} />
+            <!-- <Footer data={GLOBAL_DATA} /> -->
         </div>
     </body>
 </html>

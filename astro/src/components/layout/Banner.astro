@@ -1,7 +1,9 @@
 ---
-import Link from "@components/ui/Link.astro";
+import Cta from "@components/ui/Cta.astro";
 import type { TGlobalData } from "../../lib/schema/globalData";
 import type { TCta, TDisplay } from "../../lib/schema";
+import Container from "../../layouts/Container.astro";
+import GlobalGrid from "../../layouts/GlobalGrid.astro";
 
 type Props = { data: TGlobalData };
 type TBanner = { description: string; cta: TCta; display: TDisplay };
@@ -26,23 +28,24 @@ if (banner.display === "hidden") {
 }
 ---
 
-<div id="banner" class="bg-brand text-cta-primary-text site-grid relative py-2">
-    <div class="grid-span-body flex items-center justify-between">
+<GlobalGrid id="banner" class="bg-brand">
+    <Container layout="body" class="text-cta-primary-text flex items-center justify-between py-1">
         <div class="mx-auto flex items-center gap-2">
             <small class="flex gap-2">
-                <span>{banner.description}</span>
+                <span class="text-nowrap">{banner.description}</span>
                 <span>&mdash;</span>
             </small>
-            <Link data={banner.cta} button={["sm", "primary", "outline"]} icon={["new"]} />
+            <Cta data={banner.cta} style={["sm", "outline"]} icon={["new"]} />
         </div>
-        <button
+        <Cta
             id="dismiss-button"
-            class="rounded-cta hover:bg-cta-primary-hover focus:bg-cta-primary-hover cursor-pointer justify-end border-none px-2"
-        >
-            &#x2715;
-        </button>
-    </div>
-</div>
+            data={{ label: "Close banner" }}
+            style={["md"]}
+            icon={["close"]}
+            iconOnly
+        />
+    </Container>
+</GlobalGrid>
 <script>
     const banner = document.getElementById("banner");
     const dismissButton = document.getElementById("dismiss-button");

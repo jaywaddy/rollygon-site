@@ -21,62 +21,42 @@ import {
     Sparkles,
     Sun,
     SunMoon,
+    X,
 } from "@lucide/astro";
 
-export type TIconName =
-    | "arrowDown"
-    | "arrowLeft"
-    | "arrowRight"
-    | "arrowUp"
-    | "bluesky" // TODO
-    | "chevron-down"
-    | "chevron-left"
-    | "chevron-right"
-    | "chevron-up"
-    | "download"
-    | "external-link"
-    | "gumroad" // TODO
-    | "ko-fi" // TODO
-    | "menu"
-    | "moon"
-    | "new"
-    | "none"
-    | "search"
-    | "send"
-    | "sun"
-    | "sketchfab" // TODO
-    | "theme-toggle"
-    | "tool"
-    | "tris"
-    | "quads"
-    | "verts"
-    | "youtube"; // TODO
+const iconMap = {
+    "arrow-down": ArrowDown,
+    "arrow-left": ArrowLeft,
+    "arrow-right": ArrowRight,
+    "arrow-up": ArrowUp,
+    "close": X,
+    "chevron-down": ChevronDown,
+    "chevron-left": ChevronLeft,
+    "chevron-right": ChevronRight,
+    "chevron-up": ChevronUp,
+    "download": Download,
+    "external-link": ExternalLink,
+    "menu": Menu,
+    "new": Sparkles,
+    "quads": Box,
+    "search": Search,
+    "send": Forward,
+    "theme": SunMoon,
+    "theme-dark": Moon,
+    "theme-light": Sun,
+    "tool": Hammer,
+    "tris": Pyramid,
+    "verts": CircleDot,
+};
 
+export type TIconName = keyof typeof iconMap;
 type Props = { name: TIconName };
 
 const { name } = Astro.props;
 
-if (name === "none") return;
+if (!name) return null;
+
+const Icon = iconMap[name] ?? Fragment;
 ---
 
-{name === "arrowDown" && <ArrowDown />}
-{name === "arrowLeft" && <ArrowLeft />}
-{name === "arrowRight" && <ArrowRight />}
-{name === "arrowUp" && <ArrowUp />}
-{name === "chevron-down" && <ChevronDown />}
-{name === "chevron-left" && <ChevronLeft />}
-{name === "chevron-right" && <ChevronRight />}
-{name === "chevron-up" && <ChevronUp />}
-{name === "download" && <Download />}
-{name === "external-link" && <ExternalLink />}
-{name === "menu" && <Menu />}
-{name === "moon" && <Moon />}
-{name === "new" && <Sparkles />}
-{name === "search" && <Search />}
-{name === "send" && <Forward />}
-{name === "sun" && <Sun />}
-{name === "theme-toggle" && <SunMoon />}
-{name === "tool" && <Hammer />}
-{name === "tris" && <Pyramid />}
-{name === "quads" && <Box />}
-{name === "verts" && <CircleDot />}
+<Icon />

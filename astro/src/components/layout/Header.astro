@@ -2,8 +2,10 @@
 import Image from "@components/Image.astro";
 import type { TCta } from "../../lib/schema";
 import type { TGlobalData } from "../../lib/schema/globalData";
-import Link from "../ui/Link.astro";
+import Cta from "../ui/Cta.astro";
 import Icon from "@components/ui/Icon.astro";
+import GlobalGrid from "../../layouts/GlobalGrid.astro";
+import Container from "../../layouts/Container.astro";
 
 type Props = { data: TGlobalData };
 type THeader = { position: string; links: TCta[]; cta: TCta[]; logo: string };
@@ -11,7 +13,7 @@ type THeader = { position: string; links: TCta[]; cta: TCta[]; logo: string };
 const { data } = Astro.props;
 
 if (!data) {
-    console.error("Failed to fetch global data.");
+    console.warn("Header: Failed to fetch global data.");
     return null;
 }
 
@@ -36,37 +38,58 @@ const navPosition = () => {
 };
 ---
 
-<header id="header" class="site-grid bg-primary grid py-4 transition-[top] duration-300">
-    <div class="grid-span-body flex items-center gap-12">
-        <a href="/"><Image class="[&_svg]:text-current" src={logo.filename_disk} isSvg /></a>
+<GlobalGrid tag="header" id="header" class="bg-primary py-4 transition-[top] duration-300">
+    <Container layout="body" class="flex items-center gap-12">
+        <a href="/" aria-label="Home"
+            ><Image
+                class="[&_svg]:text-current"
+                src={logo.filename_disk}
+                alt="Rollygon logo"
+                isSvg
+            />
+        </a>
         <nav class:list={["flex items-center gap-12", navPosition()]}>
             <ul class="flex items-center gap-2">
                 {
                     header.links.map((link) => (
                         <li>
-                            <Link data={link} />
+                            <Cta data={link} style={["md", "ghost"]} />
                         </li>
                     ))
                 }
             </ul>
         </nav>
         <div
-            class="flex items-center justify-end gap-4 **:data-[theme='light']:[&_#dark-icon]:hidden **:data-[theme='dark']:[&_#light-icon]:hidden"
+            class:list={[
+                "flex items-center justify-end gap-4",
+                "**:data-[theme='light']:[&_#theme-dark-icon]:hidden **:data-[theme='dark']:[&_#theme-light-icon]:hidden",
+            ]}
         >
-            <button
+            <!-- <button
                 data-theme="light"
                 id="theme-toggle-button"
                 class="hover:bg-link-hover rounded-cta relative cursor-pointer p-[4.5px] [&_svg]:h-4"
             >
-                <div id="light-icon" class="flex h-6 items-center"><Icon name="sun" /></div>
-                <div id="dark-icon" class="flex h-6 items-center"><Icon name="moon" /></div>
+                <div id="light-theme-icon" class="flex h-6 items-center">
+                    <Icon name="theme-light" />
+                </div>
+                <div id="dark-theme-icon" class="flex h-6 items-center">
+                    <Icon name="theme-dark" />
+                </div>
                 <span class="sr-only">Toggle theme</span>
-            </button>
-            <span class="bg-outline h-4 w-0.25 content-['']"></span>
-            <Link data={header.cta[0]} icon={["download"]} button={["md"]} />
+            </button> -->
+            <Cta
+                id="theme-toggle-button"
+                data={{ label: "Toggle theme" }}
+                style={["md", "secondary"]}
+                icons={[["theme-light"], ["theme-dark"]]}
+                iconOnly
+            />
+            <span class="bg-seperator h-4 w-0.25 content-['']"></span>
+            <Cta data={header.cta[0]} icon={["download"]} style={["md"]} />
         </div>
-    </div>
-</header>
+    </Container>
+</GlobalGrid>
 <script>
     const header = document.getElementById("header") as HTMLElement;
     let prevScrollPos = window.pageYOffset;

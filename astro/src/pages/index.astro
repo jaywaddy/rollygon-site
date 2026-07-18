@@ -1,9 +1,10 @@
 ---
 import ContentWrapper from "@components/layout/ContentWrapper.astro";
 import GlobalLayout from "../layouts/GlobalLayout.astro";
-// import { getStrapiData } from "../lib";
-// import { type TLandingPageData } from "../types";
-import Link from "@components/ui/Link.astro";
+import Cta from "@components/ui/Cta.astro";
+import GlobalGrid from "../layouts/GlobalGrid.astro";
+import Container from "../layouts/Container.astro";
+import Element from "@components/Element.astro";
 
 // const landingPage = await getStrapiData<TLandingPageData>("/api/landing-page");
 
@@ -11,16 +12,18 @@ import Link from "@components/ui/Link.astro";
 ---
 
 <GlobalLayout title="Home">
-    <div class="site-grid">
-        <div class="grid-span-content prose-hero">
+    <GlobalGrid class="site-grid">
+        <Container layout="content" class="prose-hero">
             <!-- <h1 class="text-6xl">{title}</h1> -->
             <!-- <p class="lead">{subtitle}</p> -->
             <div class="flex gap-2">
                 <!-- {ctas?.map((cta) => <Link data={cta} />)} -->
             </div>
-        </div>
-    </div>
+        </Container>
+    </GlobalGrid>
     <ContentWrapper>
-        <div class="grid-span-content">content</div>
+        <Container layout="content" class="grid-span-content">
+            <Element>content</Element>
+        </Container>
     </ContentWrapper>
 </GlobalLayout>
