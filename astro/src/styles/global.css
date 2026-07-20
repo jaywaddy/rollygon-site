@@ -22,17 +22,20 @@
     --color-primary: var(--color-zinc-50);
     --color-secondary: var(--color-zinc-100);
 
+    --color-banner: var(--color-purple-600);
+    --color-banner-hover: var(--color-purple-500);
+
     --color-cta-primary: var(--color-brand);
     --color-cta-primary-hover: var(--color-brand-hover);
     --color-cta-secondary: var(--color-zinc-200);
     --color-cta-secondary-hover: var(--color-zinc-100);
 
-    --color-link-hover: var(--color-zinc-100);
+    --color-cta-hover: color-mix(in oklch, currentColor 5%, transparent);
 
     /* Typography */
     --default-font-family: "Outfit";
 
-    --color-cta-primary-text: var(--color-brand-800);
+    --color-cta-primary-text: var(--color-brand-900);
 
     --color-text: var(--color-zinc-950);
 
@@ -45,8 +48,8 @@
     --color-cta-outline: color-mix(in oklch, currentColor 50%, transparent);
     --color-seperator: color-mix(in oklch, currentColor 20%, transparent);
 
-    --radius-cta: 0.425rem;
-    --radius-element: 1.425rem;
+    --radius-cta: 0.4rem;
+    --radius-element: calc(var(--radius-cta) + 1rem);
     --radius-pill: 100vw;
 
     --site-gap: --spacing(8);
@@ -61,7 +64,7 @@
     --color-cta-secondary: var(--color-zinc-600);
     --color-cta-secondary-hover: var(--color-zinc-500);
 
-    --color-link-hover: var(--color-zinc-700);
+    --color-cta-hover: color-mix(in oklch, currentColor 10%, transparent);
 
     /* Typography */
     --color-text: var(--color-zinc-50);
@@ -72,6 +75,10 @@
 }
 
 @layer base {
+    html {
+        background-color: var(--color-banner);
+    }
+
     body {
         position: relative;
         display: flex;
@@ -95,34 +102,6 @@
         auto var(--gutter-width) repeat(6, var(--col-width))
         var(--gutter-width) auto;
     gap: var(--site-gap);
-}
-
-@utility grid-span-screen {
-    grid-column: 1/11;
-}
-
-@utility grid-span-body {
-    grid-column: 2/10;
-}
-
-@utility grid-span-content {
-    grid-column: 3/9;
-}
-
-@utility grid-span-article {
-    grid-column: 3/7;
-}
-
-@utility grid-span-sidebar {
-    grid-column: 7/9;
-}
-
-@utility grid-span-left-gutter {
-    grid-column: 2/3;
-}
-
-@utility grid-span-right-gutter {
-    grid-column: 9/10;
 }
 
 @utility gutter-bg {
@@ -154,22 +133,9 @@
     -webkit-mask-repeat: no-repeat;
 }
 
-/* CONTENT WRAPPERS */
-@utility card {
-    gap: --spacing(8);
-    padding: var(--padding-lg);
-    background-color: var(--color-ui-secondary);
-}
-
 /* TYPOGRAPHY */
-@utility prose {
-    color: red;
-}
-
 @utility prose-hero {
     @apply prose;
-
-    color: red;
 
     a {
         text-decoration: none;

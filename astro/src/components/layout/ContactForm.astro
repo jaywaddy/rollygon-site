@@ -1,20 +1,16 @@
 ---
 import Input from "@components/ui/Input.astro";
 import type { TGlobalData } from "../../lib/schema/globalData";
-import type { TInputField } from "../../lib/schema";
 import GlobalGrid from "../../layouts/GlobalGrid.astro";
 import Container from "../../layouts/Container.astro";
-import Icon from "@components/ui/Icon.astro";
 import Element from "@components/Element.astro";
+import Cta from "@components/ui/Cta.astro";
+import Icon from "@components/ui/Icon.astro";
+import type { TCta } from "../../lib/schema";
+import type { TIconName } from "@components/ui/Icon.astro";
 
 type Props = { data: TGlobalData | undefined };
-type TContactForm = {
-    title: string;
-    body: string;
-    inputFields: TInputField[];
-    email: string;
-    city: string;
-};
+type TSidebarGroup = { icon: TIconName; label: string; links?: TCta[]; text?: string };
 
 const { data } = Astro.props;
 
@@ -24,53 +20,99 @@ if (!data) {
 }
 
 const {
-    contact_city,
-    contact_email,
-    contact_form_body,
-    contact_form_input_fields,
-    contact_form_title,
+    contact_city: city,
+    contact_email: email,
+    contact_form_body: body,
+    contact_form_input_fields: input_fields,
+    contact_form_title: title,
+    social_links,
 } = data ?? {};
 
-const contactForm: TContactForm = {
-    title: contact_form_title,
-    body: contact_form_body,
-    inputFields: contact_form_input_fields,
-    email: contact_email,
-    city: contact_city,
-};
+const sidebarGroups: TSidebarGroup[] = [
+    { icon: "mail", label: "Email", text: email },
+    { icon: "location", label: "Location", text: city },
+    { icon: "at-sign", label: "Connect", links: social_links },
+];
 ---
 
 <GlobalGrid id="contact-form">
     <Container layout="article">
         <Element tag="section">
-            <h2>{contactForm.title}</h2>
-            <div set:html={contactForm.body} class="pb-4" />
+            <h2>{title}</h2>
+            <div set:html={body} class="pb-4" />
             <form action="https://formsubmit.co/29c37eddc15bd59bcd6a93560581473e" method="POST">
                 <input type="text" name="_honey" style="display:none" />
                 <input type="hidden" name="_subject" value="New submission!" />
                 <input type="hidden" name="_captcha" value="false" />
                 <ul class="flex flex-col gap-4">
                     {
-                        contactForm.inputFields.map(
-                            ({ name, type, label, placeholder, required }) => (
-                                <li>
-                                    <Input
-                                        id={name}
-                                        {type}
-                                        {label}
-                                        {name}
-                                        {placeholder}
-                                        {required}
-                                    />
-                                </li>
-                            ),
-                        )
+                        input_fields.map(({ name, type, label, placeholder, required }) => (
+                            <li>
+                                <Input id={name} {type} {label} {name} {placeholder} {required} />
+                            </li>
+                        ))
                     }
+                    <li class="flex gap-2">
+                        <Cta data={{ label: "Submit" }} icon={["send"]} />
+                        <Cta
+                            class="w-fit"
+                            data={{ label: "Write an email", href: `mailto:${email}` }}
+                            icon={["mail"]}
+                            varient={["md", "secondary"]}
+                        />
+                    </li>
                 </ul>
             </form>
         </Element>
     </Container>
     <Container layout="sidebar" class="card">
-        <Element tag="aside">sidebar...</Element>
+        <Element tag="aside">
+            <ul class="flex flex-col gap-4">
+                {
+                    sidebarGroups.map(({ icon, label, links, text }, index) => (
+                        <li>
+                            <ul class="flex flex-col gap-1">
+                                <li class="flex h-fit items-center gap-1 opacity-50 [&_svg]:w-3">
+                                    <Icon name={icon} />
+                                    <small class="capitalize">{label.toUpperCase()}</small>
+                                </li>
+                                {text && <li>{text}</li>}
+                                {links?.map(({ label, href, icon }) => (
+                                    <li>
+                                        <Cta
+                                            class="w-fit justify-start"
+                                            data={{ label, href }}
+                                            varient={["md", "ghost"]}
+                                            icon={[icon || "at-sign"]}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))
+                }
+            </ul>
+            <!-- <ul class="gap flex flex-col">
+                <li class="opacity-50">Email</li>
+                <li>{email}</li>
+            </ul>
+            <ul class="flex flex-col gap-2">
+                <li class="opacity-50">Email</li>
+                <li>{email}</li>
+            </ul>
+            <ul class="flex flex-col gap-2">
+                <li class="opacity-50">Connect</li>
+                {
+                    social_links?.map((link) => {
+                        <li>
+                            <Cta
+                                data={{ label: link.platform, href: link.url }}
+                                varient={["md", "ghost"]}
+                            />
+                        </li>;
+                    })
+                }
+            </ul> -->
+        </Element>
     </Container>
 </GlobalGrid>

@@ -1,6 +1,9 @@
+import type { TIconName } from "@components/ui/Icon.astro";
+
 export type TCta = {
     href?: string;
     label: string;
+    icon?: TIconName;
 };
 
 export type TDisplay = "visble" | "hidden";
@@ -55,10 +58,4 @@ export type TSeo = {
     og_image: string;
     sitemap_change_frequency: string;
     sitemap_priority: number;
-};
-
-export type TSocialLink = {
-    handle: string;
-    platform: string;
-    url: string;
 };

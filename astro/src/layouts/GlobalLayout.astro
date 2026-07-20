@@ -7,7 +7,7 @@ import "../styles/global.css";
 
 import { getGlobalData } from "../lib/schema/globalData";
 
-type Props = { title: string; description?: string; class?: string };
+type Props = { title: string; description?: string };
 
 const GLOBAL_DATA = await getGlobalData();
 
@@ -16,7 +16,7 @@ if (!GLOBAL_DATA) {
     throw new Error("Failed to fetch global data.");
 }
 
-const { title, description, class: className = "" } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -75,14 +75,14 @@ const { title, description, class: className = "" } = Astro.props;
         </script>
     </head>
     <body data-theme="light">
-        <div class="sticky top-0">
+        <div class="sticky top-0 z-999">
             <Banner data={GLOBAL_DATA} />
             <Header data={GLOBAL_DATA} />
         </div>
         <slot />
         <div class="mt-auto flex flex-col gap-12">
             <ContactForm data={GLOBAL_DATA} />
-            <!-- <Footer data={GLOBAL_DATA} /> -->
+            <Footer data={GLOBAL_DATA} />
         </div>
     </body>
 </html>

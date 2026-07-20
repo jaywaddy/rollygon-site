@@ -1,42 +1,63 @@
 ---
-import type { TFooter } from "../../types";
-import Link from "../ui/Link.astro";
+import Image from "@components/Image.astro";
+import type { TGlobalData } from "../../lib/schema/globalData";
+import Cta from "../ui/Cta.astro";
+import GlobalGrid from "../../layouts/GlobalGrid.astro";
+import Container from "../../layouts/Container.astro";
+import type { TCta } from "../../lib/schema";
 
-type Props = { data: TFooter | undefined };
+type Props = { data: TGlobalData | undefined };
+type TFooterGroup = { label: string; links: TCta[] };
 
-const { data: footer } = Astro.props;
+const { data } = Astro.props;
 
-if (!footer) return null;
+if (!data) {
+    console.warn("Footer: data property is invalid.");
+    return null;
+}
+
+const { copyright_text, logo, nav_links } = data ?? {};
+
+const footerGroups: TFooterGroup[] = [
+    { label: "Navigation", links: nav_links },
+    { label: "Tools", links: nav_links }, // TODO
+    { label: "Models", links: nav_links }, //TODO
+    { label: "Resources", links: nav_links }, //TODO
+];
 ---
 
-<div class="site-grid bg-ui-primary">
-    <footer class="grid-span-body">
-        <div class="border-outline border-b py-12"><Link data={footer.logo} /></div>
-        <div class="grid grid-cols-5 gap-16 py-12">
+<GlobalGrid class="bg-primary">
+    <Container layout="body">
+        <div class="border-seperator border-b py-8">
+            <a href="/" aria-label="Home" class="inline-block">
+                <Image src={logo.filename_disk} isSvg />
+            </a>
+            <div class="w-full"></div>
+        </div>
+        <div class="grid grid-cols-5 gap-16 py-8">
             {
-                footer.groups.map((group) => (
+                footerGroups.map((group) => (
                     <ul class="flex flex-col gap-2">
-                        <li class="bold pb-4 tracking-widest uppercase opacity-50">
-                            <small>{group.title}</small>
+                        <li class="pb-4 tracking-widest uppercase opacity-50">
+                            <small>{group.label}</small>
                         </li>
-                        {group.footerLinks.map((link) => (
-                            <li class="">{<Link data={link} />}</li>
+                        {group.links.map((link) => (
+                            <li>{<Cta data={link} varient={["md", "link"]} class="w-fit" />}</li>
                         ))}
                     </ul>
                 ))
             }
         </div>
-    </footer>
-    <small class="grid-span-screen flex justify-center bg-(--color-zinc-900) py-8 text-[white]">
-        <span class="text-current">Copyright &copy;</span>
-        <span id="footer-date" class="mr-1 text-current"></span>
-        <span class="text-current">{footer.copyrightText}</span>
-    </small>
-</div>
+    </Container>
+    <Container layout="full" tag="small" class="bg-banner flex justify-center py-4 text-[white]">
+        <span id="copyright-text" class="text-current">{copyright_text}</span>
+    </Container>
+</GlobalGrid>
 <script>
-    const footerDate = document.getElementById("footer-date");
+    const copyrightElement = document.getElementById("copyright-text");
+    const currentYear = new Date().getFullYear().toString();
 
-    if (footerDate) {
-        footerDate.innerHTML = new Date().getFullYear().toString();
+    if (copyrightElement) {
+        copyrightElement.innerText = copyrightElement.innerText.replace("{{year}}", currentYear);
     }
 </script>

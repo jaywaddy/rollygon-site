@@ -1,13 +1,16 @@
 ---
+import Container from "../../layouts/Container.astro";
+import GlobalGrid from "../../layouts/GlobalGrid.astro";
+
 type Props = { class?: string };
 
 const { class: className } = Astro.props;
 ---
 
-<div class:list={["site-grid", className]}>
+<GlobalGrid>
     <div class="grid-span-left-gutter gutter-bg"></div>
-    <main class="grid-span-content flex flex-col gap-12">
+    <Container layout="content" class:list={["flex flex-col gap-12", className]}>
         <slot />
-    </main>
+    </Container>
     <div class="grid-span-right-gutter gutter-bg"></div>
-</div>
+</GlobalGrid>

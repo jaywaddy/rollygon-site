@@ -4,6 +4,7 @@ import {
     ArrowLeft,
     ArrowRight,
     ArrowUp,
+    AtSign,
     Box,
     ChevronDown,
     ChevronLeft,
@@ -12,23 +13,34 @@ import {
     CircleDot,
     Download,
     ExternalLink,
-    Forward,
     Hammer,
+    Mail,
+    MapPin,
     Menu,
     Moon,
     Pyramid,
     Search,
+    SendHorizontal,
     Sparkles,
     Sun,
     SunMoon,
     X,
 } from "@lucide/astro";
 
+import Bluesky from "@components/icons/bluesky.svg";
+import GitHub from "@components/icons/github.svg";
+import Gumroad from "@components/icons/gumroad.svg";
+import KoFi from "@components/icons/ko-fi.svg";
+import Sketchfab from "@components/icons/sketchfab.svg";
+import YouTube from "@components/icons/youtube.svg";
+
 const iconMap = {
     "arrow-down": ArrowDown,
     "arrow-left": ArrowLeft,
     "arrow-right": ArrowRight,
     "arrow-up": ArrowUp,
+    "at-sign": AtSign,
+    "bluesky": Bluesky,
     "close": X,
     "chevron-down": ChevronDown,
     "chevron-left": ChevronLeft,
@@ -36,17 +48,24 @@ const iconMap = {
     "chevron-up": ChevronUp,
     "download": Download,
     "external-link": ExternalLink,
+    "github": GitHub,
+    "gumroad": Gumroad,
+    "ko-fi": KoFi,
+    "location": MapPin,
+    "mail": Mail,
     "menu": Menu,
     "new": Sparkles,
     "quads": Box,
     "search": Search,
-    "send": Forward,
+    "send": SendHorizontal,
+    "sketchfab": Sketchfab,
     "theme": SunMoon,
     "theme-dark": Moon,
     "theme-light": Sun,
     "tool": Hammer,
     "tris": Pyramid,
     "verts": CircleDot,
+    "youtube": YouTube,
 };
 
 export type TIconName = keyof typeof iconMap;

@@ -1,4 +1,4 @@
-import type { TCta, TDisplay, TImage, TInputField, TSeo, TSocialLink } from ".";
+import type { TCta, TDisplay, TImage, TInputField, TSeo } from ".";
 import { directus } from "../directus";
 import { readItems } from "@directus/sdk";
 
@@ -16,7 +16,7 @@ export type TGlobalData = {
     nav_links: TCta[];
     nav_cta: TCta[];
     bio?: string;
-    social_links?: TSocialLink[];
+    social_links?: TCta[];
     contact_form_title: string;
     contact_form_body: string;
     contact_form_input_fields: TInputField[];

@@ -10,8 +10,8 @@ type TGridLayout =
     | "left-gutter"
     | "right-gutter";
 
-type Props = { class?: string; id?: string; layout: TGridLayout; tag?: HTMLTag };
-const { class: className, id, layout, tag } = Astro.props;
+type Props = { class?: string; id?: string; layout: TGridLayout; style?: string; tag?: HTMLTag };
+const { class: className, id, layout, style, tag } = Astro.props;
 
 if (!layout) {
     console.warn("Container: layout property is invalid.");
@@ -31,6 +31,6 @@ const layouts: { [layout in TGridLayout]: string } = {
 const Tag = tag || "div";
 ---
 
-<Tag {id} class=`${layouts[layout]} ${className}`>
+<Tag {id} {style} class=`${layouts[layout]} ${className}`>
     <slot />
 </Tag>

@@ -6,7 +6,6 @@ import Container from "../../layouts/Container.astro";
 import GlobalGrid from "../../layouts/GlobalGrid.astro";
 
 type Props = { data: TGlobalData };
-type TBanner = { description: string; cta: TCta; display: TDisplay };
 
 const { data } = Astro.props;
 
@@ -17,30 +16,28 @@ if (!data) {
 
 const { banner_description, banner_cta, banner_display } = data ?? {};
 
-const banner: TBanner = {
-    description: banner_description,
-    cta: banner_cta[0],
-    display: banner_display,
-};
-
-if (banner.display === "hidden") {
+if (banner_display === "hidden") {
     return null;
 }
 ---
 
-<GlobalGrid id="banner" class="bg-brand">
-    <Container layout="body" class="text-cta-primary-text flex items-center justify-between py-1">
+<GlobalGrid id="banner" class="bg-banner">
+    <Container
+        layout="body"
+        style="--color-cta-hover: var(--color-banner-hover);"
+        class="flex items-center justify-between py-1 text-zinc-50"
+    >
         <div class="mx-auto flex items-center gap-2">
             <small class="flex gap-2">
-                <span class="text-nowrap">{banner.description}</span>
+                <span class="text-nowrap">{banner_description}</span>
                 <span>&mdash;</span>
             </small>
-            <Cta data={banner.cta} style={["sm", "outline"]} icon={["new"]} />
+            <Cta data={banner_cta[0]} varient={["sm", "outline"]} icon={["new"]} />
         </div>
         <Cta
             id="dismiss-button"
             data={{ label: "Close banner" }}
-            style={["md"]}
+            varient={["md", "ghost"]}
             icon={["close"]}
             iconOnly
         />
