@@ -21,7 +21,7 @@ export type TGlobalData = {
     contact_form_body: string;
     contact_form_input_fields: TInputField[];
     contact_email: string;
-    contact_city: string;
+    contact_location: string;
 };
 
 export async function getGlobalData() {
@@ -47,7 +47,7 @@ export async function getGlobalData() {
                 "contact_form_body",
                 "contact_form_input_fields",
                 "contact_email",
-                "contact_city",
+                "contact_location",
             ],
         }),
     ) as unknown as TGlobalData;

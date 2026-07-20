@@ -8,9 +8,9 @@ const { class: className } = Astro.props;
 ---
 
 <GlobalGrid>
-    <div class="grid-span-left-gutter gutter-bg"></div>
+    <Container layout="left-gutter" class="gutter-bg" />
     <Container layout="content" class:list={["flex flex-col gap-12", className]}>
         <slot />
     </Container>
-    <div class="grid-span-right-gutter gutter-bg"></div>
+    <Container layout="right-gutter" class="gutter-bg" />
 </GlobalGrid>

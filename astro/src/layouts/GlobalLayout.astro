@@ -9,6 +9,8 @@ import { getGlobalData } from "../lib/schema/globalData";
 
 type Props = { title: string; description?: string };
 
+const { title, description } = Astro.props;
+
 const GLOBAL_DATA = await getGlobalData();
 
 if (!GLOBAL_DATA) {
@@ -16,7 +18,7 @@ if (!GLOBAL_DATA) {
     throw new Error("Failed to fetch global data.");
 }
 
-const { title, description } = Astro.props;
+const { logo } = GLOBAL_DATA ?? {};
 ---
 
 <!doctype html>
@@ -26,7 +28,7 @@ const { title, description } = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
+        <link rel="icon" type="image/svg+xml" sizes="any" href={logo.filename_disk} />
         <title>{title} &ndash; Rollygon</title>
         <script type="module" defer>
             const systemTheme =

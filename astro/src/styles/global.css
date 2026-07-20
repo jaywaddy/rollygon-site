@@ -46,7 +46,7 @@
     --color-error: var(--color-red-600);
 
     --color-cta-outline: color-mix(in oklch, currentColor 50%, transparent);
-    --color-seperator: color-mix(in oklch, currentColor 20%, transparent);
+    --color-outline: color-mix(in oklch, currentColor 20%, transparent);
 
     --radius-cta: 0.4rem;
     --radius-element: calc(var(--radius-cta) + 1rem);
@@ -92,7 +92,6 @@
     }
 }
 
-/* SITE WRAPPERS */
 @utility site-grid {
     --col-width: min(--spacing(48), 10%);
     --gutter-width: 6rem;
@@ -133,11 +132,17 @@
     -webkit-mask-repeat: no-repeat;
 }
 
-/* TYPOGRAPHY */
-@utility prose-hero {
-    @apply prose;
+@utility eyebrow {
+    display: flex;
+    align-items: center;
+    gap: --spacing(1.5);
 
-    a {
-        text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: color-mix(in srgb, currentColor 50%, transparent 50%);
+
+    & svg {
+        width: --spacing(4);
     }
 }

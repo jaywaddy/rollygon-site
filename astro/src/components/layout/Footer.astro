@@ -5,9 +5,11 @@ import Cta from "../ui/Cta.astro";
 import GlobalGrid from "../../layouts/GlobalGrid.astro";
 import Container from "../../layouts/Container.astro";
 import type { TCta } from "../../lib/schema";
+import type { TIconName } from "@components/ui/Icon.astro";
+import Icon from "@components/ui/Icon.astro";
 
 type Props = { data: TGlobalData | undefined };
-type TFooterGroup = { label: string; links: TCta[] };
+type TFooterGroup = { icon: TIconName; label: string; links: TCta[] };
 
 const { data } = Astro.props;
 
@@ -19,16 +21,16 @@ if (!data) {
 const { copyright_text, logo, nav_links } = data ?? {};
 
 const footerGroups: TFooterGroup[] = [
-    { label: "Navigation", links: nav_links },
-    { label: "Tools", links: nav_links }, // TODO
-    { label: "Models", links: nav_links }, //TODO
-    { label: "Resources", links: nav_links }, //TODO
+    { icon: "navigation", label: "Navigation", links: nav_links },
+    { icon: "tool", label: "Tools", links: nav_links }, // TODO
+    { icon: "model", label: "Models", links: nav_links }, //TODO
+    { icon: "resource", label: "Resources", links: nav_links }, //TODO
 ];
 ---
 
 <GlobalGrid class="bg-primary">
     <Container layout="body">
-        <div class="border-seperator border-b py-8">
+        <div class="border-outline border-b py-8">
             <a href="/" aria-label="Home" class="inline-block">
                 <Image src={logo.filename_disk} isSvg />
             </a>
@@ -36,12 +38,13 @@ const footerGroups: TFooterGroup[] = [
         </div>
         <div class="grid grid-cols-5 gap-16 py-8">
             {
-                footerGroups.map((group) => (
+                footerGroups.map(({ icon, label, links }) => (
                     <ul class="flex flex-col gap-2">
-                        <li class="pb-4 tracking-widest uppercase opacity-50">
-                            <small>{group.label}</small>
+                        <li class="eyebrow">
+                            <Icon name={icon} />
+                            <small>{label}</small>
                         </li>
-                        {group.links.map((link) => (
+                        {links.map((link) => (
                             <li>{<Cta data={link} varient={["md", "link"]} class="w-fit" />}</li>
                         ))}
                     </ul>
