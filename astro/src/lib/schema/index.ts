@@ -1,5 +1,10 @@
 import type { TIconName } from "@components/ui/Icon.astro";
 
+export type TAsset = {
+    key: string;
+    collection: "models" | "resources" | "tools";
+};
+
 export type TCta = {
     href?: string;
     label: string;
@@ -7,6 +12,10 @@ export type TCta = {
 };
 
 export type TDisplay = "visble" | "hidden";
+
+export type TFile = {
+    size: number;
+};
 
 export type TImage = {
     description?: string;
@@ -47,6 +56,33 @@ export type TInputFieldType =
     | "time"
     | "url"
     | "week";
+
+export type TModelRef = {
+    collection_type: "model";
+    date_created: Date;
+    description?: string;
+    featured_image?: TImage;
+    file?: string;
+    legacy_date_created?: Date;
+    slug: string;
+    title: string;
+    tris: number;
+    quads: number;
+    verts: number;
+};
+
+export type TResourceRef = {
+    body: any; // Needs attention...
+    categories: string[];
+    collection_type: "resource";
+    date_created: Date;
+    description?: string;
+    featured_image?: TImage;
+    file?: string;
+    legacy_date_created?: Date;
+    slug: string;
+    title: string;
+};
 
 export type TSeo = {
     canonical_url: string;

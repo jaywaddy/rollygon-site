@@ -22,11 +22,10 @@ type Props = {
 
 const {
     arriaCurrent,
-    bgHover,
     varient = ["md", "primary"],
     class: classAttribute,
     data,
-    icon = ["none", "left"],
+    icon = [data.icon || "none", "left"],
     icons,
     iconOnly = false,
     id,

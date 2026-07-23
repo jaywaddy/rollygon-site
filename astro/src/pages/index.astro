@@ -1,26 +1,31 @@
 ---
-import ContentWrapper from "@components/layout/ContentWrapper.astro";
+import ContentWrapper from "@components/global/ContentWrapper.astro";
 import GlobalLayout from "../layouts/GlobalLayout.astro";
 import Cta from "@components/ui/Cta.astro";
 import GlobalGrid from "../layouts/GlobalGrid.astro";
 import Container from "../layouts/Container.astro";
 import Element from "@components/Element.astro";
+import { getLandingPage } from "../lib/schema/landingPage";
+import AssetCard from "@components/AssetCard.astro";
+import Icon from "@components/ui/Icon.astro";
+import LandingHero from "@components/LandingHero.astro";
 
-// const landingPage = await getStrapiData<TLandingPageData>("/api/landing-page");
+const data = await getLandingPage();
 
-// const { headingText: title, subheadingText: subtitle, ctas } = landingPage.data ?? {};
+const {
+    cta_buttons,
+    featured_model,
+    featured_resource,
+    featured_tool,
+    hero_subtitle,
+    hero_title,
+    seo,
+    title,
+} = data ?? {};
 ---
 
 <GlobalLayout title="Home">
-    <GlobalGrid class="site-grid">
-        <Container layout="content" class="prose-hero">
-            <!-- <h1 class="text-6xl">{title}</h1> -->
-            <!-- <p class="lead">{subtitle}</p> -->
-            <div class="flex gap-2">
-                <!-- {ctas?.map((cta) => <Link data={cta} />)} -->
-            </div>
-        </Container>
-    </GlobalGrid>
+    <LandingHero {data} />
     <ContentWrapper>
         <Container layout="content" class="grid-span-content"> content </Container>
     </ContentWrapper>
