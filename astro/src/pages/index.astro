@@ -6,8 +6,7 @@ import GlobalGrid from "../layouts/GlobalGrid.astro";
 import Container from "../layouts/Container.astro";
 import Element from "@components/Element.astro";
 import { getLandingPage } from "../lib/schema/landingPage";
-import AssetCard from "@components/AssetCard.astro";
-import Icon from "@components/ui/Icon.astro";
+import DynamicCard from "@components/DynamicCard.astro";
 import LandingHero from "@components/LandingHero.astro";
 
 const data = await getLandingPage();
@@ -15,7 +14,7 @@ const data = await getLandingPage();
 const {
     cta_buttons,
     featured_model,
-    featured_resource,
+    featured_resources,
     featured_tool,
     hero_subtitle,
     hero_title,
@@ -27,6 +26,7 @@ const {
 <GlobalLayout title="Home">
     <LandingHero {data} />
     <ContentWrapper>
-        <Container layout="content" class="grid-span-content"> content </Container>
+        <DynamicCard data={featured_model} />
+        {featured_resources.map((resource) => <DynamicCard data={resource} />)}
     </ContentWrapper>
 </GlobalLayout>

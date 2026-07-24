@@ -15,6 +15,18 @@
     --color-brand-900: oklch(26.8% 0.232 137.1);
     --color-brand-950: oklch(20.1% 0.232 137.3);
 
+    --color-badge-tool: color-mix(
+        in oklch,
+        var(--color-brand-500) 40%,
+        transparent
+    );
+
+    --color-badge-model: color-mix(
+        in oklch,
+        var(--color-purple-500) 40%,
+        transparent
+    );
+
     /* Background colors */
     --color-base: var(--color-zinc-200);
     --color-primary: var(--color-zinc-50);
@@ -45,7 +57,7 @@
     --color-error: var(--color-red-600);
 
     --color-cta-outline: color-mix(in oklch, currentColor 50%, transparent);
-    --color-outline: color-mix(in oklch, currentColor 20%, transparent);
+    --color-outline: color-mix(in oklch, currentColor 40%, transparent);
 
     --radius-cta: 0.4rem;
     --radius-element: calc(var(--radius-cta) + 1rem);
@@ -62,8 +74,6 @@
         rgba(0, 0, 0, 25%) 0%,
         rgba(0, 0, 0, 0) 75%
     );
-
-    --card-gradient: linear-gradient(transparent 20%, black 100%);
 }
 
 [data-theme="dark"] {
@@ -154,20 +164,21 @@
     background-position:
         0 0,
         var(--bg-pos) var(--bg-pos);
-    mask-image: var(--gradient, --radial-gradient);
+    mask-image: linear-gradient(transparent 2rem, black 90%);
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
 }
 
-@utility eyebrow {
+@utility badge {
+    --default-color: color-mix(in srgb, currentColor 60%, transparent);
+
     display: flex;
     align-items: center;
     gap: --spacing(1.5);
 
-    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: color-mix(in srgb, currentColor 50%, transparent 50%);
+    color: var(--badge-color, var(--default-color));
 
     & svg {
         width: --spacing(4);
@@ -175,6 +186,5 @@
 }
 
 @utility lead {
-    padding-bottom: --spacing(4);
     font-size: 1.325rem;
 }

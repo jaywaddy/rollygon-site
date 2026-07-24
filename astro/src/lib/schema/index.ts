@@ -20,6 +20,7 @@ export type TFile = {
 export type TImage = {
     description?: string;
     height?: number;
+    id: string;
     filename_disk: string;
     width?: number;
 };

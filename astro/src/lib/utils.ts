@@ -1,3 +1,16 @@
+export function getDate(date: Date | undefined): string | null {
+    if (date) {
+        return new Date(date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+    }
+
+    console.warn("getDate(): date is invalid.");
+    return null;
+}
+
 export function toPascalCase(input: string) {
     return String(input)
         .split("-")

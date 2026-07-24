@@ -40,9 +40,9 @@ const footerGroups: TFooterGroup[] = [
             {
                 footerGroups.map(({ icon, label, links }) => (
                     <ul class="flex flex-col gap-2">
-                        <li class="eyebrow">
+                        <li class="badge">
                             <Icon name={icon} />
-                            <small>{label}</small>
+                            <span>{label}</span>
                         </li>
                         {links.map((link) => (
                             <li>{<Cta data={link} varient={["md", "link"]} class="w-fit" />}</li>

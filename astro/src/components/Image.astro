@@ -22,7 +22,7 @@ const {
     alt,
     aspectRatio = "auto",
     class: className,
-    fallback = "/images/placeholder.svg",
+    fallback = "7893c681-2bde-486e-ade0-ff1b2c72f905",
     height = 24,
     loading = "lazy",
     quality = 80,
@@ -34,15 +34,6 @@ const {
 } = Astro.props;
 
 // Early returns for validation
-if (!src) {
-    console.warn("Image: src prop is required");
-    return null;
-}
-
-if (!src) {
-    console.warn("Image: src prop is required");
-    return null;
-}
 
 if (height <= 0 || width <= 0) {
     console.warn("Image: height and width must be positive numbers");
@@ -51,7 +42,7 @@ if (height <= 0 || width <= 0) {
 
 // Define styles object with Tailwind classes
 const styles = {
-    container: "overflow-hidden",
+    container: "overflow-clip",
     image: "object-cover transition-opacity duration-300",
     responsive: "w-full h-auto",
     square: "aspect-square object-cover",
@@ -74,9 +65,9 @@ const getAspectRatioClass = () => {
 };
 
 // Enhanced media URL processing with error handling
-function getDirectusMedia(url: string): string | null {
+function getDirectusMedia(url: string | undefined): string | null {
     try {
-        if (!url) return null;
+        if (!url) return `${BASE_API_URL}/assets/${fallback}`;
 
         // Return as-is if it's a data URL (base64)
         if (url.startsWith("data:")) return url;
@@ -108,7 +99,7 @@ const responsiveSizes =
 // SVG implementation
 const SVGImages = import.meta.glob<string>("../../../directus/uploads/*.svg", { query: "?raw" });
 
-const getSVG = async (id: string) => {
+const getSVG = async (id: string | undefined) => {
     const filePath = `../../../directus/uploads/${id}`;
 
     if (filePath in SVGImages) {

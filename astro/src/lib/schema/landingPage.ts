@@ -5,7 +5,7 @@ import { readItems } from "@directus/sdk";
 export type TLandingPage = {
     cta_buttons: TCta[];
     featured_model: TAsset;
-    featured_resource: TAsset;
+    featured_resources: TAsset[];
     featured_tool: TAsset;
     hero_subtitle: string;
     hero_title: string;

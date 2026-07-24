@@ -4,6 +4,7 @@ import type { TGlobalData } from "../../lib/schema/globalData";
 import Cta from "../ui/Cta.astro";
 import GlobalGrid from "../../layouts/GlobalGrid.astro";
 import Container from "../../layouts/Container.astro";
+import Seperator from "@components/ui/Seperator.astro";
 
 type Props = { data: TGlobalData };
 
@@ -62,7 +63,7 @@ const navPosition = () => {
                 icons={[["theme-light"], ["theme-dark"]]}
                 iconOnly
             />
-            <span class="bg-outline h-4 w-0.25 content-['']"></span>
+            <Seperator />
             <Cta data={nav_cta[0]} icon={["download"]} varient={["md"]} />
         </div>
     </Container>

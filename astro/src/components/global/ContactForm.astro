@@ -72,21 +72,25 @@ const sidebarGroups: TSidebarGroup[] = [
                     sidebarGroups.map(({ icon, label, links, text }) => (
                         <li>
                             <ul class="flex flex-col gap-1">
-                                <li class="eyebrow">
+                                <li class="badge">
                                     <Icon name={icon} />
-                                    <small>{label.toUpperCase()}</small>
+                                    <span>{label.toUpperCase()}</span>
                                 </li>
                                 {text && <li>{text}</li>}
-                                {links?.map(({ label, href, icon }) => (
-                                    <li>
-                                        <Cta
-                                            class="w-fit"
-                                            data={{ label, href }}
-                                            varient={["md", "ghost"]}
-                                            icon={[icon || "at-sign"]}
-                                        />
-                                    </li>
-                                ))}
+                                <li>
+                                    <ul class="flex flex-wrap gap-2">
+                                        {links?.map(({ label, href, icon }) => (
+                                            <li>
+                                                <Cta
+                                                    class="w-fit"
+                                                    data={{ label, href }}
+                                                    varient={["md", "outline"]}
+                                                    icon={[icon || "at-sign"]}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     ))

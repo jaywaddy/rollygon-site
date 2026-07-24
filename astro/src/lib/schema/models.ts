@@ -2,27 +2,32 @@ import type { TAsset, TSeo } from ".";
 import { directus } from "../directus";
 import { readItem } from "@directus/sdk";
 
-export type TTool = {
+export type TModel = {
     blender_version?: string;
+    body?: string; // Needs attention
     date_created?: Date;
     date_updated?: Date;
     description?: string;
     featured_image?: string;
     file?: string;
-    gumroad_download_url?: string;
     id?: string;
     legacy_date_created?: Date;
     price?: number;
-    related_models?: TAsset;
+    related_tools?: TAsset;
     seo?: TSeo;
+    sketchfab_model_url?: string;
     slug?: string;
     title?: string;
+    quads?: number;
+    tris?: number;
+    updates?: TAsset[];
+    verts?: number;
     youtube_video_url?: string;
 };
 
-export async function getToolById(
+export async function getModelById(
     id: string,
-    options: { fields: string[] },
-): Promise<TTool> {
-    return await directus.request(readItem("tools", id, options));
+    options: { fields: any[] },
+): Promise<TModel> {
+    return await directus.request(readItem("models", id, options));
 }
