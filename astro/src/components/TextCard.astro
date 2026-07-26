@@ -1,5 +1,6 @@
 ---
 import { type TCategory } from "../lib/schema/resources";
+import Element from "./Element.astro";
 import Image from "./Image.astro";
 import Badge from "./ui/Badge.astro";
 import type { TIconName } from "./ui/Icon.astro";
@@ -17,7 +18,7 @@ if (!data) {
 
 const { categories, description, featured_image, slug, title } = data ?? {};
 
-const badges = (): TBadge[] | undefined => {
+const badges = (): TBadge[] => {
     if (categories) {
         return categories.map((category: TCategory) => {
             return { icon: category, label: category };
@@ -28,19 +29,24 @@ const badges = (): TBadge[] | undefined => {
 };
 ---
 
-<section class:list={["relative flex gap-8 overflow-clip", className]}>
-    {!imageOff && <Image class:list={"rounded-element aspect-square h-32"} src={featured_image} />}
+<section
+    class:list={[
+        "bg-primary rounded-element relative flex min-h-36 flex-row items-center overflow-clip",
+        className,
+    ]}
+>
+    {!imageOff && <Image class:list={"aspect-square h-36"} src={featured_image} />}
 
-    <div class:list={["z-10 w-full"]}>
-        <div class="flex max-w-2xl flex-col gap-1">
+    <div class:list={["z-10 w-full pl-8"]}>
+        <div class="flex max-w-2xl flex-col">
             <a href="">
                 <h3>{title}</h3>
             </a>
-            {description && <p class="lead opacity-90">{description}</p>}
-            <div class="badge z-10 mt-2 flex gap-4">
+            {description && <p>{description}</p>}
+            <div class="z-10 mt-2 flex items-center gap-4">
                 {
-                    badges()?.map((badge: TBadge, index: number) =>
-                        index < badges.length - 1 ? (
+                    badges().map((badge: TBadge, index: number) =>
+                        index < badges().length - 1 ? (
                             <>
                                 <Badge {badge} />
                                 <Seperator />

@@ -1,7 +1,7 @@
 import type { TIconName } from "@components/ui/Icon.astro";
-import type { TAsset, TSeo } from ".";
+import type { TAsset, TQueryOptions, TSeo } from ".";
 import { directus } from "../directus";
-import { readItem } from "@directus/sdk";
+import { readItem, readItems } from "@directus/sdk";
 
 export type TCategory = "update" | "stream" | "guide" | "article" | "video";
 
@@ -22,6 +22,12 @@ export type TResource = {
     title?: string;
     youtube_video_url?: string;
 };
+
+export async function getResources(
+    options: TQueryOptions,
+): Promise<Array<TResource>> {
+    return await directus.request(readItems("resources", options));
+}
 
 export async function getResourceById(
     id: string,

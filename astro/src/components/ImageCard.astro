@@ -26,15 +26,15 @@ const { collection, description, featured_image, price, slug, title } = data ?? 
 
 const assetVarients: { [key: string]: TAssetVarient } = {
     models: {
-        badges: [{ icon: "model", label: "Live 3D Model" }],
+        badges: [{ icon: "model", label: "3D Model" }],
         class: {
             container: "rounded-element min-h-96 p-6 text-zinc-50",
-            gradient: "asset-gradient bg-purple-900",
+            gradient: "asset-gradient bg-zinc-700",
             image: "absolute inset-0 h-full",
             info: "mt-auto",
         },
         slug: `/models/${slug}`,
-        style: { gradient: "--color: var(--color-purple-950);" },
+        style: { gradient: "--color: var(--color-zinc-800);" },
     },
     tools: {
         badges: [
@@ -43,12 +43,12 @@ const assetVarients: { [key: string]: TAssetVarient } = {
         ],
         class: {
             container: "rounded-element min-h-96 h-full p-6 text-zinc-50",
-            gradient: "asset-gradient bg-brand-900",
+            gradient: "asset-gradient bg-zinc-700",
             image: "absolute inset-0 h-full",
             info: "mt-auto",
             slug: `/tools/${slug}`,
         },
-        style: { gradient: "--color: var(--color-brand-950);" },
+        style: { gradient: "--color: var(--color-zinc-800);" },
     },
 };
 
@@ -57,12 +57,16 @@ const badges = assetVarients[collection].badges ?? [];
 
 <section
     class:list={[
-        "relative flex gap-8 overflow-clip",
+        "relative flex overflow-clip",
         assetVarients[collection].class?.container,
         className,
     ]}
 >
     <Image class:list={[assetVarients[collection].class?.image]} src={featured_image} />
+    <div
+        class="absolute inset-0 w-full bg-linear-to-b from-transparent from-20% to-zinc-950 content-['']"
+    >
+    </div>
     <div
         style={assetVarients[collection].style?.gradient}
         class:list={["absolute inset-0 content-['']", assetVarients[collection].class?.gradient]}
@@ -73,8 +77,8 @@ const badges = assetVarients[collection].badges ?? [];
             <a href="">
                 <h3>{title}</h3>
             </a>
-            {description && <p class="lead opacity-90">{description}</p>}
-            <div class="badge z-10 mt-2 flex gap-4">
+            {description && <p class="lead">{description}</p>}
+            <div class="z-10 mt-2 flex items-center gap-4">
                 {
                     badges.map((badge, index) =>
                         index < badges.length - 1 ? (

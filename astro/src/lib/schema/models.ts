@@ -1,6 +1,6 @@
-import type { TAsset, TSeo } from ".";
+import type { TAsset, TQueryOptions, TSeo } from ".";
 import { directus } from "../directus";
-import { readItem } from "@directus/sdk";
+import { readItem, readItems } from "@directus/sdk";
 
 export type TModel = {
     blender_version?: string;
@@ -13,7 +13,7 @@ export type TModel = {
     id?: string;
     legacy_date_created?: Date;
     price?: number;
-    related_tools?: TAsset;
+    related_tools?: TAsset[];
     seo?: TSeo;
     sketchfab_model_url?: string;
     slug?: string;
@@ -24,6 +24,12 @@ export type TModel = {
     verts?: number;
     youtube_video_url?: string;
 };
+
+export async function getModels(
+    options: TQueryOptions,
+): Promise<Array<TModel>> {
+    return await directus.request(readItems("models", options));
+}
 
 export async function getModelById(
     id: string,

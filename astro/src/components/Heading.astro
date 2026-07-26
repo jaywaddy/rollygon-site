@@ -1,0 +1,31 @@
+---
+import Badge from "./ui/Badge.astro";
+import type { TBadge } from "./ui/Badge.astro";
+
+type Props = { eyebrow?: string | TBadge; heading: string; subheading?: string };
+
+const { eyebrow, heading, subheading } = Astro.props;
+
+if (!heading) {
+    console.warn("Heading: heading prop is either missing or invalid.");
+    return null;
+}
+
+const badge = (): TBadge | undefined => {
+    if (typeof eyebrow === "string") {
+        return { icon: "flame", label: eyebrow };
+    }
+
+    if (eyebrow !== undefined) {
+        return { icon: eyebrow.icon, label: eyebrow.label };
+    }
+
+    return undefined;
+};
+---
+
+<div>
+    {eyebrow && <Badge badge={badge()} />}
+    <h2>{heading}</h2>
+    {subheading && <p class="lead">{subheading}</p>}
+</div>

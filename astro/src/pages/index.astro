@@ -8,6 +8,9 @@ import Element from "@components/Element.astro";
 import { getLandingPage } from "../lib/schema/landingPage";
 import DynamicCard from "@components/DynamicCard.astro";
 import LandingHero from "@components/LandingHero.astro";
+import Heading from "@components/Heading.astro";
+import { getModelById } from "../lib/schema/models";
+import { getToolById } from "../lib/schema/tools";
 
 const data = await getLandingPage();
 
@@ -21,12 +24,72 @@ const {
     seo,
     title,
 } = data ?? {};
+
+const fetchFeaturedModel = await getModelById(featured_model.key, { fields: ["related_tools"] });
+const relatedTools = fetchFeaturedModel.related_tools?.map((tool) => tool);
 ---
 
 <GlobalLayout title="Home">
     <LandingHero {data} />
     <ContentWrapper>
-        <DynamicCard data={featured_model} />
-        {featured_resources.map((resource) => <DynamicCard data={resource} />)}
+        <div class="flex flex-col gap-8">
+            <Heading
+                eyebrow="Featured"
+                heading="Live 3D Model"
+                subheading="Click, drag, and scroll to interact"
+            />
+            <DynamicCard data={featured_model} />
+            <Cta
+                class="w-fit"
+                data={{ href: "/models", label: "View all models" }}
+                varient={["md", "outline"]}
+                icon={["arrow-right", "right"]}
+            />
+        </div>
+        <div class="flex flex-col gap-8">
+            <Heading
+                eyebrow="Featured"
+                heading="Tools for Modeling"
+                subheading="All tools used to build the model above"
+            />
+            <ul class="grid grid-cols-3 gap-8">
+                {
+                    relatedTools &&
+                        relatedTools.map((tool) => (
+                            <li>
+                                <DynamicCard data={tool} />
+                            </li>
+                        ))
+                }
+            </ul>
+            <Cta
+                class="w-fit"
+                data={{ href: "/tools", label: "View all tools" }}
+                varient={["md", "outline"]}
+                icon={["arrow-right", "right"]}
+            />
+        </div>
+        <div class="flex flex-col gap-8">
+            <Heading
+                eyebrow="Featured"
+                heading="Updates & Resources"
+                subheading="Guides for tools and process documentation"
+            />
+            <ul class="flex flex-col gap-4">
+                {
+                    featured_resources.map((resource) => (
+                        <li>
+                            <DynamicCard data={resource} />
+                        </li>
+                    ))
+                }
+            </ul>
+            <Cta
+                class="w-fit"
+                data={{ href: "/resources", label: "View all resources" }}
+                varient={["md", "outline"]}
+                icon={["arrow-right", "right"]}
+            />
+        </div>
     </ContentWrapper>
 </GlobalLayout>

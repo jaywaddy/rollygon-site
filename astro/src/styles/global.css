@@ -32,8 +32,8 @@
     --color-primary: var(--color-zinc-50);
     --color-secondary: var(--color-zinc-100);
 
-    --color-banner: var(--color-purple-600);
-    --color-banner-hover: var(--color-purple-500);
+    --color-banner: var(--color-zinc-950);
+    --color-banner-hover: var(--color-zinc-800);
     --color-banner-text: var(--color-zinc-50);
 
     --color-cta-primary: var(--color-brand);
@@ -56,8 +56,7 @@
 
     --color-error: var(--color-red-600);
 
-    --color-cta-outline: color-mix(in oklch, currentColor 50%, transparent);
-    --color-outline: color-mix(in oklch, currentColor 40%, transparent);
+    --color-outline: color-mix(in oklch, currentColor 30%, transparent);
 
     --radius-cta: 0.4rem;
     --radius-element: calc(var(--radius-cta) + 1rem);
@@ -118,12 +117,12 @@
 
     h2 {
         @apply text-4xl;
-        font-weight: bold;
+        font-weight: 600;
     }
 
     h3 {
         @apply text-2xl;
-        font-weight: bold;
+        font-weight: 500;
     }
 }
 
@@ -169,6 +168,10 @@
     mask-repeat: no-repeat;
 }
 
+@utility top-down-gradient {
+    background-image: linear-gradient(transparent 2rem, black 90%);
+}
+
 @utility badge {
     --default-color: color-mix(in srgb, currentColor 60%, transparent);
 
@@ -176,7 +179,7 @@
     align-items: center;
     gap: --spacing(1.5);
 
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: var(--tracking-wide);
     color: var(--badge-color, var(--default-color));
 
@@ -187,4 +190,5 @@
 
 @utility lead {
     font-size: 1.325rem;
+    color: color-mix(in srgb, currentColor 80%, transparent);
 }

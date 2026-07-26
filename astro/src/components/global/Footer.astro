@@ -3,10 +3,13 @@ import Image from "@components/Image.astro";
 import type { TGlobalData } from "../../lib/schema/globalData";
 import Cta from "../ui/Cta.astro";
 import GlobalGrid from "../../layouts/GlobalGrid.astro";
+import { getTools } from "../../lib/schema/tools";
+import { getModels } from "../../lib/schema/models";
 import Container from "../../layouts/Container.astro";
 import type { TCta } from "../../lib/schema";
 import type { TIconName } from "@components/ui/Icon.astro";
 import Icon from "@components/ui/Icon.astro";
+import { getResources } from "../../lib/schema/resources";
 
 type Props = { data: TGlobalData | undefined };
 type TFooterGroup = { icon: TIconName; label: string; links: TCta[] };
@@ -20,11 +23,30 @@ if (!data) {
 
 const { copyright_text, logo, nav_links } = data ?? {};
 
+const LINK_COUNT = 5;
+
+const fetchTools = await getTools({ fields: ["slug", "title"], sort: ["sort", "-date_created"] });
+const fetchModels = await getModels({ fields: ["slug", "title"], sort: ["sort", "-date_created"] });
+const fetchResources = await getResources({
+    fields: ["slug", "title"],
+    sort: ["sort", "-date_created"],
+});
+
+const tool_links = [...fetchTools].map(({ slug, title }) => {
+    return { href: `/tools/${slug}`, label: title };
+});
+const model_links = [...fetchModels].map(({ slug, title }) => {
+    return { href: `/models/${slug}`, label: title };
+});
+const resource_links = [...fetchResources].map(({ slug, title }) => {
+    return { href: `/resources/${slug}`, label: title };
+});
+
 const footerGroups: TFooterGroup[] = [
     { icon: "navigation", label: "Navigation", links: nav_links },
-    { icon: "tool", label: "Tools", links: nav_links }, // TODO
-    { icon: "model", label: "Models", links: nav_links }, //TODO
-    { icon: "resource", label: "Resources", links: nav_links }, //TODO
+    { icon: "tool", label: "Tools", links: tool_links.slice(0, LINK_COUNT) },
+    { icon: "model", label: "Models", links: model_links.slice(0, LINK_COUNT) },
+    { icon: "resource", label: "Resources", links: resource_links.slice(0, LINK_COUNT) },
 ];
 ---
 

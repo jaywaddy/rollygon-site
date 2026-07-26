@@ -58,7 +58,7 @@ const sidebarGroups: TSidebarGroup[] = [
                             class="w-fit"
                             data={{ label: "Write an email", href: `mailto:${email}` }}
                             icon={["mail"]}
-                            varient={["md", "outline"]}
+                            varient={["md", "secondary"]}
                         />
                     </li>
                 </ul>
@@ -74,7 +74,7 @@ const sidebarGroups: TSidebarGroup[] = [
                             <ul class="flex flex-col gap-1">
                                 <li class="badge">
                                     <Icon name={icon} />
-                                    <span>{label.toUpperCase()}</span>
+                                    <span>{label}</span>
                                 </li>
                                 {text && <li>{text}</li>}
                                 <li>
@@ -84,7 +84,7 @@ const sidebarGroups: TSidebarGroup[] = [
                                                 <Cta
                                                     class="w-fit"
                                                     data={{ label, href }}
-                                                    varient={["md", "outline"]}
+                                                    varient={["md", "secondary"]}
                                                     icon={[icon || "at-sign"]}
                                                 />
                                             </li>

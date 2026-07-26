@@ -7,7 +7,7 @@ export type TAsset = {
 
 export type TCta = {
     href?: string;
-    label: string;
+    label?: string;
     icon?: TIconName;
 };
 
@@ -70,6 +70,11 @@ export type TModelRef = {
     tris: number;
     quads: number;
     verts: number;
+};
+
+export type TQueryOptions = {
+    fields?: string[];
+    sort?: string[];
 };
 
 export type TResourceRef = {

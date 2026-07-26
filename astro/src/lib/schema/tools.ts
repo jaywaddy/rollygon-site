@@ -1,6 +1,6 @@
-import type { TAsset, TSeo } from ".";
+import type { TAsset, TQueryOptions, TSeo } from ".";
 import { directus } from "../directus";
-import { readItem } from "@directus/sdk";
+import { readItem, readItems } from "@directus/sdk";
 
 export type TTool = {
     blender_version?: string;
@@ -19,6 +19,10 @@ export type TTool = {
     title?: string;
     youtube_video_url?: string;
 };
+
+export async function getTools(options: TQueryOptions): Promise<Array<TTool>> {
+    return await directus.request(readItems("tools", options));
+}
 
 export async function getToolById(
     id: string,
