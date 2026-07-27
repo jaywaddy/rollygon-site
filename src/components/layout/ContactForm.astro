@@ -43,6 +43,12 @@ import AboutSection from "@/layout/AboutSection.astro";
 	<AboutSection />
 </section>
 
+<script is:inline>
+	document.querySelector('form[action*="formsubmit.co"]')?.addEventListener('submit', function() {
+		window.posthog?.capture('contact_form_submitted');
+	});
+</script>
+
 <style>
 	#contact-form {
 		padding: var(--padding-lg);

@@ -3,6 +3,7 @@ import "@/styles/global.css";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import ContactForm from "@/components/layout/ContactForm.astro";
+import PostHog from "@/components/posthog.astro";
 
 interface Props {
 	pageTitle: string;
@@ -20,6 +21,7 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg?" />
 		<meta name="generator" content={Astro.generator} />
+		<PostHog />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -65,6 +67,16 @@ const { pageTitle, description = "Rollygon"} = Astro.props;
 
 				menuToggleButton.setAttribute("data-is-checked", "true");
 			}
+		</script>
+		<script is:inline>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.querySelector('#theme-toggle-button')?.addEventListener('click', function() {
+					setTimeout(function() {
+						var theme = localStorage.getItem('theme') || 'dark';
+						window.posthog?.capture('theme_toggled', { theme: theme });
+					}, 0);
+				});
+			});
 		</script>
 	</head>
 	<body data-theme>

@@ -78,6 +78,18 @@ function setPrevHref(): string {
 	</ul>
 </div>
 
+<script is:inline define:vars={{ phCollection: collection }}>
+	document.querySelectorAll('.pagination ul a').forEach(function(link) {
+		link.addEventListener('click', function() {
+			var direction = link.getAttribute('title')?.toLowerCase();
+			window.posthog?.capture('content_navigation_clicked', {
+				direction: direction,
+				collection: phCollection,
+			});
+		});
+	});
+</script>
+
 <style>
 	li {
 		display: flex;

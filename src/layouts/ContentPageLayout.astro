@@ -26,6 +26,9 @@ function setButtonLabel(price: string): string {
 
 	return `Buy tool`
 }
+
+const phToolPrice = collection === 'tools' ? (content.data as { price: string }).price : null;
+const phToolHref = collection === 'tools' ? (content.data as { href: string }).href : null;
 ---
 
 <div class="column-lg">
@@ -61,6 +64,7 @@ function setButtonLabel(price: string): string {
 							<strong>{content.data.version}</strong>
 						</small>
 						<Button
+							id="tool-download-btn"
 							label={`Get tool`}
 							price={content.data.price}
 							icon="download"
@@ -118,3 +122,17 @@ function setButtonLabel(price: string): string {
 		width: 64px;
 	}
 </style>
+
+<script is:inline define:vars={{ phCollection: collection, phTitle: title, phToolPrice, phToolHref }}>
+	document.addEventListener('DOMContentLoaded', function() {
+		if (phCollection === 'tools') {
+			document.getElementById('tool-download-btn')?.addEventListener('click', function() {
+				window.posthog?.capture('tool_download_clicked', {
+					title: phTitle,
+					price: phToolPrice,
+					href: phToolHref,
+				});
+			});
+		}
+	});
+</script>

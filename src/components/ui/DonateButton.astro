@@ -11,6 +11,12 @@ const { size = "fit-content" } = Astro.props;
     <strong>Support me on Ko–fi</strong>
 </a>
 
+<script is:inline>
+	document.querySelector('.donate-button')?.addEventListener('click', function() {
+		window.posthog?.capture('ko_fi_support_clicked');
+	});
+</script>
+
 <style>
     .donate-button {
         --padding-y: var(--space-3);

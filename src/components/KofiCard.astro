@@ -14,6 +14,12 @@ const { kofi } = SOCIAL_LINK;
     </a>
 </div>
 
+<script is:inline>
+	document.querySelector('.kofi-qr')?.addEventListener('click', function() {
+		window.posthog?.capture('kofi_qr_clicked');
+	});
+</script>
+
 <style>
     .kofi-card {
         display: flex;

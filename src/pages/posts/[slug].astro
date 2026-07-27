@@ -39,6 +39,13 @@ function getModeSlug(): string  {
 ---
 
 <SiteLayout pageTitle={post.data.title}>
+	<script is:inline define:vars={{ phTitle: post.data.title, phSlug: post.slug, phTags: post.data.tags }}>
+		window.posthog?.capture('post_viewed', {
+			title: phTitle,
+			slug: phSlug,
+			tags: phTags,
+		});
+	</script>
 	<ContentPageLayout content={post} contentCollection={ALL_POSTS} {index}>
 		<Content />
 	</ContentPageLayout>
