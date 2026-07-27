@@ -36,6 +36,15 @@ function setToolIndex(): number {
 ---
 
 <SiteLayout pageTitle={tool.data.title}>
+	<script is:inline define:vars={{ phTitle: tool.data.title, phSlug: tool.slug, phPrice: tool.data.price, phVersion: tool.data.version, phTags: tool.data.tags }}>
+		window.posthog?.capture('tool_viewed', {
+			title: phTitle,
+			slug: phSlug,
+			price: phPrice,
+			version: phVersion,
+			tags: phTags,
+		});
+	</script>
 	<ContentPageLayout content={tool} contentCollection={ALL_TOOLS} {index}>
 		<Content />
 	</ContentPageLayout>

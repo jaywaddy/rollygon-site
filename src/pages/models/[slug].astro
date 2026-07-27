@@ -39,6 +39,13 @@ function setModelIndex(): number {
 ---
 
 <SiteLayout pageTitle={model.data.title}>
+	<script is:inline define:vars={{ phTitle: model.data.title, phSlug: model.slug, phTags: model.data.tags }}>
+		window.posthog?.capture('model_viewed', {
+			title: phTitle,
+			slug: phSlug,
+			tags: phTags,
+		});
+	</script>
 	<ContentPageLayout content={model} contentCollection={ALL_MODELS} {index}>
 		<Content />
 	</ContentPageLayout>
