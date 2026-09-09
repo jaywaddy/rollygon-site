@@ -1,0 +1,63 @@
+---
+import globalConfig from "@lib/config";
+import type { TCategory, TCollection, TCollectionGroup } from "@lib/utils/types";
+import { allCollections } from "@src/content.config";
+import type { CollectionEntry } from "astro:content";
+import Grid from "./ui/Grid.astro";
+const { setHref } = globalConfig.utils ?? {};
+
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+const { navigation } = globalConfig;
+
+const navLinks: TCategory[] = navigation.categories.filter((link) => {
+	return link.href !== "/" && !link.collection;
+});
+
+const collectionGroups = [
+	...populateFooterGroups(...allCollections),
+	{ label: "Information", links: [...navLinks] },
+];
+
+function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TCollectionGroup[] {
+	const maxLinks = 5;
+
+	return data.slice(0, maxLinks).map((entries) => {
+		const name = entries[0]?.collection;
+		return {
+			icon: name,
+			label: name,
+			links: entries.map((entry) => ({ href: setHref(entry), label: entry.data.title })),
+			plural:
+				navigation.categories.filter((link) => link.collection === name)[0].plural || "",
+		};
+	});
+}
+---
+
+<Grid class:list={["gap-x-8 gap-y-16", className]} size="sm">
+	{
+		collectionGroups.map((group) => (
+			<ul class="flex flex-col gap-2">
+				<li>
+					<span class="eyebrow">{group.label}</span>
+				</li>
+				{group.links?.map(({ href, label }) => (
+					<li class="">
+						<a class="link" {href}>
+							{label}
+						</a>
+					</li>
+				))}
+				{group.plural && (
+					<li>
+						<a class="link" href={`/${group.label}`}>
+							View all {group.plural}
+						</a>
+					</li>
+				)}
+			</ul>
+		))
+	}
+</Grid>

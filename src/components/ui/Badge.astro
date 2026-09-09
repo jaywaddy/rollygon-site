@@ -1,0 +1,23 @@
+---
+import globalConfig from "@lib/config";
+import Icon, { type TIcon } from "./Icon.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+type Props = { class?: string; badge?: TBadge };
+export type TBadge = { icon: TIcon; label: string };
+
+const { class: className, badge } = Astro.props;
+
+if (!badge) {
+	setWarning("Badge", "badge");
+	return null;
+}
+
+const { icon, label } = badge ?? {};
+---
+
+<div class:list={["badge flex gap-1.5", className]}>
+	<Icon name={icon} />
+	<span>{label}</span>
+</div>

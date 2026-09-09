@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+import type { TGallery } from "@lib/utils/types";
+import globalConfig from "@lib/config";
+
+export async function getStaticPaths() {
+	const entries: TGallery[] = await getCollection("gallery");
+
+	return entries.map((entry) => ({
+		params: { entry: globalConfig.utils.slugify(entry.data.title) },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout {entry} />

@@ -1,0 +1,72 @@
+---
+import Element from "@components/ui/Element.astro";
+import globalConfig from "@lib/config";
+import Icon from "@components/ui/Icon.astro";
+import Button from "@components/ui/Button.astro";
+import Seperator from "@components/ui/Seperator.astro";
+import { featureLabel } from "@lib/ext/services/lib/services";
+
+type Props = { plan: (typeof globalConfig.services)[0] };
+
+const { plan } = Astro.props;
+const { description, discount, features, featureTitle, isFeatured, id, label, note, price } = plan;
+---
+
+<Element
+	bg={isFeatured
+		? "bg-[color-mix(var(--color-brand)_10%,var(--color-primary))] outline-2 outline-brand overflow-clip"
+		: undefined}
+	class:list={["price-card relative h-full", id]}
+	{id}
+>
+	{
+		isFeatured && (
+			<span class="bg-brand text-brand-text rounded-bl-cta absolute top-0 right-0 flex items-center gap-1 px-2 py-1 text-sm">
+				<Icon class="w-4 [&_path]:stroke-2" name="thumbs-up" /> Recommended
+			</span>
+		)
+	}
+	<strong>{label}</strong>
+	<p>{description}</p>
+	<div class="flex flex-col gap-1">
+		<div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+			<p class="flex items-baseline gap-1">
+				<span class="text-3xl" id={`${id}-price`}>{price.month.toLocaleString()}</span>
+				<span id={`${id}-price-unit`}>/mo</span>
+			</p>
+			{discount > 0 && <small class="text-50">{discount * 100}% discount</small>}
+		</div>
+		{
+			discount > 0 && (
+				<p class="text-50 line-through">
+					<span id={`${id}-og-price`}>${price.month.toLocaleString()}</span>
+					<span id={`${id}-og-price-unit`}>/mo</span>
+				</p>
+			)
+		}
+		{note && <small>{note}</small>}
+	</div>
+	<Button label="Choose plan" full varient={[isFeatured ? "primary" : "secondary", "lg"]} />
+	<Seperator
+		axis="y"
+		class:list={["my-4", isFeatured && "bg-[color-mix(var(--color-brand)_25%,transparent)]!"]}
+	/>
+	<div class="flex flex-col gap-1">
+		<strong>{featureTitle}</strong>
+		<ul>
+			{
+				features
+					.filter((feature) => feature.list)
+					.map(({ asterisk, id }) => (
+						<li class="flex gap-2">
+							<Icon class="w-2.5 [&_path]:stroke-4" name="check" />
+							<p class="flex flex-col">
+								<span>{featureLabel(id)}</span>
+								{asterisk && <small class="text-70">{asterisk}</small>}
+							</p>
+						</li>
+					))
+			}
+		</ul>
+	</div>
+</Element>

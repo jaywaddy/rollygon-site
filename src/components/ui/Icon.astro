@@ -1,0 +1,138 @@
+---
+import {
+	ArrowDown,
+	ArrowLeft,
+	ArrowRight,
+	ArrowUp,
+	AtSign,
+	BookOpen,
+	Box,
+	Check,
+	ChevronDown,
+	ChevronLeft,
+	ChevronRight,
+	ChevronUp,
+	CircleDot,
+	CircleCheck,
+	Download,
+	ExternalLink,
+	Flame,
+	Globe,
+	Hammer,
+	Handshake,
+	House,
+	Image,
+	Mail,
+	MapPin,
+	Menu,
+	MessageCircleHeart,
+	Moon,
+	Navigation,
+	Newspaper,
+	Pyramid,
+	Radio,
+	RefreshCw,
+	Search,
+	SendHorizontal,
+	Sparkles,
+	Sun,
+	SunMoon,
+	X,
+	ThumbsUp,
+	ShoppingCart,
+	MessageCircle,
+	DollarSign,
+	ChartColumnBig,
+	Info,
+} from "@lucide/astro";
+
+import ArtStation from "@assets/icons/artstation.svg";
+import Bluesky from "@assets/icons/bluesky.svg";
+import Discord from "@assets/icons/discord.svg";
+import GitHub from "@assets/icons/github.svg";
+import Gumroad from "@assets/icons/gumroad.svg";
+import KoFi from "@assets/icons/ko-fi.svg";
+import Logo from "@assets/logo.svg";
+import Reddit from "@assets/icons/reddit.svg";
+import Sketchfab from "@assets/icons/sketchfab.svg";
+import Tiktok from "@assets/icons/tiktok.svg";
+import Twitch from "@assets/icons/twitch.svg";
+import Twitter from "@assets/icons/twitter.svg";
+import YouTube from "@assets/icons/youtube.svg";
+
+const iconMap = {
+	"arrow-down": ArrowDown,
+	"arrow-left": ArrowLeft,
+	"arrow-right": ArrowRight,
+	"arrow-up": ArrowUp,
+	"artstation": ArtStation,
+	"article": Newspaper,
+	"at-sign": AtSign,
+	"bar-chart": ChartColumnBig,
+	"blog": Newspaper,
+	"bluesky": Bluesky,
+	"close": X,
+	"check": Check,
+	"chevron-down": ChevronDown,
+	"chevron-left": ChevronLeft,
+	"chevron-right": ChevronRight,
+	"chevron-up": ChevronUp,
+	"config": Globe,
+	"discord": Discord,
+	"dollar": DollarSign,
+	"download": Download,
+	"external-link": ExternalLink,
+	"flame": Flame,
+	"gallery": Image,
+	"github": GitHub,
+	"guide": BookOpen,
+	"gumroad": Gumroad,
+	"handshake": Handshake,
+	"home": House,
+	"info": Info,
+	"ko-fi": KoFi,
+	"location": MapPin,
+	"logo": Logo,
+	"mail": Mail,
+	"menu": Menu,
+	"message": MessageCircle,
+	"model": Box,
+	"navigation": Navigation,
+	"new": Sparkles,
+	"none": "",
+	"open": Check,
+	"quads": Box,
+	"reddit": Reddit,
+	"refresh": RefreshCw,
+	"resource": Newspaper,
+	"search": Search,
+	"send": SendHorizontal,
+	"shop": ShoppingCart,
+	"sketchfab": Sketchfab,
+	"stream": Radio,
+	"theme": SunMoon,
+	"theme-dark": Moon,
+	"theme-light": Sun,
+	"thumbs-up": ThumbsUp,
+	"tiktok": Tiktok,
+	"tool": Hammer,
+	"tris": Pyramid,
+	"twitch": Twitch,
+	"twitter": Twitter,
+	"update": RefreshCw,
+	"verts": CircleDot,
+	"video": YouTube,
+	"youtube": YouTube,
+};
+
+export type TIcon = keyof typeof iconMap;
+type Props = { class?: string; name: TIcon };
+
+const { class: className, name } = Astro.props;
+
+if (!name) return null;
+
+const Icon = iconMap[name] ?? Fragment;
+---
+
+<Icon class:list={["fill-none", className]} />

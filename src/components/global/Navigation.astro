@@ -1,0 +1,100 @@
+---
+import Button from "../ui/Button.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Container from "@layouts/Container.astro";
+import Svg from "@components/ui/Svg.astro";
+import logo from "@assets/logo.svg";
+import globalConfig from "@lib/config";
+import MegaMenu from "@components/MegaMenu.astro";
+import CollectionLinks from "@components/CollectionLinks.astro";
+import ContactLinks from "@components/ContactLinks.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Navigation", "globalConfig");
+	return null;
+}
+
+const { background, categories, cta, position } = globalConfig.navigation ?? {};
+
+const backgroundColors: { [key in typeof background]: string } = {
+	dynamic: "bg-base",
+	static: "bg-primary",
+};
+
+const navPosition = () => {
+	switch (position) {
+		case "center":
+			return "mx-auto";
+		case "right":
+			return "ml-auto";
+		case "left":
+			return "mr-auto";
+		default:
+			setWarning("Navigation", "position");
+			return undefined;
+	}
+};
+---
+
+<GlobalGrid class:list={["py-4", backgroundColors[background]]} id="navigation">
+	<Container class:list={["flex items-center gap-12", "max-lg:justify-between"]} layout="body">
+		<a aria-label="Home" class="hover:text-50 flex items-center gap-2" href="/">
+			<Svg class="[&_svg]:h-8" src={logo} />
+			<small class="font-bold">{globalConfig.brand?.name}</small>
+		</a>
+		<nav class:list={["flex items-center gap-12", navPosition()]}>
+			<ul id="menu-desktop" class:list={["flex items-center gap-2", "max-lg:hidden"]}>
+				{
+					categories.map((link) => (
+						<li class="[--menu-y:-100%] hover:[--menu-y:0%] [&_.mega-menu-container]:pointer-events-none hover:[&_.mega-menu-container]:pointer-events-auto hover:[&_.collection]:[&_svg]:-rotate-90">
+							<Button class="nav-link" {...link} varient="ghost" />
+							<MegaMenu collection={link.collection} />
+						</li>
+					))
+				}
+			</ul>
+			<div
+				id="menu-mobile"
+				class:list={[
+					"bg-primary fixed inset-0 -z-10 flex-col items-center gap-16 overflow-scroll p-16 pt-32",
+					"lg:[--menu-display:none]",
+				]}
+			>
+				<div class="site-grid gap-16 py-4">
+					<div class:list={["items-centergap-4 flex gap-2"]}>
+						<Button
+							class="theme-toggle-button"
+							icons={[["theme-light"], ["theme-dark"]]}
+							iconOnly
+							label="Toggle theme"
+							varient="secondary"
+						/>
+						<Button {...cta} />
+					</div>
+					<CollectionLinks class="gap-16" />
+					<ContactLinks groups={["socialLinks"]} varient="secondary" />
+				</div>
+			</div>
+		</nav>
+		<div class:list={["flex items-center justify-end gap-4", "max-lg:hidden"]}>
+			<Button
+				class="theme-toggle-button"
+				icons={[["theme-light"], ["theme-dark"]]}
+				iconOnly
+				label="Toggle theme"
+				varient="ghost"
+			/>
+			<Button {...cta} />
+		</div>
+		<Button
+			class:list={["lg:hidden"]}
+			icons={[["menu"], ["close"]]}
+			iconOnly
+			id="menu-toggle-button"
+			label="Toggle Mobile Menu"
+			varient="secondary"
+		/>
+	</Container>
+</GlobalGrid>

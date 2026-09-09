@@ -1,0 +1,152 @@
+---
+import Button from "./Button.astro";
+import Icon from "./Icon.astro";
+
+type Props = {
+	class?: string;
+	id?: string;
+	label?: string;
+	name?: string;
+	placeholder?: string;
+	required?: boolean;
+	type?: TInputFieldType;
+};
+
+const {
+	id,
+	name,
+	label,
+	class: className,
+	placeholder,
+	required,
+	type = "text",
+} = Astro.props ?? {};
+
+export type TInputFieldType =
+	| "button"
+	| "checkbox"
+	| "color"
+	| "date"
+	| "datetime-local"
+	| "email"
+	| "file"
+	| "hidden"
+	| "image"
+	| "month"
+	| "number"
+	| "password"
+	| "radio"
+	| "range"
+	| "reset"
+	| "search"
+	| "submit"
+	| "tel"
+	| "text"
+	| "textarea"
+	| "time"
+	| "url"
+	| "week";
+
+const isCheckbox = type === "radio" || type === "checkbox";
+const isFile = type === "file";
+const isTextarea = type === "textarea";
+const InputTag = isTextarea ? type : "input";
+const Tag = isFile ? "div" : "label";
+---
+
+<Tag
+	class:list={[
+		"flex gap-2",
+		isCheckbox
+			? "bg-primary rounded-cta checked hover:bg-selected-hover outline-outline [&_.checkbox-outer]:outline-outline [&_.label]:text-70 relative min-h-12 min-w-24 flex-row items-center justify-start truncate pl-4 outline hover:cursor-pointer [&_.checkbox-inner]:hidden"
+			: "flex-col",
+		isCheckbox &&
+			"has-checked:[&_.checkbox-outer]:outline-brand has-checked:bg-selected has-checked:hover:bg-selected has-checked:outline-brand has-checked:[&_.label]:text-text has-checked:[&_.checkbox-inner]:flex",
+		isFile && !isCheckbox && "flex-col",
+	]}
+	for={isFile ? undefined : id}
+>
+	{
+		isCheckbox && (
+			<span
+				class:list={[
+					"checkbox-outer relative flex items-center justify-center p-0.5",
+					"h-4 w-4 outline",
+					type === "radio" ? "rounded-pill" : "rounded-sm",
+				]}
+			>
+				<span
+					class:list={[
+						"checkbox-inner bg-brand flex h-full w-full items-center justify-center content-['']",
+						type === "radio" ? "rounded-pill" : "rounded-[3px]",
+					]}
+				>
+					<Icon
+						class:list={[
+							"icon text-brand-text w-2 [&_path]:stroke-4",
+							type === "radio" && "hidden",
+						]}
+						name="check"
+					/>
+				</span>
+			</span>
+		)
+	}
+	{
+		label && (
+			<small class="label text-nowrap">
+				{label}
+				{required && !isCheckbox && <span class="text-error ml-1">*</span>}
+			</small>
+		)
+	}
+	<InputTag
+		class:list={[
+			"outline-outline outline",
+			isFile && "file-input hidden",
+			isCheckbox
+				? "h-0 w-0 opacity-0"
+				: "bg-primary rounded-cta resize-none px-4 py-2 placeholder:opacity-50",
+			className,
+		]}
+		id={id || name}
+		{name}
+		{placeholder}
+		rows={isTextarea ? "6" : undefined}
+		maxlength={isTextarea ? 999 : undefined}
+		{required}
+		type={isTextarea ? undefined : type}
+		multiple={isFile ? true : undefined}
+	/>
+	{
+		isFile && (
+			<div class="flex items-center gap-2">
+				<Button class="file-input-button" label="Choose file(s)" varient="outline" />
+				<small class="file-input-text text-70 w-full truncate" />
+			</div>
+		)
+	}
+</Tag>
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const fileInput = document.querySelector(".file-input") as HTMLInputElement;
+		const fileInputButton = document.querySelector(".file-input-button") as HTMLElement;
+		const fileInputText = document.querySelector(".file-input-text") as HTMLElement;
+		const defaultText = "No file(s) selected";
+
+		if (fileInputButton) {
+			fileInputButton.addEventListener("click", () => fileInput.click());
+
+			fileInputText.textContent = defaultText;
+			fileInputText.title = defaultText;
+
+			fileInput.addEventListener("change", () => {
+				const files = Array.prototype.map.call(fileInput.files, ({ name }) => name);
+				const newText = `(${files.length}) file${files.length > 1 ? "s" : ""}: ${files.join(", ")}`;
+
+				fileInputText.textContent = files[0] ? newText : defaultText;
+				fileInputText.title = files[0] ? newText : defaultText;
+			});
+		}
+	});
+</script>

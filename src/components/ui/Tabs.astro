@@ -1,0 +1,38 @@
+---
+import Seperator from "./Seperator.astro";
+
+export type TTab = { label: string; id: string; isFeatured?: boolean };
+
+type Props = { tabs: TTab[]; class?: string; id?: string };
+
+const { tabs, class: className, id } = Astro.props;
+---
+
+<ul {id} class:list={["flex items-center", className]}>
+	{
+		tabs.map(({ id: tabId, isFeatured, label }, index) => (
+			<li class="items-center justify-center">
+				<label
+					class:list={[
+						"bg-primary relative cursor-pointer px-4 py-2 text-sm",
+						"has-checked:bg-brand has-checked:text-brand-text",
+						"hover:bg-secondary-hover",
+						index === 0 && "rounded-l-cta",
+						index === tabs.length - 1 && "rounded-r-cta",
+					]}
+					for={`${id}-${tabId}`}
+				>
+					{label}
+					<input
+						checked={isFeatured}
+						class="h-0 w-0 appearance-none"
+						id={`${id}-${tabId}`}
+						name={`${id}-button-group`}
+						type="radio"
+					/>
+					{index > 0 && <Seperator class="absolute inset-0" />}
+				</label>
+			</li>
+		))
+	}
+</ul>

@@ -1,0 +1,25 @@
+---
+type Props = { title: string; url: string };
+
+const { title, url } = Astro.props;
+---
+
+<div class="sketchfab-embed-wrapper rounded-cta relative aspect-video overflow-clip">
+	<iframe
+		class="absolute inset-0"
+		{title}
+		width="100%"
+		height="100%"
+		frameborder="0"
+		allowfullscreen
+		mozallowfullscreen="true"
+		webkitallowfullscreen="true"
+		allow="autoplay; fullscreen; xr-spatial-tracking"
+		xr-spatial-tracking
+		execution-while-out-of-viewport
+		execution-while-not-rendered
+		web-share
+		src={`${url}/embed?autospin=1&autostart=1&preload=1`}
+	>
+	</iframe>
+</div>

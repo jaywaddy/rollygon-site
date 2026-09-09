@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Element from "./ui/Element.astro";
+import type { TCollection } from "@lib/utils/types";
+import Img from "./ui/Img.astro";
+import globalConfig from "@lib/config";
+
+const { formatDate, setHref } = globalConfig.utils ?? {};
+
+type Props = { entry: CollectionEntry<TCollection> };
+
+const { entry } = Astro.props;
+---
+
+<div class="flex flex-col gap-4">
+	<Img src={entry.data.thumbnail} />
+	<div class="flex flex-col gap-1">
+		<a class="w-fit hover:underline" href={setHref(entry)}>
+			<strong>{entry.data.title}</strong>
+		</a>
+		<small class="opacity-50">
+			{formatDate(entry.data.dateCreated)}
+		</small>
+	</div>
+</div>

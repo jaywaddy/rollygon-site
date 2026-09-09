@@ -1,0 +1,14 @@
+---
+import type { ImageMetadata } from "astro";
+import type { SvgComponent } from "astro/types";
+
+type Props = { class?: string; src: SvgComponent & ImageMetadata };
+
+const { class: className, src } = Astro.props;
+
+const Svg = src;
+---
+
+<div class:list={["overflow-clip [&_svg]:text-current", className]}>
+	<Svg />
+</div>

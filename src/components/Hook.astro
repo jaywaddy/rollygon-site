@@ -1,0 +1,44 @@
+---
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Button from "@components/ui/Button.astro";
+import globalConfig from "@lib/config";
+import Img from "@components/ui/Img.astro";
+import { galleryEntries } from "@src/content.config";
+import bgPattern from "@assets/bg-pattern.png";
+
+type Props = {
+	//
+};
+
+const { cta } = globalConfig.navigation;
+const {} = Astro.props;
+---
+
+<GlobalGrid class="relative mt-auto overflow-clip bg-(--bg) [--bg:var(--color-brand)]">
+	<Img class="absolute inset-0 h-full opacity-30 mix-blend-overlay" src={bgPattern} />
+	<Container layout="content" tag="section">
+		<div class="flex flex-col items-center gap-16 py-24 max-md:py-12">
+			<span
+				class="text-brand-text z-10 max-w-296 text-center text-6xl leading-18 font-black text-balance uppercase max-md:text-3xl max-md:leading-10"
+			>
+				Sit upright, hold tight, and ejoy the ride!
+			</span>
+
+			<div class="flex flex-col items-center gap-4">
+				<Button
+					class="px-8 py-4 text-neutral-50 [--color-brand-hover:var(--color-brand-900)] [--color-brand:var(--color-brand-text)]"
+					{...cta}
+					varient={["primary", "lg"]}
+				/>
+				<Button
+					class="text-brand-text"
+					href="/pricing"
+					icon="info"
+					label="View pricing"
+					varient="link"
+				/>
+			</div>
+		</div>
+	</Container>
+</GlobalGrid>

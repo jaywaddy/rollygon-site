@@ -1,0 +1,29 @@
+---
+import globalConfig from "@lib/config";
+
+type THeadings = { depth: number; slug: string; text: string };
+
+type Props = { headings: THeadings[] };
+
+const { headings } = Astro.props;
+---
+
+{
+	headings[0] && (
+		<aside class:list={["flex flex-col gap-2", globalConfig.banner.display]}>
+			<span class="eyebrow text-brand-body-text">On this page</span>
+			<ol class="border-brand-body-text flex flex-col gap-2 border-l-2 pr-4 pl-4 text-sm">
+				{headings.map(({ depth, slug, text }) => (
+					<li class:list={[depth === 3 && "pl-3", depth >= 4 && "pl-6"]}>
+						<a
+							class:list={["hover:underline", depth > 2 && "text-70"]}
+							href={`#${slug}`}
+						>
+							{text}
+						</a>
+					</li>
+				))}
+			</ol>
+		</aside>
+	)
+}

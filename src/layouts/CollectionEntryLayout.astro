@@ -1,0 +1,83 @@
+---
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import Seperator from "@components/ui/Seperator.astro";
+import Image from "@components/ui/Img.astro";
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { TCollection } from "@lib/utils/types";
+import TableOfContents from "@components/TableOfContents.astro";
+import ContactLinks from "@components/ContactLinks.astro";
+import globalConfig from "@lib/config";
+import YouTubeEmbed from "@components/YouTubeEmbed.astro";
+import SketchfabEmbed from "@components/SketchfabEmbed.astro";
+import Button from "@components/ui/Button.astro";
+import Fallback from "@assets/fallback.png";
+
+const { calcReadTime, formatDate } = globalConfig.utils ?? {};
+const { href: emailHref, label: emailLabel } = globalConfig.brand.contact;
+const { cta } = globalConfig.navigation;
+
+type Props = { entry: CollectionEntry<TCollection> };
+
+const { entry } = Astro.props ?? {};
+
+const { Content, headings } = await render(entry);
+const {
+	dateCreated,
+	dateUpdated,
+	title,
+	description,
+	thumbnail = Fallback,
+	//
+} = entry.data ?? {};
+
+const contactHeading = { depth: 2, slug: "contact-me", text: "Contact Me" };
+---
+
+<GlobalLayout {...entry.data}>
+	{
+		thumbnail ? (
+			<GlobalGrid>
+				<Container layout="content">
+					<Image src={thumbnail} class="rounded-cta aspect-video" />
+				</Container>
+			</GlobalGrid>
+		) : null
+	}
+	<GlobalGrid class="lg:mt-8">
+		<Container class="flex flex-col gap-8" layout="sidebar">
+			<div class="sticky top-32 grid gap-8">
+				<TableOfContents headings={[...headings, contactHeading]} />
+				<ContactLinks groups={["socialLinks"]} />
+			</div>
+		</Container>
+		<Container class="flex flex-col gap-8 max-lg:mt-8" layout="article" tag="article">
+			<div class="flex flex-col gap-4">
+				<h1>{title}</h1>
+				<p class="lead">{description}</p>
+				<div class="items center text-70 flex gap-2">
+					<small>{formatDate(dateUpdated || dateCreated)}</small>
+					<Seperator />
+					<small>{calcReadTime(entry.body)}</small>
+				</div>
+			</div>
+			<div class="content">
+				<Content />
+				<div class="flex flex-col gap-4">
+					<h2 id={contactHeading.slug}>{contactHeading.text}</h2>
+					<p>
+						If you have any questions, please contact me at <a href={emailHref}
+							>{globalConfig.brand.contact.email}</a
+						>
+					</p>
+				</div>
+			</div>
+			<div class="flex gap-2">
+				<Button {...cta} label="Buy an avatar" />
+				<Button href={emailHref} label={emailLabel} varient="outline" />
+			</div>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

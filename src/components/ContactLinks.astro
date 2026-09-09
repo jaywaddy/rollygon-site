@@ -1,0 +1,72 @@
+---
+import type { TCta } from "@lib/utils/types";
+import type { TIcon } from "./ui/Icon.astro";
+import globalConfig from "@lib/config";
+import Button, { type TButtonStyle, type TButtonSize } from "./ui/Button.astro";
+
+type Props = {
+	class?: string;
+	groups?: string[];
+	iconOnly?: boolean;
+	varient?: TButtonStyle | [TButtonStyle, TButtonSize];
+	//
+};
+
+type TContactGroup = {
+	email?: string;
+	icon: TIcon;
+	label: string;
+	links?: TCta[];
+	name: string;
+	text?: string;
+	//
+};
+
+const { class: className, iconOnly, groups, varient = "secondary" } = Astro.props ?? {};
+const { email, location, socialLinks } = globalConfig.brand?.contact ?? {};
+
+const contactGroups: TContactGroup[] = [
+	{ icon: "mail", label: "Email", name: "email", email: email },
+	{ icon: "location", label: "Location", name: "location", text: location },
+	{ icon: "at-sign", label: "Connect", name: "socialLinks", links: socialLinks },
+];
+
+const specifiedGroups: TContactGroup[] = groups
+	? contactGroups.filter((group) => groups?.includes(group.name))
+	: contactGroups;
+---
+
+<ul class:list={["flex flex-col gap-8", className]}>
+	{
+		specifiedGroups.map(({ email, label, links, text }) => (
+			<li class="flex flex-col gap-2">
+				<small class="eyebrow">{label}</small>
+				<ul class="border-brand flex flex-col">
+					{email && (
+						<li>
+							<a class="link" href={`mailto:${email.toLowerCase()}`}>
+								{email}
+							</a>
+						</li>
+					)}
+					{links && (
+						<li>
+							<ul class="flex flex-wrap gap-2">
+								{links.map((link) => (
+									<li class="h-8.25">
+										<Button class="h-full" {...link} {iconOnly} {varient} />
+									</li>
+								))}
+							</ul>
+						</li>
+					)}
+					{text && (
+						<li>
+							<span class="text-70 text-sm">{text}</span>
+						</li>
+					)}
+				</ul>
+			</li>
+		))
+	}
+</ul>

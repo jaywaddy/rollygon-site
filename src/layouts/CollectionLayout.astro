@@ -1,0 +1,43 @@
+---
+import type { TSeo } from "@components/AstroSeo.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Container from "@layouts/Container.astro";
+import { getCollection } from "astro:content";
+import type { TCollection } from "@lib/utils/types";
+import CardBlogPost from "@components/CardBlogPost.astro";
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Grid, { type TGridSizes } from "@components/ui/Grid.astro";
+
+type Props = { collection: TCollection; data: TSeo };
+
+const { collection, data } = Astro.props;
+
+const getEntries = await getCollection(collection);
+const entries = getEntries.sort((older, newer) => {
+	return newer.data.dateCreated.valueOf() - older.data.dateCreated.valueOf();
+});
+
+const gridLayouts: { [key in TCollection]: TGridSizes } = { blog: "full", gallery: "lg" };
+
+const Card = collection === "blog" ? CardBlogPost : CardGalleryEntry;
+---
+
+<GlobalLayout {...data}>
+	<GlobalGrid class="mt-8 gap-y-16">
+		<Container layout="content">
+			<h1>{data.title}</h1>
+		</Container>
+		<Container layout="content">
+			<Grid class="gap-8" size={gridLayouts[collection]} tag="ul">
+				{
+					entries.map((entry) => (
+						<li class="flex flex-col gap-1">
+							<Card {entry} />
+						</li>
+					))
+				}
+			</Grid>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

@@ -1,0 +1,48 @@
+---
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Hero from "@components/Hero.astro";
+import Button from "@components/ui/Button.astro";
+import Grid from "@components/ui/Grid.astro";
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import globalConfig from "@lib/config";
+import { galleryEntries } from "@src/content.config";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Landing Page", "globalConfig");
+	return null;
+}
+
+const { brand } = globalConfig;
+const seo = { title: "Home" };
+---
+
+<GlobalLayout breadcrumbs={false} {...seo} hook ogTitle>
+	<div class="relative">
+		<GlobalGrid>
+			<Container layout="body">
+				<Hero position="left" />
+			</Container>
+		</GlobalGrid>
+	</div>
+	<GlobalGrid>
+		<Container class="flex flex-col gap-16" layout="body">
+			<section class="flex flex-col gap-8">
+				<h2 class="text-center text-lg">Most Recent Commissions</h2>
+				<Grid class="gap-4" size="md" tag="ul">
+					{
+						[...galleryEntries].map((entry) => (
+							<li>
+								<CardGalleryEntry {entry} />
+							</li>
+						))
+					}
+				</Grid>
+				<Button href="/portfolio" label="View all work" varient="secondary" />
+			</section>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

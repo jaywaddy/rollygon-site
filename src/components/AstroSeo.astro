@@ -1,0 +1,69 @@
+---
+import globalConfig from "@lib/config";
+import type { TZodImage } from "@lib/utils/types";
+import fallback from "@assets/fallback.png";
+
+export type TSeo = {
+	canonicalUrl?: string;
+	description?: string;
+	metaDescription?: string;
+	metaTitle?: string;
+	name?: string;
+	ogTitle?: boolean;
+	title?: string;
+	thumbnail?: TZodImage;
+	type?: string;
+};
+
+type Props = TSeo;
+
+const { capitalize } = globalConfig.utils;
+const { bio, domain, heading, subheading } = globalConfig.brand;
+const {
+	canonicalUrl,
+	metaDescription,
+	metaTitle,
+	name,
+	thumbnail,
+	title,
+	description,
+	ogTitle,
+	type = "website",
+} = Astro.props;
+
+const resolvedOgDescription =
+	metaDescription || description || `${capitalize(heading.toLowerCase())} ${subheading}`;
+const resolvedOgImage = {
+	href: new URL(thumbnail?.src || fallback.src, Astro.url).href,
+	type: thumbnail?.format || fallback.format,
+	height: String(thumbnail?.height || fallback.height),
+	width: String(thumbnail?.width || fallback.width),
+};
+const resolvedOgTitle = ogTitle ? `${name} - ${bio}` : `${metaTitle || title} - ${name}`;
+---
+
+<>
+	<!-- HTML Meta Tags -->
+	<title>{title} | {name}</title>
+	<meta name="description" content={resolvedOgDescription} />
+	{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content={resolvedOgTitle} />
+	<meta property="og:description" content={resolvedOgDescription} />
+	<meta property="og:image" content={resolvedOgImage.href} />
+	<meta property="og:image:type" content={resolvedOgImage.type} />
+	<meta property="og:image:width" content={resolvedOgImage.width} />
+	<meta property="og:image:height" content={resolvedOgImage.height} />
+	<meta property="og:site_name" content={name} />
+	<meta property="og:type" content={type} />
+	<meta property="og:url" content={Astro.url.href} />
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content={domain} />
+	<meta property="twitter:url" content={Astro.url.href} />
+	<meta name="twitter:title" content={resolvedOgTitle} />
+	<meta name="twitter:description" content={resolvedOgDescription} />
+	<meta name="twitter:image" content={resolvedOgImage.href} />
+</>

@@ -1,0 +1,56 @@
+---
+import { type TCollection } from "@lib/utils/types";
+import { getCollection } from "astro:content";
+import Button from "./ui/Button.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Container from "@layouts/Container.astro";
+import globalConfig from "@lib/config";
+
+const { setHref } = globalConfig.utils ?? {};
+
+type Props = { collection?: TCollection };
+
+const { collection } = Astro.props;
+
+if (!collection) {
+	return null;
+}
+
+const collectionList = await getCollection(collection);
+---
+
+<div class="mega-menu-container absolute right-0 left-0">
+	<div class="mt-4 overflow-clip">
+		<div
+			class="mega-menu bg-primary border-outline left-0 -z-10 h-fit w-full translate-y-(--menu-y) border-y"
+		>
+			<GlobalGrid class:list={["mega-menu relative"]}>
+				<Container class="flex flex-col gap-4 py-4" layout="body">
+					<ul class="menu border-outline flex w-fit flex-col gap-2 border-b py-4">
+						{
+							collectionList.map((entry) => (
+								<li>
+									{/* <Button
+										label={enrty.data.title}
+										href={setHref(enrty)}
+										varient="link"
+										icon={collection}
+									/> */}
+									<a class="link" href={setHref(entry)}>
+										{entry.data.title}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+					<Button
+						href={`/${collection}`}
+						label="View all"
+						varient="secondary"
+						icon={["arrow-right", "right"]}
+					/>
+				</Container>
+			</GlobalGrid>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+---
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Container from "@layouts/Container.astro";
+import Svg from "@components/ui/Svg.astro";
+import globalConfig from "@lib/config";
+import logo from "@assets/logo.svg";
+import ContactLinks from "@components/ContactLinks.astro";
+import CollectionLinks from "@components/CollectionLinks.astro";
+
+type Props = { hook?: boolean };
+
+const { brand } = globalConfig ?? {};
+const { hook } = Astro.props;
+---
+
+<GlobalGrid class:list={["bg-primary gap-y-8 pt-8", hook ? "mt-0" : "mt-auto"]}>
+	<Container layout="body">
+		<div class="site-grid grid-cols-(--grid-footer) gap-x-16 gap-y-8 max-md:grid-cols-1">
+			<div
+				class="border-outline flex flex-col gap-8 py-4 max-md:border-b max-md:pb-16 md:border-r"
+			>
+				<a
+					href="/"
+					aria-label="Home"
+					class="hover:text-50 flex w-fit flex-wrap items-center gap-2 text-sm"
+				>
+					<Svg class="[&_svg]:h-8" src={logo} />
+					<span class="font-bold">{brand.name}</span>
+				</a>
+				<ContactLinks iconOnly varient="secondary" />
+			</div>
+			<CollectionLinks class="py-4" />
+		</div>
+	</Container>
+	<Container layout="full" tag="small" class="bg-banner flex justify-center py-4 text-[white]">
+		<div class="flex flex-wrap gap-1 px-4 text-current">
+			<span>Copyright &copy;</span>
+			<span id="copyright-text"></span>
+			<span>{brand.name}. All rights reserved.</span>
+		</div>
+	</Container>
+</GlobalGrid>
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const copyrightElement = document.getElementById("copyright-text");
+		const currentYear = new Date().getFullYear().toString();
+
+		if (copyrightElement) {
+			copyrightElement.innerText = copyrightElement.innerText = currentYear;
+		}
+	});
+</script>

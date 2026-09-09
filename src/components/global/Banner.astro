@@ -1,0 +1,76 @@
+---
+import Button from "@components/ui/Button.astro";
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+
+import globalConfig from "@lib/config";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Banner", "globalConfig");
+	return null;
+}
+
+const { cta, display, label, varient } = globalConfig.banner ?? {};
+
+if (!display) {
+	return null;
+}
+---
+
+<GlobalGrid class="bg-banner text-banner-text relative" varient={varient.toString()} id="banner">
+	<Container layout="body" class="relative flex items-center justify-between py-1">
+		<div class="mx-auto flex min-h-8 items-center gap-2">
+			<small class="flex gap-2">
+				<span class="text-nowrap">{label}</span>
+				<span>&mdash;</span>
+			</small>
+			<Button
+				class="[--color-secondary-hover:var(--color-zinc-500)] [--color-secondary:var(--color-zinc-600)]"
+				{...cta}
+				varient={["secondary", "sm"]}
+			/>
+		</div>
+		{
+			varient === "manual-hide" && (
+				<Button
+					class="absolute right-0"
+					label="Close banner"
+					icon={["close"]}
+					iconOnly
+					id="dismiss-button"
+					varient="ghost"
+				/>
+			)
+		}
+	</Container>
+</GlobalGrid>
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const banner = document.getElementById("banner");
+		const dismissButton = document.getElementById("dismiss-button");
+		const hideBanner = localStorage.getItem("hideBanner");
+		const hideBannerTimestamp = localStorage.getItem("hideBannerTimestamp");
+		const timer = 604800000;
+
+		if (banner && dismissButton) {
+			const timestamp = Date.now().toString();
+
+			dismissButton.addEventListener("click", () => {
+				banner.style.display = "none";
+				banner.dataset.hidden = "true";
+				localStorage.setItem("hideBanner", "true");
+				localStorage.setItem("hideBannerTimestamp", timestamp);
+			});
+		}
+
+		if (hideBanner === "true") {
+			if (Math.abs(Number(hideBannerTimestamp) - Date.now()) > timer) {
+				banner.style.display = "block";
+			} else {
+				banner.style.display = "none";
+			}
+		}
+	});
+</script>

@@ -1,0 +1,24 @@
+---
+import type { HTMLTag } from "astro/types";
+
+type Props = { class?: string; id?: string; tag?: HTMLTag; varient?: string };
+
+const { class: className, id, tag: Tag = "div", varient } = Astro.props;
+---
+
+<Tag
+	{id}
+	class:list={[
+		"site-grid grid-cols-(--site-grid) gap-4",
+		"[--site-grid:auto_1fr_auto]",
+		"max-sm:[--site-grid:var(--grid-xs)]",
+		"sm:[--site-grid:var(--grid-sm)]",
+		"lg:[--site-grid:var(--grid-md)]",
+		"xl:[--site-grid:var(--grid-lg)]",
+		"2xl:[--site-grid:var(--grid-xl)]",
+		className,
+	]}
+	data-varient={varient}
+>
+	<slot />
+</Tag>

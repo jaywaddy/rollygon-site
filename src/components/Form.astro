@@ -1,0 +1,80 @@
+---
+import Input from "@components/ui/Input.astro";
+import type { TFormSection } from "@lib/utils/types";
+import Button from "@components/ui/Button.astro";
+import type { TButton } from "@components/ui/Button.astro";
+import globalConfig from "@lib/config";
+
+type Props = { action: string; buttons: TButton[]; data: TFormSection[]; method: string };
+
+const { action, buttons, data, method } = Astro.props;
+const { slugify } = globalConfig.utils;
+---
+
+<form {action} {method} class="flex flex-col gap-16">
+	{
+		data.map(({ groups, title }, index) => (
+			<section class="flex flex-col gap-4">
+				<div class="flex flex-col gap-2">
+					{title && (
+						<span class="eyebrow" id={slugify(title)}>
+							{title}
+						</span>
+					)}
+				</div>
+				<ul class="flex flex-col gap-4">
+					{groups.map((group) =>
+						group.fields ? (
+							<>
+								<li class="flex flex-col gap-2">
+									<small>
+										{group.label}
+										{group.label && group.required && (
+											<span class="text-error ml-1">*</span>
+										)}
+									</small>
+									<ul
+										class:list={[
+											group.fields[2] && group.type === "radio"
+												? "flex flex-col gap-2"
+												: "grid grid-cols-2 gap-2",
+										]}
+									>
+										{group.fields.map((field) => (
+											<li>
+												<Input
+													{...field}
+													name={group.name}
+													required={group.required}
+													type={group.type}
+												/>
+											</li>
+										))}
+									</ul>
+									{group.containsOther && (
+										<div class="mt-2">
+											<Input label="If other, provide details" type="text" />
+										</div>
+									)}
+								</li>
+							</>
+						) : (
+							<li>
+								<Input {...group} />
+							</li>
+						),
+					)}
+					{data.length - 1 === index && (
+						<ul class="flex gap-2">
+							{buttons.map((button) => (
+								<li>
+									<Button {...button} />
+								</li>
+							))}
+						</ul>
+					)}
+				</ul>
+			</section>
+		))
+	}
+</form>

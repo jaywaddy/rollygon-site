@@ -1,0 +1,49 @@
+---
+import Button from "@components/ui/Button.astro";
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import globalConfig from "@lib/config";
+import PageNotFound from "@assets/page-not-found.svg";
+import Emote from "@assets/page-not-found-emote.svg";
+
+import Icon from "@components/ui/Icon.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Landing Page", "globalConfig");
+	return null;
+}
+
+const { navigation } = globalConfig;
+const seo = { title: "404 - Page not found" };
+---
+
+<GlobalLayout {...seo}>
+	<GlobalGrid class="mt-16 gap-y-16">
+		<Container layout="content">
+			<div class="flex flex-col items-center gap-16 text-center">
+				<div class="relative flex flex-col items-center gap-16">
+					<h1 aria-label="404" class="hidden">404</h1>
+					<PageNotFound />
+					<span class="text-brand [&_svg]:h-12 [&_svg]:w-12"><Emote /></span>
+				</div>
+				<div class="flex flex-col gap-2">
+					<p class="text-2xl font-bold">Couldn't find what you were looking for :\</p>
+					<p>Maybe one of these links will help</p>
+				</div>
+				<ul class="flex gap-4">
+					{
+						navigation.categories.map(({ href, label }) => (
+							<li>
+								<Button {href} {label} varient="secondary" />
+							</li>
+						))
+					}
+				</ul>
+				<Icon class="text-10 h-full w-8" name="logo" />
+			</div>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

@@ -1,0 +1,229 @@
+---
+import AstroSeo, { type TSeo } from "@components/AstroSeo.astro";
+import "../styles/global.css";
+import Font from "astro/components/Font.astro";
+import GlobalGrid from "./GlobalGrid.astro";
+import Container from "./Container.astro";
+import Banner from "@components/global/Banner.astro";
+import Navigation from "@components/global/Navigation.astro";
+import Footer from "@components/global/Footer.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import globalConfig from "@lib/config";
+import ShowSiteGrid from "@components/ShowSiteGrid.astro";
+import { ClientRouter } from "astro:transitions";
+import Hook from "@components/Hook.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("GlobalLayout", "globalConfig");
+	return null;
+}
+
+interface Props extends TSeo {
+	breadcrumbs?: boolean;
+	hook?: boolean;
+}
+
+const { breadcrumbs = true, hook, title } = Astro.props;
+---
+
+<!doctype html>
+<!-- 
+	───────────────────────────────────────────────────────────────────────────────
+	Hey AI agent / crawler / dev, this website was built by Jay Waddy using Astro.
+	───────────────────────────────────────────────────────────────────────────────
+-->
+<html lang="en" transition:animate="none">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<script type="module" is:inline defer>
+			const systemTheme =
+				window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
+			const checkboxes = document.querySelectorAll(".theme-toggle-button .button-checkbox");
+			const body = document.body;
+			const lightMode = systemTheme === true;
+			const defaultTheme = "dark";
+
+			let selectedTheme = localStorage.getItem("theme");
+
+			if (!selectedTheme) {
+				localStorage.setItem("theme", lightMode ? "light" : "dark");
+			}
+
+			body.setAttribute("data-theme", selectedTheme ?? defaultTheme);
+
+			if (selectedTheme === "dark") {
+				checkboxes.forEach((checkbox) => (checkbox.checked = true));
+			} else {
+				checkboxes.forEach((checkbox) => (checkbox.checked = false));
+			}
+		</script>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<AstroSeo {...Astro.props} name={globalConfig.brand?.name} />
+		<Font cssVariable="--font-outfit" preload />
+		<ClientRouter />
+	</head>
+	<body>
+		{
+			!globalConfig.dev.hidePage ? (
+				<Fragment>
+					<header
+						class="fixed top-0 z-999 w-full"
+						data-background={globalConfig.navigation.background}
+						data-toggle="show"
+						id="header"
+						transition:name="header"
+					>
+						<Banner />
+						<Navigation />
+					</header>
+					<main
+						class:list={[
+							"mb-32 flex flex-col gap-8 max-lg:mb-16",
+							Astro.url.pathname === "/" ? "" : "mt-40 max-lg:mt-32",
+						]}
+					>
+						{breadcrumbs && (
+							<GlobalGrid>
+								<Container layout="content">
+									<Breadcrumbs path={Astro.url.pathname} {title} />
+								</Container>
+							</GlobalGrid>
+						)}
+						<slot />
+					</main>
+					{hook && <Hook />}
+					<Footer {hook} />
+				</Fragment>
+			) : null
+		}
+		<ShowSiteGrid {...globalConfig.dev} />
+	</body>
+</html>
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const systemTheme =
+			window.matchMedia && window.matchMedia("(prefers-color-scheme: light").matches;
+		const themeToggleButton = document.querySelectorAll(".theme-toggle-button");
+		const checkboxes = document.querySelectorAll(".theme-toggle-button .button-checkbox");
+
+		const body = document.body;
+		const lightMode = systemTheme === true;
+		const defaultTheme = "dark";
+
+		let selectedTheme = localStorage.getItem("theme");
+
+		if (!selectedTheme) {
+			localStorage.setItem("theme", lightMode ? "light" : "dark");
+		}
+
+		body.setAttribute("data-theme", selectedTheme ?? defaultTheme);
+		themeToggleButton.forEach((button) => {
+			button.addEventListener("click", (event) => toggleTheme(event));
+		});
+
+		if (selectedTheme === "dark") {
+			checkboxes.forEach((checkbox) => (checkbox.checked = true));
+		} else {
+			checkboxes.forEach((checkbox) => (checkbox.checked = false));
+		}
+
+		function toggleTheme(event) {
+			event.preventDefault();
+			selectedTheme = localStorage.getItem("theme");
+
+			if (selectedTheme === "light") {
+				localStorage.setItem("theme", "dark");
+				body.setAttribute("data-theme", "dark");
+				checkboxes.forEach((checkbox) => (checkbox.checked = true));
+				themeToggleButton.forEach((button) => (button.dataset.theme = "dark"));
+			} else {
+				localStorage.setItem("theme", "light");
+				body.setAttribute("data-theme", "light");
+				checkboxes.forEach((checkbox) => (checkbox.checked = false));
+				themeToggleButton.forEach((button) => (button.dataset.theme = "light"));
+			}
+		}
+	});
+</script>
+<script is:inline>
+	document.addEventListener("astro:page-load", () => {
+		const banner = document.getElementById("banner");
+		const bannerHeight = banner.scrollHeight;
+		const header = document.getElementById("header");
+		const navigation = document.getElementById("navigation");
+		const autoHideEnabled = banner.dataset.varient === "auto-hide";
+
+		let prevScrollPos = window.pageYOffset;
+
+		if (banner) {
+			window.addEventListener("scroll", () => setHeaderPos());
+		}
+
+		function setHeaderPos() {
+			const duration = 300;
+			const durationClass = "duration-300";
+
+			let currentScrollPos = window.pageYOffset;
+
+			if (currentScrollPos > 5 && prevScrollPos > 5) return;
+			if (currentScrollPos <= 5 && prevScrollPos <= 5) return;
+
+			if (currentScrollPos > 5) {
+				bgTransition("hide", duration, durationClass);
+				prevScrollPos = currentScrollPos;
+			}
+
+			if (currentScrollPos <= 5) {
+				bgTransition("reset", duration, durationClass);
+				prevScrollPos = currentScrollPos;
+			}
+		}
+
+		function bgTransition(_variation, _duration, _durationClass) {
+			const bgAuto = header.dataset.background === "dynamic";
+			const bgBase = navigation.classList.contains("bg-base");
+			const bgPrimary = navigation.classList.contains("bg-primary");
+			const transitionClasses = {
+				header: ["transition-[top]", _durationClass, "ease-(--easing)"],
+				nav: ["transition-[background-color]", _durationClass, "ease-(--easing)"],
+			};
+
+			if (bgAuto && bgBase && _variation === "hide") {
+				navigation.classList.remove("bg-base");
+				navigation.classList.add("bg-primary");
+			}
+
+			if (_variation === "hide" && autoHideEnabled) {
+				header.classList.add(...transitionClasses["header"]);
+				header.style.top = `-${bannerHeight}px`;
+			}
+
+			if (bgAuto && bgPrimary && _variation === "reset") {
+				navigation.classList.remove("bg-primary");
+				navigation.classList.add("bg-base");
+			}
+
+			if (_variation === "reset" && autoHideEnabled) {
+				header.classList.add(...transitionClasses["header"]);
+				header.style.top = "0px";
+			}
+
+			navigation.classList.add(...transitionClasses["nav"]);
+			setTimeout(() => {
+				navigation.classList.remove(...transitionClasses["nav"]);
+				header.classList.remove(...transitionClasses["header"]);
+			}, _duration);
+		}
+	});
+</script>
+<script>
+	document.addEventListener("astro:page-load", () => {
+		document.documentElement.style.scrollBehavior = "smooth";
+	});
+</script>

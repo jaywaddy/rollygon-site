@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+import type { TBlog } from "@lib/utils/types";
+import globalConfig from "@lib/config";
+
+export async function getStaticPaths() {
+	const posts: TBlog[] = await getCollection("blog");
+
+	return posts.map((post) => ({
+		params: { post: globalConfig.utils.slugify(post.data.title) },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout entry={post} />

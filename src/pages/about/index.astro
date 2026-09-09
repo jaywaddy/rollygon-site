@@ -1,0 +1,49 @@
+---
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import { Content, getHeadings, frontmatter } from "./about.md";
+import globalConfig from "@lib/config";
+import TableOfContents from "@components/TableOfContents.astro";
+import ContactLinks from "@components/ContactLinks.astro";
+import Img from "@components/ui/Img.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("About - index.astro", "globalConfig");
+	return null;
+}
+
+const { bio } = globalConfig.brand ?? {};
+const { title, thumbnail } = frontmatter;
+---
+
+<GlobalLayout {...frontmatter}>
+	{
+		thumbnail && (
+			<GlobalGrid>
+				<Container layout="body">
+					<Img src={thumbnail} />
+				</Container>
+			</GlobalGrid>
+		)
+	}
+	<GlobalGrid class="mt-8 gap-y-16">
+		<Container layout="sidebar">
+			<div class="sticky top-32 flex flex-col gap-8">
+				<TableOfContents headings={getHeadings()} />
+				<ContactLinks />
+			</div>
+		</Container>
+		<Container class="flex flex-col gap-16" layout="article">
+			<div>
+				<h1>{title}</h1>
+				<p class="lead">{bio}</p>
+			</div>
+			<div class="content">
+				<Content />
+			</div>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

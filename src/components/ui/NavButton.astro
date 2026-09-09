@@ -1,0 +1,12 @@
+---
+import type { TButton } from "./Button.astro";
+import Button from "./Button.astro";
+
+interface Props extends TButton {
+	collection?: string;
+}
+
+const { collection } = Astro.props;
+---
+
+<Button />

@@ -1,0 +1,48 @@
+---
+import globalConfig from "@lib/config";
+import { features } from "@lib/ext/services/lib/features";
+import PricingChartColumn from "./PricingChartColumn.astro";
+
+type Props = { services: typeof globalConfig.services };
+
+const { services } = Astro.props;
+---
+
+<div class="relative overflow-clip [--chart-grid:minmax(16rem,auto)_1fr]">
+	<ul
+		class:list={[
+			"grid grid-cols-(--chart-grid) gap-4",
+			"sm:[--chart-grid:minmax(12rem,auto)_1fr]",
+			"max-sm:[--chart-grid:minmax(8rem,auto)_1fr]",
+		]}
+	>
+		<li>
+			<ul>
+				<li class="eyebrow flex h-16 items-center">Features</li>
+				{
+					features.map(({ label }) => (
+						<li class="flex h-16 items-center max-md:max-w-32">
+							<span class="text-70 text-sm">{label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</li>
+		<li
+			class:list={[
+				"grid scrollbar-gutter-auto justify-end gap-4 overflow-x-auto overflow-y-clip",
+				"grid-cols-[repeat(2,minmax(auto,12rem))]",
+			]}
+		>
+			{
+				services.map(({ features, isFeatured, label }) => (
+					<PricingChartColumn align="center" {features} {isFeatured} title={label} />
+				))
+			}
+		</li>
+	</ul>
+	<ul class="pointer-events-none absolute inset-0">
+		{features.map(() => <li class="h-16 w-full border-40 border-b border-dashed" />)}
+		<li class="h-16 w-full border-40 border-b border-dashed"></li>
+	</ul>
+</div>

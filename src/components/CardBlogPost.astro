@@ -1,0 +1,25 @@
+---
+import type { TCollection } from "@lib/utils/types";
+import type { CollectionEntry } from "astro:content";
+import Seperator from "./ui/Seperator.astro";
+import globalConfig from "@lib/config";
+
+const { calcReadTime, formatDate, setHref } = globalConfig.utils ?? {};
+
+type Props = { entry: CollectionEntry<TCollection> };
+
+const { entry } = Astro.props;
+---
+
+<div class="flex flex-col gap-2 border-50 border-b border-dashed pb-8">
+	<a class="w-fit hover:underline" href={setHref(entry)}>
+		<strong>{entry.data.title}</strong>
+	</a>
+	<div class="flex items-center gap-2">
+		<small class="opacity-50">
+			{formatDate(entry.data.dateCreated)}
+		</small>
+		<small><Seperator axis="x" /></small>
+		<small class="opacity-50">{calcReadTime(entry.body)}</small>
+	</div>
+</div>

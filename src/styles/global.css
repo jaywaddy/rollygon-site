@@ -1,0 +1,310 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "tailwindcss/preflight.css" layer(base);
+
+@theme {
+	--font-sans: var(--font-outfit), sans-serif;
+
+	--breakpoint-xs: 30rem;
+
+	--color-brand-50: hsl(90, 75%, 95%);
+	--color-brand-100: hsl(90, 75%, 90%);
+	--color-brand-200: hsl(90, 75%, 80%);
+	--color-brand-300: hsl(90, 75%, 70%);
+	--color-brand-400: hsl(90, 75%, 60%);
+	--color-brand-500: hsl(90, 75%, 50%);
+	--color-brand-600: hsl(90, 75%, 40%);
+	--color-brand-700: hsl(90, 75%, 30%);
+	--color-brand-800: hsl(90, 75%, 20%);
+	--color-brand-900: hsl(90, 75%, 10%);
+	--color-brand-950: hsl(90, 75%, 05%);
+
+	--color-neutral-50: var(--color-zinc-50);
+	--color-neutral-100: var(--color-zinc-100);
+	--color-neutral-200: var(--color-zinc-200);
+	--color-neutral-300: var(--color-zinc-300);
+	--color-neutral-400: var(--color-zinc-400);
+	--color-neutral-500: var(--color-zinc-500);
+	--color-neutral-600: var(--color-zinc-600);
+	--color-neutral-700: var(--color-zinc-700);
+	--color-neutral-800: var(--color-zinc-800);
+	--color-neutral-900: var(--color-zinc-900);
+	--color-neutral-950: var(--color-zinc-950);
+
+	--color-0: color-mix(in oklch, currentColor 0%, transparent);
+	--color-05: color-mix(in oklch, currentColor 5%, transparent);
+	--color-10: color-mix(in oklch, currentColor 10%, transparent);
+	--color-20: color-mix(in oklch, currentColor 20%, transparent);
+	--color-30: color-mix(in oklch, currentColor 30%, transparent);
+	--color-40: color-mix(in oklch, currentColor 40%, transparent);
+	--color-50: color-mix(in oklch, currentColor 50%, transparent);
+	--color-60: color-mix(in oklch, currentColor 60%, transparent);
+	--color-70: color-mix(in oklch, currentColor 70%, transparent);
+	--color-80: color-mix(in oklch, currentColor 80%, transparent);
+	--color-90: color-mix(in oklch, currentColor 90%, transparent);
+	--color-100: color-mix(in oklch, currentColor 100%, transparent);
+
+	--color-error: var(--color-red-600);
+	--color-success: var(--color-green-600);
+
+	/* Background colors */
+	--color-base: var(--color-neutral-100);
+
+	--color-primary: var(--color-neutral-50);
+	--color-primary-hover: var(--color-base);
+	--color-primary-active: var(--color-neutral-200);
+
+	--color-secondary: var(--color-neutral-200);
+	--color-secondary-hover: color-mix(
+		var(--color-secondary) 50%,
+		var(--color-primary)
+	);
+	--color-secondary-active: var(--color-neutral-300);
+
+	--color-selected: color-mix(var(--color-brand) 5%, var(--color-primary));
+	--color-selected-hover: var(--color-neutral-100);
+
+	--color-banner: var(--color-neutral-950);
+	--color-banner-hover: var(--color-neutral-800);
+	--color-banner-text: var(--color-neutral-50);
+
+	/* Typography */
+	--default-font-family: "Outfit";
+
+	--color-text: var(--color-neutral-950);
+	--color-brand-text: var(--color-neutral-950);
+	--color-brand-body-text: color-mix(
+		var(--color-brand) 80%,
+		var(--color-text)
+	);
+	--color-invert: var(--color-neutral-50);
+
+	--text-sm: 0.875rem;
+
+	/* General */
+	--color-brand: var(--color-brand-400);
+	--color-brand-hover: var(--color-brand-300);
+
+	--color-outline: color-mix(in oklch, currentColor 20%, transparent);
+
+	--easing: cubic-bezier(0.65, 0, 0.35, 1);
+
+	--grid-xs: auto 5vw repeat(1, 1fr) 5vw auto;
+	--grid-sm: 2rem 5vw repeat(4, 1fr) 5vw 2rem;
+	--grid-md: auto 5vw repeat(6, min(9.5rem, 12vw)) 5vw auto;
+	--grid-lg: auto 5vw repeat(6, max(9.5rem, 11.5vw)) 5vw auto;
+	--grid-xl: auto min(11rem, 5vw) repeat(6, 11rem) min(11rem, 5vw) auto;
+
+	--grid-footer: 20rem 1fr;
+
+	--radius-multiplier: 0.5;
+	--radius-cta: 0.275rem;
+	--radius-element: calc(
+		var(--radius-cta) + calc(var(--radius-multiplier) * 1rem)
+	);
+	--radius-pill: 100vw;
+
+	--site-gap: --spacing(4);
+	--spacing-element: --spacing(8);
+}
+
+:root {
+	[data-theme="dark"] {
+		/* Background colors */
+		--color-brand: var(--color-brand-400);
+		--color-brand-hover: var(--color-brand-300);
+
+		--color-base: var(--color-neutral-900);
+
+		--color-primary: var(--color-neutral-800);
+		--color-primary-hover: color-mix(
+			var(--color-neutral-700) 50%,
+			var(--color-neutral-800)
+		);
+		--color-primary-active: var(--color-neutral-700);
+
+		--color-secondary: var(--color-neutral-700);
+		--color-secondary-hover: var(--color-neutral-600);
+		--color-secondary-active: var(--color-neutral-500);
+
+		--color-selected: color-mix(
+			var(--color-brand) 5%,
+			var(--color-primary)
+		);
+		--color-selected-hover: color-mix(
+			var(--color-neutral-700) 50%,
+			var(--color-neutral-800)
+		);
+
+		/* Typography */
+		--color-text: var(--color-neutral-50);
+		--color-brand-body-text: var(--color-brand);
+		--color-invert: var(--color-neutral-950);
+
+		/* General */
+		--color-error: var(--color-red-400);
+		--color-success: var(--color-green-400);
+	}
+}
+
+@layer base {
+	html {
+		scroll-padding-top: --spacing(32);
+		scrollbar-gutter: stable;
+		background-color: transparent;
+	}
+
+	body {
+		@apply font-sans;
+
+		position: relative;
+		display: flex;
+		flex-direction: column;
+
+		overflow-y: auto;
+
+		min-height: 100dvh;
+
+		color: var(--color-text);
+		background-color: var(--color-base);
+
+		&:has(#menu-toggle-button input:checked) {
+			margin: 0;
+			height: 100%;
+			overflow: hidden;
+
+			#menu-mobile {
+				display: var(--menu-display, flex);
+			}
+		}
+	}
+
+	h1 {
+		@apply text-5xl;
+		font-weight: bold;
+		text-wrap-style: balance;
+	}
+
+	h2 {
+		@apply text-4xl;
+		font-weight: 600;
+	}
+
+	h3 {
+		@apply text-2xl;
+		font-weight: 500;
+	}
+
+	#menu-mobile {
+		display: none;
+	}
+}
+
+@utility content {
+	display: flex;
+	flex-direction: column;
+	gap: --spacing(6);
+	max-width: 60ch;
+
+	h2 ~ h2 {
+		margin-top: --spacing(8);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p {
+		text-wrap: pretty;
+	}
+
+	em {
+		color: var(--color-brand-body-text);
+	}
+
+	a {
+		text-decoration: underline;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: --spacing(2);
+
+		padding-left: --spacing(4);
+		list-style-position: inside;
+		list-style: disc;
+	}
+
+	img {
+		border-radius: var(--radius-cta);
+	}
+
+	p:has(img) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: --spacing(4);
+	}
+
+	hr {
+		border-bottom: dashed color-mix(var(--color-text) 30%, transparent) 1px;
+		color: rgba(0, 0, 0, 0);
+	}
+}
+
+/* --- Components --- */
+@utility eyebrow {
+	display: flex;
+	align-items: center;
+	gap: --spacing(1.5);
+
+	font-weight: bold;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wide);
+
+	& svg {
+		width: --spacing(4);
+	}
+}
+
+@utility badge {
+	--default-color: var(--color-70);
+
+	display: flex;
+	align-items: center;
+	gap: --spacing(1.5);
+
+	text-transform: uppercase;
+	letter-spacing: var(--tracking-wide);
+	color: var(--badge-color, var(--default-color));
+
+	& svg {
+		width: --spacing(4);
+	}
+}
+
+@utility site-grid {
+	--col-size: min(var(--min-col-size, 360px), 100%);
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--col-size), 1fr));
+}
+
+@utility lead {
+	font-size: 1.325rem;
+	color: var(--color-70);
+}
+
+@utility link {
+	max-width: fit-content;
+	font-size: 0.825rem;
+	color: var(--color-70);
+
+	&:hover {
+		color: currentColor;
+		text-decoration: underline;
+	}
+}

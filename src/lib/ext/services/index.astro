@@ -1,0 +1,103 @@
+---
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import { frontmatter } from "./pricing.md";
+import globalConfig from "@lib/config";
+import Tabs, { type TTab } from "@components/ui/Tabs.astro";
+import PlanCard from "@lib/ext/services/components/PlanCard.astro";
+import Grid from "@components/ui/Grid.astro";
+import PricingChart from "@lib/ext/services/components/PricingChart.astro";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Contact - index.astro", "globalConfig");
+	return null;
+}
+
+const { title, description } = frontmatter ?? {};
+
+const services = globalConfig.services;
+const tabs: TTab[] = [
+	{ label: "Pay Monthly", id: "month" },
+	{ label: "Pay Yearly", id: "annual", isFeatured: true },
+	{ label: "Pay Once", id: "once" },
+];
+const tabsId = "pricing-tabs";
+---
+
+<GlobalLayout {...frontmatter}>
+	<GlobalGrid class="gap-y-8">
+		<Container class="flex flex-col gap-8" layout="content">
+			<div class="flex max-w-[60ch] flex-col gap-4">
+				<h1>{title}</h1>
+				<p class="lead">{description}</p>
+			</div>
+			<div class="flex flex-col gap-4">
+				<span class="eyebrow">Select billing cycle</span>
+				<Tabs id={tabsId} {tabs} />
+			</div>
+			<Grid class="w-full gap-4" size="lg" tag="ul">
+				{
+					services.map((service) => (
+						<li>
+							<PlanCard plan={service} />
+						</li>
+					))
+				}
+			</Grid>
+		</Container>
+		<Container layout="content">
+			<PricingChart {services} />
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>
+<script is:inline define:vars={{ services, tabsId }}>
+	const tabs = document.querySelectorAll(`input[name='${tabsId}-button-group']`);
+
+	if (tabs) {
+		tabs.forEach((tab) => {
+			const tabId = tab.id.split("-").reverse()[0];
+
+			if (tab.checked) {
+				updatePrice(services, tabId);
+			}
+
+			tab.addEventListener("click", () => {
+				updatePrice(services, tabId);
+			});
+		});
+	}
+
+	function updatePrice(services, tabId) {
+		services.forEach((service) => {
+			const serviceId = service.id;
+			const discountedPrice = document.getElementById(`${serviceId}-price`);
+			const ogPrice = document.getElementById(`${serviceId}-og-price`);
+			const priceUnit = document.getElementById(`${serviceId}-price-unit`);
+			const ogPriceUnit = document.getElementById(`${serviceId}-og-price-unit`);
+
+			if (discountedPrice) {
+				discountedPrice.innerText = `$${discountPrice(service, service.price[tabId]).toLocaleString()}`;
+			}
+
+			if (ogPrice) {
+				ogPrice.innerText = `$${service.price[tabId].toLocaleString()}`;
+			}
+
+			if (tabId === "once") {
+				priceUnit.innerHTML = "";
+				ogPriceUnit.innerHTML = "";
+			} else {
+				priceUnit.innerHTML = "/mo";
+				ogPriceUnit.innerHTML = "/mo";
+			}
+		});
+	}
+
+	function discountPrice(service, price) {
+		const discountAmount = price * service.discount;
+		return Math.round(price - discountAmount);
+	}
+</script>

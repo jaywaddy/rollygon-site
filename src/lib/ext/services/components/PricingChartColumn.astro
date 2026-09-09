@@ -1,0 +1,42 @@
+---
+import Icon from "@components/ui/Icon.astro";
+import { type TPlanFeature } from "../lib/services";
+import { features as allFeatures } from "../lib/features";
+
+type Props = {
+	align?: "left" | "center" | "right";
+	class?: string;
+	features: TPlanFeature[];
+	isFeatured: boolean;
+	title: string;
+};
+
+const { align = "center", class: className, features, isFeatured, title } = Astro.props;
+
+const alignments = { left: "justify-start", center: "justify-center", right: "justify-end" };
+const filteredFeatures = allFeatures.map(({ id }) => {
+	return (
+		features.filter((feature) => {
+			return id === feature.id ? { asterisk: feature.asterisk, id } : null;
+		})[0] || { id: null }
+	);
+});
+---
+
+<ul class:list={[className]}>
+	<li><span class:list={["eyebrow h-16", alignments[align]]}>{title}</span></li>
+	{
+		filteredFeatures.map(({ asterisk, id }) => (
+			<li class:list={["flex h-16 items-center", alignments[align]]}>
+				{id &&
+					(asterisk ? (
+						<span class="text-70 text-center text-sm">{asterisk}</span>
+					) : (
+						<span>
+							<Icon class="text-brand w-4" name="check" />
+						</span>
+					))}
+			</li>
+		))
+	}
+</ul>

@@ -1,0 +1,89 @@
+---
+import type { TCta } from "@lib/utils/types";
+import Button from "./ui/Button.astro";
+import Icon from "./ui/Icon.astro";
+import globalConfig from "@lib/config";
+
+const { capitalize, setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Bread Crumbs", "globalConfig");
+	return null;
+}
+
+type Props = { path: string; title: string | undefined };
+
+const { path, title } = Astro.props ?? {};
+
+const crumbs = path.split("/");
+const lastCrumb = crumbs.length - 1;
+
+const crumbList: TCta[] = crumbs.map((_crumb, _index) => {
+	const setHref = () => {
+		if (_index > 0 && _index < crumbs.length) {
+			return crumbs.slice(0, _index + 1).join("/");
+		}
+
+		return "/";
+	};
+
+	const setLabel = () => {
+		if (_index == lastCrumb) {
+			return title;
+		}
+
+		if (_index === 0) {
+			return "Home";
+		}
+
+		return capitalize(_crumb);
+	};
+
+	return {
+		href: setHref(),
+		label: _crumb === "" ? globalConfig.brand?.name : setLabel() || "",
+		icon: _index === 0 ? "home" : undefined,
+		varient: "ghost",
+		iconOnly: _index === 0,
+	};
+});
+---
+
+<ul class="flex scrollbar-gutter-auto items-center overflow-auto lg:gap-2">
+	{
+		crumbList.map((crumb, index) => (
+			<Fragment>
+				{index > 0 && (
+					<lil>
+						<Icon class="text-50 w-4" name="chevron-right" />
+					</lil>
+				)}
+				<li
+					class:list={[
+						"max-md:[&_.bcrumb]:p-[0.5px_1px] max-md:[&_.bcrumb]:text-xs max-md:[&_.bcrumb]:[&_svg]:w-3",
+					]}
+				>
+					<Button
+						class:list={[
+							"bcrumb w-fit",
+							index !== lastCrumb && "text-50 hover:text-100",
+							index !== 0 && index !== lastCrumb && "max-md:hidden md:flex",
+						]}
+						{...crumb}
+					/>
+					{index !== 0 && index !== lastCrumb && (
+						<Button
+							class:list={[
+								"bcrumb w-fit",
+								index !== lastCrumb && "text-50 hover:text-100",
+								"max-md:flex md:hidden",
+							]}
+							{...crumb}
+							label={"..."}
+						/>
+					)}
+				</li>
+			</Fragment>
+		))
+	}
+</ul>

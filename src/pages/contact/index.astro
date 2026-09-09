@@ -1,0 +1,46 @@
+---
+import Container from "@layouts/Container.astro";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import GlobalLayout from "@layouts/GlobalLayout.astro";
+import { Content, frontmatter } from "./contact.md";
+import Form from "@components/Form.astro";
+import globalConfig from "@lib/config";
+import ContactLinks from "@components/ContactLinks.astro";
+import contactForm from "@forms/contact";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+if (!globalConfig) {
+	setWarning("Contact - index.astro", "globalConfig");
+	return null;
+}
+---
+
+<GlobalLayout {...frontmatter}>
+	<GlobalGrid class="gap-y-8">
+		<Container layout="sidebar" tag="aside">
+			<div class="sticky top-32 flex flex-col gap-8">
+				<ContactLinks />
+			</div>
+		</Container>
+		<Container class="flex flex-col gap-8" layout="article">
+			<div>
+				<Content />
+			</div>
+			<Form
+				action=""
+				data={contactForm}
+				method=""
+				buttons={[
+					{ icon: "send", label: "Submit request" },
+					{
+						href: `mailto:${globalConfig.brand.contact.email}`,
+						icon: "mail",
+						label: "Wraite an email",
+						varient: "outline",
+					},
+				]}
+			/>
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

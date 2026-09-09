@@ -1,0 +1,67 @@
+---
+import type { HTMLTag } from "astro/types";
+import globalConfig from "@lib/config";
+
+const { setWarning } = globalConfig.utils ?? {};
+
+type TGridLayout =
+	| "full"
+	| "body"
+	| "content"
+	| "article"
+	| "sidebar"
+	| "left-gutter"
+	| "right-gutter"
+	| "right-margin"
+	| "left-margin";
+
+type Props = {
+	class?: string;
+	id?: string;
+	layout: TGridLayout;
+	tag?: HTMLTag;
+	//
+};
+
+const { class: className, id, layout, tag: Tag = "div" } = Astro.props;
+
+if (!layout) {
+	setWarning("Container", "layout");
+	return null;
+}
+
+const layouts: { [layout in TGridLayout]: string[] } = {
+	"full": ["col-span-full"],
+	"body": [
+		"col-start-2 col-end-5",
+		"sm:col-start-2 sm:col-end-8",
+		"lg:col-start-2 lg:col-end-10",
+	],
+	"content": [
+		"col-start-2 col-end-5",
+		"xs:col-start-3 xs:col-end-3",
+		"sm:col-start-3 sm:col-end-7",
+		"lg:col-start-3 lg:col-end-9",
+	],
+	"article": [
+		"col-start-2 col-end-5",
+		"xs:col-start-3 xs:col-end-3",
+		"sm:col-start-3 sm:col-end-7",
+		"lg:col-start-5 lg:col-end-9",
+	],
+	"sidebar": [
+		"col-start-2 col-end-5",
+		"xs:col-start-3 xs:col-end-3",
+		"sm:col-start-3 sm:col-end-7",
+		"lg:col-start-3 lg:col-end-5",
+	],
+	"left-gutter": ["max-lg:hidden", "lg:col-start-2 lg:col-end-3"],
+	"right-gutter": ["max-lg:hidden", "lg:col-start-9 lg:col-end-10"],
+	"left-margin": ["max-lg:hidden", "lg:col-start-1 lg:col-end-2"],
+	"right-margin": ["max-lg:hidden", "lg:col-start-10 lg:col-end-11"],
+};
+---
+
+<Tag {id} class:list={[...layouts[layout], className]}>
+	<slot />
+</Tag>
