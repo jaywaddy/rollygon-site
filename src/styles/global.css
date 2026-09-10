@@ -82,10 +82,12 @@
 	--text-sm: 0.875rem;
 
 	/* General */
-	--color-brand: var(--color-brand-400);
-	--color-brand-hover: var(--color-brand-300);
+	--color-brand: var(--color-brand-500);
+	--color-brand-hover: var(--color-brand-400);
+	--color-brand-active: var(--color-brand-300);
 
-	--color-outline: color-mix(in oklch, currentColor 20%, transparent);
+	--color-outline: color-mix(currentColor 10%, transparent);
+	--color-shadow: color-mix(var(--color-neutral-950) 10%, transparent);
 
 	--easing: cubic-bezier(0.65, 0, 0.35, 1);
 
@@ -111,8 +113,8 @@
 :root {
 	[data-theme="dark"] {
 		/* Background colors */
-		--color-brand: var(--color-brand-400);
-		--color-brand-hover: var(--color-brand-300);
+		--color-brand: var(--color-brand-500);
+		--color-brand-hover: var(--color-brand-400);
 
 		--color-base: var(--color-neutral-900);
 
@@ -144,6 +146,7 @@
 		/* General */
 		--color-error: var(--color-red-400);
 		--color-success: var(--color-green-400);
+		--color-shadow: color-mix(var(--color-neutral-950) 60%, transparent);
 	}
 }
 
@@ -252,6 +255,16 @@
 		border-bottom: dashed color-mix(var(--color-text) 30%, transparent) 1px;
 		color: rgba(0, 0, 0, 0);
 	}
+}
+
+@utility bg-blur-primary {
+	background-color: color-mix(var(--color-primary) 85%, transparent);
+	backdrop-filter: blur(var(--blur-2xl));
+}
+
+@utility bg-blur-secondary {
+	background-color: color-mix(var(--color-neutral-950) 85%, transparent);
+	backdrop-filter: blur(var(--blur-2xl));
 }
 
 /* --- Components --- */

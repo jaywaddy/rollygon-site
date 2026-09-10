@@ -3,9 +3,10 @@ import GlobalGrid from "@layouts/GlobalGrid.astro";
 import Container from "@layouts/Container.astro";
 import Svg from "@components/ui/Svg.astro";
 import globalConfig from "@lib/config";
-import logo from "@assets/logo.svg";
+import logo from "@assets/logo-full.svg";
 import ContactLinks from "@components/ContactLinks.astro";
 import CollectionLinks from "@components/CollectionLinks.astro";
+import Button from "@components/ui/Button.astro";
 
 type Props = { hook?: boolean };
 
@@ -25,7 +26,6 @@ const { hook } = Astro.props;
 					class="hover:text-50 flex w-fit flex-wrap items-center gap-2 text-sm"
 				>
 					<Svg class="[&_svg]:h-8" src={logo} />
-					<span class="font-bold">{brand.name}</span>
 				</a>
 				<ContactLinks iconOnly varient="secondary" />
 			</div>

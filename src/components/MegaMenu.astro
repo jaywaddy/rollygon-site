@@ -2,55 +2,62 @@
 import { type TCollection } from "@lib/utils/types";
 import { getCollection } from "astro:content";
 import Button from "./ui/Button.astro";
-import GlobalGrid from "@layouts/GlobalGrid.astro";
-import Container from "@layouts/Container.astro";
 import globalConfig from "@lib/config";
+import CardGalleryEntry from "./CardGalleryEntry.astro";
 
-const { setHref } = globalConfig.utils ?? {};
+type Props = { collection?: TCollection; plural: string | undefined };
 
-type Props = { collection?: TCollection };
-
-const { collection } = Astro.props;
+const { collection, plural } = Astro.props;
 
 if (!collection) {
 	return null;
 }
 
 const collectionList = await getCollection(collection);
+const gridSize = () => {
+	if (collectionList.length <= 1) {
+		return "grid-cols-[repeat(1,--spacing(64))]";
+	}
+
+	if (collectionList.length === 2) {
+		return "grid-cols-[repeat(2,--spacing(64))]";
+	}
+
+	return "grid-cols-[repeat(3,--spacing(64))]";
+};
 ---
 
-<div class="mega-menu-container absolute right-0 left-0">
-	<div class="mt-4 overflow-clip">
+<div
+	class:list={[
+		"mega-menu-container absolute inset-auto m-0 pt-4 transition-opacity duration-200 ease-out [position-anchor:--mega-menu] [position-area:bottom_center]",
+	]}
+	role="menu"
+>
+	<div
+		class:list={[
+			"bg-primary rounded-element border-outline -z-10 flex h-fit flex-col gap-4 border p-4 [box-shadow:0px_0px_--spacing(8)_var(--color-shadow)]",
+		]}
+	>
 		<div
-			class="mega-menu bg-primary border-outline left-0 -z-10 h-fit w-full translate-y-(--menu-y) border-y"
+			class:list={[
+				"rounded-tl-cta bg-primary border-outline rigfht-[50%] absolute top-2 left-[50%] aspect-square w-4 translate-x-[-50%] rotate-45 border-t border-l",
+			]}
 		>
-			<GlobalGrid class:list={["mega-menu relative"]}>
-				<Container class="flex flex-col gap-4 py-4" layout="body">
-					<ul class="menu border-outline flex w-fit flex-col gap-2 border-b py-4">
-						{
-							collectionList.map((entry) => (
-								<li>
-									{/* <Button
-										label={enrty.data.title}
-										href={setHref(enrty)}
-										varient="link"
-										icon={collection}
-									/> */}
-									<a class="link" href={setHref(entry)}>
-										{entry.data.title}
-									</a>
-								</li>
-							))
-						}
-					</ul>
-					<Button
-						href={`/${collection}`}
-						label="View all"
-						varient="secondary"
-						icon={["arrow-right", "right"]}
-					/>
-				</Container>
-			</GlobalGrid>
 		</div>
+		<ul class:list={["menu grid gap-2", gridSize()]}>
+			{
+				[...collectionList].slice(0, 3).map((entry) => (
+					<li class="h-64">
+						<CardGalleryEntry {entry} type="mega-menu" />
+					</li>
+				))
+			}
+		</ul>
+		<Button
+			href={`/${collection}`}
+			label={`View all${plural ? ` ${plural}` : ""}`}
+			varient="outline"
+			icon={["arrow-right", "right"]}
+		/>
 	</div>
 </div>

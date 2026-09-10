@@ -51,13 +51,13 @@ const buttonSizes: { [key in TButtonSize]: string } = {
 	md: collection
 		? "pl-3 pr-1 py-1.5 text-[0.875rem]"
 		: iconOnly
-			? "aspect-1/1 p-[calc(--spacing(1)+0.5px)]"
+			? "aspect-square p-[calc(--spacing(1)+0.5px)]"
 			: "px-3 py-1.5 text-[0.875rem]",
-	lg: iconOnly ? "aspect-1/1 p-2" : "font-[500] px-4 py-2",
+	lg: iconOnly ? "aspect-square p-2" : "font-[500] px-7 py-3.5",
 };
 
 const buttonStyles: { [key in TButtonStyle]: string } = {
-	primary: "bg-brand text-brand-text hover:bg-brand-hover outline-0.5 active:bg-brand-500",
+	primary: "bg-brand text-brand-text hover:bg-brand-hover outline-0.5 active:bg-brand-active",
 	secondary: "bg-secondary hover:bg-secondary-hover active:bg-secondary-active",
 	ghost: "hover:bg-secondary-hover active:bg-secondary-active",
 	outline: "bg-primary outline-outline outline hover:bg-primary-hover active:bg-primary-active",
@@ -86,7 +86,6 @@ const LabelTag = size === "sm" ? "small" : "span";
 	data-toggle={iconOnly ? "false" : undefined}
 	class:list={[
 		"rounded-cta relative flex cursor-pointer items-center justify-center gap-1 text-nowrap [&_svg]:h-4",
-
 		buttonStyles[style],
 		classAttribute,
 		collection && "collection",

@@ -11,10 +11,10 @@ const banner: TBanner = {
 	cta: {
 		href: "/tools",
 		icon: "new",
-		label: "View Latest Tool",
+		label: "Download Latest Tool",
 	},
 	display: true,
-	label: "New tools out for download!",
+	label: "New tools available for download!",
 	varient: "auto-hide",
 };
 

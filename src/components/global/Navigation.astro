@@ -3,7 +3,7 @@ import Button from "../ui/Button.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import Container from "@layouts/Container.astro";
 import Svg from "@components/ui/Svg.astro";
-import logo from "@assets/logo.svg";
+import logo from "@assets/logo-full.svg";
 import globalConfig from "@lib/config";
 import MegaMenu from "@components/MegaMenu.astro";
 import CollectionLinks from "@components/CollectionLinks.astro";
@@ -26,7 +26,7 @@ const backgroundColors: { [key in typeof background]: string } = {
 const navPosition = () => {
 	switch (position) {
 		case "center":
-			return "mx-auto";
+			return "left-[50%] translate-x-[-50%] absolute";
 		case "right":
 			return "ml-auto";
 		case "left":
@@ -39,18 +39,33 @@ const navPosition = () => {
 ---
 
 <GlobalGrid class:list={["py-4", backgroundColors[background]]} id="navigation">
-	<Container class:list={["flex items-center gap-12", "max-lg:justify-between"]} layout="body">
+	<Container
+		class:list={[
+			"relative flex items-center gap-12",
+			"max-lg:justify-between",
+			position === "center" && "justify-between",
+		]}
+		layout="body"
+	>
 		<a aria-label="Home" class="hover:text-50 flex items-center gap-2" href="/">
 			<Svg class="[&_svg]:h-8" src={logo} />
-			<small class="font-bold">{globalConfig.brand?.name}</small>
 		</a>
 		<nav class:list={["flex items-center gap-12", navPosition()]}>
 			<ul id="menu-desktop" class:list={["flex items-center gap-2", "max-lg:hidden"]}>
 				{
 					categories.map((link) => (
-						<li class="[--menu-y:-100%] hover:[--menu-y:0%] [&_.mega-menu-container]:pointer-events-none hover:[&_.mega-menu-container]:pointer-events-auto hover:[&_.collection]:[&_svg]:-rotate-90">
-							<Button class="nav-link" {...link} varient="ghost" />
-							<MegaMenu collection={link.collection} />
+						<li
+							class:list={[
+								"relative [&_.mega-menu-container]:pointer-events-none [&_.mega-menu-container]:hidden hover:[&_.mega-menu-container]:pointer-events-auto hover:[&_.mega-menu-container]:z-10 hover:[&_.mega-menu-container]:flex",
+								"hover:[&_.collection]:[&_svg]:-rotate-90",
+							]}
+						>
+							<Button
+								class:list={["nav-link z-99 [anchor-name:--mega-menu]"]}
+								{...link}
+								varient="ghost"
+							/>
+							<MegaMenu collection={link.collection} plural={link.plural} />
 						</li>
 					))
 				}

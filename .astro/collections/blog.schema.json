@@ -7,8 +7,8 @@
     },
     "metaTitle": {
       "type": "string",
-      "minLength": 42,
-      "maxLength": 52
+      "minLength": 41,
+      "maxLength": 51
     },
     "dateCreated": {
       "type": "string",
@@ -23,8 +23,8 @@
     },
     "metaDescription": {
       "type": "string",
-      "minLength": 52,
-      "maxLength": 152
+      "minLength": 51,
+      "maxLength": 151
     },
     "draft": {
       "default": false,

@@ -10,31 +10,37 @@ export type TNavigation = {
 const navigation: TNavigation = {
 	background: "static",
 	cta: {
-		href: "/",
+		href: "/tools",
 		icon: "download",
 		label: "Get Free Tools",
 	},
 	categories: [
-		{ href: "/", label: "Home" },
+		// { href: "/", label: "Home" },
 		{
-			href: "/gallery",
-			label: "Gallery",
+			href: "/tools",
+			label: "Tools",
 			collection: "gallery",
-			singular: "entry",
-			plural: "entries",
+			singular: "tool",
+			plural: "tools",
 		},
 		{
-			href: "/blog",
-			label: "Blog",
+			href: "/models",
+			label: "Models",
 			collection: "blog",
-			singular: "post",
-			plural: "posts",
+			singular: "model",
+			plural: "models",
 		},
-		{ href: "/pricing", label: "Pricing" },
+		{
+			href: "/resources",
+			label: "Resources",
+			collection: "blog",
+			singular: "resource",
+			plural: "resources",
+		},
 		{ href: "/about", label: "About" },
 		{ href: "/contact", label: "Contact" },
 	],
-	position: "left",
+	position: "center",
 };
 
 export default navigation;

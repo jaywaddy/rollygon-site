@@ -4,22 +4,52 @@ import Element from "./ui/Element.astro";
 import type { TCollection } from "@lib/utils/types";
 import Img from "./ui/Img.astro";
 import globalConfig from "@lib/config";
+import Icon from "./ui/Icon.astro";
 
 const { formatDate, setHref } = globalConfig.utils ?? {};
 
-type Props = { entry: CollectionEntry<TCollection> };
+type Props = { entry: CollectionEntry<TCollection>; type?: "default" | "image-only" | "mega-menu" };
 
-const { entry } = Astro.props;
+const { entry, type = "default" } = Astro.props;
 ---
 
-<div class="flex flex-col gap-4">
-	<Img src={entry.data.thumbnail} />
-	<div class="flex flex-col gap-1">
-		<a class="w-fit hover:underline" href={setHref(entry)}>
-			<strong>{entry.data.title}</strong>
-		</a>
-		<small class="opacity-50">
-			{formatDate(entry.data.dateCreated)}
-		</small>
-	</div>
+<div
+	class:list={[
+		"relative flex flex-col gap-4",
+		type === "mega-menu" && "border-outline rounded-cta h-full overflow-clip border",
+	]}
+>
+	{
+		type !== "default" && (
+			<div class="rounded-pill bg-blur-primary absolute right-0 m-2 p-2">
+				<Icon class="h-4 w-4" name={entry.collection} />
+			</div>
+		)
+	}
+	<Img
+		class:list={[type === "mega-menu" && "absolute inset-0 -z-10 h-full"]}
+		src={entry.data.thumbnail}
+	/>
+	{
+		type !== "image-only" && (
+			<div class:list={["flex flex-col gap-1", type === "mega-menu" && "flex h-full"]}>
+				<a
+					class:list={["w-fit hover:underline", "after:absolute after:inset-0"]}
+					href={setHref(entry)}
+				>
+					<strong
+						class:list={[
+							type === "mega-menu" &&
+								"bg-blur-secondary absolute bottom-0 p-4 text-neutral-50",
+						]}
+					>
+						{entry.data.title}
+					</strong>
+				</a>
+				{type === "default" && (
+					<small class="opacity-50">{formatDate(entry.data.dateCreated)}</small>
+				)}
+			</div>
+		)
+	}
 </div>
