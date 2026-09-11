@@ -57,6 +57,9 @@ if (!display) {
 		if (banner && dismissButton) {
 			const timestamp = Date.now().toString();
 
+			document.documentElement.classList.remove("[--scroll-p:--spacing(32)]");
+			document.documentElement.classList.add("[--scroll-p:--spacing(24)]");
+
 			dismissButton.addEventListener("click", () => {
 				banner.style.display = "none";
 				banner.dataset.hidden = "true";

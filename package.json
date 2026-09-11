@@ -25,6 +25,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.20",
+		"@toolwind/anchors": "^1.0.10",
 		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
 		"@typescript-eslint/parser": "^8.61.1",
 		"eslint": "^10.5.0",

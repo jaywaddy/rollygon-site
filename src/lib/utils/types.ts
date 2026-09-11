@@ -2,8 +2,6 @@ import type { CollectionEntry } from "astro:content";
 import type { TIcon } from "@components/ui/Icon.astro";
 import type { TInputFieldType } from "@components/ui/Input.astro";
 
-export type TBlog = CollectionEntry<"blog">;
-
 export type TCategory = {
 	collection?: TCollection;
 	href: string;
@@ -12,14 +10,14 @@ export type TCategory = {
 	singular?: string;
 };
 
-export type TCollection = "blog" | "gallery";
+export type TCollection = "tools" | "gallery";
 
 export type TCollectionGroup = {
 	icon?: TIcon;
 	label: string;
 	links?: TCategory[];
-	plural?: string;
 	singular?: string;
+	plural?: string;
 };
 
 export type TCta = {
@@ -52,7 +50,6 @@ export type TFormSection = {
 	groups: Array<TFormField>;
 	title?: string;
 };
-export type TGallery = CollectionEntry<"gallery">;
 
 export type TImage = {
 	alt: string;
@@ -63,5 +60,14 @@ export type TZodImage = {
 	src: string;
 	width: number;
 	height: number;
-	format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+	format:
+		| "apng"
+		| "png"
+		| "jpg"
+		| "jpeg"
+		| "tiff"
+		| "webp"
+		| "gif"
+		| "svg"
+		| "avif";
 };

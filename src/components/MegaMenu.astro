@@ -5,9 +5,9 @@ import Button from "./ui/Button.astro";
 import globalConfig from "@lib/config";
 import CardGalleryEntry from "./CardGalleryEntry.astro";
 
-type Props = { collection?: TCollection; plural: string | undefined };
+type Props = { collection?: TCollection; index: number };
 
-const { collection, plural } = Astro.props;
+const { collection, index } = Astro.props;
 
 if (!collection) {
 	return null;
@@ -16,46 +16,45 @@ if (!collection) {
 const collectionList = await getCollection(collection);
 const gridSize = () => {
 	if (collectionList.length <= 1) {
-		return "grid-cols-[repeat(1,--spacing(64))]";
+		return "grid-cols-[repeat(1,--spacing(52))]";
 	}
 
 	if (collectionList.length === 2) {
-		return "grid-cols-[repeat(2,--spacing(64))]";
+		return "grid-cols-[repeat(2,--spacing(52))]";
 	}
 
-	return "grid-cols-[repeat(3,--spacing(64))]";
+	return "grid-cols-[repeat(3,--spacing(52))]";
 };
 ---
 
 <div
-	class:list={[
-		"mega-menu-container absolute inset-auto m-0 pt-4 transition-opacity duration-200 ease-out [position-anchor:--mega-menu] [position-area:bottom_center]",
-	]}
+	class:list={["mega-menu-container absolute inset-auto left-[50%] translate-x-[-50%] pt-4"]}
 	role="menu"
 >
 	<div
 		class:list={[
-			"bg-primary rounded-element border-outline -z-10 flex h-fit flex-col gap-4 border p-4 [box-shadow:0px_0px_--spacing(8)_var(--color-shadow)]",
+			"rounded-tl-cta bg-primary border-outline rigfht-[50%] absolute top-2 left-[50%] aspect-square w-4 translate-x-[-50%] rotate-45 border-t border-l",
 		]}
 	>
-		<div
-			class:list={[
-				"rounded-tl-cta bg-primary border-outline rigfht-[50%] absolute top-2 left-[50%] aspect-square w-4 translate-x-[-50%] rotate-45 border-t border-l",
-			]}
-		>
-		</div>
+	</div>
+	<div
+		class:list={[
+			"bg-primary rounded-element border-outline -z-10 flex h-fit flex-col gap-4 border p-4 [box-shadow:0px_0px_--spacing(8)_var(--color-shadow)]",
+			index === 0 && "max-xl:translate-x-[25%]",
+		]}
+	>
 		<ul class:list={["menu grid gap-2", gridSize()]}>
 			{
 				[...collectionList].slice(0, 3).map((entry) => (
-					<li class="h-64">
-						<CardGalleryEntry {entry} type="mega-menu" />
+					<li class="aspect-square">
+						<CardGalleryEntry {entry} size="sm" />
 					</li>
 				))
 			}
 		</ul>
 		<Button
 			href={`/${collection}`}
-			label={`View all${plural ? ` ${plural}` : ""}`}
+			label={`View all${` ${collectionList[0].data.plural}` || ""}`}
 			varient="outline"
 			icon={["arrow-right", "right"]}
 		/>

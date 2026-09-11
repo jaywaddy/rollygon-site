@@ -9,7 +9,7 @@ import MegaMenu from "@components/MegaMenu.astro";
 import CollectionLinks from "@components/CollectionLinks.astro";
 import ContactLinks from "@components/ContactLinks.astro";
 
-const { setWarning } = globalConfig.utils ?? {};
+const { setWarning, slugify } = globalConfig.utils ?? {};
 
 if (!globalConfig) {
 	setWarning("Navigation", "globalConfig");
@@ -53,19 +53,15 @@ const navPosition = () => {
 		<nav class:list={["flex items-center gap-12", navPosition()]}>
 			<ul id="menu-desktop" class:list={["flex items-center gap-2", "max-lg:hidden"]}>
 				{
-					categories.map((link) => (
+					categories.map((link, index) => (
 						<li
 							class:list={[
 								"relative [&_.mega-menu-container]:pointer-events-none [&_.mega-menu-container]:hidden hover:[&_.mega-menu-container]:pointer-events-auto hover:[&_.mega-menu-container]:z-10 hover:[&_.mega-menu-container]:flex",
 								"hover:[&_.collection]:[&_svg]:-rotate-90",
 							]}
 						>
-							<Button
-								class:list={["nav-link z-99 [anchor-name:--mega-menu]"]}
-								{...link}
-								varient="ghost"
-							/>
-							<MegaMenu collection={link.collection} plural={link.plural} />
+							<Button class:list={["nav-link z-99"]} {...link} varient="ghost" />
+							<MegaMenu collection={link.collection} {index} />
 						</li>
 					))
 				}

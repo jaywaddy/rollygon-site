@@ -14,70 +14,126 @@ import YouTubeEmbed from "@components/YouTubeEmbed.astro";
 import SketchfabEmbed from "@components/SketchfabEmbed.astro";
 import Button from "@components/ui/Button.astro";
 import Fallback from "@assets/fallback.png";
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import { isActionError } from "astro:actions";
+import Icon from "@components/ui/Icon.astro";
 
 const { calcReadTime, formatDate } = globalConfig.utils ?? {};
-const { href: emailHref, label: emailLabel } = globalConfig.brand.contact;
-const { cta } = globalConfig.navigation;
 
-type Props = { entry: CollectionEntry<TCollection> };
+type Props = {
+	entry: CollectionEntry<TCollection>;
+	firstEntry?: CollectionEntry<TCollection>;
+	modelSize?: "sm" | "lg";
+	nextEntry?: CollectionEntry<TCollection>;
+};
 
-const { entry } = Astro.props ?? {};
+const { entry, firstEntry, modelSize = "sm", nextEntry } = Astro.props ?? {};
 
 const { Content, headings } = await render(entry);
 const {
 	dateCreated,
 	dateUpdated,
-	title,
 	description,
+	sketchfabUrl,
+	title,
 	thumbnail = Fallback,
 	//
 } = entry.data ?? {};
 
+const isTool = entry.collection === "tools";
+const price = isTool && entry.data.price ? entry.data.price : "Free ";
 const contactHeading = { depth: 2, slug: "contact-me", text: "Contact Me" };
+const multipleEntries = firstEntry || nextEntry;
 ---
 
-<GlobalLayout {...entry.data}>
+<GlobalLayout {...entry.data} {thumbnail}>
 	{
 		thumbnail ? (
 			<GlobalGrid>
-				<Container layout="content">
-					<Image src={thumbnail} class="rounded-cta aspect-video" />
+				<Container class="relative" layout="content">
+					<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
+						<Icon class="h-4 w-4" name={entry.collection} />
+					</div>
+					<div class="relative flex h-128">
+						<Image src={thumbnail} class="rounded-element h-full w-full" />
+					</div>
 				</Container>
 			</GlobalGrid>
 		) : null
 	}
 	<GlobalGrid class="lg:mt-8">
-		<Container class="flex flex-col gap-8" layout="sidebar">
-			<div class="sticky top-32 grid gap-8">
+		<Container class="flex flex-col gap-8 pr-12" layout="sidebar">
+			<div class:list={["sticky top-(--scroll-p) grid gap-8"]}>
 				<TableOfContents headings={[...headings, contactHeading]} />
+				{
+					multipleEntries && (
+						<div class="flex aspect-square flex-col gap-2">
+							<span class="eyebrow">Next {entry.data.singular}</span>
+							{nextEntry ? (
+								<CardGalleryEntry entry={nextEntry} size="md" />
+							) : (
+								<CardGalleryEntry entry={firstEntry} size="md" />
+							)}
+						</div>
+					)
+				}
 				<ContactLinks groups={["socialLinks"]} />
 			</div>
 		</Container>
-		<Container class="flex flex-col gap-8 max-lg:mt-8" layout="article" tag="article">
+		<Container class="flex flex-col gap-16 max-lg:mt-8" layout="article" tag="article">
 			<div class="flex flex-col gap-4">
 				<h1>{title}</h1>
 				<p class="lead">{description}</p>
-				<div class="items center text-70 flex gap-2">
+
+				<div class="items center text-70 flex gap-4 *:border-40!">
 					<small>{formatDate(dateUpdated || dateCreated)}</small>
-					<Seperator />
-					<small>{calcReadTime(entry.body)}</small>
+					<!-- <Seperator />
+					<small>{calcReadTime(entry.body)}</small> -->
+					{
+						isTool && (
+							<>
+								<Seperator />
+								<small>{entry.data.version}</small>
+								<Seperator />
+								<small>{entry.data.size}</small>
+							</>
+						)
+					}
 				</div>
+				{
+					isTool && (
+						<Button
+							href={entry.data.downloadLink}
+							label={`${price}Download`}
+							icon="download"
+							varient={["primary", "lg"]}
+						/>
+					)
+				}
 			</div>
-			<div class="content">
-				<Content />
-				<div class="flex flex-col gap-4">
-					<h2 id={contactHeading.slug}>{contactHeading.text}</h2>
-					<p>
-						If you have any questions, please contact me at <a href={emailHref}
-							>{globalConfig.brand.contact.email}</a
-						>
-					</p>
-				</div>
+			<div class="flex flex-col gap-16">
+				{
+					sketchfabUrl && modelSize === "sm" && (
+						<div class="flex flex-col gap-8">
+							<span class="eyebrow">Tool Demo</span>
+							<SketchfabEmbed {title} url={sketchfabUrl} />
+						</div>
+					)
+				}
+				<article class="content">
+					<Content />
+				</article>
+				{
+					isTool && (
+						<Button
+							href={entry.data.downloadLink}
+							label={`${price}Download`}
+							icon="download"
+							varient={["primary", "lg"]}
+						/>
+					)
+				}
 			</div>
-			<div class="flex gap-2">
-				<Button {...cta} label="Buy an avatar" />
-				<Button href={emailHref} label={emailLabel} varient="outline" />
-			</div>
-		</Container>
-	</GlobalGrid>
-</GlobalLayout>
+		</Container></GlobalGrid
+	></GlobalLayout
+>

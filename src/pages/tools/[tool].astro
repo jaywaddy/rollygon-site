@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+import globalConfig from "@lib/config";
+
+export async function getStaticPaths() {
+	const tools = await getCollection("tools");
+
+	return tools.map((tool, index) => ({
+		params: { tool: globalConfig.utils.slugify(tool.data.title) },
+		props: { firstTool: tools[0], nextTool: tools[index + 1], tool },
+	}));
+}
+
+const { firstTool, nextTool, tool } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout entry={tool} firstEntry={firstTool} nextEntry={nextTool} />

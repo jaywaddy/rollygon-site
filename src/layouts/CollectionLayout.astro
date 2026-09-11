@@ -5,7 +5,6 @@ import GlobalGrid from "@layouts/GlobalGrid.astro";
 import Container from "@layouts/Container.astro";
 import { getCollection } from "astro:content";
 import type { TCollection } from "@lib/utils/types";
-import CardBlogPost from "@components/CardBlogPost.astro";
 import CardGalleryEntry from "@components/CardGalleryEntry.astro";
 import Grid, { type TGridSizes } from "@components/ui/Grid.astro";
 
@@ -18,13 +17,11 @@ const entries = getEntries.sort((older, newer) => {
 	return newer.data.dateCreated.valueOf() - older.data.dateCreated.valueOf();
 });
 
-const gridLayouts: { [key in TCollection]: TGridSizes } = { blog: "full", gallery: "lg" };
-
-const Card = collection === "blog" ? CardBlogPost : CardGalleryEntry;
+const gridLayouts: { [key in TCollection]: TGridSizes } = { tools: "sm", gallery: "lg" };
 ---
 
 <GlobalLayout {...data}>
-	<GlobalGrid class="mt-8 gap-y-16">
+	<GlobalGrid class="gap-y-16">
 		<Container layout="content">
 			<h1>{data.title}</h1>
 		</Container>
@@ -32,8 +29,8 @@ const Card = collection === "blog" ? CardBlogPost : CardGalleryEntry;
 			<Grid class="gap-8" size={gridLayouts[collection]} tag="ul">
 				{
 					entries.map((entry) => (
-						<li class="flex flex-col gap-1">
-							<Card {entry} />
+						<li class="flex aspect-square w-full flex-col gap-1">
+							<CardGalleryEntry {entry} size="md" />
 						</li>
 					))
 				}

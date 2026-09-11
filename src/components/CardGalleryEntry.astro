@@ -1,55 +1,72 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Element from "./ui/Element.astro";
 import type { TCollection } from "@lib/utils/types";
-import Img from "./ui/Img.astro";
+import Img from "@components/ui/Img.astro";
 import globalConfig from "@lib/config";
-import Icon from "./ui/Icon.astro";
+import Icon from "@components/ui/Icon.astro";
+import ImageLoader from "./ui/ImageLoader.astro";
 
 const { formatDate, setHref } = globalConfig.utils ?? {};
 
-type Props = { entry: CollectionEntry<TCollection>; type?: "default" | "image-only" | "mega-menu" };
+type Props = {
+	aspect?: "auto" | "square" | "video";
+	entry: CollectionEntry<TCollection> | undefined;
+	size?: "sm" | "md" | "lg";
+};
 
-const { entry, type = "default" } = Astro.props;
+const { aspect = "video", entry, size = "lg" } = Astro.props;
+const aspectRatio = { auto: "", square: "aspect-square", video: "aspect-video" };
+const compact = size === "sm" || size === "md";
+
+const TextSize = size === "sm" ? "small" : "strong";
 ---
 
 <div
 	class:list={[
 		"relative flex flex-col gap-4",
-		type === "mega-menu" && "border-outline rounded-cta h-full overflow-clip border",
+		"hover:[&_.thumbnail_img]:scale-110 hover:[&_.thumbnail_img]:-rotate-1",
+		compact && "border-outline h-full w-full overflow-clip border",
+		size === "sm" ? "rounded-cta" : "rounded-element",
 	]}
 >
-	{
-		type !== "default" && (
-			<div class="rounded-pill bg-blur-primary absolute right-0 m-2 p-2">
-				<Icon class="h-4 w-4" name={entry.collection} />
-			</div>
-		)
-	}
-	<Img
-		class:list={[type === "mega-menu" && "absolute inset-0 -z-10 h-full"]}
-		src={entry.data.thumbnail}
-	/>
-	{
-		type !== "image-only" && (
-			<div class:list={["flex flex-col gap-1", type === "mega-menu" && "flex h-full"]}>
-				<a
-					class:list={["w-fit hover:underline", "after:absolute after:inset-0"]}
-					href={setHref(entry)}
-				>
-					<strong
-						class:list={[
-							type === "mega-menu" &&
-								"bg-blur-secondary absolute bottom-0 p-4 text-neutral-50",
-						]}
-					>
-						{entry.data.title}
-					</strong>
-				</a>
-				{type === "default" && (
-					<small class="opacity-50">{formatDate(entry.data.dateCreated)}</small>
-				)}
-			</div>
-		)
-	}
+	<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
+		<Icon class="h-4 w-4" name={entry?.collection || "at-sign"} />
+	</div>
+
+	<div
+		class:list={[
+			"flex",
+			size === "lg" && ["relative", aspectRatio[aspect]],
+			compact && "absolute inset-0",
+		]}
+	>
+		<ImageLoader aspect="auto" />
+		<Img
+			class:list={["thumbnail relative h-full ease-in-out [&_img]:transition-(--easing)"]}
+			src={entry?.data.thumbnail}
+		/>
+	</div>
+
+	<div class:list={["flex flex-col gap-1", compact && "flex h-full"]}>
+		<a
+			class:list={["w-fit hover:underline", "after:absolute after:inset-0"]}
+			href={setHref(entry)}
+		>
+			<TextSize
+				class:list={[
+					TextSize === "small" && "font-bold",
+					compact && "bg-blur-secondary absolute bottom-0 w-full p-4 text-neutral-50",
+				]}
+			>
+				{entry?.data.title}
+			</TextSize>
+		</a>
+		{
+			size === "lg" && (
+				<small class="opacity-50">
+					{formatDate(entry?.data.dateCreated || new Date())}
+				</small>
+			)
+		}
+	</div>
 </div>

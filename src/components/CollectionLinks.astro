@@ -29,8 +29,7 @@ function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TColle
 			icon: name,
 			label: name,
 			links: entries.map((entry) => ({ href: setHref(entry), label: entry.data.title })),
-			plural:
-				navigation.categories.filter((link) => link.collection === name)[0].plural || "",
+			plural: entries[0].data.plural || "",
 		};
 	});
 }
@@ -52,8 +51,8 @@ function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TColle
 				))}
 				{group.plural && (
 					<li>
-						<a class="link" href={`/${group.label}`}>
-							View all {group.plural}
+						<a class="link text-50" href={`/${group.label}`}>
+							View all{group.plural && ` ${group.plural}`}
 						</a>
 					</li>
 				)}

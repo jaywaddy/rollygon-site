@@ -20,6 +20,7 @@ export type TButton = {
 	id?: string;
 	isExternal?: boolean;
 	noIcon?: boolean;
+	style?: string;
 };
 
 type Props = TButton;
@@ -38,6 +39,7 @@ const {
 	id,
 	isExternal,
 	noIcon = false,
+	style: styleAttribute,
 } = Astro.props;
 
 const size = typeof varient === "string" ? "md" : varient[1];
@@ -84,6 +86,7 @@ const LabelTag = size === "sm" ? "small" : "span";
 	{href}
 	{target}
 	data-toggle={iconOnly ? "false" : undefined}
+	style={styleAttribute}
 	class:list={[
 		"rounded-cta relative flex cursor-pointer items-center justify-center gap-1 text-nowrap [&_svg]:h-4",
 		buttonStyles[style],

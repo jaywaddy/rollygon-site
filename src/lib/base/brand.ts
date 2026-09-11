@@ -1,11 +1,11 @@
 import type { TCta } from "@lib/utils/types";
+import type { TButton } from "@components/ui/Button.astro";
 
 export type TBrand = {
 	bio?: string;
 	contact: {
 		description?: string;
-		href?: string;
-		label: string;
+		cta?: TButton;
 		email?: string;
 		location?: string;
 		phoneNumber?: string;
@@ -28,18 +28,44 @@ const email = "message@rollygon.com";
 const brand: TBrand = {
 	bio: "3D modeling tools",
 	contact: {
-		href: `mailto:${email.toLowerCase()}`,
-		label: "Contact me",
+		cta: {
+			href: `mailto:${email.toLowerCase()}`,
+			label: "Contact me",
+			icon: "message",
+		},
 		location: "Sacramento, CA 🇺🇸",
 		email: email,
 		socialLinks: [
-			{ href: "/", icon: "youtube", label: "YouTube" },
-			{ href: "/", icon: "bluesky", label: "Bluesky" },
 			{
-				href: `mailto:${email.toLowerCase()}`,
-				icon: "at-sign",
-				label: "Email",
+				href: "https://rollygon.gumroad.com/",
+				icon: "gumroad",
+				label: "Gumroad",
 			},
+			{
+				href: "https://ko-fi.com/rollygon",
+				icon: "ko-fi",
+				label: "Ko-fi",
+			},
+			{
+				href: "https://sketchfab.com/rollygon",
+				icon: "sketchfab",
+				label: "Sketchfab",
+			},
+			{
+				href: "https://twitch.tv/rollygon",
+				icon: "twitch",
+				label: "Twitch",
+			},
+			{
+				href: "https://youtube.com/@rollygon",
+				icon: "youtube",
+				label: "YouTube",
+			},
+			// {
+			// 	href: `mailto:${email.toLowerCase()}`,
+			// 	icon: "at-sign",
+			// 	label: "Email",
+			// },
 		],
 	},
 	favicon: {

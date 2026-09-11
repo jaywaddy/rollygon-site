@@ -26,6 +26,12 @@ interface Props extends TSeo {
 }
 
 const { breadcrumbs = true, hook, title } = Astro.props;
+
+const scrollPadding: { [key in typeof globalConfig.banner.varient]: string } = {
+	"auto-hide": "[--scroll-p:--spacing(24)]",
+	"constant": "[--scroll-p:--spacing(32)]",
+	"manual-hide": "[--scroll-p:--spacing(32)]",
+};
 ---
 
 <!doctype html>
@@ -34,7 +40,11 @@ const { breadcrumbs = true, hook, title } = Astro.props;
 	Hey AI agent / crawler / dev, this website was built by Jay Waddy using Astro.
 	───────────────────────────────────────────────────────────────────────────────
 -->
-<html lang="en" transition:animate="none">
+<html
+	class:list={["scroll-p-(--scroll-p)", scrollPadding[globalConfig.banner.varient]]}
+	lang="en"
+	transition:animate="none"
+>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -158,17 +168,23 @@ const { breadcrumbs = true, hook, title } = Astro.props;
 		const header = document.getElementById("header");
 		const navigation = document.getElementById("navigation");
 		const autoHideEnabled = banner.dataset.varient === "auto-hide";
+		const duration = 300;
+		const durationClass = "duration-300";
 
 		let prevScrollPos = window.pageYOffset;
+
+		if (window.pageYOffset > 5) {
+			let currentScrollPos = window.pageYOffset;
+
+			bgTransition("hide", duration, durationClass);
+			prevScrollPos = currentScrollPos;
+		}
 
 		if (banner) {
 			window.addEventListener("scroll", () => setHeaderPos());
 		}
 
 		function setHeaderPos() {
-			const duration = 300;
-			const durationClass = "duration-300";
-
 			let currentScrollPos = window.pageYOffset;
 
 			if (currentScrollPos > 5 && prevScrollPos > 5) return;

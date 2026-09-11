@@ -10,6 +10,9 @@
       "minLength": 41,
       "maxLength": 51
     },
+    "canonicalUrl": {
+      "type": "string"
+    },
     "dateCreated": {
       "type": "string",
       "format": "date-time"
@@ -26,11 +29,37 @@
       "minLength": 51,
       "maxLength": 151
     },
+    "sketchfabUrl": {
+      "type": "string"
+    },
+    "YouTubeEmbed": {
+      "type": "string"
+    },
     "draft": {
       "default": false,
       "type": "boolean"
     },
+    "plural": {
+      "default": "tools",
+      "type": "string"
+    },
+    "singular": {
+      "default": "tool",
+      "type": "string"
+    },
+    "downloadLink": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "size": {
+      "type": "string"
+    },
     "thumbnail": {
+      "type": "string"
+    },
+    "version": {
       "type": "string"
     },
     "$schema": {

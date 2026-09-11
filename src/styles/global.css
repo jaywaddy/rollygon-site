@@ -19,6 +19,18 @@
 	--color-brand-900: hsl(90, 75%, 10%);
 	--color-brand-950: hsl(90, 75%, 05%);
 
+	--color-brand-alt-50: var(--color-fuchsia-50);
+	--color-brand-alt-100: var(--color-fuchsia-100);
+	--color-brand-alt-200: var(--color-fuchsia-200);
+	--color-brand-alt-300: var(--color-fuchsia-300);
+	--color-brand-alt-400: var(--color-fuchsia-400);
+	--color-brand-alt-500: var(--color-fucshia-500);
+	--color-brand-alt-600: var(--color-fuchsia-600);
+	--color-brand-alt-700: var(--color-fuchsia-700);
+	--color-brand-alt-800: var(--color-fuchsia-800);
+	--color-brand-alt-900: var(--color-fuchsia-900);
+	--color-brand-alt-950: var(--color-fuchsia-950);
+
 	--color-neutral-50: var(--color-zinc-50);
 	--color-neutral-100: var(--color-zinc-100);
 	--color-neutral-200: var(--color-zinc-200);
@@ -152,7 +164,6 @@
 
 @layer base {
 	html {
-		scroll-padding-top: --spacing(32);
 		scrollbar-gutter: stable;
 		background-color: transparent;
 	}
@@ -213,6 +224,10 @@
 		margin-top: --spacing(8);
 	}
 
+	*:has(+ h2:first-of-type) {
+		margin-bottom: --spacing(8);
+	}
+
 	h1,
 	h2,
 	h3,
@@ -223,8 +238,18 @@
 		text-wrap: pretty;
 	}
 
+	p:not(:has(strong)),
+	ul {
+		color: var(--color-70);
+	}
+
 	em {
 		color: var(--color-brand-body-text);
+	}
+
+	strong {
+		text-transform: uppercase;
+		font-size: var(--text-sm);
 	}
 
 	a {
@@ -241,8 +266,19 @@
 		list-style: disc;
 	}
 
+	blockquote {
+		display: flex;
+		flex-direction: column;
+		gap: --spacing(4);
+		position: relative;
+		padding-inline: --spacing(6);
+
+		border-left: dotted 2px var(--color-brand-body-text);
+	}
+
 	img {
-		border-radius: var(--radius-cta);
+		border-radius: var(--radius-element);
+		background-color: var(--color-secondary);
 	}
 
 	p:has(img) {
@@ -258,12 +294,14 @@
 }
 
 @utility bg-blur-primary {
+	background-color: var(--color-primary);
 	background-color: color-mix(var(--color-primary) 85%, transparent);
 	backdrop-filter: blur(var(--blur-2xl));
 }
 
 @utility bg-blur-secondary {
-	background-color: color-mix(var(--color-neutral-950) 85%, transparent);
+	background-color: var(--color-brand-alt-600);
+	background-color: color-mix(var(--color-brand-alt-600) 60%, transparent);
 	backdrop-filter: blur(var(--blur-2xl));
 }
 
@@ -290,9 +328,13 @@
 	align-items: center;
 	gap: --spacing(1.5);
 
-	text-transform: uppercase;
+	padding: --spacing(1) --spacing(3);
+	border-radius: var(--radius-cta);
+
+	font-size: var(--text-sm);
 	letter-spacing: var(--tracking-wide);
 	color: var(--badge-color, var(--default-color));
+	background-color: var(--color-secondary);
 
 	& svg {
 		width: --spacing(4);

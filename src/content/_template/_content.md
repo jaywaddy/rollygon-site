@@ -5,8 +5,13 @@ description:
 # metaDescription:
 dateCreated:
 # dateUpdated:
-# thumbnail:
+# canonicalUrl:
+# thumbnail: ./thumbnail.png
 # sketchfabUrl:
 # youtubeUrl:
+# downloadLink:
+# price:
+# size:
+# version:
 # draft: true
 ---

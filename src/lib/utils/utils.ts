@@ -63,10 +63,14 @@ export function formatDate(date: Date, monthFormat?: "short" | "long"): string {
 	});
 }
 
-export function setHref(content: Collection): string {
-	const { collection, data, id } = content;
+export function setHref(content: Collection | undefined): string {
+	if (content) {
+		const { collection, data, id } = content;
 
-	return `/${collection}/${slugify(data.title) || id}`;
+		return `/${collection}/${slugify(data.title) || id}`;
+	}
+
+	return "";
 }
 
 export function setWarning(element: string, prop: string): void {

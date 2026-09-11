@@ -1,5 +1,4 @@
 ---
-import Container from "@layouts/Container.astro";
 import globalConfig from "@lib/config";
 import Button from "@components/ui/Button.astro";
 import Img from "@components/ui/Img.astro";
@@ -22,7 +21,7 @@ const alignment: { [key in typeof position]: string } = {
 ---
 
 <>
-	<Img class="absolute inset-0 h-full rounded-none mix-blend-overlay opacity-30" src={bgPattern} />
+	<Img class="absolute inset-0 h-full rounded-none opacity-15" src={bgPattern} />
 	<section
 		class:list={["relative flex gap-8 py-16 pt-40 max-lg:pt-48 lg:my-32", alignment[position]]}
 	>

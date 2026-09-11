@@ -2,25 +2,30 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection, getCollection } from "astro:content";
 import globalConfig from "@lib/config";
-import type { TBlog, TGallery } from "@lib/utils/types";
+import type YouTubeEmbed from "@components/YouTubeEmbed.astro";
 
-export const blogPosts: TBlog[] = await getCollection("blog");
-export const galleryEntries: TGallery[] = await getCollection("gallery");
+export const toolsCollection = await getCollection("tools");
+export const galleryEntries = await getCollection("gallery");
 
 export const allCollections = [
-	galleryEntries,
-	blogPosts,
+	toolsCollection,
 	//
 ];
 
 const collectionSchema = {
 	title: z.string(),
 	metaTitle: seoString(50, 60).optional(),
+	canonicalUrl: z.string().optional(),
 	dateCreated: z.date(),
 	dateUpdated: z.date().optional(),
 	description: z.string(),
 	metaDescription: seoString(60, 160).optional(),
+	sketchfabUrl: z.string().optional(),
+	YouTubeEmbed: z.string().optional(),
 	draft: z.boolean().default(false),
+
+	plural: z.string().optional(),
+	singular: z.string().optional(),
 };
 
 function seoString(_min: number, _max: number): z.ZodString {
@@ -35,15 +40,22 @@ function seoString(_min: number, _max: number): z.ZodString {
 	return z.string();
 }
 
-const blog = defineCollection({
+const tools = defineCollection({
 	loader: glob({
-		base: "./src/content/blog",
+		base: "./src/content/tools",
 		pattern: "**/*.md",
 	}),
 	schema: ({ image }) => {
 		return z.object({
 			...collectionSchema,
+			downloadLink: z.string().optional(),
+			price: z.number().optional(),
+			size: z.string().optional(),
 			thumbnail: image().optional(),
+			version: z.string().optional(),
+
+			plural: z.string().default("tools"),
+			singular: z.string().default("tool"),
 		});
 	},
 });
@@ -57,8 +69,11 @@ const gallery = defineCollection({
 		return z.object({
 			...collectionSchema,
 			thumbnail: image().optional(),
+
+			plural: z.string().default("models"),
+			singular: z.string().default("model"),
 		});
 	},
 });
 
-export const collections = { blog, gallery };
+export const collections = { tools, gallery };
