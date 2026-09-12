@@ -6,9 +6,7 @@
       "type": "string"
     },
     "metaTitle": {
-      "type": "string",
-      "minLength": 41,
-      "maxLength": 51
+      "type": "string"
     },
     "canonicalUrl": {
       "type": "string"
@@ -25,19 +23,38 @@
       "type": "string"
     },
     "metaDescription": {
-      "type": "string",
-      "minLength": 51,
-      "maxLength": 151
-    },
-    "sketchfabUrl": {
       "type": "string"
     },
-    "YouTubeEmbed": {
+    "slug": {
       "type": "string"
     },
     "draft": {
       "default": false,
       "type": "boolean"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "streams": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sketchfabUrl": {
+      "type": "string"
+    },
+    "youtubeUrl": {
+      "type": "string"
     },
     "plural": {
       "default": "tools",
@@ -47,6 +64,9 @@
       "default": "tool",
       "type": "string"
     },
+    "thumbnail": {
+      "type": "string"
+    },
     "downloadLink": {
       "type": "string"
     },
@@ -54,9 +74,6 @@
       "type": "number"
     },
     "size": {
-      "type": "string"
-    },
-    "thumbnail": {
       "type": "string"
     },
     "version": {

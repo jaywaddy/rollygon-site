@@ -6,6 +6,7 @@ description:
 dateCreated:
 # dateUpdated:
 # canonicalUrl:
+# slug:
 # thumbnail: ./thumbnail.png
 # sketchfabUrl:
 # youtubeUrl:
@@ -13,5 +14,6 @@ dateCreated:
 # price:
 # size:
 # version:
+# tags:
 # draft: true
 ---

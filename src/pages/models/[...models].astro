@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+import globalConfig from "@lib/config";
+
+export async function getStaticPaths() {
+	const models = await getCollection("models");
+
+	return models.map((model, index) => ({
+		params: { models: globalConfig.utils.slugify(model.data.slug || model.data.title) },
+		props: { firstModel: models[0], nextModel: models[index + 1], model },
+	}));
+}
+
+const { firstModel, model, nextModel } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout entry={model} firstEntry={firstModel} nextEntry={nextModel} />

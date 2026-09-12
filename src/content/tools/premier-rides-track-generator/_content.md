@@ -13,6 +13,8 @@ downloadLink: "https://rollygon.gumroad.com/l/premier_rides_track_gen"
 # price:
 size: 224.5 MB
 version: v0.1 (Preview)
+models:
+    - poltergeist
 # draft: true
 ---
 

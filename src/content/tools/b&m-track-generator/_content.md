@@ -13,6 +13,12 @@ downloadLink: "https://rollygon.gumroad.com/l/track_generator_bm"
 # price:
 size: 70.5 MB
 version: v33
+models:
+    - batman-the-dark-knight
+    - batman-the-ride
+    - georgia-scorcher
+    - hydra-zero-g-roll
+    - talon-loop
 # draft: true
 ---
 

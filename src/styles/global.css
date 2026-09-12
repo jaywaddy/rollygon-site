@@ -241,6 +241,7 @@
 	p:not(:has(strong)),
 	ul {
 		color: var(--color-70);
+		font-size: 1.125rem;
 	}
 
 	em {
@@ -301,8 +302,8 @@
 
 @utility bg-blur-secondary {
 	background-color: var(--color-brand-alt-600);
-	background-color: color-mix(var(--color-brand-alt-600) 60%, transparent);
-	backdrop-filter: blur(var(--blur-2xl));
+	background-color: color-mix(var(--color-neutral-800) 70%, transparent);
+	backdrop-filter: blur(var(--blur-xl));
 }
 
 /* --- Components --- */

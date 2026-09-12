@@ -4,12 +4,14 @@ import type { TCategory, TCollection, TCollectionGroup } from "@lib/utils/types"
 import { allCollections } from "@src/content.config";
 import type { CollectionEntry } from "astro:content";
 import Grid from "./ui/Grid.astro";
-const { setHref } = globalConfig.utils ?? {};
+import { streamsCollection } from "@src/content.config";
+const { setHref, setStreamTitle } = globalConfig.utils ?? {};
 
 type Props = { class?: string };
 
 const { class: className } = Astro.props;
 const { navigation } = globalConfig;
+const maxLinks = 5;
 
 const navLinks: TCategory[] = navigation.categories.filter((link) => {
 	return link.href !== "/" && !link.collection;
@@ -21,14 +23,22 @@ const collectionGroups = [
 ];
 
 function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TCollectionGroup[] {
-	const maxLinks = 5;
+	return data.map((entries) => {
+		const collection = entries[0].collection;
+		const isStream = collection === "streams";
+		const setLinkHref = function (entry: CollectionEntry<TCollection>) {
+			return entry.collection === "streams"
+				? `/${entry.data.collection}/${entry.id.split("/")[0]}/streams/${entry.id.split("/")[1]}`
+				: setHref(entry);
+		};
 
-	return data.slice(0, maxLinks).map((entries) => {
-		const name = entries[0]?.collection;
 		return {
-			icon: name,
-			label: name,
-			links: entries.map((entry) => ({ href: setHref(entry), label: entry.data.title })),
+			icon: collection,
+			label: collection,
+			links: entries.map((entry) => ({
+				href: setLinkHref(entry),
+				label: isStream ? setStreamTitle(entry, entry.data.title) : entry.data.title,
+			})),
 			plural: entries[0].data.plural || "",
 		};
 	});
@@ -42,7 +52,7 @@ function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TColle
 				<li>
 					<span class="eyebrow">{group.label}</span>
 				</li>
-				{group.links?.map(({ href, label }) => (
+				{group.links?.slice(0, maxLinks).map(({ href, label }) => (
 					<li class="">
 						<a class="link" {href}>
 							{label}

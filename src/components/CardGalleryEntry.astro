@@ -23,16 +23,17 @@ const TextSize = size === "sm" ? "small" : "strong";
 
 <div
 	class:list={[
-		"relative flex flex-col gap-4",
-		"hover:[&_.thumbnail_img]:scale-110 hover:[&_.thumbnail_img]:-rotate-1",
-		compact && "border-outline h-full w-full overflow-clip border",
-		size === "sm" ? "rounded-cta" : "rounded-element",
+		"relative flex w-full flex-col gap-4",
+		"hover:[&_.thumbnail_img]:scale-105",
+		compact && "border-outline h-full overflow-clip border",
+		size === "sm"
+			? "rounded-cta hover:[&_.thumbnail_img]:-rotate-1"
+			: "rounded-element hover:[&_.thumbnail_img]:rotate-[-0.5deg]",
 	]}
 >
 	<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
 		<Icon class="h-4 w-4" name={entry?.collection || "at-sign"} />
 	</div>
-
 	<div
 		class:list={[
 			"flex",
@@ -42,11 +43,12 @@ const TextSize = size === "sm" ? "small" : "strong";
 	>
 		<ImageLoader aspect="auto" />
 		<Img
-			class:list={["thumbnail relative h-full ease-in-out [&_img]:transition-(--easing)"]}
+			class:list={[
+				"thumbnail relative h-full w-full ease-in-out [&_img]:transition-(--easing)",
+			]}
 			src={entry?.data.thumbnail}
 		/>
 	</div>
-
 	<div class:list={["flex flex-col gap-1", compact && "flex h-full"]}>
 		<a
 			class:list={["w-fit hover:underline", "after:absolute after:inset-0"]}
@@ -55,7 +57,8 @@ const TextSize = size === "sm" ? "small" : "strong";
 			<TextSize
 				class:list={[
 					TextSize === "small" && "font-bold",
-					compact && "bg-blur-secondary absolute bottom-0 w-full p-4 text-neutral-50",
+					compact && "absolute bottom-0 w-full bg-purple-600 p-4 text-neutral-50",
+					compact && entry?.collection === "tools" && "bg-yellow-600",
 				]}
 			>
 				{entry?.data.title}

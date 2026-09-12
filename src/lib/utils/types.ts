@@ -10,7 +10,7 @@ export type TCategory = {
 	singular?: string;
 };
 
-export type TCollection = "tools" | "gallery";
+export type TCollection = "models" | "streams" | "tools";
 
 export type TCollectionGroup = {
 	icon?: TIcon;

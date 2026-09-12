@@ -6,20 +6,35 @@ import globalConfig from "@lib/config";
 
 const { calcReadTime, formatDate, setHref } = globalConfig.utils ?? {};
 
-type Props = { entry: CollectionEntry<TCollection> };
+type Props = {
+	entry: CollectionEntry<TCollection>;
+	href?: string;
+	prefix?: string;
+	suffix?: string;
+};
 
-const { entry } = Astro.props;
+const { entry, href, prefix, suffix } = Astro.props;
+
+const postLabel = `${prefix ? `${prefix} ` : ""}${entry.data.title}${suffix ? ` ${suffix}` : ""}`;
 ---
 
 <div class="flex flex-col gap-2 border-50 border-b border-dashed pb-8">
-	<a class="w-fit hover:underline" href={setHref(entry)}>
-		<strong>{entry.data.title}</strong>
+	<a class="flex w-fit gap-2 hover:underline" href={href || setHref(entry)}>
+		<strong>{postLabel}</strong>
 	</a>
 	<div class="flex items-center gap-2">
 		<small class="opacity-50">
 			{formatDate(entry.data.dateCreated)}
 		</small>
-		<small><Seperator axis="x" /></small>
-		<small class="opacity-50">{calcReadTime(entry.body)}</small>
+		{
+			entry.collection !== "streams" && (
+				<>
+					<small>
+						<Seperator axis="x" />
+					</small>
+					<small class="opacity-50">{calcReadTime(entry.body)}</small>
+				</>
+			)
+		}
 	</div>
 </div>

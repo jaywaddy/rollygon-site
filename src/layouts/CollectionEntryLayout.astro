@@ -15,59 +15,58 @@ import SketchfabEmbed from "@components/SketchfabEmbed.astro";
 import Button from "@components/ui/Button.astro";
 import Fallback from "@assets/fallback.png";
 import CardGalleryEntry from "@components/CardGalleryEntry.astro";
-import { isActionError } from "astro:actions";
 import Icon from "@components/ui/Icon.astro";
+import { modelsCollection, streamsCollection, toolsCollection } from "@src/content.config";
+import DynamicTitleSection from "@components/DynamicTitleSection.astro";
+import CardBlogPost from "@components/CardBlogPost.astro";
 
-const { calcReadTime, formatDate } = globalConfig.utils ?? {};
+const { calcReadTime, capitalize, findContent, formatDate, slugify } = globalConfig.utils ?? {};
 
 type Props = {
 	entry: CollectionEntry<TCollection>;
 	firstEntry?: CollectionEntry<TCollection>;
-	modelSize?: "sm" | "lg";
 	nextEntry?: CollectionEntry<TCollection>;
 };
 
-const { entry, firstEntry, modelSize = "sm", nextEntry } = Astro.props ?? {};
+const { entry, firstEntry, nextEntry } = Astro.props ?? {};
 
 const { Content, headings } = await render(entry);
-const {
-	dateCreated,
-	dateUpdated,
-	description,
-	sketchfabUrl,
-	title,
-	thumbnail = Fallback,
-	//
-} = entry.data ?? {};
+const { sketchfabUrl, title, thumbnail = Fallback, youtubeUrl } = entry.data ?? {};
 
+const isModel = entry.collection === "models";
+const isStream = entry.collection === "streams";
 const isTool = entry.collection === "tools";
-const price = isTool && entry.data.price ? entry.data.price : "Free ";
-const contactHeading = { depth: 2, slug: "contact-me", text: "Contact Me" };
-const multipleEntries = firstEntry || nextEntry;
+const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 ---
 
 <GlobalLayout {...entry.data} {thumbnail}>
-	{
-		thumbnail ? (
-			<GlobalGrid>
-				<Container class="relative" layout="content">
-					<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
-						<Icon class="h-4 w-4" name={entry.collection} />
-					</div>
-					<div class="relative flex h-128">
-						<Image src={thumbnail} class="rounded-element h-full w-full" />
-					</div>
-				</Container>
-			</GlobalGrid>
-		) : null
-	}
-	<GlobalGrid class="lg:mt-8">
-		<Container class="flex flex-col gap-8 pr-12" layout="sidebar">
-			<div class:list={["sticky top-(--scroll-p) grid gap-8"]}>
-				<TableOfContents headings={[...headings, contactHeading]} />
+	<GlobalGrid>
+		<Container class="relative" layout="content">
+			<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
+				<Icon class="h-4 w-4" name={entry.collection} />
+			</div>
+			<div class:list={["relative"]}>
 				{
-					multipleEntries && (
-						<div class="flex aspect-square flex-col gap-2">
+					sketchfabUrl && isModel ? (
+						<SketchfabEmbed {title} url={sketchfabUrl} />
+					) : youtubeUrl ? (
+						<YouTubeEmbed url={youtubeUrl} />
+					) : (
+						<div class="rounded-element max-h-96 overflow-clip">
+							<Image src={thumbnail} />
+						</div>
+					)
+				}
+			</div>
+		</Container>
+	</GlobalGrid>
+	<GlobalGrid class="lg:mt-8">
+		<Container class="flex flex-col gap-8 lg:pr-12" layout="sidebar">
+			<div class:list={["sticky top-(--scroll-p) grid gap-8"]}>
+				<TableOfContents headings={[...headings]} />
+				{
+					!singleEntry && (
+						<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
 							<span class="eyebrow">Next {entry.data.singular}</span>
 							{nextEntry ? (
 								<CardGalleryEntry entry={nextEntry} size="md" />
@@ -80,60 +79,105 @@ const multipleEntries = firstEntry || nextEntry;
 				<ContactLinks groups={["socialLinks"]} />
 			</div>
 		</Container>
-		<Container class="flex flex-col gap-16 max-lg:mt-8" layout="article" tag="article">
-			<div class="flex flex-col gap-4">
-				<h1>{title}</h1>
-				<p class="lead">{description}</p>
-
-				<div class="items center text-70 flex gap-4 *:border-40!">
-					<small>{formatDate(dateUpdated || dateCreated)}</small>
-					<!-- <Seperator />
-					<small>{calcReadTime(entry.body)}</small> -->
-					{
-						isTool && (
-							<>
-								<Seperator />
-								<small>{entry.data.version}</small>
-								<Seperator />
-								<small>{entry.data.size}</small>
-							</>
-						)
-					}
-				</div>
-				{
-					isTool && (
-						<Button
-							href={entry.data.downloadLink}
-							label={`${price}Download`}
-							icon="download"
-							varient={["primary", "lg"]}
-						/>
-					)
-				}
-			</div>
+		<Container class="flex flex-col gap-8 max-lg:mt-8" layout="article" tag="article">
+			<DynamicTitleSection {entry} />
 			<div class="flex flex-col gap-16">
 				{
-					sketchfabUrl && modelSize === "sm" && (
+					sketchfabUrl && !isModel && (
 						<div class="flex flex-col gap-8">
-							<span class="eyebrow">Tool Demo</span>
+							<span class="eyebrow">{capitalize(entry.data.singular)} Demo</span>
 							<SketchfabEmbed {title} url={sketchfabUrl} />
 						</div>
 					)
 				}
-				<article class="content">
-					<Content />
-				</article>
+				{
+					entry.body && (
+						<article class="content">
+							<Content />
+						</article>
+					)
+				}
+				{
+					isModel && entry.data.tools && (
+						<div class="flex flex-col gap-4">
+							<span class="eyebrow">Tools Used</span>
+							<ul class="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
+								{entry.data.tools.map((tool) => (
+									<li class="aspect-square">
+										<CardGalleryEntry
+											entry={toolsCollection.find(
+												(content) =>
+													content.id.split("/")[0] ===
+													tool.replace("&", ""),
+											)}
+											size="sm"
+										/>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				}
+				{
+					isModel && (
+						<div class="flex flex-col gap-4">
+							<span class="eyebrow">Live Streams</span>
+							<ul class="flex flex-col gap-2">
+								{streamsCollection
+									.filter(
+										(stream) =>
+											stream.id.split("/")[0] ===
+											slugify(title).replace("&", ""),
+									)
+									.map((stream) => (
+										<li>
+											<CardBlogPost
+												entry={stream}
+												href={`/models/${entry.data.slug || slugify(title)}/streams/${stream.id.split("/")[1]}`}
+												prefix={`${title} | Stream #${Number(stream.id.split("/")[1]).toLocaleString()} - `}
+											/>
+										</li>
+									))}
+							</ul>
+						</div>
+					)
+				}
 				{
 					isTool && (
 						<Button
 							href={entry.data.downloadLink}
-							label={`${price}Download`}
+							label={
+								entry.data.price
+									? `$${entry.data.price.toLocaleString()}`
+									: "Free Download"
+							}
 							icon="download"
 							varient={["primary", "lg"]}
 						/>
 					)
 				}
+				{
+					isTool && (
+						<div class="flex flex-col gap-4">
+							<span class="eyebrow">Models Built Using this Tool</span>
+							<ul class="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
+								{entry.data.models?.map((model) => (
+									<li class="aspect-square">
+										<CardGalleryEntry
+											entry={modelsCollection.find(
+												(content) =>
+													content.id.split("/")[0] ===
+													model.replace("&", ""),
+											)}
+											size="sm"
+										/>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				}
 			</div>
-		</Container></GlobalGrid
-	></GlobalLayout
->
+		</Container>
+	</GlobalGrid>
+</GlobalLayout>

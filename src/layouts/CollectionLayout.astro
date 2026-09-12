@@ -16,8 +16,6 @@ const getEntries = await getCollection(collection);
 const entries = getEntries.sort((older, newer) => {
 	return newer.data.dateCreated.valueOf() - older.data.dateCreated.valueOf();
 });
-
-const gridLayouts: { [key in TCollection]: TGridSizes } = { tools: "sm", gallery: "lg" };
 ---
 
 <GlobalLayout {...data}>
@@ -26,7 +24,7 @@ const gridLayouts: { [key in TCollection]: TGridSizes } = { tools: "sm", gallery
 			<h1>{data.title}</h1>
 		</Container>
 		<Container layout="content">
-			<Grid class="gap-8" size={gridLayouts[collection]} tag="ul">
+			<Grid class="gap-8" size="sm" tag="ul">
 				{
 					entries.map((entry) => (
 						<li class="flex aspect-square w-full flex-col gap-1">

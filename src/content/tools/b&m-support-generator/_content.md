@@ -13,6 +13,12 @@ downloadLink: "https://rollygon.gumroad.com/l/bm_support_generator"
 # price:
 size: 70.6 MB
 version: v33
+models:
+    - batman-the-dark-knight
+    - batman-the-ride
+    - georgia-scorcher
+    - hydra-zero-g-roll
+    - talon-loop
 # draft: true
 ---
 

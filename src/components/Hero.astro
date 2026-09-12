@@ -4,11 +4,10 @@ import Button from "@components/ui/Button.astro";
 import Img from "@components/ui/Img.astro";
 
 import bgPattern from "@assets/bg-pattern.png";
+import GlobalGrid from "@layouts/GlobalGrid.astro";
+import Container from "@layouts/Container.astro";
 
-type Props = {
-	position: "left" | "center" | "right";
-	//
-};
+type Props = { position: "left" | "center" | "right" };
 
 const { brand, navigation } = globalConfig;
 const { position } = Astro.props;
@@ -22,31 +21,38 @@ const alignment: { [key in typeof position]: string } = {
 
 <>
 	<Img class="absolute inset-0 h-full rounded-none opacity-15" src={bgPattern} />
-	<section
-		class:list={["relative flex gap-8 py-16 pt-40 max-lg:pt-48 lg:my-32", alignment[position]]}
-	>
-		<div class="flex flex-col gap-8">
-			<div class:list={["flex flex-col gap-4", alignment[position]]}>
-				<span class="eyebrow text-brand-body-text">{brand.bio}</span>
-				<h1 class="max-w-2xl">{brand.heading}</h1>
-				<p class="lead max-w-lg">{brand.subheading}</p>
-			</div>
-			<div
+	<GlobalGrid>
+		<Container layout="content">
+			<section
 				class:list={[
-					"flex gap-4",
+					"relative flex gap-8 py-16 pt-40 max-lg:pt-48 lg:my-32",
 					alignment[position],
-					position === "center" && "flex-col",
 				]}
 			>
-				<Button {...navigation.cta} varient={["primary", "lg"]} />
-				<Button
-					class="text-70 hover:text-100"
-					href="/pricing"
-					icon="info"
-					label="View pricing"
-					varient="link"
-				/>
-			</div>
-		</div>
-	</section>
+				<div class="flex flex-col gap-8">
+					<div class:list={["flex flex-col gap-4", alignment[position]]}>
+						<span class="eyebrow text-brand-body-text">{brand.bio}</span>
+						<h1 class="max-w-2xl">{brand.heading}</h1>
+						<p class="lead max-w-lg">{brand.subheading}</p>
+					</div>
+					<div
+						class:list={[
+							"flex gap-4",
+							alignment[position],
+							position === "center" && "flex-col",
+						]}
+					>
+						<Button {...navigation.cta} varient={["primary", "lg"]} />
+						<Button
+							class="text-70 hover:text-100"
+							href="/pricing"
+							icon="info"
+							label="View pricing"
+							varient="link"
+						/>
+					</div>
+				</div>
+			</section>
+		</Container>
+	</GlobalGrid>
 </>

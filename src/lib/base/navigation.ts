@@ -24,12 +24,12 @@ const navigation: TNavigation = {
 		{
 			href: "/models",
 			label: "Models",
-			collection: "gallery",
+			collection: "models",
 		},
 		{
 			href: "/resources",
 			label: "Resources",
-			collection: "gallery",
+			// collection: "models",
 		},
 		{ href: "/about", label: "About" },
 		{ href: "/contact", label: "Contact" },

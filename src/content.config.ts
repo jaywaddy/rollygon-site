@@ -1,57 +1,95 @@
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection, getCollection } from "astro:content";
-import globalConfig from "@lib/config";
-import type YouTubeEmbed from "@components/YouTubeEmbed.astro";
 
+export const modelsCollection = await getCollection("models");
+export const streamsCollection = await getCollection("streams");
 export const toolsCollection = await getCollection("tools");
-export const galleryEntries = await getCollection("gallery");
 
 export const allCollections = [
 	toolsCollection,
+	modelsCollection,
+	streamsCollection,
 	//
 ];
 
+const globPattern = ["**/*.md", "!_template/*.md"];
+
 const collectionSchema = {
 	title: z.string(),
-	metaTitle: seoString(50, 60).optional(),
+	metaTitle: z.string().optional(),
 	canonicalUrl: z.string().optional(),
 	dateCreated: z.date(),
 	dateUpdated: z.date().optional(),
 	description: z.string(),
-	metaDescription: seoString(60, 160).optional(),
-	sketchfabUrl: z.string().optional(),
-	YouTubeEmbed: z.string().optional(),
+	metaDescription: z.string().optional(),
+	slug: z.string().optional(),
 	draft: z.boolean().default(false),
+
+	models: z.array(z.string()).optional(),
+	streams: z.array(z.string()).optional(),
+	tools: z.array(z.string()).optional(),
+
+	sketchfabUrl: z.string().optional(),
+	youtubeUrl: z.string().optional(),
 
 	plural: z.string().optional(),
 	singular: z.string().optional(),
 };
 
-function seoString(_min: number, _max: number): z.ZodString {
-	if (globalConfig.brand) {
-		const siteTitleLength = globalConfig.brand.name.length;
-		const newMin = _min - siteTitleLength;
-		const newMax = _max - siteTitleLength;
-
-		return z.string().min(newMin).max(newMax);
-	}
-
-	return z.string();
-}
-
-const tools = defineCollection({
+const models = defineCollection({
 	loader: glob({
-		base: "./src/content/tools",
-		pattern: "**/*.md",
+		base: "./src/content/models",
+		pattern: globPattern,
 	}),
 	schema: ({ image }) => {
 		return z.object({
 			...collectionSchema,
+			thumbnail: image().optional(),
+
+			size: z.string().optional(),
+			version: z.string().optional(),
+			verts: z.string().optional(),
+			tris: z.string().optional(),
+			quads: z.string().optional(),
+
+			plural: z.string().default("models"),
+			singular: z.string().default("model"),
+		});
+	},
+});
+
+const streams = defineCollection({
+	loader: glob({
+		base: "./src/content/streams",
+		pattern: globPattern,
+	}),
+	schema: ({ image }) => {
+		return z.object({
+			...collectionSchema,
+			thumbnail: image().optional(),
+
+			collection: z.string(),
+
+			plural: z.string().default("streams"),
+			singular: z.string().default("stream"),
+		});
+	},
+});
+
+const tools = defineCollection({
+	loader: glob({
+		base: "./src/content/tools",
+		pattern: globPattern,
+	}),
+	schema: ({ image }) => {
+		return z.object({
+			...collectionSchema,
+			thumbnail: image().optional(),
+
 			downloadLink: z.string().optional(),
 			price: z.number().optional(),
 			size: z.string().optional(),
-			thumbnail: image().optional(),
 			version: z.string().optional(),
 
 			plural: z.string().default("tools"),
@@ -60,20 +98,4 @@ const tools = defineCollection({
 	},
 });
 
-const gallery = defineCollection({
-	loader: glob({
-		base: "./src/content/gallery",
-		pattern: "**/*.md",
-	}),
-	schema: ({ image }) => {
-		return z.object({
-			...collectionSchema,
-			thumbnail: image().optional(),
-
-			plural: z.string().default("models"),
-			singular: z.string().default("model"),
-		});
-	},
-});
-
-export const collections = { tools, gallery };
+export const collections = { models, streams, tools };

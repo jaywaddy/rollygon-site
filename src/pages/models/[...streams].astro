@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+
+export async function getStaticPaths() {
+	const streams = await getCollection("streams");
+
+	return streams.map((stream, index) => ({
+		params: {
+			streams:
+				`/${stream.id.split("/")[0]}/streams/${stream.id.split("/")[1]}` ||
+				`/${stream.id.split("/")[0]}/streams/`,
+		},
+		props: { firstStream: streams[0], nextStream: streams[index + 1], stream },
+	}));
+}
+
+const { firstStream, stream, nextStream } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout entry={stream} firstEntry={firstStream} nextEntry={nextStream} />

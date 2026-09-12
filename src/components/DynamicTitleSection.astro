@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Icon from "@components/ui/Icon.astro";
+import type { TCollection } from "@lib/utils/types";
+import globalConfig from "@lib/config";
+import Seperator from "./ui/Seperator.astro";
+import Button from "./ui/Button.astro";
+import type { TIcon } from "@components/ui/Icon.astro";
+
+type Props = { entry: CollectionEntry<TCollection> };
+
+const { entry } = Astro.props;
+const { calcReadTime, formatDate } = globalConfig.utils;
+const { dateUpdated, dateCreated, description, title } = entry.data;
+
+const isModel = entry.collection === "models";
+const isStream = entry.collection === "streams";
+const isTool = entry.collection === "tools";
+
+const stats: ({ label: string | undefined; icon: TIcon } | undefined)[] = [
+	{ label: formatDate(dateUpdated || dateCreated), icon: "date" },
+	isModel || isTool ? { label: entry.data.version, icon: "version" } : undefined,
+	isModel ? { label: entry.data.verts, icon: "verts" } : undefined,
+	isModel ? { label: entry.data.tris, icon: "tris" } : undefined,
+	isModel ? { label: entry.data.quads, icon: "quads" } : undefined,
+];
+---
+
+<div class="flex flex-col gap-4">
+	<h1>{title}</h1>
+	<p class="lead">{description}</p>
+	<div class="text-60 flex flex-wrap items-center gap-4 *:border-40!">
+		{
+			stats.map(
+				(stat, index) =>
+					stat && (
+						<>
+							{index > 0 && <Seperator class="h-3" />}
+							<small class="flex items-center gap-2">
+								<Icon class="w-4" name={stat.icon} />
+								{stat.label}
+							</small>
+						</>
+					),
+			)
+		}
+	</div>
+	{
+		isTool && (
+			<Button
+				class="mt-4"
+				href={entry.data.downloadLink}
+				label={entry.data.price ? `$${entry.data.price.toLocaleString()}` : "Free Download"}
+				icon="download"
+				varient={["primary", "lg"]}
+			/>
+		)
+	}
+</div>

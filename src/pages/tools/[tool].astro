@@ -7,7 +7,7 @@ export async function getStaticPaths() {
 	const tools = await getCollection("tools");
 
 	return tools.map((tool, index) => ({
-		params: { tool: globalConfig.utils.slugify(tool.data.title) },
+		params: { tool: globalConfig.utils.slugify(tool.data.slug || tool.data.title) },
 		props: { firstTool: tools[0], nextTool: tools[index + 1], tool },
 	}));
 }

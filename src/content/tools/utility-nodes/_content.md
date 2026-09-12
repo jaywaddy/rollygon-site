@@ -13,6 +13,17 @@ downloadLink: "https://rollygon.gumroad.com/l/utility-nodes"
 # price:
 size: 2.8 MB
 version: v1.1
+models:
+    # - arrow-looper
+    - batman-the-dark-knight
+    - batman-the-ride
+    - boomerang
+    - fahrenheit
+    - georgia-scorcher
+    - hydra-zero-g-roll
+    - poltergeist
+    - talon-loop
+    # - the-cannon
 # draft: true
 ---
 

@@ -1,4 +1,5 @@
 import type { TCollection } from "./types";
+import { modelsCollection, streamsCollection } from "@src/content.config";
 import { type CollectionEntry } from "astro:content";
 
 type Collection = CollectionEntry<TCollection>;
@@ -10,6 +11,7 @@ const utils = {
 	findContent,
 	formatDate,
 	setHref,
+	setStreamTitle,
 	setWarning,
 	slugify,
 	titleCase,
@@ -63,11 +65,29 @@ export function formatDate(date: Date, monthFormat?: "short" | "long"): string {
 	});
 }
 
-export function setHref(content: Collection | undefined): string {
+export function setHref(
+	content: Collection | undefined,
+	entry?: string,
+): string {
 	if (content) {
 		const { collection, data, id } = content;
 
-		return `/${collection}/${slugify(data.title) || id}`;
+		return `${entry ? `/${entry}` : ""}/${collection}/${slugify(data.slug || data.title) || id}`;
+	}
+
+	return "";
+}
+
+export function setStreamTitle(entry: Collection, title: string) {
+	if (entry.collection === "streams") {
+		const entryName =
+			entry.data.collection === "models" &&
+			modelsCollection.find(
+				(model) => slugify(model.data.title) === entry.id.split("/")[0],
+			)?.data.title;
+		const episode = entry.id.split("/")[1];
+
+		return `${entryName} | Ep. ${episode} - ${title}`;
 	}
 
 	return "";

@@ -7,7 +7,7 @@ import Container from "@layouts/Container.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import GlobalLayout from "@layouts/GlobalLayout.astro";
 import globalConfig from "@lib/config";
-import { galleryEntries } from "@src/content.config";
+import { toolsCollection } from "@src/content.config";
 
 const { setWarning } = globalConfig.utils ?? {};
 
@@ -29,12 +29,12 @@ const seo = { title: "Home" };
 		</GlobalGrid>
 	</div>
 	<GlobalGrid>
-		<Container class="flex flex-col gap-16" layout="body">
+		<Container class="flex flex-col gap-16" layout="content">
 			<section class="flex flex-col gap-8">
 				<h2 class="text-center text-lg">Most Recent Commissions</h2>
 				<Grid class="gap-4" size="md" tag="ul">
 					{
-						[...galleryEntries].map((entry) => (
+						[...toolsCollection].map((entry) => (
 							<li>
 								<CardGalleryEntry {entry} />
 							</li>
