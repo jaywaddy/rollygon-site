@@ -1,0 +1,54 @@
+---
+import CardBlogPost from "@components/CardBlogPost.astro";
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Grid from "@components/ui/Grid.astro";
+import CollectionLayout from "@layouts/CollectionLayout.astro";
+import { allCollections, resourcesCollection, streamsCollection } from "@src/content.config";
+import globalConfig from "@lib/config";
+import Button from "@components/ui/Button.astro";
+import type { TCollection } from "@lib/utils/types";
+
+type Props = { category: string; collection: TCollection; count?: number };
+
+const { category, collection, count = -1 } = Astro.props;
+const { findContent, getProjectID, setStreamTitle } = globalConfig.utils;
+---
+
+<div class="flex flex-col gap-4">
+	<span class="eyebrow">
+		{findContent(collection, category)?.data.title}
+	</span>
+	<ul class="flex flex-col gap-8">
+		{
+			streamsCollection
+				.filter((stream) => category === getProjectID(stream))
+				.map((entry, index) =>
+					count < 0 ? (
+						<>
+							<li>
+								<CardBlogPost {entry} label={setStreamTitle(entry)} />
+							</li>
+						</>
+					) : (
+						<>
+							{index <= count - 1 && (
+								<li>
+									<CardBlogPost {entry} label={setStreamTitle(entry)} />
+								</li>
+							)}
+							{index === count && (
+								<li>
+									<Button
+										href={`/${collection}/${getProjectID(entry)}/streams`}
+										label="View all streams"
+										icon={["arrow-right", "right"]}
+										varient="secondary"
+									/>
+								</li>
+							)}
+						</>
+					),
+				)
+		}
+	</ul>
+</div>

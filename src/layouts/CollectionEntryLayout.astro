@@ -2,11 +2,8 @@
 import Container from "@layouts/Container.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import GlobalLayout from "@layouts/GlobalLayout.astro";
-import Seperator from "@components/ui/Seperator.astro";
 import Image from "@components/ui/Img.astro";
 import { render } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-import type { TCollection } from "@lib/utils/types";
 import TableOfContents from "@components/TableOfContents.astro";
 import ContactLinks from "@components/ContactLinks.astro";
 import globalConfig from "@lib/config";
@@ -19,31 +16,32 @@ import Icon from "@components/ui/Icon.astro";
 import { modelsCollection, streamsCollection, toolsCollection } from "@src/content.config";
 import DynamicTitleSection from "@components/DynamicTitleSection.astro";
 import CardBlogPost from "@components/CardBlogPost.astro";
+import type { TEntry } from "@lib/utils/types";
 
-const { calcReadTime, capitalize, findContent, formatDate, slugify } = globalConfig.utils ?? {};
+const { capitalize, findContent, findStream, getProjectID, setStreamTitle } = globalConfig.utils;
 
-type Props = {
-	entry: CollectionEntry<TCollection>;
-	firstEntry?: CollectionEntry<TCollection>;
-	nextEntry?: CollectionEntry<TCollection>;
-};
+type Props = { entry: TEntry; title?: string };
 
-const { entry, firstEntry, nextEntry } = Astro.props ?? {};
+const { entry, title: entryTitle } = Astro.props;
+const { Content, headings } = await render(entry.current);
+const { sketchfabUrl, title, thumbnail = Fallback, youtubeUrl } = entry.current.data;
 
-const { Content, headings } = await render(entry);
-const { sketchfabUrl, title, thumbnail = Fallback, youtubeUrl } = entry.data ?? {};
-
-const isModel = entry.collection === "models";
-const isStream = entry.collection === "streams";
-const isTool = entry.collection === "tools";
-const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
+const isModel = entry.current.collection === "models";
+const isStream = entry.current.collection === "streams";
+const isTool = entry.current.collection === "tools";
+const singleEntry = entry.newest?.data.title === entry.current.data.title && !entry.prev;
 ---
 
-<GlobalLayout {...entry.data} {thumbnail}>
+<GlobalLayout
+	{entry}
+	metaTitle={isStream ? entryTitle : undefined}
+	{...entry.current.data}
+	{thumbnail}
+>
 	<GlobalGrid>
 		<Container class="relative" layout="content">
 			<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">
-				<Icon class="h-4 w-4" name={entry.collection} />
+				<Icon class="h-4 w-4" name={entry.current.collection} />
 			</div>
 			<div class:list={["relative"]}>
 				{
@@ -52,8 +50,8 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 					) : youtubeUrl ? (
 						<YouTubeEmbed url={youtubeUrl} />
 					) : (
-						<div class="rounded-element max-h-96 overflow-clip">
-							<Image src={thumbnail} />
+						<div class="rounded-element flex max-h-96 items-center overflow-clip">
+							<Image class="w-full" src={thumbnail} />
 						</div>
 					)
 				}
@@ -67,11 +65,36 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 				{
 					!singleEntry && (
 						<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
-							<span class="eyebrow">Next {entry.data.singular}</span>
-							{nextEntry ? (
-								<CardGalleryEntry entry={nextEntry} size="md" />
+							{entry.next ? (
+								<>
+									<span class="eyebrow">Next {entry.current.data.singular}</span>
+									<div class="relative h-full">
+										{isStream && (
+											<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
+												Stream #
+												{Number(
+													getProjectID(entry.next, "path"),
+												).toLocaleString()}
+											</span>
+										)}
+										<CardGalleryEntry entry={entry.next} size="md" />
+									</div>
+								</>
 							) : (
-								<CardGalleryEntry entry={firstEntry} size="md" />
+								<>
+									<span class="eyebrow">First {entry.current.data.singular}</span>
+									<div class="relative h-full">
+										{isStream && entry.newest && (
+											<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
+												Stream #
+												{Number(
+													getProjectID(entry.newest, "path"),
+												).toLocaleString()}
+											</span>
+										)}
+										<CardGalleryEntry entry={entry.newest} size="md" />
+									</div>
+								</>
 							)}
 						</div>
 					)
@@ -80,35 +103,44 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 			</div>
 		</Container>
 		<Container class="flex flex-col gap-8 max-lg:mt-8" layout="article" tag="article">
-			<DynamicTitleSection {entry} />
+			<DynamicTitleSection entry={entry.current} title={entryTitle} />
 			<div class="flex flex-col gap-16">
 				{
-					sketchfabUrl && !isModel && (
+					entry.current.data.models && (
 						<div class="flex flex-col gap-8">
-							<span class="eyebrow">{capitalize(entry.data.singular)} Demo</span>
-							<SketchfabEmbed {title} url={sketchfabUrl} />
+							<span class="eyebrow">
+								{isStream
+									? "Model Built on Stream"
+									: `${capitalize(entry.current.data.singular)} Demo`}
+							</span>
+							<SketchfabEmbed
+								{title}
+								url={
+									findContent("models", entry.current.data.models[0])?.data
+										.sketchfabUrl
+								}
+							/>
 						</div>
 					)
 				}
 				{
-					entry.body && (
+					entry.current.body && (
 						<article class="content">
 							<Content />
 						</article>
 					)
 				}
 				{
-					isModel && entry.data.tools && (
+					isModel && entry.current.data.tools && (
 						<div class="flex flex-col gap-4">
 							<span class="eyebrow">Tools Used</span>
 							<ul class="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
-								{entry.data.tools.map((tool) => (
+								{entry.current.data.tools.map((tool) => (
 									<li class="aspect-square">
 										<CardGalleryEntry
 											entry={toolsCollection.find(
 												(content) =>
-													content.id.split("/")[0] ===
-													tool.replace("&", ""),
+													getProjectID(content) === tool.replace("&", ""),
 											)}
 											size="sm"
 										/>
@@ -119,36 +151,12 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 					)
 				}
 				{
-					isModel && (
-						<div class="flex flex-col gap-4">
-							<span class="eyebrow">Live Streams</span>
-							<ul class="flex flex-col gap-2">
-								{streamsCollection
-									.filter(
-										(stream) =>
-											stream.id.split("/")[0] ===
-											slugify(title).replace("&", ""),
-									)
-									.map((stream) => (
-										<li>
-											<CardBlogPost
-												entry={stream}
-												href={`/models/${entry.data.slug || slugify(title)}/streams/${stream.id.split("/")[1]}`}
-												prefix={`${title} | Stream #${Number(stream.id.split("/")[1]).toLocaleString()} - `}
-											/>
-										</li>
-									))}
-							</ul>
-						</div>
-					)
-				}
-				{
-					isTool && (
+					entry.current.collection === "tools" && (
 						<Button
-							href={entry.data.downloadLink}
+							href={entry.current.data.downloadLink}
 							label={
-								entry.data.price
-									? `$${entry.data.price.toLocaleString()}`
+								entry.current.data.price
+									? `$${entry.current.data.price.toLocaleString()}`
 									: "Free Download"
 							}
 							icon="download"
@@ -161,7 +169,7 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 						<div class="flex flex-col gap-4">
 							<span class="eyebrow">Models Built Using this Tool</span>
 							<ul class="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
-								{entry.data.models?.map((model) => (
+								{entry.current.data.models?.map((model) => (
 									<li class="aspect-square">
 										<CardGalleryEntry
 											entry={modelsCollection.find(
@@ -170,6 +178,23 @@ const singleEntry = firstEntry?.data.title === entry.data.title && !nextEntry;
 													model.replace("&", ""),
 											)}
 											size="sm"
+										/>
+									</li>
+								))}
+							</ul>
+						</div>
+					)
+				}
+				{
+					!isStream && findContent("streams", getProjectID(entry.current)) && (
+						<div class="flex flex-col gap-4">
+							<span class="eyebrow">Live Streams</span>
+							<ul class="flex flex-col gap-8">
+								{findStream(getProjectID(entry.current)).map((stream) => (
+									<li>
+										<CardBlogPost
+											entry={stream}
+											label={setStreamTitle(stream)}
 										/>
 									</li>
 								))}

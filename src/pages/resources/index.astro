@@ -1,0 +1,68 @@
+---
+import CardBlogPost from "@components/CardBlogPost.astro";
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Grid from "@components/ui/Grid.astro";
+import CollectionLayout from "@layouts/CollectionLayout.astro";
+import { resourcesCollection, streamsCollection } from "@src/content.config";
+import globalConfig from "@lib/config";
+import Button from "@components/ui/Button.astro";
+import SortedCardBlogPosts from "@components/SortedCardBlogPosts.astro";
+
+const { findContent, getProjectID, setStreamTitle } = globalConfig.utils;
+const streamCategories = function () {
+	const streams = streamsCollection.map((stream) => ({
+		projectID: getProjectID(stream),
+		stream: stream,
+	}));
+	let category = "";
+	return streams
+		.map(({ projectID, stream }) => {
+			if (category !== projectID && stream.collection === "streams") {
+				category = projectID;
+				return { collection: stream.data.collection, id: projectID, stream: stream };
+			}
+			return;
+		})
+		.filter((stream) => stream);
+};
+---
+
+<CollectionLayout
+	data={{
+		title: "Resources",
+		description: "Description",
+		//
+	}}
+>
+	<div class="flex flex-col gap-16">
+		<div class="flex flex-col gap-4">
+			<span class="eyebrow">Blog Posts</span>
+			<Grid class="gap-8" size="sm" tag="ul">
+				{
+					resourcesCollection.map((entry) => (
+						<li class:list={["flex aspect-square w-full flex-col gap-1"]}>
+							<CardGalleryEntry {entry} size="md" />
+						</li>
+					))
+				}
+			</Grid>
+		</div>
+		<div class="flex flex-col gap-8">
+			<h2>Live Streams by Project</h2>
+			<div class="flex flex-col gap-16">
+				{
+					streamCategories().map(
+						(category) =>
+							category?.stream && (
+								<SortedCardBlogPosts
+									category={getProjectID(category.stream)}
+									collection={category.collection}
+									count={5}
+								/>
+							),
+					)
+				}
+			</div>
+		</div>
+	</div>
+</CollectionLayout>

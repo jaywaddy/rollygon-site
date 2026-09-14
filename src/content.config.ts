@@ -1,16 +1,42 @@
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
-import { defineCollection, getCollection } from "astro:content";
+import {
+	defineCollection,
+	getCollection,
+	type CollectionEntry,
+} from "astro:content";
+import type { TCollection } from "@lib/utils/types";
 
-export const modelsCollection = await getCollection("models");
-export const streamsCollection = await getCollection("streams");
-export const toolsCollection = await getCollection("tools");
+export const modelsCollection = sortCollection(await getCollection("models"));
+export const resourcesCollection = sortCollection(
+	await getCollection("resources"),
+);
+export const streamsCollection = sortCollection(await getCollection("streams"));
+export const toolsCollection = sortCollection(await getCollection("tools"));
 
-export const allCollections = [
+function sortCollection(collection: CollectionEntry<TCollection>[]) {
+	return collection.sort(
+		(olderDate, newerDate) =>
+			newerDate.data.dateUpdated?.valueOf() ||
+			newerDate.data.dateCreated.valueOf() -
+				olderDate.data.dateCreated.valueOf(),
+	);
+}
+
+export const allCollections: {
+	[key in TCollection]: CollectionEntry<TCollection>[];
+} = {
+	models: modelsCollection,
+	resources: resourcesCollection,
+	streams: streamsCollection,
+	tools: toolsCollection,
+};
+
+export const collectionsList = [
 	toolsCollection,
 	modelsCollection,
+	resourcesCollection,
 	streamsCollection,
-	//
 ];
 
 const globPattern = ["**/*.md", "!_template/*.md"];
@@ -59,6 +85,24 @@ const models = defineCollection({
 	},
 });
 
+const resources = defineCollection({
+	loader: glob({
+		base: "./src/content/resources",
+		pattern: globPattern,
+	}),
+	schema: ({ image }) => {
+		return z.object({
+			...collectionSchema,
+			thumbnail: image().optional(),
+
+			collection: z.enum(["models", "tools", "streams", "resources"]),
+
+			plural: z.string().default("resources"),
+			singular: z.string().default("resource"),
+		});
+	},
+});
+
 const streams = defineCollection({
 	loader: glob({
 		base: "./src/content/streams",
@@ -69,7 +113,7 @@ const streams = defineCollection({
 			...collectionSchema,
 			thumbnail: image().optional(),
 
-			collection: z.string(),
+			collection: z.enum(["models", "tools", "streams", "resources"]),
 
 			plural: z.string().default("streams"),
 			singular: z.string().default("stream"),
@@ -98,4 +142,4 @@ const tools = defineCollection({
 	},
 });
 
-export const collections = { models, streams, tools };
+export const collections = { models, resources, streams, tools };

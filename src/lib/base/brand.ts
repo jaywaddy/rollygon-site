@@ -74,7 +74,7 @@ const brand: TBrand = {
 	},
 	domain: "rollygon.com",
 	root: "https://rollygon.com",
-	name: "Rollygon.",
+	name: "Rollygon",
 	heading: "Free and open sourced modeling tools for Blender.",
 	subheading: "So you can build roller coasters out of polygons.",
 };

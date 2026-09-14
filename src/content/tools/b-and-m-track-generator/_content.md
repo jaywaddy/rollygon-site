@@ -7,7 +7,7 @@ dateCreated: 2025-08-25
 dateUpdated: 2026-06-01
 canonicalUrl: "http://rollygon.com/tools/bm-track-generator"
 thumbnail: ./thumbnail.png
-sketchfabUrl: "https://sketchfab.com/models/46388202e85c4c0eb2566b35a7a9e185"
+# sketchfabUrl:
 # youtubeUrl:
 downloadLink: "https://rollygon.gumroad.com/l/track_generator_bm"
 # price:

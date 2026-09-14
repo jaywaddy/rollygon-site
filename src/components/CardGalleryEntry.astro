@@ -11,10 +11,11 @@ const { formatDate, setHref } = globalConfig.utils ?? {};
 type Props = {
 	aspect?: "auto" | "square" | "video";
 	entry: CollectionEntry<TCollection> | undefined;
+	href?: string;
 	size?: "sm" | "md" | "lg";
 };
 
-const { aspect = "video", entry, size = "lg" } = Astro.props;
+const { aspect = "video", entry, href, size = "lg" } = Astro.props;
 const aspectRatio = { auto: "", square: "aspect-square", video: "aspect-video" };
 const compact = size === "sm" || size === "md";
 
@@ -52,7 +53,7 @@ const TextSize = size === "sm" ? "small" : "strong";
 	<div class:list={["flex flex-col gap-1", compact && "flex h-full"]}>
 		<a
 			class:list={["w-fit hover:underline", "after:absolute after:inset-0"]}
-			href={setHref(entry)}
+			href={href || setHref(entry, entry)}
 		>
 			<TextSize
 				class:list={[

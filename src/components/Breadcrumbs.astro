@@ -1,19 +1,20 @@
 ---
-import type { TCta } from "@lib/utils/types";
+import type { TCollection, TCta } from "@lib/utils/types";
 import Button from "./ui/Button.astro";
 import Icon from "./ui/Icon.astro";
 import globalConfig from "@lib/config";
+import type { CollectionEntry } from "astro:content";
 
-const { capitalize, setWarning } = globalConfig.utils ?? {};
+const { capitalize, findContent, getProjectID, setWarning } = globalConfig.utils ?? {};
 
 if (!globalConfig) {
 	setWarning("Bread Crumbs", "globalConfig");
 	return null;
 }
 
-type Props = { path: string; title: string | undefined };
+type Props = { entry?: CollectionEntry<TCollection>; path: string; title: string | undefined };
 
-const { path, title } = Astro.props ?? {};
+const { entry, path, title } = Astro.props ?? {};
 
 const crumbs = path.split("/");
 const lastCrumb = crumbs.length - 1;
@@ -28,20 +29,39 @@ const crumbList: TCta[] = crumbs.map((_crumb, _index) => {
 	};
 
 	const setLabel = () => {
-		if (_index == lastCrumb) {
-			return title;
-		}
+		const root = crumbs[1];
+		const getCollectionFromPath = function (path: string) {
+			if (
+				path === "models" ||
+				path === "resources" ||
+				path === "streams" ||
+				path === "tools"
+			) {
+				return findContent(path, _crumb)?.data.title;
+			}
 
-		if (_index === 0) {
-			return "Home";
-		}
+			return "";
+		};
 
-		return capitalize(_crumb);
+		switch (_index) {
+			case 0:
+				return "Home";
+			case 2:
+				return getCollectionFromPath(root);
+			case lastCrumb:
+				return title;
+			default:
+				if (entry && entry.collection === "streams" && _crumb === getProjectID(entry)) {
+					return findContent(entry.data.collection, getProjectID(entry))?.data.title;
+				}
+
+				return capitalize(_crumb);
+		}
 	};
 
 	return {
 		href: setHref(),
-		label: _crumb === "" ? globalConfig.brand?.name : setLabel() || "",
+		label: _crumb === "" ? globalConfig.brand?.name : setLabel(),
 		icon: _index === 0 ? "home" : undefined,
 		varient: "ghost",
 		iconOnly: _index === 0,
@@ -52,11 +72,11 @@ const crumbList: TCta[] = crumbs.map((_crumb, _index) => {
 <ul class="flex scrollbar-gutter-auto items-center overflow-auto lg:gap-2">
 	{
 		crumbList.map((crumb, index) => (
-			<Fragment>
+			<>
 				{index > 0 && (
-					<lil>
+					<li>
 						<Icon class="text-50 w-4" name="chevron-right" />
-					</lil>
+					</li>
 				)}
 				<li
 					class:list={[
@@ -83,7 +103,7 @@ const crumbList: TCta[] = crumbs.map((_crumb, _index) => {
 						/>
 					)}
 				</li>
-			</Fragment>
+			</>
 		))
 	}
 </ul>

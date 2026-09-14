@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import globalConfig from "@lib/config";
+import CollectionLayout from "@layouts/CollectionLayout.astro";
+import SortedCardBlogPosts from "@components/SortedCardBlogPosts.astro";
+
+const { getProjectID, setStreamTitle } = globalConfig.utils;
+
+export async function getStaticPaths() {
+	const { getProjectID } = globalConfig.utils;
+	const streams = await getCollection("streams");
+
+	return streams.map((stream) => ({
+		params: { streamsIndex: `/${getProjectID(stream)}/streams` },
+		props: { stream },
+	}));
+}
+
+const { stream } = Astro.props;
+---
+
+<CollectionLayout data={{ title: "Live Streams" }}>
+	<SortedCardBlogPosts category={getProjectID(stream)} collection="models" />
+</CollectionLayout>

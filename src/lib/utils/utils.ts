@@ -1,5 +1,10 @@
 import type { TCollection } from "./types";
-import { modelsCollection, streamsCollection } from "@src/content.config";
+import {
+	allCollections,
+	modelsCollection,
+	streamsCollection,
+	toolsCollection,
+} from "@src/content.config";
 import { type CollectionEntry } from "astro:content";
 
 type Collection = CollectionEntry<TCollection>;
@@ -8,18 +13,22 @@ const utils = {
 	calcReadTime,
 	calcWordCount,
 	capitalize,
+	filterCollection,
 	findContent,
+	findStream,
 	formatDate,
+	getProjectID,
 	setHref,
 	setStreamTitle,
 	setWarning,
 	slugify,
+	sortCollection,
 	titleCase,
 };
 
 export type TUtils = typeof utils;
 
-export function calcReadTime(article: string | undefined): string {
+function calcReadTime(article: string | undefined): string {
 	const wordsPerMinute = 248;
 
 	if (!article) {
@@ -31,7 +40,7 @@ export function calcReadTime(article: string | undefined): string {
 	return `${output} min. read`;
 }
 
-export function calcWordCount(input: string): number {
+function calcWordCount(input: string): number {
 	const cleanInput = input
 		.replace(/(^\s*)|(\s*$)/gi, "")
 		.replace(/[ ]{2,}/gi, " ")
@@ -40,7 +49,7 @@ export function calcWordCount(input: string): number {
 	return cleanInput.split(" ").length;
 }
 
-export function capitalize(input: string) {
+function capitalize(input: string) {
 	return input
 		.split("-")
 		.map((word) => {
@@ -49,14 +58,23 @@ export function capitalize(input: string) {
 		.join("");
 }
 
-export function findContent(
-	contentArray: Array<Collection>,
-	id: string,
-): Collection {
-	return contentArray.find((content) => content.id === id) || contentArray[0];
+function filterCollection(entries: CollectionEntry<TCollection>[], id: string) {
+	return entries.filter((entry) => getProjectID(entry) === id);
 }
 
-export function formatDate(date: Date, monthFormat?: "short" | "long"): string {
+function findContent(collection: TCollection, id: string) {
+	return allCollections[collection].find(
+		(content) => getProjectID(content) === id,
+	);
+}
+
+function findStream(project: string) {
+	return streamsCollection.filter(
+		(stream) => stream.id.split("/")[0] === project,
+	);
+}
+
+function formatDate(date: Date, monthFormat?: "short" | "long"): string {
 	return new Date(date).toLocaleString("en-US", {
 		timeZone: "UTC",
 		month: monthFormat || "short",
@@ -65,41 +83,57 @@ export function formatDate(date: Date, monthFormat?: "short" | "long"): string {
 	});
 }
 
-export function setHref(
-	content: Collection | undefined,
-	entry?: string,
-): string {
+function getProjectID(
+	entry: CollectionEntry<TCollection> | undefined,
+	path?: "path",
+) {
+	if (entry) {
+		return path ? entry?.id.split("/")[1] : entry?.id.split("/")[0];
+	}
+
+	return "";
+}
+
+function setHref(...content: Array<Collection | undefined>): string {
 	if (content) {
-		const { collection, data, id } = content;
+		const root = content[0];
+		const subdir = content[1];
 
-		return `${entry ? `/${entry}` : ""}/${collection}/${slugify(data.slug || data.title) || id}`;
+		if (subdir && subdir.collection === "streams") {
+			return `/${subdir.data.collection}/${getProjectID(subdir)}/streams/${getProjectID(subdir, "path")}`;
+		}
+
+		if (root) {
+			const { collection, data, id } = root;
+
+			return `/${collection}/${slugify(data.slug || data.title) || id}`;
+		}
 	}
 
 	return "";
 }
 
-export function setStreamTitle(entry: Collection, title: string) {
+function setStreamTitle(entry: Collection) {
 	if (entry.collection === "streams") {
-		const entryName =
-			entry.data.collection === "models" &&
-			modelsCollection.find(
-				(model) => slugify(model.data.title) === entry.id.split("/")[0],
-			)?.data.title;
-		const episode = entry.id.split("/")[1];
+		const entryName = findContent(
+			entry.data.collection,
+			getProjectID(entry),
+		)?.data.title;
+		const episode = Number(getProjectID(entry, "path")).toLocaleString();
 
-		return `${entryName} | Ep. ${episode} - ${title}`;
+		return `${entryName} | Stream #${episode} - ${entry.data.title}`;
 	}
 
 	return "";
 }
 
-export function setWarning(element: string, prop: string): void {
+function setWarning(element: string, prop: string): void {
 	return console.warn(
 		`⚠️ <${element} />: ${prop} property is either missing or invalid.`,
 	);
 }
 
-export function slugify(input: string): string {
+function slugify(input: string): string {
 	return input
 		.toLowerCase()
 		.replace("&", "-and-")
@@ -110,7 +144,16 @@ export function slugify(input: string): string {
 		.replace(/-+/g, "-");
 }
 
-export function titleCase(input: string): string {
+function sortCollection(collection: CollectionEntry<TCollection>[]) {
+	return collection.sort(
+		(olderDate, newerDate) =>
+			newerDate.data?.dateUpdated?.valueOf() ||
+			newerDate.data.dateCreated.valueOf() -
+				olderDate.data.dateCreated.valueOf(),
+	);
+}
+
+function titleCase(input: string): string {
 	return input
 		.split("-")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))

@@ -1,12 +1,24 @@
 ---
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Grid from "@components/ui/Grid.astro";
 import CollectionLayout from "@layouts/CollectionLayout.astro";
+import { modelsCollection } from "@src/content.config";
 ---
 
 <CollectionLayout
-	collection="models"
 	data={{
 		title: "Models",
 		description: "",
 		//
 	}}
-/>
+>
+	<Grid class="gap-8" size="sm" tag="ul">
+		{
+			modelsCollection.map((entry) => (
+				<li class:list={["flex aspect-square w-full flex-col gap-1"]}>
+					<CardGalleryEntry {entry} size="md" />
+				</li>
+			))
+		}
+	</Grid>
+</CollectionLayout>

@@ -3,19 +3,10 @@ import type { TSeo } from "@components/AstroSeo.astro";
 import GlobalLayout from "@layouts/GlobalLayout.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import Container from "@layouts/Container.astro";
-import { getCollection } from "astro:content";
-import type { TCollection } from "@lib/utils/types";
-import CardGalleryEntry from "@components/CardGalleryEntry.astro";
-import Grid, { type TGridSizes } from "@components/ui/Grid.astro";
 
-type Props = { collection: TCollection; data: TSeo };
+type Props = { data: TSeo };
 
-const { collection, data } = Astro.props;
-
-const getEntries = await getCollection(collection);
-const entries = getEntries.sort((older, newer) => {
-	return newer.data.dateCreated.valueOf() - older.data.dateCreated.valueOf();
-});
+const { data } = Astro.props;
 ---
 
 <GlobalLayout {...data}>
@@ -24,15 +15,7 @@ const entries = getEntries.sort((older, newer) => {
 			<h1>{data.title}</h1>
 		</Container>
 		<Container layout="content">
-			<Grid class="gap-8" size="sm" tag="ul">
-				{
-					entries.map((entry) => (
-						<li class="flex aspect-square w-full flex-col gap-1">
-							<CardGalleryEntry {entry} size="md" />
-						</li>
-					))
-				}
-			</Grid>
+			<slot />
 		</Container>
 	</GlobalGrid>
 </GlobalLayout>

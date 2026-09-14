@@ -1,5 +1,8 @@
 ---
+import CardGalleryEntry from "@components/CardGalleryEntry.astro";
+import Grid from "@components/ui/Grid.astro";
 import CollectionLayout from "@layouts/CollectionLayout.astro";
+import { toolsCollection } from "@src/content.config";
 ---
 
 <CollectionLayout
@@ -9,4 +12,14 @@ import CollectionLayout from "@layouts/CollectionLayout.astro";
 		description: "Description",
 		//
 	}}
-/>
+>
+	<Grid class="gap-8" size="sm" tag="ul">
+		{
+			toolsCollection.map((entry) => (
+				<li class:list={["flex aspect-square w-full flex-col gap-1"]}>
+					<CardGalleryEntry {entry} size="md" />
+				</li>
+			))
+		}
+	</Grid>
+</CollectionLayout>

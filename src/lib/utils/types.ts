@@ -10,7 +10,7 @@ export type TCategory = {
 	singular?: string;
 };
 
-export type TCollection = "models" | "streams" | "tools";
+export type TCollection = "models" | "resources" | "streams" | "tools";
 
 export type TCollectionGroup = {
 	icon?: TIcon;
@@ -24,6 +24,25 @@ export type TCta = {
 	href?: string;
 	icon?: TIcon;
 	label?: string;
+};
+
+export type TDynamicPageInfo = {
+	params: {
+		streams: string;
+	};
+	props: {
+		entry: TEntry;
+	};
+};
+
+export type TEntry = {
+	newest?: CollectionEntry<TCollection>;
+	oldest?: CollectionEntry<TCollection>;
+	prev?: CollectionEntry<TCollection>;
+	next?: CollectionEntry<TCollection>;
+	collection: CollectionEntry<TCollection>[];
+	current: CollectionEntry<TCollection>;
+	index: number;
 };
 
 export type TFormField = {

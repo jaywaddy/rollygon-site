@@ -1,11 +1,11 @@
 ---
 import globalConfig from "@lib/config";
 import type { TCategory, TCollection, TCollectionGroup } from "@lib/utils/types";
-import { allCollections } from "@src/content.config";
+import { collectionsList } from "@src/content.config";
 import type { CollectionEntry } from "astro:content";
 import Grid from "./ui/Grid.astro";
 import { streamsCollection } from "@src/content.config";
-const { setHref, setStreamTitle } = globalConfig.utils ?? {};
+const { getProjectID, setHref, setStreamTitle } = globalConfig.utils ?? {};
 
 type Props = { class?: string };
 
@@ -18,7 +18,7 @@ const navLinks: TCategory[] = navigation.categories.filter((link) => {
 });
 
 const collectionGroups = [
-	...populateFooterGroups(...allCollections),
+	...populateFooterGroups(...collectionsList),
 	{ label: "Information", links: [...navLinks] },
 ];
 
@@ -28,18 +28,18 @@ function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TColle
 		const isStream = collection === "streams";
 		const setLinkHref = function (entry: CollectionEntry<TCollection>) {
 			return entry.collection === "streams"
-				? `/${entry.data.collection}/${entry.id.split("/")[0]}/streams/${entry.id.split("/")[1]}`
+				? `/${entry.data.collection}/${getProjectID(entry)}/streams/${getProjectID(entry, "path")}`
 				: setHref(entry);
 		};
 
 		return {
 			icon: collection,
-			label: collection,
+			label: isStream ? `Latest ${collection}` : collection,
 			links: entries.map((entry) => ({
 				href: setLinkHref(entry),
-				label: isStream ? setStreamTitle(entry, entry.data.title) : entry.data.title,
+				label: isStream ? setStreamTitle(entry) : entry.data.title,
 			})),
-			plural: entries[0].data.plural || "",
+			plural: isStream ? undefined : entries[0].data.plural || "",
 		};
 	});
 }

@@ -7,18 +7,22 @@ import Seperator from "./ui/Seperator.astro";
 import Button from "./ui/Button.astro";
 import type { TIcon } from "@components/ui/Icon.astro";
 
-type Props = { entry: CollectionEntry<TCollection> };
+type Props = { entry: CollectionEntry<TCollection>; title?: string };
 
-const { entry } = Astro.props;
+const { entry, title: customTitle } = Astro.props;
 const { calcReadTime, formatDate } = globalConfig.utils;
 const { dateUpdated, dateCreated, description, title } = entry.data;
 
 const isModel = entry.collection === "models";
+const isResource = entry.collection === "resources";
 const isStream = entry.collection === "streams";
 const isTool = entry.collection === "tools";
 
 const stats: ({ label: string | undefined; icon: TIcon } | undefined)[] = [
 	{ label: formatDate(dateUpdated || dateCreated), icon: "date" },
+	isResource || (isStream && entry.body)
+		? { label: calcReadTime(entry.body), icon: "time" }
+		: undefined,
 	isModel || isTool ? { label: entry.data.version, icon: "version" } : undefined,
 	isModel ? { label: entry.data.verts, icon: "verts" } : undefined,
 	isModel ? { label: entry.data.tris, icon: "tris" } : undefined,
@@ -27,7 +31,7 @@ const stats: ({ label: string | undefined; icon: TIcon } | undefined)[] = [
 ---
 
 <div class="flex flex-col gap-4">
-	<h1>{title}</h1>
+	<h1>{customTitle || title}</h1>
 	<p class="lead">{description}</p>
 	<div class="text-60 flex flex-wrap items-center gap-4 *:border-40!">
 		{

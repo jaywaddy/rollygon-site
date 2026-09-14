@@ -1,0 +1,36 @@
+---
+import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
+import globalConfig from "@lib/config";
+import { resourcesCollection } from "@src/content.config";
+
+export async function getStaticPaths() {
+	const { filterCollection: filter, getProjectID } = globalConfig.utils;
+	const resources = resourcesCollection;
+	let id = "";
+
+	return resources.map((resource, index) => {
+		id = getProjectID(resource);
+
+		return {
+			params: {
+				resources: globalConfig.utils.slugify(resource.data.slug || resource.data.title),
+			},
+			props: {
+				entry: {
+					newest: filter(resources, id)[0],
+					oldest: filter(resources, id)[resources.length - 1],
+					prev: filter(resources, id)[index + 1],
+					next: filter(resources, id)[index - 1],
+					collection: filter(resources, id),
+					current: resource,
+					index: index,
+				},
+			},
+		};
+	});
+}
+
+const { entry } = Astro.props ?? {};
+---
+
+<CollectionEntryLayout {entry} />

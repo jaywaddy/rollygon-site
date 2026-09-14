@@ -1,28 +1,31 @@
 ---
 import ImageLoader from "@components/ui/ImageLoader.astro";
 
-type Props = { title: string; url: string };
+type Props = { title: string; url: string | undefined };
 
 const { title, url } = Astro.props;
 ---
 
-<div class="sketchfab-embed-wrapper rounded-element relative aspect-video overflow-hidden">
-	<ImageLoader />
-	<iframe
-		class="absolute inset-0"
-		{title}
-		width="100%"
-		height="100%"
-		frameborder="0"
-		allowfullscreen
-		mozallowfullscreen="true"
-		webkitallowfullscreen="true"
-		allow="autoplay; fullscreen; xr-spatial-tracking"
-		xr-spatial-tracking
-		execution-while-out-of-viewport
-		execution-while-not-rendered
-		web-share
-		src={`${url}/embed?&autostart=1&preload=1`}
-	>
-	</iframe>
-</div>
+{
+	url ? (
+		<div class="sketchfab-embed-wrapper rounded-element relative aspect-video overflow-hidden">
+			<ImageLoader />
+			<iframe
+				class="absolute inset-0"
+				{title}
+				width="100%"
+				height="100%"
+				frameborder="0"
+				allowfullscreen
+				mozallowfullscreen="true"
+				webkitallowfullscreen="true"
+				allow="autoplay; fullscreen; xr-spatial-tracking"
+				xr-spatial-tracking
+				execution-while-out-of-viewport
+				execution-while-not-rendered
+				web-share
+				src={`${url}/embed?&autostart=1&preload=1`}
+			/>
+		</div>
+	) : null
+}

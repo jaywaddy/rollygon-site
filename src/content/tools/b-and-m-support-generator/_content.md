@@ -7,7 +7,7 @@ dateCreated: 2025-08-25
 # dateUpdated:
 canonicalUrl: "http://rollygon.com/tools/bm-support-generator"
 thumbnail: ./thumbnail.png
-sketchfabUrl: "https://sketchfab.com/models/46388202e85c4c0eb2566b35a7a9e185"
+# sketchfabUrl:
 # youtubeUrl:
 downloadLink: "https://rollygon.gumroad.com/l/bm_support_generator"
 # price:

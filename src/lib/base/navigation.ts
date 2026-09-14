@@ -29,7 +29,7 @@ const navigation: TNavigation = {
 		{
 			href: "/resources",
 			label: "Resources",
-			// collection: "models",
+			collection: "resources",
 		},
 		{ href: "/about", label: "About" },
 		{ href: "/contact", label: "Contact" },

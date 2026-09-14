@@ -18,8 +18,8 @@ verts: 182.9k
 tris: 291.2k
 quads: 140k
 tools:
-    - b&m-support-generator
-    - b&m-track-generator
+    - b-and-m-support-generator
+    - b-and-m-track-generator
     - utility-nodes
 # tags:
 # draft: true

@@ -1,9 +1,9 @@
 ---
 import { type TCollection } from "@lib/utils/types";
-import { getCollection } from "astro:content";
 import Button from "./ui/Button.astro";
-import globalConfig from "@lib/config";
 import CardGalleryEntry from "./CardGalleryEntry.astro";
+import { allCollections } from "@src/content.config";
+import globalConfig from "@lib/config";
 
 type Props = { collection?: TCollection; index: number };
 
@@ -13,7 +13,9 @@ if (!collection) {
 	return null;
 }
 
-const collectionList = await getCollection(collection);
+const { sortCollection } = globalConfig.utils;
+const resources = sortCollection([...allCollections["resources"], ...allCollections["streams"]]);
+const collectionList = collection === "resources" ? resources : allCollections[collection];
 const gridSize = () => {
 	if (collectionList.length <= 1) {
 		return "grid-cols-[repeat(1,--spacing(52))]";
@@ -47,14 +49,14 @@ const gridSize = () => {
 			{
 				[...collectionList].slice(0, 3).map((entry) => (
 					<li class="aspect-square">
-						<CardGalleryEntry {entry} size="sm" />
+						<CardGalleryEntry {entry} stream={entry} size="sm" />
 					</li>
 				))
 			}
 		</ul>
 		<Button
 			href={`/${collection}`}
-			label={`View all${` ${collectionList[0].data.plural}` || ""}`}
+			label={`View all${` ${collectionList[0]?.data.plural}` || ""}`}
 			varient="outline"
 			icon={["arrow-right", "right"]}
 		/>

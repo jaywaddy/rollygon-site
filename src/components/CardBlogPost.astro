@@ -3,38 +3,43 @@ import type { TCollection } from "@lib/utils/types";
 import type { CollectionEntry } from "astro:content";
 import Seperator from "./ui/Seperator.astro";
 import globalConfig from "@lib/config";
+import Img from "./ui/Img.astro";
 
 const { calcReadTime, formatDate, setHref } = globalConfig.utils ?? {};
 
-type Props = {
-	entry: CollectionEntry<TCollection>;
-	href?: string;
-	prefix?: string;
-	suffix?: string;
-};
+type Props = { class?: string; entry: CollectionEntry<TCollection>; href?: string; label?: string };
 
-const { entry, href, prefix, suffix } = Astro.props;
-
-const postLabel = `${prefix ? `${prefix} ` : ""}${entry.data.title}${suffix ? ` ${suffix}` : ""}`;
+const { class: className, entry, href, label } = Astro.props;
 ---
 
-<div class="flex flex-col gap-2 border-50 border-b border-dashed pb-8">
-	<a class="flex w-fit gap-2 hover:underline" href={href || setHref(entry)}>
-		<strong>{postLabel}</strong>
-	</a>
-	<div class="flex items-center gap-2">
-		<small class="opacity-50">
-			{formatDate(entry.data.dateCreated)}
-		</small>
-		{
-			entry.collection !== "streams" && (
-				<>
-					<small>
-						<Seperator axis="x" />
-					</small>
-					<small class="opacity-50">{calcReadTime(entry.body)}</small>
-				</>
-			)
-		}
+<div class="relative flex h-24 gap-4">
+	<Img class="aspect-square" src={entry.data.thumbnail} />
+	<div
+		class:list={[
+			"flex w-full flex-col justify-center border-30 border-b border-dashed md:gap-2",
+			className,
+		]}
+	>
+		<a
+			class="card-link flex max-h-18 gap-2 truncate overflow-clip text-wrap hover:underline"
+			href={href || setHref(entry, entry)}
+		>
+			<strong>{label ? label : entry.data.title}</strong>
+		</a>
+		<div class="flex items-center gap-2">
+			<small class="opacity-50">
+				{formatDate(entry.data.dateCreated)}
+			</small>
+			{
+				entry.collection !== "streams" && (
+					<>
+						<small>
+							<Seperator axis="x" />
+						</small>
+						<small class="opacity-50">{calcReadTime(entry.body)}</small>
+					</>
+				)
+			}
+		</div>
 	</div>
 </div>

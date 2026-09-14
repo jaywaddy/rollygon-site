@@ -7,7 +7,7 @@ dateCreated: 2025-10-24
 # dateUpdated:
 # canonicalUrl:
 thumbnail: ./thumbnail.png
-sketchfabUrl: "https://sketchfab.com/models/2fe3479533184f8788caf28dad9b9c1e"
+# sketchfabUrl:
 # youtubeUrl:
 downloadLink: "https://rollygon.gumroad.com/l/premier_rides_support_gen"
 # price:

@@ -8,6 +8,7 @@ export type TIconPosition = "left" | "right";
 export type TButton = {
 	arriaCurrent?: "page" | undefined;
 	bgHover?: string;
+	disabled?: boolean;
 	varient?: TButtonStyle | [TButtonStyle, TButtonSize];
 	class?: string;
 	collection?: string;
@@ -27,6 +28,7 @@ type Props = TButton;
 
 const {
 	arriaCurrent,
+	disabled = false,
 	varient = "primary",
 	class: classAttribute,
 	collection,
@@ -58,12 +60,21 @@ const buttonSizes: { [key in TButtonSize]: string } = {
 	lg: iconOnly ? "aspect-square p-2" : "font-[500] px-7 py-3.5",
 };
 
-const buttonStyles: { [key in TButtonStyle]: string } = {
-	primary: "bg-brand text-brand-text hover:bg-brand-hover outline-0.5 active:bg-brand-active",
-	secondary: "bg-secondary hover:bg-secondary-hover active:bg-secondary-active",
-	ghost: "hover:bg-secondary-hover active:bg-secondary-active",
-	outline: "bg-primary outline-outline outline hover:bg-primary-hover active:bg-primary-active",
-	link: "relative text-[0.875rem] hover:underline active:text-50",
+const buttonStyles: { [key in TButtonStyle]: string[] } = {
+	primary: [
+		"bg-brand text-brand-text outline-0.5",
+		disabled ? "" : "hover:bg-brand-hover active:bg-brand-active",
+	],
+	secondary: [
+		"bg-secondary",
+		disabled ? "" : "hover:bg-secondary-hover active:bg-secondary-active",
+	],
+	ghost: [disabled ? "" : "hover:bg-secondary-hover active:bg-secondary-active"],
+	outline: [
+		"bg-primary outline-outline outline",
+		disabled ? "" : "hover:bg-primary-hover active:bg-primary-active",
+	],
+	link: ["relative text-[0.875rem] active:text-50", disabled ? "" : "hover:underline"],
 };
 
 const iconPositions: { [key in TIconPosition]: string } = {
@@ -85,11 +96,13 @@ const LabelTag = size === "sm" ? "small" : "span";
 	{id}
 	{href}
 	{target}
+	aria-disabled={disabled}
 	data-toggle={iconOnly ? "false" : undefined}
 	style={styleAttribute}
 	class:list={[
-		"rounded-cta relative flex cursor-pointer items-center justify-center gap-1 text-nowrap [&_svg]:h-4",
+		"rounded-cta relative flex items-center justify-center gap-1 text-nowrap [&_svg]:h-4",
 		buttonStyles[style],
+		disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer",
 		classAttribute,
 		collection && "collection",
 		!full && "w-fit",
@@ -112,7 +125,6 @@ const LabelTag = size === "sm" ? "small" : "span";
 					"[&_.icon-2]:hidden",
 					"has-checked:[&_.icon-1]:hidden",
 					"has-checked:[&_.icon-2]:block",
-					//
 				]}
 			>
 				{icons.map((_icon, index) => (
@@ -122,7 +134,6 @@ const LabelTag = size === "sm" ? "small" : "span";
 							iconStrokeWidths[size],
 							size === "sm" && "[&_svg]:w-3",
 							`icon-${index + 1}`,
-							//
 						]}
 					>
 						<Icon name={_icon[0]} />
