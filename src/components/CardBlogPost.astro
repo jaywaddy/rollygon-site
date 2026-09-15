@@ -7,33 +7,38 @@ import Img from "./ui/Img.astro";
 
 const { calcReadTime, formatDate, setHref } = globalConfig.utils ?? {};
 
-type Props = { class?: string; entry: CollectionEntry<TCollection>; href?: string; label?: string };
+type Props = {
+	class?: string;
+	entry: CollectionEntry<TCollection> | undefined;
+	href?: string;
+	label?: string;
+};
 
 const { class: className, entry, href, label } = Astro.props;
 ---
 
 <div class="rounded-cta bg-primary outline-outline relative flex h-32 gap-4 p-2 pr-8 outline">
 	<div class="border-outline rounded-cta aspect-square border">
-		<Img class="h-full" src={entry.data.thumbnail} />
+		<Img class="h-full" src={entry?.data.thumbnail} />
 	</div>
 	<div class:list={["flex w-full flex-col justify-center md:gap-2", className]}>
 		<a
 			class="card-link flex max-h-18 gap-2 truncate overflow-clip text-wrap hover:underline"
 			href={href || setHref(entry, entry)}
 		>
-			<strong>{label ? label : entry.data.title}</strong>
+			<strong>{label ? label : entry?.data.title}</strong>
 		</a>
 		<div class="flex items-center gap-2">
 			<small class="opacity-50">
-				{formatDate(entry.data.dateCreated)}
+				{formatDate(entry?.data.dateCreated || new Date())}
 			</small>
 			{
-				entry.collection !== "streams" && (
+				entry?.collection !== "streams" && (
 					<>
 						<small>
 							<Seperator axis="x" />
 						</small>
-						<small class="opacity-50">{calcReadTime(entry.body)}</small>
+						<small class="opacity-50">{calcReadTime(entry?.body)}</small>
 					</>
 				)
 			}

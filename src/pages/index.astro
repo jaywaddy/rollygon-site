@@ -1,15 +1,17 @@
 ---
+import CardBlogPost from "@components/CardBlogPost.astro";
 import CardGalleryEntry from "@components/CardGalleryEntry.astro";
 import Hero from "@components/Hero.astro";
+import SketchfabEmbed from "@components/SketchfabEmbed.astro";
 import Button from "@components/ui/Button.astro";
 import Grid from "@components/ui/Grid.astro";
 import Container from "@layouts/Container.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import GlobalLayout from "@layouts/GlobalLayout.astro";
 import globalConfig from "@lib/config";
-import { toolsCollection } from "@src/content.config";
+import { resourcesCollection, streamsCollection, toolsCollection } from "@src/content.config";
 
-const { setWarning, titleCase } = globalConfig.utils ?? {};
+const { findContent, getProjectID, setWarning, titleCase } = globalConfig.utils ?? {};
 
 if (!globalConfig) {
 	setWarning("Landing Page", "globalConfig");
@@ -23,35 +25,86 @@ const seo = {
 	description:
 		"A gallery of 3d models of 1:1 roller coasters built from open source tools made using NoLimits 2 and Blender",
 };
+const featuredModel = findContent("models", "poltergeist");
 ---
 
 <GlobalLayout breadcrumbs={false} {...seo} hook>
 	<div class="relative">
 		<GlobalGrid>
-			<Container layout="body">
-				<Hero position="left" />
+			<Container layout="body" tag="section">
+				<div class="flex flex-col gap-8">
+					<Hero position="left" />
+				</div>
 			</Container>
 		</GlobalGrid>
 	</div>
 	<GlobalGrid>
-		<Container class="flex flex-col gap-16" layout="content">
+		<Container class="flex flex-col gap-16 lg:-mt-24" layout="content">
 			<section class="flex flex-col gap-8">
-				<h2 class="text-center text-lg">Most Recent Commissions</h2>
-				<Grid class="gap-4" size="md" tag="ul">
-					{
-						[...toolsCollection].map((entry) => (
-							<li>
-								<CardGalleryEntry {entry} />
-							</li>
-						))
-					}
-				</Grid>
+				<h2 class="eyebrow">Live 3D Model</h2>
+				<div class="aspect-video w-full">
+					<SketchfabEmbed url={featuredModel?.data.sketchfabUrl || ""} />
+				</div>
 				<Button
-					href="/portfolio"
-					label="View all work"
-					varient="secondary"
+					href={`/models/${getProjectID(featuredModel)}`}
+					label="View model details"
 					icon={["arrow-right", "right"]}
+					varient="outline"
 				/>
+			</section>
+			<section class="flex flex-col gap-8">
+				<div class="flex flex-col gap-4">
+					<h2 class="eyebrow">Newest Open Sourced Tools</h2>
+					<Grid class="gap-8" size="sm" tag="ul">
+						{
+							toolsCollection.slice(0, 3).map((entry) => (
+								<li class="aspect-square">
+									<CardGalleryEntry {entry} size="md" />
+								</li>
+							))
+						}
+					</Grid>
+				</div>
+				<Button
+					href="/tools"
+					label="View all tools"
+					icon={["arrow-right", "right"]}
+					varient="outline"
+				/>
+			</section>
+			<section class="flex flex-col gap-8">
+				<div class="flex flex-col gap-4">
+					<h2 class="eyebrow">Guides and Resources</h2>
+					<Grid class="gap-8" size="sm" tag="ul">
+						{
+							resourcesCollection.slice(0, 3).map((entry) => (
+								<li class="aspect-square">
+									<CardGalleryEntry {entry} size="md" />
+								</li>
+							))
+						}
+					</Grid>
+				</div>
+				<Button
+					href="/resources"
+					label="View all resources"
+					icon={["arrow-right", "right"]}
+					varient="outline"
+				/>
+			</section>
+			<section class="flex flex-col gap-8">
+				<div class="flex flex-col gap-4">
+					<h2 class="eyebrow">Live Streamed Devlogs</h2>
+					<ul class="flex flex-col gap-4">
+						{
+							streamsCollection.slice(0, 9).map((entry) => (
+								<li class="w-full">
+									<CardBlogPost {entry} />
+								</li>
+							))
+						}
+					</ul>
+				</div>
 			</section>
 		</Container>
 	</GlobalGrid>

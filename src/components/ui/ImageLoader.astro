@@ -2,9 +2,18 @@
 import Icon from "./Icon.astro";
 import Img from "./Img.astro";
 import bgPattern from "@assets/bg-pattern-alt.png";
+
+type Props = { alpha?: boolean };
+
+const { alpha } = Astro.props;
 ---
 
-<div class="absolute inset-0 flex h-full w-full items-center justify-center">
+<div
+	class:list={[
+		"absolute inset-0 flex h-full w-full items-center justify-center",
+		alpha ? "" : "bg-primary",
+	]}
+>
 	<Img src={bgPattern} class="h-full w-full opacity-20" />
 	<div class="absolute m-auto flex flex-col items-center">
 		<span>Loading</span>
