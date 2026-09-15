@@ -1,5 +1,24 @@
 ---
-title: "About"
+title: About Rollygon
+metaTitle: How I Learned to Build Roller Coasters Out of Polygons with NoLimits 2 and Blender
+description: Learn about the problems, solutions, and goals of Rollygon and  the "Why?" behind building roller coasters out of polygons.
+# metaDescription:
+dateCreated: 2025-09-20
+dateUpdated: 2026-09-14
+# canonicalUrl:
+# slug:
+# thumbnail: ./thumbnail.png
+# sketchfabUrl:
+# youtubeUrl: https://www.youtube.com/watch?v=
+# downloadLink:
+# price:
+# models:
+#     - ___
+# tools:
+#     - ___
+# collection:
+# tags:
+# draft: true
 ---
 
 ## The Reason

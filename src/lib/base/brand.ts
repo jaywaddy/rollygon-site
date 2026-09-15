@@ -12,10 +12,6 @@ export type TBrand = {
 		timeZone?: string;
 		socialLinks?: TCta[];
 	};
-	favicon: {
-		fallback: string;
-		svg: string;
-	};
 	domain: string;
 	root: string;
 	name: string;
@@ -26,7 +22,13 @@ export type TBrand = {
 const email = "message@rollygon.com";
 
 const brand: TBrand = {
-	bio: "3D modeling tools",
+	domain: "rollygon.com",
+	root: "https://rollygon.com",
+	name: "Rollygon",
+	heading: "Get Free and open sourced modeling tools for Blender.",
+	subheading: "So you can build roller coasters out of polygons.",
+	bio: "I'm a solo dev makes free tools to build roller coasters out of polygons",
+
 	contact: {
 		cta: {
 			href: `mailto:${email.toLowerCase()}`,
@@ -68,15 +70,6 @@ const brand: TBrand = {
 			// },
 		],
 	},
-	favicon: {
-		fallback: "/favicon.ico",
-		svg: "/favicon.svg",
-	},
-	domain: "rollygon.com",
-	root: "https://rollygon.com",
-	name: "Rollygon",
-	heading: "Free and open sourced modeling tools for Blender.",
-	subheading: "So you can build roller coasters out of polygons.",
 };
 
 export default brand;

@@ -17,7 +17,7 @@ export type TSeo = {
 
 type Props = TSeo;
 
-const { capitalize } = globalConfig.utils;
+const { capitalize, titleCase } = globalConfig.utils;
 const { bio, domain, heading, subheading } = globalConfig.brand;
 const {
 	canonicalUrl,
@@ -44,12 +44,12 @@ const resolvedOgTitle = ogTitle ? `${name} - ${bio}` : `${metaTitle || title} - 
 
 <>
 	<!-- HTML Meta Tags -->
-	<title>{title} | {name}</title>
+	<title>{titleCase(title)} | {name}</title>
 	<meta name="description" content={resolvedOgDescription} />
 	{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
 	<!-- Open Graph Meta Tags -->
-	<meta property="og:title" content={resolvedOgTitle} />
+	<meta property="og:title" content={titleCase(resolvedOgTitle)} />
 	<meta property="og:description" content={resolvedOgDescription} />
 	<meta property="og:image" content={resolvedOgImage.href} />
 	<meta property="og:image:type" content={resolvedOgImage.type} />

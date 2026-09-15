@@ -9,7 +9,7 @@ import GlobalLayout from "@layouts/GlobalLayout.astro";
 import globalConfig from "@lib/config";
 import { toolsCollection } from "@src/content.config";
 
-const { setWarning } = globalConfig.utils ?? {};
+const { setWarning, titleCase } = globalConfig.utils ?? {};
 
 if (!globalConfig) {
 	setWarning("Landing Page", "globalConfig");
@@ -17,10 +17,15 @@ if (!globalConfig) {
 }
 
 const { brand } = globalConfig;
-const seo = { title: "Home" };
+const seo = {
+	title: "Home",
+	metaTitle: titleCase(brand.bio || ""),
+	description:
+		"A gallery of 3d models of 1:1 roller coasters built from open source tools made using NoLimits 2 and Blender",
+};
 ---
 
-<GlobalLayout breadcrumbs={false} {...seo} hook ogTitle>
+<GlobalLayout breadcrumbs={false} {...seo} hook>
 	<div class="relative">
 		<GlobalGrid>
 			<Container layout="body">

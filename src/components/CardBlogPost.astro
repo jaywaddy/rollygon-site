@@ -12,14 +12,11 @@ type Props = { class?: string; entry: CollectionEntry<TCollection>; href?: strin
 const { class: className, entry, href, label } = Astro.props;
 ---
 
-<div class="relative flex h-24 gap-4">
-	<Img class="aspect-square" src={entry.data.thumbnail} />
-	<div
-		class:list={[
-			"flex w-full flex-col justify-center border-30 border-b border-dashed md:gap-2",
-			className,
-		]}
-	>
+<div class="rounded-cta bg-primary outline-outline relative flex h-32 gap-4 p-2 pr-8 outline">
+	<div class="border-outline rounded-cta aspect-square border">
+		<Img class="h-full" src={entry.data.thumbnail} />
+	</div>
+	<div class:list={["flex w-full flex-col justify-center md:gap-2", className]}>
 		<a
 			class="card-link flex max-h-18 gap-2 truncate overflow-clip text-wrap hover:underline"
 			href={href || setHref(entry, entry)}

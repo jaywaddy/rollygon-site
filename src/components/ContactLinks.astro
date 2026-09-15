@@ -22,7 +22,7 @@ type TContactGroup = {
 	//
 };
 
-const { class: className, iconOnly, groups, varient = "secondary" } = Astro.props ?? {};
+const { class: className, iconOnly, groups, varient = "outline" } = Astro.props ?? {};
 const { email, location, socialLinks } = globalConfig.brand?.contact ?? {};
 
 const contactGroups: TContactGroup[] = [

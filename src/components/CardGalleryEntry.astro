@@ -37,9 +37,10 @@ const TextSize = size === "sm" ? "small" : "strong";
 	</div>
 	<div
 		class:list={[
-			"flex",
+			"flex overflow-clip",
 			size === "lg" && ["relative", aspectRatio[aspect]],
-			compact && "absolute inset-0",
+			compact ? "absolute inset-0" : "rounded-element border-outline border",
+			,
 		]}
 	>
 		<ImageLoader aspect="auto" />
@@ -58,8 +59,11 @@ const TextSize = size === "sm" ? "small" : "strong";
 			<TextSize
 				class:list={[
 					TextSize === "small" && "font-bold",
-					compact && "absolute bottom-0 w-full bg-purple-600 p-4 text-neutral-50",
-					compact && entry?.collection === "tools" && "bg-yellow-600",
+					compact && "absolute bottom-0 w-full border-t p-4 text-neutral-50",
+					compact && entry?.collection === "tools" && "border-yellow-500 bg-yellow-600",
+					compact && entry?.collection === "streams" && "border-pink-500 bg-pink-600",
+					compact && entry?.collection === "models" && "border-purple-500 bg-purple-600",
+					compact && entry?.collection === "resources" && "border-sky-500 bg-sky-600",
 				]}
 			>
 				{entry?.data.title}

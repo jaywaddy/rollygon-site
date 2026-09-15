@@ -35,8 +35,8 @@ export const allCollections: {
 export const collectionsList = [
 	toolsCollection,
 	modelsCollection,
-	resourcesCollection,
 	streamsCollection,
+	resourcesCollection,
 ];
 
 const globPattern = ["**/*.md", "!_template/*.md"];

@@ -1,10 +1,5 @@
 import type { TCollection } from "./types";
-import {
-	allCollections,
-	modelsCollection,
-	streamsCollection,
-	toolsCollection,
-} from "@src/content.config";
+import { allCollections, streamsCollection } from "@src/content.config";
 import { type CollectionEntry } from "astro:content";
 
 type Collection = CollectionEntry<TCollection>;
@@ -208,11 +203,36 @@ function sortCollection(collection: CollectionEntry<TCollection>[]) {
 	);
 }
 
-function titleCase(input: string): string {
-	return input
-		.split("-")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join(" ");
+function titleCase(input: string | undefined) {
+	const smallWords = new Set([
+		"a",
+		"an",
+		"the",
+		"and",
+		"but",
+		"or",
+		"for",
+		"nor",
+		"on",
+		"at",
+		"to",
+		"from",
+		"by",
+	]);
+	const words = input?.toLowerCase().split(/\s+/);
+	return words
+		?.map((word, index) => {
+			if (
+				index !== 0 &&
+				index !== words.length - 1 &&
+				smallWords.has(word)
+			) {
+				return word;
+			}
+			return word.charAt(0).toUpperCase() + word.slice(1);
+		})
+		.join(" ")
+		.replace("B&m", "B&M");
 }
 
 export default utils;
