@@ -1,13 +1,13 @@
 ---
 import CollectionEntryLayout from "@layouts/CollectionEntryLayout.astro";
 import globalConfig from "@lib/config";
-import { resourcesCollection } from "@src/content.config";
+import { toolsCollection } from "@src/content.config";
 
 export async function getStaticPaths() {
 	const { setDynamicPage } = globalConfig.utils;
 	let id = "";
 
-	return setDynamicPage(resourcesCollection, "resources", id);
+	return setDynamicPage(toolsCollection, "tools", id);
 }
 
 const { entry } = Astro.props ?? {};

@@ -6,29 +6,11 @@ import { streamsCollection } from "@src/content.config";
 
 const { setStreamTitle } = globalConfig.utils;
 
-export async function getStaticPaths(): Promise<TDynamicPageInfo[]> {
-	const { filterCollection: filter, getProjectID } = globalConfig.utils;
-	const streams = streamsCollection;
+export async function getStaticPaths() {
+	const { setDynamicPage } = globalConfig.utils;
 	let id = "";
 
-	return streams.map((stream, index) => {
-		id = getProjectID(stream);
-
-		return {
-			params: { streams: `/${getProjectID(stream)}/streams/${getProjectID(stream, "path")}` },
-			props: {
-				entry: {
-					newest: filter(streams, id)[0],
-					oldest: filter(streams, id)[streams.length - 1],
-					prev: filter(streams, id)[index + 1],
-					next: filter(streams, id)[index - 1],
-					collection: filter(streams, id),
-					current: stream,
-					index: index,
-				},
-			},
-		};
-	});
+	return setDynamicPage(streamsCollection, "streams", id);
 }
 
 const { entry } = Astro.props ?? {};

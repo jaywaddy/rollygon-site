@@ -1,0 +1,50 @@
+---
+import type { TEntry } from "@lib/utils/types";
+import Button from "./ui/Button.astro";
+import globalConfig from "@lib/config";
+
+type Props = { data: TEntry };
+
+const { data } = Astro.props;
+const { getProjectID } = globalConfig.utils;
+---
+
+<div class="flex gap-2">
+	{
+		data.current.collection === "streams" ? (
+			<>
+				<Button
+					href={getProjectID(data?.prev, "path")}
+					label="Prev"
+					icon="arrow-left"
+					varient="outline"
+					disabled={data?.prev === undefined}
+				/>
+				<Button
+					href={getProjectID(data?.next, "path")}
+					label="Next"
+					icon={["arrow-right", "right"]}
+					varient="outline"
+					disabled={data?.next === undefined}
+				/>
+			</>
+		) : (
+			<>
+				<Button
+					href={getProjectID(data?.globalPrev)}
+					label="Prev"
+					icon="arrow-left"
+					varient="outline"
+					disabled={data?.globalPrev === undefined}
+				/>
+				<Button
+					href={getProjectID(data?.globalNext)}
+					label="Next"
+					icon={["arrow-right", "right"]}
+					varient="outline"
+					disabled={data?.globalNext === undefined}
+				/>
+			</>
+		)
+	}
+</div>

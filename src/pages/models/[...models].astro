@@ -4,29 +4,10 @@ import globalConfig from "@lib/config";
 import { modelsCollection } from "@src/content.config";
 
 export async function getStaticPaths() {
-	const { filterCollection: filter, getProjectID } = globalConfig.utils;
-	const models = modelsCollection;
-
+	const { setDynamicPage } = globalConfig.utils;
 	let id = "";
 
-	return models.map((model, index) => {
-		id = getProjectID(model);
-
-		return {
-			params: { models: globalConfig.utils.slugify(model.data.slug || model.data.title) },
-			props: {
-				entry: {
-					newest: filter(models, id)[0],
-					oldest: filter(models, id)[models.length - 1],
-					prev: filter(models, id)[index + 1],
-					next: filter(models, id)[index - 1],
-					collection: filter(models, id),
-					current: model,
-					index: index,
-				},
-			},
-		};
-	});
+	return setDynamicPage(modelsCollection, "models", id);
 }
 
 const { entry } = Astro.props ?? {};

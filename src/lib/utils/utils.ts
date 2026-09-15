@@ -18,6 +18,7 @@ const utils = {
 	findStream,
 	formatDate,
 	getProjectID,
+	setDynamicPage,
 	setHref,
 	setStreamTitle,
 	setWarning,
@@ -92,6 +93,60 @@ function getProjectID(
 	}
 
 	return "";
+}
+
+function setDynamicPage(
+	collection: CollectionEntry<TCollection>[],
+	name: TCollection,
+	id: string,
+) {
+	return collection.map((resource, index) => {
+		const sortedCollection = filterCollection(
+			collection,
+			getProjectID(resource),
+		);
+		const firstIndex = collection.indexOf(sortedCollection[0]);
+		const lastIndex = sortedCollection.length;
+
+		const newest = firstIndex;
+		const oldest = firstIndex + lastIndex - 1;
+		const prev = index + 1;
+		const next = index - 1;
+
+		id = getProjectID(resource);
+
+		return {
+			params: {
+				[name]:
+					name === "streams"
+						? `/${getProjectID(resource)}/streams/${getProjectID(resource, "path")}`
+						: slugify(resource.data.slug || resource.data.title),
+			},
+			props: {
+				entry: {
+					globalNewest: collection[0],
+					globalOldest: collection[collection.length - 1],
+					globalPrev: collection[prev],
+					globalNext: collection[next],
+
+					newest: collection[newest],
+					oldest: collection[oldest],
+					prev:
+						getProjectID(collection[prev]) === id
+							? collection[prev]
+							: undefined,
+					next:
+						getProjectID(collection[next]) === id
+							? collection[next]
+							: undefined,
+					current: resource,
+
+					collection: filterCollection(collection, id),
+					index: index,
+				},
+			},
+		};
+	});
 }
 
 function setHref(...content: Array<Collection | undefined>): string {

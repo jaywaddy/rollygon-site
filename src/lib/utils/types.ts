@@ -36,6 +36,10 @@ export type TDynamicPageInfo = {
 };
 
 export type TEntry = {
+	globalNewest?: CollectionEntry<TCollection>;
+	globalOldest?: CollectionEntry<TCollection>;
+	globalPrev?: CollectionEntry<TCollection>;
+	globalNext?: CollectionEntry<TCollection>;
 	newest?: CollectionEntry<TCollection>;
 	oldest?: CollectionEntry<TCollection>;
 	prev?: CollectionEntry<TCollection>;

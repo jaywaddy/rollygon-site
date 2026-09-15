@@ -15,6 +15,7 @@ import Hook from "@components/Hook.astro";
 import type { CollectionEntry } from "astro:content";
 import type { TCollection, TEntry } from "@lib/utils/types";
 import Button from "@components/ui/Button.astro";
+import PaginationButtons from "@components/PaginationButtons.astro";
 
 const { getProjectID, setWarning } = globalConfig.utils ?? {};
 
@@ -27,11 +28,9 @@ interface Props extends TSeo {
 	breadcrumbs?: boolean;
 	entry?: TEntry;
 	hook?: boolean;
-	prevEntry?: CollectionEntry<TCollection>;
-	nextEntry?: CollectionEntry<TCollection>;
 }
 
-const { breadcrumbs = true, entry, hook, prevEntry, nextEntry, title } = Astro.props;
+const { breadcrumbs = true, entry, hook, title } = Astro.props;
 
 const scrollPadding: { [key in typeof globalConfig.banner.varient]: string } = {
 	"auto-hide": "[--scroll-p:--spacing(24)]",
@@ -113,51 +112,12 @@ const scrollPadding: { [key in typeof globalConfig.banner.varient]: string } = {
 											path={Astro.url.pathname}
 											{title}
 										/>
-										{entry && (
-											<div class="flex gap-2">
-												<Button
-													href={
-														prevEntry?.collection === "streams"
-															? getProjectID(prevEntry, "path")
-															: getProjectID(prevEntry)
-													}
-													label="Prev"
-													icon="arrow-left"
-													varient="outline"
-													disabled={prevEntry === undefined}
-												/>
-												<Button
-													href={
-														nextEntry?.collection === "streams"
-															? getProjectID(nextEntry, "path")
-															: getProjectID(nextEntry)
-													}
-													label="Next"
-													icon={["arrow-right", "right"]}
-													varient="outline"
-													disabled={nextEntry === undefined}
-												/>
-											</div>
-										)}
+										{entry && <PaginationButtons data={entry} />}
 									</div>
 								</Container>
 							</GlobalGrid>
 						)}
 						<slot />
-						<GlobalGrid>
-							<Container class="flex justify-end" layout="content">
-								{entry && (
-									<div class="flex gap-2">
-										<Button label="Prev" icon="arrow-left" varient="outline" />
-										<Button
-											label="Next"
-											icon={["arrow-right", "right"]}
-											varient="outline"
-										/>
-									</div>
-								)}
-							</Container>
-						</GlobalGrid>
 					</main>
 					{hook && <Hook />}
 					<Footer {hook} />

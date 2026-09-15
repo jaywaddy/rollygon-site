@@ -17,6 +17,7 @@ import { modelsCollection, streamsCollection, toolsCollection } from "@src/conte
 import DynamicTitleSection from "@components/DynamicTitleSection.astro";
 import CardBlogPost from "@components/CardBlogPost.astro";
 import type { TEntry } from "@lib/utils/types";
+import PaginationButtons from "@components/PaginationButtons.astro";
 
 const { capitalize, findContent, findStream, getProjectID, setStreamTitle } = globalConfig.utils;
 
@@ -29,7 +30,10 @@ const { sketchfabUrl, title, thumbnail = Fallback, youtubeUrl } = entry.current.
 const isModel = entry.current.collection === "models";
 const isStream = entry.current.collection === "streams";
 const isTool = entry.current.collection === "tools";
-const singleEntry = entry.newest?.data.title === entry.current.data.title && !entry.prev;
+const singleEntry =
+	entry.globalPrev !== entry.current
+		? entry.globalNewest === entry.current && !entry.globalPrev?.id
+		: entry.newest === entry.current && !entry.prev?.id;
 ---
 
 <GlobalLayout
@@ -63,11 +67,11 @@ const singleEntry = entry.newest?.data.title === entry.current.data.title && !en
 			<div class:list={["sticky top-(--scroll-p) grid gap-8"]}>
 				<TableOfContents headings={[...headings]} />
 				{
-					!singleEntry && (
-						<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
-							{entry.next ? (
-								<>
-									<span class="eyebrow">Next {entry.current.data.singular}</span>
+					!singleEntry &&
+						(entry.current.collection === "streams" ? (
+							entry.next ? (
+								<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
+									<span class="eyebrow">Next {entry.next.data.singular}</span>
 									<div class="relative h-full">
 										{isStream && (
 											<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
@@ -79,25 +83,60 @@ const singleEntry = entry.newest?.data.title === entry.current.data.title && !en
 										)}
 										<CardGalleryEntry entry={entry.next} size="md" />
 									</div>
-								</>
+								</div>
 							) : (
-								<>
-									<span class="eyebrow">First {entry.current.data.singular}</span>
-									<div class="relative h-full">
-										{isStream && entry.newest && (
-											<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
-												Stream #
-												{Number(
-													getProjectID(entry.newest, "path"),
-												).toLocaleString()}
-											</span>
-										)}
-										<CardGalleryEntry entry={entry.newest} size="md" />
+								entry.collection[1] && (
+									<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
+										<span class="eyebrow">
+											First {entry.current.data.singular}
+										</span>
+										<div class="relative h-full">
+											{isStream && entry.newest && (
+												<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
+													Stream #
+													{Number(
+														getProjectID(entry.oldest, "path"),
+													).toLocaleString()}
+												</span>
+											)}
+											<CardGalleryEntry entry={entry.oldest} size="md" />
+										</div>
 									</div>
-								</>
-							)}
-						</div>
-					)
+								)
+							)
+						) : entry.globalNext ? (
+							<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
+								<span class="eyebrow">Next {entry.globalNext.data.singular}</span>
+								<div class="relative h-full">
+									{isStream && (
+										<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
+											Stream #
+											{Number(
+												getProjectID(entry.globalNext),
+											).toLocaleString()}
+										</span>
+									)}
+									<CardGalleryEntry entry={entry.globalNext} size="md" />
+								</div>
+							</div>
+						) : (
+							<div class="flex w-full flex-col gap-2 max-lg:h-64 lg:aspect-square">
+								<span class="eyebrow">
+									First {entry.globalOldest?.data.singular}
+								</span>
+								<div class="relative h-full">
+									{isStream && entry.newest && (
+										<span class="bg-blur-primary rounded-pill absolute inset-0 z-10 m-2 flex h-8 w-fit items-center justify-center px-4">
+											Stream #
+											{Number(
+												getProjectID(entry.globalOldest),
+											).toLocaleString()}
+										</span>
+									)}
+									<CardGalleryEntry entry={entry.globalOldest} size="md" />
+								</div>
+							</div>
+						))
 				}
 				<ContactLinks groups={["socialLinks"]} />
 			</div>
@@ -199,6 +238,13 @@ const singleEntry = entry.newest?.data.title === entry.current.data.title && !en
 									</li>
 								))}
 							</ul>
+						</div>
+					)
+				}
+				{
+					entry && (
+						<div class="flex justify-end">
+							<PaginationButtons data={entry} />
 						</div>
 					)
 				}
