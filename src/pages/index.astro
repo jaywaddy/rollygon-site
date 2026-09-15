@@ -5,13 +5,15 @@ import Hero from "@components/Hero.astro";
 import SketchfabEmbed from "@components/SketchfabEmbed.astro";
 import Button from "@components/ui/Button.astro";
 import Grid from "@components/ui/Grid.astro";
+import Icon from "@components/ui/Icon.astro";
 import Container from "@layouts/Container.astro";
 import GlobalGrid from "@layouts/GlobalGrid.astro";
 import GlobalLayout from "@layouts/GlobalLayout.astro";
 import globalConfig from "@lib/config";
 import { resourcesCollection, streamsCollection, toolsCollection } from "@src/content.config";
 
-const { findContent, getProjectID, setWarning, titleCase } = globalConfig.utils ?? {};
+const { findContent, getProjectID, setStreamTitle, setWarning, titleCase } =
+	globalConfig.utils ?? {};
 
 if (!globalConfig) {
 	setWarning("Landing Page", "globalConfig");
@@ -29,19 +31,16 @@ const featuredModel = findContent("models", "poltergeist");
 ---
 
 <GlobalLayout breadcrumbs={false} {...seo} hook>
-	<div class="relative">
-		<GlobalGrid>
-			<Container layout="body" tag="section">
-				<div class="flex flex-col gap-8">
-					<Hero position="left" />
-				</div>
-			</Container>
-		</GlobalGrid>
+	<div class="relative flex flex-col gap-8 lg:pb-12">
+		<Hero position="left" />
 	</div>
 	<GlobalGrid>
-		<Container class="flex flex-col gap-16 lg:-mt-24" layout="content">
+		<Container class="flex flex-col gap-16 lg:-mt-32" layout="content">
 			<section class="flex flex-col gap-8">
-				<h2 class="eyebrow">Live 3D Model</h2>
+				<div class="flex gap-2">
+					<Icon class="text-brand-body-text" name="stream" />
+					<h2 class="eyebrow">Live 3D Model</h2>
+				</div>
 				<div class="aspect-video w-full">
 					<SketchfabEmbed url={featuredModel?.data.sketchfabUrl || ""} />
 				</div>
@@ -99,7 +98,7 @@ const featuredModel = findContent("models", "poltergeist");
 						{
 							streamsCollection.slice(0, 9).map((entry) => (
 								<li class="w-full">
-									<CardBlogPost {entry} />
+									<CardBlogPost {entry} label={setStreamTitle(entry)} />
 								</li>
 							))
 						}

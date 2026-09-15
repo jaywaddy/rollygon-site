@@ -3,8 +3,7 @@ import globalConfig from "@lib/config";
 import type { TCategory, TCollection, TCollectionGroup } from "@lib/utils/types";
 import { collectionsList } from "@src/content.config";
 import type { CollectionEntry } from "astro:content";
-import Grid from "./ui/Grid.astro";
-import { streamsCollection } from "@src/content.config";
+import Grid from "@components/ui/Grid.astro";
 const { getProjectID, setHref, setStreamTitle } = globalConfig.utils ?? {};
 
 type Props = { class?: string };
@@ -48,7 +47,7 @@ function populateFooterGroups(...data: CollectionEntry<TCollection>[][]): TColle
 <Grid class:list={["gap-x-8 gap-y-16", className]} size="sm">
 	{
 		collectionGroups.map((group) => (
-			<ul class="flex flex-col gap-2">
+			<ul class="flex flex-col gap-2 max-lg:gap-4">
 				<li>
 					<span class="eyebrow">{group.label}</span>
 				</li>

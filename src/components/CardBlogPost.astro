@@ -1,9 +1,9 @@
 ---
 import type { TCollection } from "@lib/utils/types";
 import type { CollectionEntry } from "astro:content";
-import Seperator from "./ui/Seperator.astro";
+import Seperator from "@components/ui/Seperator.astro";
 import globalConfig from "@lib/config";
-import Img from "./ui/Img.astro";
+import Img from "@components/ui/Img.astro";
 
 const { calcReadTime, formatDate, setHref } = globalConfig.utils ?? {};
 
