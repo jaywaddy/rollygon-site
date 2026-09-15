@@ -4,12 +4,16 @@ import type { TZodImage } from "@lib/utils/types";
 import fallback from "@assets/fallback.png";
 
 export type TSeo = {
+	body?: string;
 	canonicalUrl?: string;
+	dateCreated?: Date;
+	dateUpdated?: Date;
 	description?: string;
 	metaDescription?: string;
 	metaTitle?: string;
 	name?: string;
 	ogTitle?: boolean;
+	robots?: string;
 	title?: string;
 	thumbnail?: TZodImage;
 	type?: string;
@@ -17,17 +21,30 @@ export type TSeo = {
 
 type Props = TSeo;
 
-const { capitalize, titleCase } = globalConfig.utils;
-const { bio, domain, heading, subheading } = globalConfig.brand;
+const { calcWordCount, capitalize, titleCase } = globalConfig.utils;
 const {
-	canonicalUrl,
+	bio,
+	domain,
+	heading,
+	keywords,
+	name: siteName,
+	owner,
+	root,
+	subheading,
+} = globalConfig.brand;
+const {
+	body,
+	canonicalUrl = Astro.url,
+	dateCreated,
+	dateUpdated,
+	description,
 	metaDescription,
 	metaTitle,
 	name,
+	ogTitle,
+	robots = "index",
 	thumbnail,
 	title,
-	description,
-	ogTitle,
 	type = "website",
 } = Astro.props;
 
@@ -40,17 +57,55 @@ const resolvedOgImage = {
 	width: String(thumbnail?.width || fallback.width),
 };
 const resolvedOgTitle = ogTitle ? `${name} - ${bio}` : `${metaTitle || title} - ${name}`;
+const resolvedOgKeywords = keywords?.map((keyword) => titleCase(keyword));
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"@id": Astro.url,
+	"mainEntityOfPage": Astro.url,
+	"headline": resolvedOgTitle,
+	"name": resolvedOgTitle,
+	"description": resolvedOgDescription,
+	"datePublished": dateCreated,
+	"dateModified": dateUpdated,
+	"author": { "@type": "Person", "@id": `${root}/about`, "name": owner, "url": `${root}/about` },
+	"image": {
+		"@type": "ImageObject",
+		"@id": resolvedOgImage.href,
+		"url": resolvedOgImage.href,
+		"height": resolvedOgImage.height,
+		"width": resolvedOgImage.width,
+	},
+	"isPartOf": { "@type": "Blog", "@id": root, "name": siteName },
+	"url": Astro.url,
+	"wordCount": body ? calcWordCount(body) : 0,
+	"keywords": resolvedOgKeywords,
+};
 ---
 
 <>
 	<!-- HTML Meta Tags -->
 	<title>{titleCase(title)} | {name}</title>
 	<meta name="description" content={resolvedOgDescription} />
-	{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+	<link rel="canonical" href={canonicalUrl} />
 
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content={titleCase(resolvedOgTitle)} />
 	<meta property="og:description" content={resolvedOgDescription} />
+	<meta name="keywords" content={resolvedOgKeywords?.join(", ")} />
+	{
+		dateUpdated ? (
+			<meta property="article:modified_time" content={new Date(dateUpdated).toDateString()} />
+		) : dateCreated ? (
+			<meta
+				property="article:published_time"
+				content={new Date(dateCreated).toDateString()}
+			/>
+		) : null
+	}
+	<meta name="robots" content={robots} />
+	<meta property="og:locale" content="en_US" />
 	<meta property="og:image" content={resolvedOgImage.href} />
 	<meta property="og:image:type" content={resolvedOgImage.type} />
 	<meta property="og:image:width" content={resolvedOgImage.width} />
@@ -66,4 +121,6 @@ const resolvedOgTitle = ogTitle ? `${name} - ${bio}` : `${metaTitle || title} - 
 	<meta name="twitter:title" content={resolvedOgTitle} />
 	<meta name="twitter:description" content={resolvedOgDescription} />
 	<meta name="twitter:image" content={resolvedOgImage.href} />
+
+	<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 </>

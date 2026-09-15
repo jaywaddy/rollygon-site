@@ -50,6 +50,7 @@ const collectionSchema = {
 	description: z.string(),
 	metaDescription: z.string().optional(),
 	slug: z.string().optional(),
+	robots: z.string().optional(),
 	draft: z.boolean().default(false),
 
 	models: z.array(z.string()).optional(),

@@ -15,7 +15,6 @@ const navigation: TNavigation = {
 		label: "Get Free Tools",
 	},
 	categories: [
-		// { href: "/", label: "Home" },
 		{
 			href: "/tools",
 			label: "Tools",

@@ -232,6 +232,8 @@ function titleCase(input: string | undefined) {
 			return word.charAt(0).toUpperCase() + word.slice(1);
 		})
 		.join(" ")
+		.replace(": t", ": T")
+		.replace("3d", "3D")
 		.replace("B&m", "B&M");
 }
 

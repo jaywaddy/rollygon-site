@@ -9,12 +9,12 @@ export type TBanner = {
 
 const banner: TBanner = {
 	cta: {
-		href: "/tools",
-		icon: "new",
-		label: "Download Latest Tool",
+		href: "/tools/b-and-m-track-generator",
+		icon: "flame",
+		label: "Download Most Popular Tool",
 	},
 	display: true,
-	label: "New tools available for download!",
+	label: "Free tools available for download!",
 	varient: "auto-hide",
 };
 

@@ -18,6 +18,7 @@ dateUpdated: 2026-09-14
 #     - ___
 # collection:
 # tags:
+# robots: noindex, nofollow
 # draft: true
 ---
 

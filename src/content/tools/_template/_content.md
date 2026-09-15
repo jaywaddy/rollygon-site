@@ -15,5 +15,6 @@ dateCreated:
 # size:
 # version:
 # tags:
+# robots: noindex, nofollow
 # draft: true
 ---

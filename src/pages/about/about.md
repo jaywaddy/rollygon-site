@@ -7,6 +7,7 @@ dateCreated: 2025-09-20
 dateUpdated: 2026-09-14
 # canonicalUrl:
 # slug:
+# robots: noindex, nofollow
 # thumbnail: ./thumbnail.png
 # sketchfabUrl:
 # youtubeUrl: https://www.youtube.com/watch?v=

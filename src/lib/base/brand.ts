@@ -13,9 +13,11 @@ export type TBrand = {
 		socialLinks?: TCta[];
 	};
 	domain: string;
-	root: string;
-	name: string;
 	heading: string;
+	keywords?: Array<string | undefined>;
+	name: string;
+	owner?: string;
+	root: string;
 	subheading: string;
 };
 
@@ -25,6 +27,7 @@ const brand: TBrand = {
 	domain: "rollygon.com",
 	root: "https://rollygon.com",
 	name: "Rollygon",
+	owner: "Jay Waddy",
 	heading: "Get Free and open sourced modeling tools for Blender.",
 	subheading: "So you can build roller coasters out of polygons.",
 	bio: "I'm a solo dev makes free tools to build roller coasters out of polygons",
@@ -63,13 +66,23 @@ const brand: TBrand = {
 				icon: "youtube",
 				label: "YouTube",
 			},
-			// {
-			// 	href: `mailto:${email.toLowerCase()}`,
-			// 	icon: "at-sign",
-			// 	label: "Email",
-			// },
 		],
 	},
+
+	keywords: [
+		"3d",
+		"3d modeling",
+		"nolimits 2",
+		"blender",
+		"blender 3d",
+		"roller coaster",
+		"3d roller coaster",
+		"roller coaster model",
+		"open source",
+		"free download",
+		"ride",
+		"live stream",
+	],
 };
 
 export default brand;

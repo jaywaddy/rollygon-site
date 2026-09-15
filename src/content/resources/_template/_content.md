@@ -19,4 +19,5 @@ dateCreated: ___
 collection: resources
 # tags:
 # draft: true
+# robots: noindex, nofollow
 ---

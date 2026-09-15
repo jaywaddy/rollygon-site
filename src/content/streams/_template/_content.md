@@ -19,5 +19,6 @@ tools:
     - ___
 collection: ___
 # tags:
+# robots: noindex, nofollow
 # draft: true
 ---

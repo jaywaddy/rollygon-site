@@ -28,6 +28,9 @@
     "slug": {
       "type": "string"
     },
+    "robots": {
+      "type": "string"
+    },
     "draft": {
       "default": false,
       "type": "boolean"
