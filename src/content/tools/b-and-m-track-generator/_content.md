@@ -5,7 +5,7 @@ description: A Blender 5.1 geometry node group that builds B&M styled track. Thi
 # metaDescription:
 dateCreated: 2025-08-25
 dateUpdated: 2026-06-01
-canonicalUrl: "http://rollygon.com/tools/bm-track-generator"
+# canonicalUrl:
 thumbnail: ./thumbnail.png
 # sketchfabUrl:
 # youtubeUrl:
@@ -19,6 +19,7 @@ models:
     - georgia-scorcher
     - hydra-zero-g-roll
     - talon-loop
+# redirect: "http://rollygon.com/tools/bm-track-generator"
 # draft: true
 ---
 

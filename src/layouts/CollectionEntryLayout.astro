@@ -13,7 +13,7 @@ import Button from "@components/ui/Button.astro";
 import Fallback from "@assets/fallback.png";
 import CardGalleryEntry from "@components/CardGalleryEntry.astro";
 import Icon from "@components/ui/Icon.astro";
-import { modelsCollection, streamsCollection, toolsCollection } from "@src/content.config";
+import { modelsCollection, toolsCollection } from "@src/content.config";
 import DynamicTitleSection from "@components/DynamicTitleSection.astro";
 import CardBlogPost from "@components/CardBlogPost.astro";
 import type { TEntry } from "@lib/utils/types";
@@ -21,9 +21,9 @@ import PaginationButtons from "@components/PaginationButtons.astro";
 
 const { capitalize, findContent, findStream, getProjectID, setStreamTitle } = globalConfig.utils;
 
-type Props = { entry: TEntry; title?: string };
+type Props = { entry: TEntry; metaTitle?: string; title?: string };
 
-const { entry, title: entryTitle } = Astro.props;
+const { entry, metaTitle, title: entryTitle } = Astro.props;
 const { Content, headings } = await render(entry.current);
 const { sketchfabUrl, title, thumbnail = Fallback, youtubeUrl } = entry.current.data;
 
@@ -36,12 +36,7 @@ const singleEntry =
 		: entry.newest === entry.current && !entry.prev?.id;
 ---
 
-<GlobalLayout
-	{entry}
-	metaTitle={isStream ? entryTitle : undefined}
-	{...entry.current.data}
-	{thumbnail}
->
+<GlobalLayout {entry} {...entry.current.data} body={entry.current.body} {metaTitle} {thumbnail}>
 	<GlobalGrid>
 		<Container class="relative" layout="content">
 			<div class="rounded-pill bg-blur-primary absolute right-0 z-10 m-2 p-2">

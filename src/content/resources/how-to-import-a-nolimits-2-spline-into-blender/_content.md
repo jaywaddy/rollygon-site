@@ -5,7 +5,7 @@ description: A Guide on setting up a NoLimits 2 to Blender pipeline for building
 # metaDescription:
 dateCreated: 2025-10-17
 dateUpdated: 2026-09-13
-canonicalUrl: http://rollygon.com/posts/import-nl2-spline-to-blender
+# canonicalUrl:
 # slug:
 thumbnail: ./thumbnail.png
 # sketchfabUrl:
@@ -18,6 +18,7 @@ thumbnail: ./thumbnail.png
 #     - ___
 collection: resources
 # tags:
+# redirect: http://rollygon.com/posts/import-nl2-spline-to-blender
 # draft: true
 ---
 

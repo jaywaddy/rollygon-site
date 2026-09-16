@@ -28,6 +28,15 @@
     "slug": {
       "type": "string"
     },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "redirect": {
+      "type": "string"
+    },
     "robots": {
       "type": "string"
     },

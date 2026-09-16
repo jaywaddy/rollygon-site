@@ -13,4 +13,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props ?? {};
 ---
 
-<CollectionEntryLayout {entry} />
+<CollectionEntryLayout
+	{entry}
+	metaTitle={`${entry.current.data.title} | Open Source 3D Roller Coaster Modeling Tool Made in Blender`}
+/>

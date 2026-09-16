@@ -15,4 +15,8 @@ export async function getStaticPaths() {
 const { entry } = Astro.props ?? {};
 ---
 
-<CollectionEntryLayout {entry} title={setStreamTitle(entry.current)} />
+<CollectionEntryLayout
+	{entry}
+	metaTitle={setStreamTitle(entry.current, "Live Stream")}
+	title={setStreamTitle(entry.current)}
+/>

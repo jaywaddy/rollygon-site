@@ -5,7 +5,7 @@ description: A Blender 5.1 geometry node group that builds B&M styled supports. 
 # metaDescription:
 dateCreated: 2025-08-25
 # dateUpdated:
-canonicalUrl: "http://rollygon.com/tools/bm-support-generator"
+# canonicalUrl:
 thumbnail: ./thumbnail.png
 # sketchfabUrl:
 # youtubeUrl:
@@ -19,6 +19,7 @@ models:
     - georgia-scorcher
     - hydra-zero-g-roll
     - talon-loop
+# redirect: "http://rollygon.com/tools/bm-support-generator"
 # draft: true
 ---
 

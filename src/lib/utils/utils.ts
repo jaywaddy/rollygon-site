@@ -163,15 +163,16 @@ function setHref(...content: Array<Collection | undefined>): string {
 	return "";
 }
 
-function setStreamTitle(entry: Collection) {
+function setStreamTitle(entry: Collection, seo?: string) {
 	if (entry.collection === "streams") {
 		const entryName = findContent(
 			entry.data.collection,
 			getProjectID(entry),
 		)?.data.title;
+		const seoTitle = seo ? ` | ${seo}` : "";
 		const episode = Number(getProjectID(entry, "path")).toLocaleString();
 
-		return `${entryName} | Stream #${episode} - ${entry.data.title}`;
+		return `${entryName}${seoTitle} | Stream #${episode} - ${entry.data.title}`;
 	}
 
 	return "";
